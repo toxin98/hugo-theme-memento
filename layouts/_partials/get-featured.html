@@ -1,0 +1,6 @@
+{{ $img := .Params.featured }}
+{{ $pattern := .Params.featured | default "*featured*" }}
+{{ with .Resources.GetMatch $pattern }}
+  {{ $img = .RelPermalink }}
+{{ end }}
+<img src="{{ $img }}" alt="featured">

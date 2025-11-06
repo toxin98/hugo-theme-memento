@@ -1,0 +1,7 @@
+{{ $name := . }}
+{{ $iconSVG := resources.Get (printf "icons/%s.svg" $name) }}
+{{ if $iconSVG }}
+  {{ $iconSVG.Content | safeHTML }}
+{{ else }}
+  {{ errorf "Error: icon '%s.svg' is not found under 'assets/icons' folder" . }}
+{{ end }}

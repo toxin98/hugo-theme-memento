@@ -1,0 +1,56 @@
+{{ define "main" }}
+
+  <div class="wrapper">
+
+    <aside class="sidebar-left">
+    </aside>
+
+    <div class="middle-container">
+
+      {{ range .Sections.ByTitle.Reverse }}
+      <div class="post-section">
+        <div class="post-section-header" id="{{ .Title }}">
+          <h3 class="year">{{ .Title }}</h3>
+          <span class="count">#{{ .Pages.Len }}</span>
+          {{ partial "utils/icon.html" "activity-heartbeat"}}
+          {{ .Description }}
+        </div>
+        <ul>
+          {{ range .Pages }}
+            <li class="post-item" id="{{ .LinkTitle }}">
+              <div class="post-card">
+                <div class="post-date">
+                  {{ .Date | time.Format "Jan 02" }}
+                </div>
+                <div class="post-featured">
+                  {{ with .Resources.Get .Params.featured }}
+                    <img class="featured-img" src="{{ .RelPermalink }}" alt="featured">
+                  {{ else }}
+                    no set
+                  {{ end }}
+                </div>
+                <div class="post-pro">
+                  <span class="post-title">
+                    {{ .LinkTitle }}
+                  </span>
+                  <div class="post-summary">
+                    <!-- {{ .Summary }} -->
+                    summarytest
+                  </div>
+                  <a href="{{ .RelPermalink }}">Read more</a>
+                </a>
+              </div>
+            </li>
+          {{ end }}
+        </ul>
+      </div>
+      {{ end }}
+
+    </div>
+
+    <aside class="sidebar-right">
+    </aside>
+
+  </div>
+
+{{ end }}

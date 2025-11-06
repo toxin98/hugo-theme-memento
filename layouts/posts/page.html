@@ -1,0 +1,39 @@
+{{ define "main" }}
+
+  <div class="wrapper">
+
+    <aside class="sidebar-left">
+      <h1><a href="{{ .FirstSection.RelPermalink }}#{{ .LinkTitle  }}">くBack</a></h1>
+      <p></p>
+      <h2>{{ .Date | time.Format "2006" }}</h2>
+      <h2>{{ .Date | time.Format "January, 2" }}</h2>
+    </aside>
+
+    <div class="middle-container">
+
+      <div class="page-featured">
+        {{ with .Resources.Get .Params.featured }}
+          <img class="page-featured" src="{{ .RelPermalink }}" alt="featured-img">
+        {{ end }}
+      </div>
+
+      <article class="content">
+        <h1>{{ .Title }}</h1>
+        {{ .Content }}
+        {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+      </article>
+
+    <div class="sticky-bottom-bar">
+      <button class="toggle-left">{{ partial "utils/icon.html" "layout-sidebar-left-expand"}}</button>
+      <button class="toggle-right">{{ partial "utils/icon.html" "list-tree"}}</button>
+    </div>
+
+    </div>
+
+    <aside class="sidebar-right">
+      {{ partial "toc.html" . }}
+    </aside>
+
+  </div>
+
+{{ end }}

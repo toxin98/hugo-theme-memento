@@ -1,0 +1,15 @@
+{{ $locationAlt  := .Get "locationAlt" }}
+{{ $locationLink := .Get "locationLink"}}
+<div class="ephemera-header">
+  {{ partial "date-format.html" (dict "date" .Page.Date "layout" "2006/01/02 15:04 Monday" "prefix" "") }}
+  {{ partial "location.html" (dict "alt" $locationAlt "link" $locationLink)}}
+</div>
+
+<div class="ephemera-summary">
+  {{ $musicID := .Get "musicID" }}
+  {{ if $musicID }}
+    {{ partial "music.html" (dict "id" $musicID) }}
+  {{ else }}
+    {{ partial "sudoku.html" . }}
+  {{ end }}
+</div>

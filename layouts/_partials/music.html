@@ -1,0 +1,16 @@
+{{ $id := .id }}
+{{ $src := printf
+  "https://music.163.com/outchain/player?type=2&id=%s&auto=1&height=66"
+  $id
+}}
+
+<iframe
+  frameborder="no"
+  border="0"
+  marginwidth="0"
+  marginheight="0"
+  width="340"
+  height="86"
+  loading="lazy"
+  src="{{ $src }}">
+</iframe>

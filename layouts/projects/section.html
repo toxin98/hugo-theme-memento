@@ -1,0 +1,38 @@
+{{ define "main" }}
+
+  <div class="wrapper">
+
+    <aside class="sidebar-left">
+    </aside>
+
+    <div class="middle-container">
+
+      <article class="content">
+
+        <h1>{{ .Title }}</h1>
+
+        <div class="projects-grid">
+          {{ range .Pages }}
+            <div class="project-card">
+              <div class="project-info">
+                <h2 class="project-title">{{ .Title }}</h2>
+                <p class="project-desc">{{ .Description | default "Description: -" }}</p>
+                <a href="{{ .RelPermalink }}" class="project-link">View Project</a>
+              </div>
+              <div class="project-featured">
+                {{ partial "get-featured.html" . }}
+              </div>
+            </div>
+          {{ end }}
+        </div>
+
+        </article>
+
+    </div>
+
+    <aside class="sidebar-right">
+    </aside>
+
+  </div>
+
+{{ end }}

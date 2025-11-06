@@ -1,0 +1,20 @@
+{{ $page := .Page }}
+{{ $count := $page.Resources.ByType "image" | len }}
+{{ $folderName := $page | path.Dir | path.BaseName }}
+{{ $media := slice }}
+
+{{ if gt $count 0 }}
+
+  <div class="sudoku sudoku-{{ $count }}">
+  {{ range $i := seq 1 $count }}
+    {{ $index := printf "%02d" $i }}
+    {{ $mediaName := printf "*%s-%s*" $folderName $index }}
+    {{ with $page.Resources.GetMatch $mediaName }}
+        <img src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt="">
+    {{ else }}
+      <span>{{ $index }}</span>
+    {{ end }}
+  {{ end }}
+  </div>
+
+{{ end }}

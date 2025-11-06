@@ -1,1 +1,25 @@
-<p>Copyright {{ now.Year }}. All rights reserved.</p>
+<div class="wrapper">
+  <p>Copyright {{ now.Year }} toxintoxin | <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> | Themed by <a href="https://github.com/toxin98/hugo-theme-memento" target="_blank">memento</a></p>
+</div>
+
+<div id="video-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); justify-content:center; align-items:center;">
+    <video id="video-player" controls style="max-width:90%; max-height:90%;"></video>
+</div>
+
+<script>
+function openVideoModal(src) {
+    const modal = document.getElementById('video-modal');
+    const player = document.getElementById('video-player');
+    player.src = src;
+    modal.style.display = 'flex';
+    player.play();
+}
+
+document.getElementById('video-modal').addEventListener('click', function() {
+    const player = document.getElementById('video-player');
+    player.pause();
+    player.src = '';
+    this.style.display = 'none';
+});
+</script>

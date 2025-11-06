@@ -1,0 +1,11 @@
+{{- $alt := .alt -}}
+{{- $link := .link -}}
+
+<a class="location"
+  href="{{ $link }}"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="location-link"
+>
+{{ partial "utils/icon.html" "map-pin"}} {{ $alt }}
+</a>

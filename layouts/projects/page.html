@@ -1,0 +1,25 @@
+{{ define "main" }}
+
+  <div class="wrapper">
+
+    <aside class="sidebar-left">
+    </aside>
+
+    <div class="middle-container">
+
+      <div class="content-container">
+        <article class="content">
+          <h1>{{ .Title }}</h1>
+          {{ .Content }}
+          {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+        </article>
+      </div>
+
+    </div>
+
+    <aside class="sidebar-right">
+    </aside>
+
+  </div>
+
+{{ end }}

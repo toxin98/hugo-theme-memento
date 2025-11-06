@@ -1,0 +1,30 @@
+{{ define "main" }}
+
+  <div class="wrapper">
+
+    <aside class="sidebar-left">
+    </aside>
+
+    <div class="middle-container">
+
+      <div class="ephemera-stream">
+        {{ range .RegularPages.ByDate.Reverse }}
+          <div class="ephemera-card">
+            <article class="ephemera-item">
+              {{ .Summary }}
+              <div class="ephemera-content">
+                {{ .ContentWithoutSummary }}
+              </div>
+            </article>
+          </div>
+        {{ end }}
+      </div>
+
+    </div>
+
+    <aside class="sidebar-right">
+    </aside>
+
+  </div>
+
+{{ end }}

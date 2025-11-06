@@ -1,0 +1,81 @@
+<div class="wrapper">
+
+  <aside class="sidebar-left">
+
+    <nav class="docs-tree">
+      <ul>
+        <li>
+          <a href="{{ .FirstSection.RelPermalink }}"
+            class="{{ if eq .RelPermalink .FirstSection.RelPermalink }}active{{ end }}">
+            {{ partial "utils/icon.html" "notebook"}}{{ .FirstSection.Title }}
+          </a>
+          <div class="docs-buttons">
+            <button>{{ partial "utils/icon.html" "search"}}</button>
+            <button>{{ partial "utils/icon.html" "copy-plus"}}</button>
+            <button>{{ partial "utils/icon.html" "copy-minus"}}</button>
+          </div>
+          <ul>
+            {{ template "docs-recursive" (dict "context" .FirstSection "current" .Page ) }}
+          </ul>
+        </li>
+      </ul>
+    </nav>
+
+    {{ define "docs-recursive" }}
+
+      {{ $context := .context }}
+      {{ $current := .current }}
+
+      {{ range $context.Sections }}
+        <li>
+          <a href="{{ .RelPermalink }}"
+            class="{{ if eq .RelPermalink $current.RelPermalink }}active{{ end }}">
+            {{ partial "utils/icon.html" "folder"}}
+            <span>{{ .LinkTitle }}</span>
+          </a>
+          <ul>
+            {{ template "docs-recursive" (dict "context" . "current" $current) }}
+          </ul>
+        </li>
+      {{ end }}
+      {{ range $context.RegularPages }}
+        <li>
+          <a href="{{ .RelPermalink }}"
+            class="{{ if eq .RelPermalink $current.RelPermalink }}active{{ end }}">
+            {{ partial "utils/icon.html" "file"}}
+            <span>{{ .LinkTitle }}</span>
+          </a>
+        </li>
+      {{ end }}
+
+    {{ end }}
+
+  </aside>
+
+
+  <div class="middle-container">
+
+    {{ partial "breadcrumbs.html" . }}
+
+    <article class="content">
+      <div class="docs-date-container">
+        {{ partial "date-format.html" (dict "date" .Lastmod "layout" ":date_long" "prefix" "Last updated: ") }}
+        {{ partial "date-format.html" (dict "date" .PublishDate "layout" ":date_long" "prefix" "Publish date: ") }}
+      </div>
+      <h1>{{ .Title }}</h1>
+      {{ .Content }}
+      {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+    </article>
+
+    <div class="sticky-bottom-bar">
+      <button class="toggle-left">{{ partial "utils/icon.html" "layout-sidebar-left-expand"}}</button>
+      <button class="toggle-right">{{ partial "utils/icon.html" "list-tree"}}</button>
+    </div>
+
+  </div>
+
+  <aside class="sidebar-right">
+    {{ partial "toc.html" . }}
+  </aside>
+
+</div>

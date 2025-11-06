@@ -1,0 +1,23 @@
+{{ $page := .Page }}
+{{ $folderName := $page | path.Dir | path.BaseName }}
+
+{{ $videoName := printf "%s-%s" $folderName "video.mp4" }}
+{{ $thumbnailName := printf "%s-%s" $folderName "video-thumbnail.png" }}
+
+{{ $video := $page.Resources.Get $videoName }}
+{{ $thumbnail := $page.Resources.Get $thumbnailName }}
+
+{{ $videoURL := "" }}
+{{ $thumbnailURL := "" }}
+
+{{ if $video }}
+  {{ $videoURL := $video.RelPermalink }}
+{{ end }}
+{{ if $thumbnail }}
+  {{ $thumbnailURL := $thumbnail.RelPermalink }}
+{{ end }}
+
+<div class="video-card" onclick="openVideoModal('{{ $videoURL }}')">
+  <img src="{{ $thumbnailURL }}" class="video-thumbnail" />
+  <div class="play-btn">&#9658;</div>
+</div>
