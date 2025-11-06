@@ -3,23 +3,21 @@
   <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> | Themed by <a href="https://github.com/toxin98/hugo-theme-memento" target="_blank">memento</a></p>
 </div>
 
-<div id="video-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); justify-content:center; align-items:center;">
-    <video id="video-player" controls style="max-width:90%; max-height:90%;"></video>
-</div>
+<div id="recent-music"></div>
 
 <script>
-function openVideoModal(src) {
-    const modal = document.getElementById('video-modal');
-    const player = document.getElementById('video-player');
-    player.src = src;
-    modal.style.display = 'flex';
-    player.play();
-}
+async function loadRecentMusic() {
+  const res = await fetch('/.netlify/functions/recent-music');
+  const data = await res.json();
+  if (!data.title) return;
 
-document.getElementById('video-modal').addEventListener('click', function() {
-    const player = document.getElementById('video-player');
-    player.pause();
-    player.src = '';
-    this.style.display = 'none';
-});
+  document.getElementById('recent-music').innerHTML = `
+    <div style="font-size:14px; opacity:0.75;">
+      最近在听：
+      <a href="${data.url}" target="_blank" style="text-decoration:none;">
+        ${data.title} - ${data.artist}
+      </a>
+    </div>`;
+}
+loadRecentMusic();
 </script>
