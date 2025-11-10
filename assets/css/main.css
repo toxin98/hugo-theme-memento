@@ -41,7 +41,7 @@ body {
   color: #222;
   font-family: sans-serif;
   font-size: 16px;
-  line-height: 1.5rem;
+  line-height: 1.4;
   margin: 0;
   min-height: 100vh;
   display: flex;
@@ -363,7 +363,7 @@ main > .wrapper {
   content: "›";
   margin: 0 4px;
   font-size: 24px;
-  line-height: 20px;
+  line-height: 14px;
 }
 
 
@@ -418,7 +418,7 @@ main > .wrapper {
 
 .docs-tree {
   overflow-y: auto;
-  font-size: 0.8rem;
+  font-size: 14px;
 }
 
 .docs-tree svg {
@@ -470,9 +470,9 @@ main > .wrapper {
   border-left: 1px solid #666;
   margin-left: 4px;
 }
-/* 不同层级的缩进 */
+
 .docs-tree ul ul li {
-  padding-left: 0.5rem;
+  padding-left: 0.5rem;  /* 不同层级的缩进 */
 }
 
 .docs-tree-section {
