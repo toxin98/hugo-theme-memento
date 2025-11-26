@@ -62,6 +62,7 @@
         {{ partial "date-format.html" (dict "date" .Lastmod "layout" ":date_long" "prefix" "Last updated: ") }}
         {{ partial "date-format.html" (dict "date" .PublishDate "layout" ":date_long" "prefix" "Publish date: ") }}
       </div>
+      <h1>{{ .Title }}</h1>
       {{ .Content }}
       {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
     </article>
