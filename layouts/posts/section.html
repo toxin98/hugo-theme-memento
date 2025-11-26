@@ -12,8 +12,6 @@
         <div class="post-section-header" id="{{ .Title }}">
           <h3 class="year">{{ .Title }}</h3>
           <span class="count">#{{ .Pages.Len }}</span>
-          {{ partial "utils/icon.html" "activity-heartbeat"}}
-          {{ .Description }}
         </div>
         <ul>
           {{ range .Pages }}
