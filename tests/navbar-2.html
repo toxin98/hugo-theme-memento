@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The New Yorker - Reverse Engineered</title>
+    <style>
+        /* --- 0. 变量定义 --- */
+        :root {
+            --header-logo-height: 70px;
+            --header-nav-height: 50px;
+            --total-header-height: calc(var(--header-logo-height) + var(--header-nav-height));
+            
+            --z-wrapper: 500;  /* 对应截图中的 z-index: 500 */
+            --z-logo-layer: 20;
+            --z-nav-layer: 10;
+
+            --font-serif: "Times New Roman", Times, serif;
+            --font-sans: Helvetica, Arial, sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: var(--font-serif);
+            background: #fff;
+            color: #121212;
+        }
+
+        /* --- 1. Persistent Top Wrapper (截图中的外壳) --- */
+        .persistent-top-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: var(--z-wrapper);
+            /* 这个容器本身不设背景，背景由子元素决定，以便做透视遮挡 */
+        }
+
+        /* --- 2. Stacked Navigation (堆叠层) --- */
+        .stacked-header {
+            width: 100%;
+            background-color: transparent; 
+        }
+
+        /* --- Layer A: The Grid (Logo区域) - 永远固定 --- */
+        /* 他们使用 Grid 布局来确保 Logo 绝对居中 */
+        .header-grid-row {
+            position: relative;
+            height: var(--header-logo-height);
+            background-color: #fff; /* 必须有背景色，作为遮挡层 */
+            border-bottom: 1px solid #000;
+            z-index: var(--z-logo-layer); /* 层级高 */
+            
+            /* Grid 布局核心 */
+            display: grid;
+            grid-template-columns: 1fr auto 1fr; /* 左-中-右 */
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .menu-trigger {
+            justify-self: start;
+            font-family: var(--font-sans);
+            font-weight: bold;
+            font-size: 12px;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        .logo {
+            font-size: 32px;
+            letter-spacing: -1px;
+            text-align: center;
+            /* 防止被左右挤压 */
+            white-space: nowrap; 
+        }
+
+        .subscribe-btn {
+            justify-self: end;
+            font-family: var(--font-sans);
+            font-weight: bold;
+            font-size: 11px;
+            text-transform: uppercase;
+            border: 1px solid #000;
+            padding: 6px 12px;
+            text-decoration: none;
+            color: #000;
+        }
+
+        /* --- Layer B: Nav Row (导航区域) - 动态伸缩 --- */
+        .header-nav-row {
+            position: relative;
+            height: var(--header-nav-height);
+            background-color: #fff;
+            border-bottom: 1px solid #e2e2e2;
+            z-index: var(--z-nav-layer); /* 层级低，藏在 Logo 层下面 */
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            /* 动画性能优化 */
+            transition: transform 0.3s cubic-bezier(0.215, 0.610, 0.355, 1.000); /* 类似 iOS 的平滑曲线 */
+            will-change: transform;
+        }
+
+        /* 隐藏状态：向上位移自身高度，刚好躲进 Logo 层的背面 */
+        .header-nav-row.is-hidden {
+            transform: translateY(-100%);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-family: var(--font-sans);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- 3. Main Content (兄弟节点) --- */
+        main#main-content {
+            /* 关键：给 fixed header 留位置 */
+            padding-top: calc(var(--total-header-height) + 40px);
+            max-width: 800px;
+            margin: 0 auto;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        /* 模拟长文章 */
+        h1 { font-size: 42px; line-height: 1.1; margin-bottom: 20px; }
+        p { font-size: 18px; line-height: 1.6; margin-bottom: 20px; text-align: justify; }
+        .spacer { height: 150vh; background: linear-gradient(to bottom, #fff, #f4f4f4); }
+
+    </style>
+</head>
+<body>
+
+    <!-- 对应截图: PersistentTopWrapper -->
+    <div class="persistent-top-wrapper">
+        
+        <!-- 对应截图: StackedNavigationHeader -->
+        <header class="stacked-header">
+            
+            <!-- Layer A: Logo Bar (Grid Layout) -->
+            <div class="header-grid-row">
+                <div class="menu-trigger">Menu</div>
+                <div class="logo">THE NEW YORKER</div>
+                <a href="#" class="subscribe-btn">Subscribe</a>
+            </div>
+
+            <!-- Layer B: Nav Bar (Slide Animation) -->
+            <nav class="header-nav-row" id="dynamic-nav">
+                <ul class="nav-links">
+                    <li><a href="#">News</a></li>
+                    <li><a href="#">Culture</a></li>
+                    <li><a href="#">Books</a></li>
+                    <li><a href="#">Business & Tech</a></li>
+                    <li><a href="#">Humor</a></li>
+                    <li><a href="#">Cartoons</a></li>
+                    <li><a href="#">Crossword</a></li>
+                </ul>
+            </nav>
+
+        </header>
+    </div>
+
+    <!-- 对应截图: Main Content -->
+    <main id="main-content">
+        <h1>Anatomy of a Header</h1>
+        <p>This layout is structurally identical to the one found in the Developer Tools screenshot.</p>
+        <p>We have a <code>.persistent-top-wrapper</code> that acts as the fixed anchor. Inside, we use CSS Grid for the top bar to replicate their <code>StackedNavigationGrid</code>.</p>
+        <p>Scroll down. Observe how the navigation bar slides up underneath the logo bar. The logo bar acts as a visual mask because it has a higher z-index and a solid background color.</p>
+        <div class="spacer"></div>
+    </main>
+
+    <script>
+        // 逻辑保持不变：滚动监听
+        const navRow = document.getElementById('dynamic-nav');
+        let lastScrollY = window.scrollY;
+
+        window.addEventListener('scroll', () => {
+            const currentScrollY = window.scrollY;
+
+            // 顶部防抖
+            if (currentScrollY <= 0) {
+                navRow.classList.remove('is-hidden');
+                return;
+            }
+
+            // 滚动方向判断
+            if (currentScrollY > lastScrollY && currentScrollY > 50) {
+                // 向下滚 -> 隐藏 Nav
+                navRow.classList.add('is-hidden');
+            } else {
+                // 向上滚 -> 显示 Nav
+                navRow.classList.remove('is-hidden');
+            }
+
+            lastScrollY = currentScrollY;
+        }, { passive: true }); // passive: true 提升滚动性能
+    </script>
+
+</body>
+</html>
