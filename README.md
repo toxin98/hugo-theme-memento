@@ -1,5 +1,7 @@
 # hugo-theme-memento
 
+The theme was built at the end of 2025 and requires Hugo version 0.148.0.
+
 ## Initialize a new Hugo site
 
 ```shell
