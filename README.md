@@ -16,7 +16,7 @@ git init
 ## Installation
 
 ```shell
-git submodule add https://github.com/toxin98/hugo-theme-memento.git themes/hugo-theme-memento
+git submodule add -b main https://github.com/toxin98/hugo-theme-memento.git themes/hugo-theme-memento
 ```
 
 Change `hugo.toml`
