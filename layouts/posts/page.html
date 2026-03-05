@@ -5,8 +5,9 @@
     <aside class="sidebar-left">
       <h1><a href="{{ .FirstSection.RelPermalink }}#{{ .LinkTitle  }}">くBack</a></h1>
       <p></p>
-      <h2>{{ .Date | time.Format "2006" }}</h2>
-      <h2>{{ .Date | time.Format "January, 2" }}</h2>
+      <span class="posts-date-year">{{ .Date.Format "2006" }}</span>
+      <span class="posts-date-month">{{ .Date.Format "January" }}</span>
+      <span class="posts-date-day">{{ .Date.Format "02" }}</span>
     </aside>
 
     <div class="middle-container">
