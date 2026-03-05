@@ -1,0 +1,4 @@
+[submodule "themes/hugo-theme-memento"]
+	path = themes/hugo-theme-memento
+	url = https://github.com/toxin98/hugo-theme-memento.git
+	branch = main
