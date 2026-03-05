@@ -630,9 +630,9 @@ main > .wrapper {
 }
 
 .posts-cover {
-  flex: 0 0 180px;
-  width: 180px;
-  height: 120px;
+  flex: 0 0 150px;
+  width: 150px;
+  height: 100px;
   display: block;
   overflow: hidden;
   border-radius: 8px;
@@ -655,14 +655,16 @@ main > .wrapper {
 }
 
 .posts-date {
-  flex: 0 0 48px;
+  flex: 0 0 64px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 0.1rem;
+  margin-right: 6px;
 }
 
 .posts-date-month {
+  align-self: flex-start;
+  text-align: left;
   font-size: 1.2rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -670,7 +672,9 @@ main > .wrapper {
 }
 
 .posts-date-day {
-  font-size: 1.4rem;
+  align-self: flex-end;
+  text-align: right;
+  font-size: 1.8rem;
   font-weight: 600;
   letter-spacing: 0.06em;
   color: #6b7280;
