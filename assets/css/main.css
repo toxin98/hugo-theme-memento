@@ -617,8 +617,9 @@ main > .wrapper {
 .posts-item {
   display: flex;
   align-items: stretch;
-  padding: 7px 4px;
+  padding: 8px 16px;
   border-bottom: 1px solid #e8eaee;
+  gap: 12px;
 }
 
 .posts-item + .posts-item {
@@ -631,14 +632,13 @@ main > .wrapper {
 
 .posts-cover {
   flex: 0 0 150px;
-  width: 150px;
-  height: 100px;
+  width: 180px;
+  height: 120px;
   display: block;
   overflow: hidden;
   border-radius: 8px;
   border: 1px solid #eceff3;
   background: transparent;
-  margin-right: 12px;
 }
 
 .posts-cover img {
@@ -655,11 +655,10 @@ main > .wrapper {
 }
 
 .posts-date {
-  flex: 0 0 64px;
+  flex: 0 0 56px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-right: 6px;
 }
 
 .posts-date-month {
@@ -715,41 +714,6 @@ main > .wrapper {
   color: #0b63b8;
   text-decoration: underline;
   text-underline-offset: 2px;
-}
-
-@media (max-width: 768px) {
-  .posts-year-section {
-    margin: 1.1rem 0;
-  }
-
-  .posts-item {
-    padding: 0.65rem 0.1rem;
-  }
-
-  .posts-date {
-    flex-basis: 54px;
-    margin-right: 0.7rem;
-  }
-
-  .posts-cover {
-    flex-basis: 192px;
-    width: 192px;
-    height: 128px;
-    margin-right: 0.7rem;
-  }
-
-  .posts-date-day {
-    font-size: 1.3rem;
-  }
-
-  .year-number {
-    font-size: 1.5rem;
-  }
-
-  .posts-title,
-  .posts-summary {
-    font-size: 15px;
-  }
 }
 
 
