@@ -1,6 +1,6 @@
-+++
-title = "Blog post date"
-+++
+---
+title: "Blog post date"
+---
 
 Supported date extraction patterns  
 
