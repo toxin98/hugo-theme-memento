@@ -2,6 +2,8 @@
 title: "Blog post date"
 ---
 
+because of
+
 Supported date extraction patterns  
 
 | Pattern                               | Example                                           |
