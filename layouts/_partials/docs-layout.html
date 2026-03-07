@@ -1,3 +1,25 @@
+<style>
+  .docs-tree details > summary {
+    list-style: none;
+  }
+
+  .docs-tree details > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .docs-folder-open {
+    display: none;
+  }
+
+  .docs-tree details[open] > summary .docs-folder-open {
+    display: inline-block;
+  }
+
+  .docs-tree details[open] > summary .docs-folder-closed {
+    display: none;
+  }
+</style>
+
 <div class="wrapper">
 
   <aside class="sidebar-left">
@@ -28,14 +50,16 @@
 
       {{ range $context.Sections.ByLinkTitle }}
         <li>
-          <a href="{{ .RelPermalink }}"
-            class="{{ if eq .RelPermalink $current.RelPermalink }}active{{ end }}">
-            {{ partial "utils/icon.html" "folder"}}
-            <span>{{ .LinkTitle }}</span>
-          </a>
-          <ul>
-            {{ template "docs-recursive" (dict "context" . "current" $current) }}
-          </ul>
+          <details {{ if .IsAncestor $current }}open{{ end }}>
+            <summary class="{{ if eq .RelPermalink $current.RelPermalink }}active{{ end }}">
+              <span class="docs-folder-closed">{{ partial "utils/icon.html" "folder" }}</span>
+              <span class="docs-folder-open">{{ partial "utils/icon.html" "folder-open" }}</span>
+              <span>{{ .LinkTitle }}</span>
+            </summary>
+            <ul>
+              {{ template "docs-recursive" (dict "context" . "current" $current) }}
+            </ul>
+          </details>
         </li>
       {{ end }}
       {{ range $context.RegularPages.ByLinkTitle }}
