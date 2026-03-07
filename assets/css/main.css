@@ -216,6 +216,14 @@ main > .wrapper {
   /* overflow-y: auto; */
 }
 
+@media print {
+
+  header, footer {
+    display: none;
+  }
+
+}
+
 @media (max-width: 1280px) {
 
   .sidebar-right {
@@ -231,7 +239,6 @@ main > .wrapper {
   }
 
 }
-
 
 @media (max-width: 768px) {
 
@@ -267,7 +274,6 @@ main > .wrapper {
   }
 
 }
-
 /* --- Overlay (遮罩层 - 仅移动端使用) --- */
 .overlay {
   display: none;
@@ -282,47 +288,19 @@ main > .wrapper {
   transition: opacity 0.3s ease;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .content {
   flex: 1;
   overflow-wrap: break-word; /* 遇到长单词也会换行 */
   word-break: break-word;    /* 保证兼容 */
 }
 
-
-
-
-
-
-
-
-
-:target::before {
-  content: "";
+.content img {
   display: block;
-  padding-top: var(--top-bar-height);
-  margin-top: calc(-1 * var(--top-bar-height));
+  width: 80%;
+  max-height: calc(80vw * 2 / 3);
+  margin: 0 auto;
 }
-
+/* toc */
 #TableOfContents {
   max-height: calc(100vh - 10rem);
   overflow-y: auto;
@@ -353,15 +331,7 @@ main > .wrapper {
   color: #000;
   border-bottom: 0.1rem solid #000;
 }
-
-
-
-
-
-
-
-
-
+/* breadcrumbs */
 .breadcrumbs-list {
   list-style: none;
   display: flex;
@@ -393,50 +363,12 @@ main > .wrapper {
   font-size: 24px;
   line-height: 14px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* docs */
 .docs-date-container {
   display: flex;
   justify-content: space-between;
   color: #666;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .docs-buttons {
   position: absolute;
@@ -535,47 +467,31 @@ main > .wrapper {
 .docs-tree details[open] > summary .docs-folder-closed {
   display: none;
 }
-
-
-
-
-
-
-
-
-
-.post-section-header {
-  position: sticky;
-  top: var(--top-bar-height);
-  height: 40px;
-  background-color: #f8f8f8;
-  display: flex;
-  align-items: center;
+/* posts*/
+.posts-year-section {
+  margin: 1.2rem 0;
 }
 
-.post-section :target::before {
+.posts-year-section-header {
+  position: sticky;
+  top: var(--top-bar-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  /* margin-bottom: 0.7rem; */
+}
+
+.posts-year-section :target::before {
   content: "";
   display: block;
   padding-top: 120px;
   margin-top: -120px;
 }
 
-.post-section ul {
+.posts-year-section ul{
   list-style: none;
   margin: 0;
   padding: 0;
-}
-
-/* posts section list */
-.posts-year-section {
-  margin: 1.2rem 0;
-}
-
-.posts-year-section-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  /* margin-bottom: 0.7rem; */
 }
 
 .posts-date-year {
@@ -589,12 +505,6 @@ main > .wrapper {
   align-items: baseline;
   gap: 0.3rem;
   color: #6b7280;
-}
-
-.posts-year-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
 }
 
 .posts-item {
@@ -699,43 +609,13 @@ main > .wrapper {
   text-underline-offset: 2px;
 }
 
-
-
-
-
-
-
-
-
-
 .page-featured img {
   width: 100%;
   height: auto;
   object-fit: cover;  /* 保持比例，裁切多余部分 */
   object-position: center;
 }
-
-.content img {
-  display: block;
-  width: 80%;
-  max-height: calc(80vw * 2 / 3);
-  margin: 0 auto;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* ephemera */
 .ephemera-stream {
   margin: 0 auto;
 }
@@ -831,28 +711,6 @@ main > .wrapper {
 .sudoku-8 img:nth-child(8) { grid-column: 3; grid-row: 3; }
 /* -------------------- 9 -------------------- */
 .sudoku-9 { grid-template-columns: repeat(3, 50px); grid-template-rows: repeat(3, 50px); gap: 2px; }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* projects */
 .projects-grid {
   display: grid;
@@ -897,13 +755,4 @@ main > .wrapper {
   object-fit: cover;  /* 保持比例，裁切多余部分 */
   object-position: center;
   border-left: 1px solid #ddd;
-}
-
-
-@media print {
-
-  header, footer, aside {
-    display: none;
-  }
-
 }
