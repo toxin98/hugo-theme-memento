@@ -601,6 +601,8 @@ main > .wrapper {
   margin: 0.35rem 0 0;
   color: #6b7280;
   line-height: 1.5;
+  overflow-wrap: anywhere;
+  word-break: break-word;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
