@@ -181,8 +181,7 @@ main > .wrapper {
 }
 
 .middle-container {
-  flex: 0 1 var(--middle-max-width);
-  width: min(100%, var(--middle-max-width));
+  flex: 0 0 var(--middle-max-width);
   padding: 0 12px;
   display: flex;
   flex-direction: column;
@@ -271,6 +270,12 @@ main > .wrapper {
 
   .menu-toggle {
     visibility: visible;
+  }
+
+  .middle-container {
+    flex: auto;
+    width: 100%;
+    max-width: 100%;
   }
 
 }
