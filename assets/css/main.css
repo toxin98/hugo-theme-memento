@@ -551,7 +551,26 @@ main > .wrapper {
   display: block;
 } */
 
+.docs-tree details > summary {
+  list-style: none;
+  cursor: pointer;
+}
 
+.docs-tree details > summary::-webkit-details-marker {
+  display: none;
+}
+
+.docs-folder-open {
+  display: none;
+}
+
+.docs-tree details[open] > summary .docs-folder-open {
+  display: inline-block;
+}
+
+.docs-tree details[open] > summary .docs-folder-closed {
+  display: none;
+}
 
 
 
