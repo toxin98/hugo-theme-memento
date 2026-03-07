@@ -214,7 +214,19 @@ main > .wrapper {
   /* 内容过长时允许内部滚动 */
   /* overflow-y: auto; */
 }
-
+/* --- Overlay (遮罩层 - 仅移动端使用) --- */
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 800; /* 在 sidebar 之下，header 之上(如果想覆盖header需调整) */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
 @media print {
 
   header, footer {
@@ -279,20 +291,7 @@ main > .wrapper {
   }
 
 }
-/* --- Overlay (遮罩层 - 仅移动端使用) --- */
-.overlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 800; /* 在 sidebar 之下，header 之上(如果想覆盖header需调整) */
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
+/* content */
 .content {
   flex: 1;
   overflow-wrap: break-word; /* 遇到长单词也会换行 */
@@ -335,38 +334,6 @@ main > .wrapper {
 #TableOfContents a:focus {
   color: #000;
   border-bottom: 0.1rem solid #000;
-}
-/* breadcrumbs */
-.breadcrumbs-list {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  margin: 6px 0;
-  padding: 0;
-  font-size: 14px;
-}
-
-.breadcrumbs-list li {
-  display: flex;
-  color: #555;
-}
-
-.breadcrumbs-list a {
-  text-decoration: none;
-  color: #0073e6;
-  transition: color 0.2s;
-}
-
-.breadcrumbs-list a:hover {
-  text-decoration: underline;
-  color: #1d1aeb;
-}
-
-.breadcrumbs-list li:not(:last-child)::after {
-  content: "›";
-  margin: 0 4px;
-  font-size: 24px;
-  line-height: 14px;
 }
 /* docs */
 .docs-date-container {
@@ -471,6 +438,38 @@ main > .wrapper {
 
 .docs-tree details[open] > summary .docs-folder-closed {
   display: none;
+}
+/* breadcrumbs */
+.breadcrumbs-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 6px 0;
+  padding: 0;
+  font-size: 14px;
+}
+
+.breadcrumbs-list li {
+  display: flex;
+  color: #555;
+}
+
+.breadcrumbs-list a {
+  text-decoration: none;
+  color: #0073e6;
+  transition: color 0.2s;
+}
+
+.breadcrumbs-list a:hover {
+  text-decoration: underline;
+  color: #1d1aeb;
+}
+
+.breadcrumbs-list li:not(:last-child)::after {
+  content: "›";
+  margin: 0 4px;
+  font-size: 24px;
+  line-height: 14px;
 }
 /* posts*/
 .posts-year-section {
