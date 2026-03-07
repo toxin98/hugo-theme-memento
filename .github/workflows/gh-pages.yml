@@ -4,10 +4,8 @@ on:
   push:
     branches:
       - main
-      - exampleSite/*
   # manual run
   workflow_dispatch:
-
 
 # Allow one concurrent deployment
 concurrency:
