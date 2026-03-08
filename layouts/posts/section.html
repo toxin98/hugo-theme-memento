@@ -24,7 +24,7 @@
             <span class="posts-date-month">{{ .Date.Format "Jan" }}</span>
             <span class="posts-date-day">{{ .Date.Format "02" }}</span>
           </time>
-          <a class="posts-cover" aria-label="{{ .LinkTitle }}">
+          <a class="posts-featured" aria-label="{{ .LinkTitle }}">
             {{ with .Resources.GetMatch .Params.featured }}
             {{ $thumb := .Filter (slice images.AutoOrient (images.Process "fit 1600x1600")) }}
             <img src="{{ $thumb.RelPermalink }}" width="{{ $thumb.Width }}" height="{{ $thumb.Height }}" alt="" loading="lazy" decoding="async" />

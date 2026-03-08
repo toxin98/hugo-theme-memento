@@ -527,7 +527,7 @@ main > .wrapper {
   background-color: transparent;
 }
 
-.posts-cover {
+.posts-featured {
   flex: 0 0 150px;
   width: 180px;
   height: 120px;
@@ -538,7 +538,7 @@ main > .wrapper {
   background: transparent;
 }
 
-.posts-cover img {
+.posts-featured img {
   display: block;
   width: 100%;
   height: 100%;
@@ -547,7 +547,7 @@ main > .wrapper {
   transition: transform 0.28s ease;
 }
 
-.posts-item:hover .posts-cover img {
+.posts-item:hover .posts-featured img {
   transform: scale(1.05);
 }
 
