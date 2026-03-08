@@ -34,10 +34,10 @@ a {
 
 :root {
   --top-bar-bg-color: #fff;
-  --top-bar-height: 42px;
+  --top-bar-height: 48px;
   --nav-bar-bg-color: #fff;
-  --nav-bar-height: 32px;
-  --header-height: 74px;
+  --nav-bar-height: 36px;
+  --header-height: 84px;
   --sidebar-width: 246px;
   --middle-max-width: 768px;
   --z-header: 1000;
@@ -254,7 +254,7 @@ main > .wrapper {
 @media (max-width: 768px) {
 
   :root{
-    --header-height: 42px;
+    --header-height: 48px;
   }
 
   .nav-bar {
