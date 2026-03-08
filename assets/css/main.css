@@ -292,12 +292,6 @@ main > .wrapper {
 
 }
 /* content */
-.content {
-  flex: 1;
-  overflow-wrap: break-word; /* 遇到长单词也会换行 */
-  word-break: break-word;    /* 保证兼容 */
-}
-
 .content img {
   display: block;
   width: 80%;
@@ -337,8 +331,11 @@ main > .wrapper {
 }
 /* docs */
 .docs-date-container {
+  margin-top: 0.5rem;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
+  gap: 0.2rem 1rem;
   color: #666;
 }
 
