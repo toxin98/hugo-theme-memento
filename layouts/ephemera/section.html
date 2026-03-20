@@ -7,9 +7,12 @@
 
     <div class="middle-container">
 
-      <div class="ephemera-stream">
-        {{ range .RegularPages.ByDate.Reverse }}
-          <div class="ephemera-card">
+      {{ $pages := .RegularPages.ByDate.Reverse }}
+      {{ $paginator := .Paginate $pages }}
+
+      <div class="ephemera-stream" data-infinite-scroll-list>
+        {{ range $paginator.Pages }}
+          <div class="ephemera-card" data-infinite-scroll-item>
             <article class="ephemera-item">
               {{ .Summary }}
               <div class="ephemera-content">
@@ -19,6 +22,16 @@
           </div>
         {{ end }}
       </div>
+
+      {{ if $paginator.HasNext }}
+        {{ $nextURL := $paginator.Next.URL }}
+        <div class="older-items" data-infinite-scroll-next data-next-url="{{ $nextURL }}" aria-hidden="true"></div>
+        <noscript>
+          <p class="older-items-fallback">
+            <a href="{{ $nextURL }}">LOAD MORE</a>
+          </p>
+        </noscript>
+      {{ end }}
 
     </div>
 
