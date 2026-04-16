@@ -1,5 +1,158 @@
 {{ define "main" }}
 
 {{ $data := site.Data.photography.analog.metadata }}
+{{ $total := len $data }}
+{{ $filmCounts := dict }}
+{{ $cameraCounts := dict }}
+{{ $labCounts := dict }}
+
+{{ range $data }}
+  {{ with .film }}
+    {{ $current := index $filmCounts . | default 0 }}
+    {{ $filmCounts = merge $filmCounts (dict . (add $current 1)) }}
+  {{ end }}
+  {{ with .camera }}
+    {{ $current := index $cameraCounts . | default 0 }}
+    {{ $cameraCounts = merge $cameraCounts (dict . (add $current 1)) }}
+  {{ end }}
+  {{ with .development.lab }}
+    {{ $current := index $labCounts . | default 0 }}
+    {{ $labCounts = merge $labCounts (dict . (add $current 1)) }}
+  {{ end }}
+{{ end }}
+
+  <div class="wrapper">
+
+    <aside class="sidebar-left">
+    </aside>
+
+    <div class="middle-container">
+
+      <article class="content photography-analog">
+        <header class="photography-analog-header">
+          <p class="photography-analog-eyebrow">Photography</p>
+          <h1>{{ .Title }}</h1>
+          {{ with .Content }}
+            <div class="photography-analog-intro">
+              {{ . }}
+            </div>
+          {{ end }}
+          <div class="photography-analog-hero" aria-label="总览">
+            <span class="photography-analog-hero-label">总共拍摄</span>
+            <strong class="photography-analog-hero-value">{{ $total }}</strong>
+            <span class="photography-analog-hero-unit">卷</span>
+          </div>
+        </header>
+
+        <section class="photography-analog-stats" aria-label="统计信息">
+          <article class="photography-analog-stat">
+            <span class="photography-analog-stat-label">不同胶卷</span>
+            <strong class="photography-analog-stat-value">{{ len $filmCounts }}</strong>
+            <div class="photography-analog-chip-list">
+              {{ range $film, $count := $filmCounts }}
+                <span class="photography-analog-chip">{{ $film }} × {{ $count }}</span>
+              {{ end }}
+            </div>
+          </article>
+
+          <article class="photography-analog-stat">
+            <span class="photography-analog-stat-label">相机频率</span>
+            <strong class="photography-analog-stat-value">{{ len $cameraCounts }}</strong>
+            <div class="photography-analog-chip-list">
+              {{ range $camera, $count := $cameraCounts }}
+                <span class="photography-analog-chip">{{ $camera }} × {{ $count }}</span>
+              {{ end }}
+            </div>
+          </article>
+
+          <article class="photography-analog-stat">
+            <span class="photography-analog-stat-label">Lab 频率</span>
+            <strong class="photography-analog-stat-value">{{ len $labCounts }}</strong>
+            <div class="photography-analog-chip-list">
+              {{ range $lab, $count := $labCounts }}
+                <span class="photography-analog-chip">{{ $lab }} × {{ $count }}</span>
+              {{ end }}
+            </div>
+          </article>
+        </section>
+
+        <section class="photography-analog-grid" aria-label="底片记录">
+          {{ range $data }}
+            {{ $started := "" }}
+            {{ $finished := "" }}
+            {{ with .date }}
+              {{ with .started }}
+                {{ $started = . }}
+              {{ end }}
+              {{ with .finished }}
+                {{ $finished = . }}
+              {{ end }}
+            {{ end }}
+
+            <article class="photography-analog-card">
+              <div class="photography-analog-card-header">
+                <span class="photography-analog-card-id">#{{ .id }}</span>
+                {{ if and (ne $started "") (ne $finished "") }}
+                  <span class="photography-analog-card-date">{{ $started }} → {{ $finished }}</span>
+                {{ else if ne $started "" }}
+                  <span class="photography-analog-card-date">Started {{ $started }}</span>
+                {{ else if ne $finished "" }}
+                  <span class="photography-analog-card-date">Finished {{ $finished }}</span>
+                {{ end }}
+              </div>
+
+              <dl class="photography-analog-card-list">
+                <div>
+                  <dt>Film</dt>
+                  <dd>{{ .film | default "-" }}</dd>
+                </div>
+                <div>
+                  <dt>Camera</dt>
+                  <dd>{{ .camera | default "-" }}</dd>
+                </div>
+                <div>
+                  <dt>Lab</dt>
+                  <dd>{{ with .development.lab }}{{ . }}{{ else }}-{{ end }}</dd>
+                </div>
+                <div>
+                  <dt>Process</dt>
+                  <dd>{{ with .development.process }}{{ . }}{{ else }}-{{ end }}</dd>
+                </div>
+                <div>
+                  <dt>Scanning</dt>
+                  <dd>
+                    {{ with .development.scanning }}
+                      {{ $brand := .brand | default "" }}
+                      {{ $model := .model | default "" }}
+                      {{ if and (ne $brand "") (ne $model "") }}
+                        {{ $brand }} / {{ $model }}
+                      {{ else if ne $brand "" }}
+                        {{ $brand }}
+                      {{ else if ne $model "" }}
+                        {{ $model }}
+                      {{ else }}
+                        -
+                      {{ end }}
+                    {{ else }}
+                      -
+                    {{ end }}
+                  </dd>
+                </div>
+                <div class="photography-analog-card-notes">
+                  <dt>Notes</dt>
+                  <dd>{{ .notes | default "-" }}</dd>
+                </div>
+              </dl>
+            </article>
+          {{ end }}
+        </section>
+      </article>
+
+    </div>
+
+    <aside class="sidebar-right">
+    </aside>
+
+  </div>
 
 {{ end }}
