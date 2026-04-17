@@ -1,6 +1,6 @@
 {{ define "main" }}
 
-{{ $data := hugo.Data.analog }}
+{{ $data := hugo.Data.analog.metadata }}
 {{ $total := len $data }}
 {{ $filmCounts := dict }}
 {{ $cameraCounts := dict }}
