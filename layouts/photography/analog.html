@@ -119,9 +119,9 @@
                   <dd>{{ with .development.process }}{{ . }}{{ else }}-{{ end }}</dd>
                 </div>
                 <div>
-                  <dt>Scanning</dt>
+                  <dt>Digitization</dt>
                   <dd>
-                    {{ with .development.scanning }}
+                    {{ with .development.digitization }}
                       {{ $brand := .brand | default "" }}
                       {{ $model := .model | default "" }}
                       {{ if and (ne $brand "") (ne $model "") }}
@@ -138,9 +138,9 @@
                     {{ end }}
                   </dd>
                 </div>
-                <div class="photography-analog-card-notes">
-                  <dt>Notes</dt>
-                  <dd>{{ .notes | default "-" }}</dd>
+                <div class="photography-analog-card-note">
+                  <dt>Note</dt>
+                  <dd>{{ .note | default "-" }}</dd>
                 </div>
               </dl>
             </article>
