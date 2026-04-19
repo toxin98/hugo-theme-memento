@@ -28,3 +28,9 @@ Change `hugo.toml`
 ```toml
 theme = "hugo-theme-memento"
 ```
+
+## Update
+
+```shell
+git submodule update --remote
+```
