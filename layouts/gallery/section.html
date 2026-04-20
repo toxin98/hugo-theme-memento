@@ -3,7 +3,7 @@
   <!-- digital -->
 
   <!-- analog -->
-  {{ $data := hugo.Data.photography.analog.metadata }}
+  {{ $data := hugo.Data.gallery.analog.metadata }}
   {{ $total := len $data }}
   {{ $filmCounts := dict }}
   {{ $cameraCounts := dict }}
@@ -31,55 +31,55 @@
 
     <div class="middle-container">
 
-      <article class="content photography-analog">
-        <div class="photography-analog-header">
-          <p class="photography-analog-eyebrow">Photography</p>
+      <article class="content gallery-analog">
+        <div class="gallery-analog-header">
+          <p class="gallery-analog-eyebrow">gallery</p>
           <h1>{{ .Title }}</h1>
           {{ with .Content }}
-            <div class="photography-analog-intro">
+            <div class="gallery-analog-intro">
               {{ . }}
             </div>
           {{ end }}
-          <div class="photography-analog-hero" aria-label="总览">
-            <span class="photography-analog-hero-label">总共拍摄</span>
-            <strong class="photography-analog-hero-value">{{ $total }}</strong>
-            <span class="photography-analog-hero-unit">卷</span>
+          <div class="gallery-analog-hero" aria-label="总览">
+            <span class="gallery-analog-hero-label">总共拍摄</span>
+            <strong class="gallery-analog-hero-value">{{ $total }}</strong>
+            <span class="gallery-analog-hero-unit">卷</span>
           </div>
         </div>
 
-        <section class="photography-analog-stats" aria-label="统计信息">
-          <article class="photography-analog-stat">
-            <span class="photography-analog-stat-label">不同胶卷</span>
-            <strong class="photography-analog-stat-value">{{ len $filmCounts }}</strong>
-            <div class="photography-analog-chip-list">
+        <section class="gallery-analog-stats" aria-label="统计信息">
+          <article class="gallery-analog-stat">
+            <span class="gallery-analog-stat-label">不同胶卷</span>
+            <strong class="gallery-analog-stat-value">{{ len $filmCounts }}</strong>
+            <div class="gallery-analog-chip-list">
               {{ range $film, $count := $filmCounts }}
-                <span class="photography-analog-chip">{{ $film }} × {{ $count }}</span>
+                <span class="gallery-analog-chip">{{ $film }} × {{ $count }}</span>
               {{ end }}
             </div>
           </article>
 
-          <article class="photography-analog-stat">
-            <span class="photography-analog-stat-label">相机频率</span>
-            <strong class="photography-analog-stat-value">{{ len $cameraCounts }}</strong>
-            <div class="photography-analog-chip-list">
+          <article class="gallery-analog-stat">
+            <span class="gallery-analog-stat-label">相机频率</span>
+            <strong class="gallery-analog-stat-value">{{ len $cameraCounts }}</strong>
+            <div class="gallery-analog-chip-list">
               {{ range $camera, $count := $cameraCounts }}
-                <span class="photography-analog-chip">{{ $camera }} × {{ $count }}</span>
+                <span class="gallery-analog-chip">{{ $camera }} × {{ $count }}</span>
               {{ end }}
             </div>
           </article>
 
-          <article class="photography-analog-stat">
-            <span class="photography-analog-stat-label">Lab 频率</span>
-            <strong class="photography-analog-stat-value">{{ len $labCounts }}</strong>
-            <div class="photography-analog-chip-list">
+          <article class="gallery-analog-stat">
+            <span class="gallery-analog-stat-label">Lab 频率</span>
+            <strong class="gallery-analog-stat-value">{{ len $labCounts }}</strong>
+            <div class="gallery-analog-chip-list">
               {{ range $lab, $count := $labCounts }}
-                <span class="photography-analog-chip">{{ $lab }} × {{ $count }}</span>
+                <span class="gallery-analog-chip">{{ $lab }} × {{ $count }}</span>
               {{ end }}
             </div>
           </article>
         </section>
 
-        <section class="photography-analog-grid" aria-label="底片记录">
+        <section class="gallery-analog-grid" aria-label="底片记录">
           {{ range $data }}
             {{ $started := "" }}
             {{ $finished := "" }}
@@ -92,19 +92,19 @@
               {{ end }}
             {{ end }}
 
-            <article class="photography-analog-card">
-              <div class="photography-analog-card-header">
-                <span class="photography-analog-card-id">#{{ .id }}</span>
+            <article class="gallery-analog-card">
+              <div class="gallery-analog-card-header">
+                <span class="gallery-analog-card-id">#{{ .id }}</span>
                 {{ if and (ne $started "") (ne $finished "") }}
-                  <span class="photography-analog-card-date">{{ $started }} → {{ $finished }}</span>
+                  <span class="gallery-analog-card-date">{{ $started }} → {{ $finished }}</span>
                 {{ else if ne $started "" }}
-                  <span class="photography-analog-card-date">Started {{ $started }}</span>
+                  <span class="gallery-analog-card-date">Started {{ $started }}</span>
                 {{ else if ne $finished "" }}
-                  <span class="photography-analog-card-date">Finished {{ $finished }}</span>
+                  <span class="gallery-analog-card-date">Finished {{ $finished }}</span>
                 {{ end }}
               </div>
 
-              <dl class="photography-analog-card-list">
+              <dl class="gallery-analog-card-list">
                 <div>
                   <dt>Film</dt>
                   <dd>{{ .film | default "-" }}</dd>
@@ -141,7 +141,7 @@
                     {{ end }}
                   </dd>
                 </div>
-                <div class="photography-analog-card-note">
+                <div class="gallery-analog-card-note">
                   <dt>Note</dt>
                   <dd>{{ .note | default "-" }}</dd>
                 </div>

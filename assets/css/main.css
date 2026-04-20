@@ -650,19 +650,19 @@ main > .wrapper {
   object-fit: cover;  /* 保持比例，裁切多余部分 */
   object-position: center;
 }
-/* photography / analog */
-.photography-analog {
+/* gallery / analog */
+.gallery-analog {
   padding: 1rem 0 2rem;
 }
 
-.photography-analog-header h1 {
+.gallery-analog-header h1 {
   margin: 0.15rem 0 0.5rem;
   font-size: clamp(2rem, 4vw, 2.8rem);
   line-height: 1.1;
   letter-spacing: -0.03em;
 }
 
-.photography-analog-eyebrow {
+.gallery-analog-eyebrow {
   margin: 0;
   color: #7a8794;
   font-size: 0.85rem;
@@ -670,13 +670,13 @@ main > .wrapper {
   text-transform: uppercase;
 }
 
-.photography-analog-intro {
+.gallery-analog-intro {
   color: #4b5563;
   font-size: 1rem;
   line-height: 1.7;
 }
 
-.photography-analog-hero {
+.gallery-analog-hero {
   display: inline-flex;
   align-items: baseline;
   gap: 0.45rem;
@@ -688,30 +688,30 @@ main > .wrapper {
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
 }
 
-.photography-analog-hero-label {
+.gallery-analog-hero-label {
   color: #6b7280;
   font-size: 0.88rem;
 }
 
-.photography-analog-hero-value {
+.gallery-analog-hero-value {
   font-size: 2.2rem;
   line-height: 1;
   color: #111827;
 }
 
-.photography-analog-hero-unit {
+.gallery-analog-hero-unit {
   color: #6b7280;
   font-size: 0.95rem;
 }
 
-.photography-analog-stats {
+.gallery-analog-stats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 0.9rem;
   margin: 1.25rem 0;
 }
 
-.photography-analog-stat {
+.gallery-analog-stat {
   padding: 1rem;
   border: 1px solid #e5e7eb;
   border-radius: 14px;
@@ -719,27 +719,27 @@ main > .wrapper {
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
 }
 
-.photography-analog-stat-label {
+.gallery-analog-stat-label {
   display: block;
   margin-bottom: 0.35rem;
   color: #6b7280;
   font-size: 0.82rem;
 }
 
-.photography-analog-stat-value {
+.gallery-analog-stat-value {
   font-size: 1.5rem;
   line-height: 1;
   color: #111827;
 }
 
-.photography-analog-chip-list {
+.gallery-analog-chip-list {
   display: flex;
   flex-wrap: wrap;
   gap: 0.45rem;
   margin-top: 0.8rem;
 }
 
-.photography-analog-chip {
+.gallery-analog-chip {
   display: inline-flex;
   align-items: center;
   padding: 0.25rem 0.55rem;
@@ -750,13 +750,13 @@ main > .wrapper {
   line-height: 1.3;
 }
 
-.photography-analog-grid {
+.gallery-analog-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 1rem;
 }
 
-.photography-analog-card {
+.gallery-analog-card {
   padding: 1rem;
   border: 1px solid #e5e7eb;
   border-radius: 16px;
@@ -764,7 +764,7 @@ main > .wrapper {
   box-shadow: 0 2px 6px rgba(15, 23, 42, 0.05);
 }
 
-.photography-analog-card-header {
+.gallery-analog-card-header {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -772,27 +772,27 @@ main > .wrapper {
   margin-bottom: 0.85rem;
 }
 
-.photography-analog-card-id {
+.gallery-analog-card-id {
   font-weight: 700;
   color: #111827;
 }
 
-.photography-analog-card-date {
+.gallery-analog-card-date {
   color: #6b7280;
   font-size: 0.88rem;
 }
 
-.photography-analog-card-list {
+.gallery-analog-card-list {
   display: grid;
   gap: 0.85rem;
   margin: 0;
 }
 
-.photography-analog-card-list div {
+.gallery-analog-card-list div {
   margin: 0;
 }
 
-.photography-analog-card-list dt {
+.gallery-analog-card-list dt {
   margin-bottom: 0.2rem;
   color: #6b7280;
   font-size: 0.82rem;
@@ -800,13 +800,13 @@ main > .wrapper {
   letter-spacing: 0.08em;
 }
 
-.photography-analog-card-list dd {
+.gallery-analog-card-list dd {
   margin: 0;
   color: #111827;
   overflow-wrap: anywhere;
 }
 
-.photography-analog-card-note dd {
+.gallery-analog-card-note dd {
   color: #374151;
   line-height: 1.6;
 }
