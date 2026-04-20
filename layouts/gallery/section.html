@@ -1,25 +1,28 @@
 {{ define "main" }}
 
-{{ $data := hugo.Data.photography.analog.metadata }}
-{{ $total := len $data }}
-{{ $filmCounts := dict }}
-{{ $cameraCounts := dict }}
-{{ $labCounts := dict }}
+  <!-- digital -->
 
-{{ range $data }}
-  {{ with .film }}
-    {{ $current := index $filmCounts . | default 0 }}
-    {{ $filmCounts = merge $filmCounts (dict . (add $current 1)) }}
+  <!-- analog -->
+  {{ $data := hugo.Data.photography.analog.metadata }}
+  {{ $total := len $data }}
+  {{ $filmCounts := dict }}
+  {{ $cameraCounts := dict }}
+  {{ $labCounts := dict }}
+
+  {{ range $data }}
+    {{ with .film }}
+      {{ $current := index $filmCounts . | default 0 }}
+      {{ $filmCounts = merge $filmCounts (dict . (add $current 1)) }}
+    {{ end }}
+    {{ with .camera }}
+      {{ $current := index $cameraCounts . | default 0 }}
+      {{ $cameraCounts = merge $cameraCounts (dict . (add $current 1)) }}
+    {{ end }}
+    {{ with .development.lab }}
+      {{ $current := index $labCounts . | default 0 }}
+      {{ $labCounts = merge $labCounts (dict . (add $current 1)) }}
+    {{ end }}
   {{ end }}
-  {{ with .camera }}
-    {{ $current := index $cameraCounts . | default 0 }}
-    {{ $cameraCounts = merge $cameraCounts (dict . (add $current 1)) }}
-  {{ end }}
-  {{ with .development.lab }}
-    {{ $current := index $labCounts . | default 0 }}
-    {{ $labCounts = merge $labCounts (dict . (add $current 1)) }}
-  {{ end }}
-{{ end }}
 
   <div class="wrapper">
 
