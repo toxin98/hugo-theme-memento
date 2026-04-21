@@ -3,10 +3,22 @@
   <div class="wrapper">
 
     <aside class="sidebar-left">
+      {{ with .Site.GetPage "Section" .Section }}
+        <ul>
+          <li>
+            <a href="{{ .RelPermalink }}">ALL</a>
+          </li>
+          {{ range .Sections }}
+            <li>
+              <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+            </li>
+          {{ end }}
+        </ul>
+      {{ end }}
     </aside>
 
     <div class="middle-container">
-    {{ $posts := where site.RegularPages "Section" .Section }}
+    {{ $posts := .RegularPagesRecursive }}
     {{ range $posts.GroupByDate "2006" }}
     <div class="posts-year-section">
 
