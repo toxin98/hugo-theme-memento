@@ -235,6 +235,10 @@ main > .wrapper {
 
 }
 
+.only-narrow {
+  display: none;
+}
+
 @media (max-width: 1280px) {
 
   .sidebar-right {
@@ -247,6 +251,10 @@ main > .wrapper {
 
   .sidebar-left {
     display: none;
+  }
+
+  .only-narrow {
+    display: block;
   }
 
 }
@@ -494,7 +502,6 @@ main > .wrapper {
 .posts-year-section-header {
   position: sticky;
   top: var(--top-bar-height);
-  display: flex;
   justify-content: space-between;
   align-items: baseline;
   /* margin-bottom: 0.7rem; */
