@@ -1,5 +1,5 @@
 <div class="wrapper">
-  <p>Copyright {{ now.Year }} toxintoxin | <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></p>
+  <p>Copyright {{ now.Year }} {{ .Site.Params.copyright.author }} | <a href="{{ .Site.Params.copyright.licenseLink }}" target="_blank">{{ .Site.Params.copyright.license }}</a></p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> | Themed by <a href="https://github.com/toxin98/hugo-theme-memento" target="_blank">memento</a></p>
 </div>
 
