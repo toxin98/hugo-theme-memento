@@ -292,11 +292,29 @@ main > .wrapper {
 
 }
 /* content */
+.content {
+  color: #444;
+}
+
+.content h1,
+.content h2,
+.content h3,
+.content h4 {
+  margin-top: 1.5rem;
+}
+
 .content img {
   display: block;
   width: 80%;
   max-height: calc(80vw * 2 / 3);
   margin: 0 auto;
+}
+
+.content code {
+  text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
 }
 /* toc */
 #TableOfContents {
