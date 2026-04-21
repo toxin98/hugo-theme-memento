@@ -3,9 +3,10 @@
   <div class="wrapper">
 
     <aside class="sidebar-left">
-      <h1><a href="{{ .FirstSection.RelPermalink }}#{{ .LinkTitle  }}">くBack</a></h1>
+      <h1><a href="{{ .FirstSection.RelPermalink }}">ALL</a></h1>
       <p></p>
-      <span class="posts-date-year">{{ .Date.Format "2006" }}</span>
+      <a href="{{ .CurrentSection.RelPermalink }}"><span class="posts-date-year">{{ .Date.Format "2006" }}</span></a>
+      <p></p>
       <span class="posts-date-month">{{ .Date.Format "January" }}</span>
       <span class="posts-date-day">{{ .Date.Format "02" }}</span>
     </aside>
