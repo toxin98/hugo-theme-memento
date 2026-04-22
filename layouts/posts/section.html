@@ -8,7 +8,7 @@
           <li>
             <a href="{{ .RelPermalink }}">All posts</a>
           </li>
-          {{ range .Sections }}
+          {{ range .Sections.ByTitle.Reverse }}
             <li>
               <a href="{{ .RelPermalink }}">{{ .LinkTitle }} {{ .Pages.Len }}</a>
             </li>
