@@ -10,7 +10,8 @@
     {{ $index := printf "%02d" $i }}
     {{ $mediaName := printf "*%s-%s*" $folderName $index }}
     {{ with $page.Resources.GetMatch $mediaName }}
-      <img src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt="" loading="lazy" decoding="async">
+      {{ $thumb := .Filter (slice images.AutoOrient (images.Process "fit 600x600")) }}
+      <img src="{{ $thumb.RelPermalink }}" alt="" loading="lazy" decoding="async">
     {{ else }}
       <span>{{ $index }}</span>
     {{ end }}
