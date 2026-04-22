@@ -3,12 +3,12 @@
   <div class="wrapper">
 
     <aside class="sidebar-left">
-      <h1><a href="{{ .FirstSection.RelPermalink }}">All posts</a></h1>
-      <p></p>
-      <a href="{{ .CurrentSection.RelPermalink }}"><span class="posts-date-year">{{ .Date.Format "2006" }}</span></a>
-      <p></p>
-      <span class="posts-date-month">{{ .Date.Format "January" }}</span>
-      <span class="posts-date-day">{{ .Date.Format "02" }}</span>
+      <h2><a href="{{ .FirstSection.RelPermalink }}">All posts</a></h2>
+      <h3><a href="{{ .CurrentSection.RelPermalink }}"><span class="posts-date-year">{{ .Date.Format "2006" }}</span></h3></a>
+      <time class="posts-date narrow" datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}" aria-label="{{ .Date.Format "2006-01-02" }}">
+        <span class="posts-date-month">{{ .Date.Format "January" }}</span>
+        <span class="posts-date-day">{{ .Date.Format "02" }}</span>
+      </time>
     </aside>
 
     <div class="middle-container">
