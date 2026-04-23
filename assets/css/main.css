@@ -135,10 +135,10 @@ header {
 }
 
 #navMenu ul {
-  display: flex;
   list-style: none;
   margin: 0;
   padding: 0;
+  display: flex;
   justify-content: center;
 }
 
@@ -239,10 +239,6 @@ main > .wrapper {
 
 }
 
-.only-narrow {
-  display: none;
-}
-
 @media (max-width: 1280px) {
 
   .sidebar-right {
@@ -255,10 +251,6 @@ main > .wrapper {
 
   .sidebar-left {
     display: none;
-  }
-
-  .only-narrow {
-    display: block;
   }
 
 }
@@ -499,6 +491,42 @@ main > .wrapper {
   line-height: 14px;
 }
 /* posts*/
+.posts-category ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+/* 每个 item：控制宽度 */
+.posts-category li {
+  flex: 0 0 80px; /* 固定宽度，可改 */
+  margin: 0.2rem;
+}
+/* 按钮样式 */
+.posts-category li a {
+  display: block;
+  text-align: center;
+  padding: 0.2rem;
+  border-radius: 999px; /* pill 关键 */
+  text-decoration: none;
+
+  background: #f2f2f2;
+  color: #333;
+
+  transition: all 0.2s ease;
+}
+/* hover 效果 */
+.posts-category li a:hover {
+  background: #333;
+  color: #fff;
+}
+/* 当前选中（如果你之后加 active class） */
+.posts-category li a.active {
+  background: #0b9ddb;
+  color: white;
+}
+
 .posts-year-section {
   margin: 1.2rem 0;
 }

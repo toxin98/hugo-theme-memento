@@ -3,18 +3,26 @@
   <div class="wrapper">
 
     <aside class="sidebar-left">
-      {{ with .Site.GetPage "Section" .Section }}
-        <ul>
-          <li>
-            <a href="{{ .RelPermalink }}">All posts</a>
-          </li>
-          {{ range .Sections.ByTitle.Reverse }}
+      <div  class="posts-category">
+        {{ with .Site.GetPage "Section" .Section }}
+          <ul>
             <li>
-              <a href="{{ .RelPermalink }}">{{ .LinkTitle }} {{ .Pages.Len }}</a>
+              <a href="{{ .RelPermalink }}"
+                class="{{ if eq $.RelPermalink .RelPermalink }}active{{ end }}">
+                Total #{{ .RegularPagesRecursive.Len }}
+              </a>
             </li>
-          {{ end }}
-        </ul>
-      {{ end }}
+            {{ range .Sections.ByTitle.Reverse }}
+            <li>
+              <a href="{{ .RelPermalink }}"
+                class="{{ if eq $.RelPermalink .RelPermalink }}active{{ end }}">
+                {{ .LinkTitle }} #{{ .Pages.Len }}
+              </a>
+            </li>
+            {{ end }}
+          </ul>
+        {{ end }}
+      </div>
     </aside>
 
     <div class="middle-container">
@@ -22,7 +30,7 @@
     {{ range $posts.GroupByDate "2006" }}
     <div class="posts-year-section">
 
-      <div class="posts-year-section-header only-narrow">
+      <div class="posts-year-section-header">
         <span class="posts-date-year">{{ .Key }}</span>
       </div>
 
