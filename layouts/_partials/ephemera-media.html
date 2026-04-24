@@ -1,0 +1,10 @@
+{{ $images := sort (.Resources.ByType "image") "Name" }}
+{{ if gt (len $images) 0 }}
+  <div class="ephemera-media">
+    {{ range $images }}
+      <figure class="ephemera-media-item">
+        <img src="{{ .RelPermalink }}" alt="" loading="lazy" decoding="async">
+      </figure>
+    {{ end }}
+  </div>
+{{ end }}
