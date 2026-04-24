@@ -10,9 +10,8 @@
     <div class="middle-container">
       <article class="ephemera-single">
         <div class="ephemera-body{{ if gt (len $images) 0 }} has-media{{ end }}">
-          {{ .Summary }}
-          {{ partial "ephemera-media.html" . }}
-          <div class="ephemera-copy">
+            {{ partial "ephemera-media.html" . }}
+          <div class="ephemera-content">
             {{ .ContentWithoutSummary }}
           </div>
         </div>

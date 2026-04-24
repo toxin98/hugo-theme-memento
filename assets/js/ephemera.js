@@ -16,26 +16,22 @@ function initEphemeraViewer() {
     document.body.style.overflow = "";
   }
 
-  function renderViewerContent(content) {
-    const media = content.querySelector(".ephemera-media")?.cloneNode(true);
-    const copy = content.querySelector(".ephemera-copy")?.cloneNode(true);
-    const summary = content.querySelector(".ephemera-summary")?.cloneNode(true);
+  function renderViewerContent(ephemera) {
+    const summary = ephemera.querySelector(".ephemera-summary")?.cloneNode(true);
+    const content = ephemera.querySelector(".ephemera-content")?.cloneNode(true);
 
     left.innerHTML = "";
     right.innerHTML = "";
 
-    if (media) {
-      left.appendChild(media);
-      viewer.classList.remove("viewer-empty-media");
-    } else if (summary) {
+    if (summary) {
       left.appendChild(summary);
       viewer.classList.remove("viewer-empty-media");
     } else {
       viewer.classList.add("viewer-empty-media");
     }
 
-    if (copy) {
-      right.appendChild(copy);
+    if (content) {
+      right.appendChild(content);
     }
   }
 
@@ -53,13 +49,13 @@ function initEphemeraViewer() {
 
       const html = await res.text();
       const doc = new DOMParser().parseFromString(html, "text/html");
-      const content = doc.querySelector(".ephemera-body");
+      const ephemera = doc.querySelector(".ephemera-body");
 
-      if (!content) {
+      if (!ephemera) {
         throw new Error(`Missing .ephemera-body in ${url}`);
       }
 
-      renderViewerContent(content);
+      renderViewerContent(ephemera);
       viewer.classList.remove("hidden");
       document.body.style.overflow = "hidden";
     } catch (error) {
