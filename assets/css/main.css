@@ -930,7 +930,7 @@ main > .wrapper {
   margin: 0 auto;
 }
 
-.ephemera-card {
+.ephemera-item {
   display: flex;
   min-width: 300px;
   max-height: 300px;
@@ -953,7 +953,7 @@ main > .wrapper {
   text-align: center;
 }
 
-.ephemera-item {
+.ephemera-body {
   display: flex;
   flex-wrap: wrap;
   margin: 12px 0;
@@ -961,12 +961,12 @@ main > .wrapper {
   column-gap: 10px;
 }
 
-.ephemera-item > .ephemera-header {
+.ephemera-body > .ephemera-header {
   flex-basis: 100%; /* 占满整行 */
   position: relative;
 }
 
-.ephemera-item > .ephemera-header > .location {
+.ephemera-body > .ephemera-header > .location {
   position: absolute;
   left: 226px;
   color: grey;
@@ -977,48 +977,40 @@ main > .wrapper {
   margin-top: -12px;
 }
 
-.ephemera-single {
+.content {
   padding: 12px 0 24px;
 }
 
-.ephemera-single .ephemera-body.has-media > .ephemera-summary {
-  display: none;
-}
-
-.ephemera-single .ephemera-copy {
+.content .ephemera-content {
   margin-top: 16px;
 }
 
-.ephemera-single .ephemera-copy > :first-child {
+.content .ephemera-content > :first-child {
   margin-top: 0;
 }
 
-.ephemera-media {
+.ephemera-summary {
   display: grid;
   gap: 12px;
   margin-top: 12px;
 }
 
-.ephemera-media-item {
-  margin: 0;
-}
-
-.ephemera-media img,
+.ephemera-summary img,
 .viewer-left .ephemera-summary img {
   display: block;
   width: 100%;
   height: auto;
 }
 
-.viewer-left .ephemera-media {
+.viewer-left .ephemera-summary {
   margin-top: 0;
 }
 
-.viewer-right .ephemera-copy {
+.viewer-right .ephemera-content {
   margin-top: 0;
 }
 
-.viewer-right .ephemera-copy > :first-child {
+.viewer-right .ephemera-content > :first-child {
   margin-top: 0;
 }
 

@@ -1,19 +1,22 @@
 {{ define "main" }}
 
-  {{ $images := .Resources.ByType "image" }}
-
   <div class="wrapper">
 
     <aside class="sidebar-left">
     </aside>
 
     <div class="middle-container">
-      <article class="ephemera-single">
-        <div class="ephemera-body{{ if gt (len $images) 0 }} has-media{{ end }}">
-            {{ partial "ephemera-media.html" . }}
-          <div class="ephemera-content">
-            {{ .ContentWithoutSummary }}
-          </div>
+      <article class="content">
+        <div class="ephemera-summary">
+          {{ $images := sort (.Page.Resources.ByType "image") "Name" }}
+          {{ if gt (len $images) 0 }}
+            {{ range $images }}
+              <img src="{{ .RelPermalink }}" alt="" loading="lazy" decoding="async">
+            {{ end }}
+          {{ end }}
+        </div>
+        <div class="ephemera-content">
+          {{ .ContentWithoutSummary }}
         </div>
       </article>
     </div>

@@ -1,6 +1,5 @@
-{{ $page := .Page }}
-{{ $count := $page.Resources.ByType "image" | len }}
-{{ $folderName := $page | path.Dir | path.BaseName }}
+{{ $count := $.Page.Resources.ByType "image" | len }}
+{{ $folderName := $.Page.File.ContentBaseName }}
 {{ $media := slice }}
 
 {{ if gt $count 0 }}
@@ -9,7 +8,7 @@
   {{ range $i := seq 1 $count }}
     {{ $index := printf "%02d" $i }}
     {{ $mediaName := printf "*%s-%s*" $folderName $index }}
-    {{ with $page.Resources.GetMatch $mediaName }}
+    {{ with $.Page.Resources.GetMatch $mediaName }}
       {{ $thumb := .Filter (slice images.AutoOrient (images.Process "fit 600x600")) }}
       <img src="{{ $thumb.RelPermalink }}" alt="" loading="lazy" decoding="async">
     {{ else }}

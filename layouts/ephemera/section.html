@@ -12,8 +12,8 @@
 
       <div class="ephemera-stream" data-infinite-scroll-list>
         {{ range $paginator.Pages }}
-          <div class="ephemera-card" data-infinite-scroll-item data-url="{{ .RelPermalink }}">
-            <article class="ephemera-item">
+          <div class="ephemera-item" data-infinite-scroll-item data-url="{{ .RelPermalink }}">
+            <article class="ephemera-body">
               {{ .Summary }}
               <div class="ephemera-content">
                 {{ .ContentWithoutSummary }}

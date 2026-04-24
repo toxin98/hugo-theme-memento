@@ -1,0 +1,6 @@
+{{ $locationAlt  := .Get "locationAlt" }}
+{{ $locationLink := .Get "locationLink"}}
+<div class="ephemera-header">
+  {{ partial "date-format.html" (dict "date" .Page.Date "layout" "2006/01/02 15:04 Monday" "prefix" "") }}
+  {{ partial "location.html" (dict "alt" $locationAlt "link" $locationLink)}}
+</div>

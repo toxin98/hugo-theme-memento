@@ -49,10 +49,10 @@ function initEphemeraViewer() {
 
       const html = await res.text();
       const doc = new DOMParser().parseFromString(html, "text/html");
-      const ephemera = doc.querySelector(".ephemera-body");
+      const ephemera = doc.querySelector(".content");
 
       if (!ephemera) {
-        throw new Error(`Missing .ephemera-body in ${url}`);
+        throw new Error(`Missing .content in ${url}`);
       }
 
       renderViewerContent(ephemera);
@@ -66,10 +66,10 @@ function initEphemeraViewer() {
   list.addEventListener("click", (event) => {
     if (event.target.closest("a, button")) return;
 
-    const card = event.target.closest(".ephemera-card");
-    if (!card) return;
+    const item = event.target.closest(".ephemera-item");
+    if (!item) return;
 
-    openViewer(card.dataset.url);
+    openViewer(item.dataset.url);
   });
 
   closeButton?.addEventListener("click", closeViewer);
