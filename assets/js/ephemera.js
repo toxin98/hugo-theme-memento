@@ -1,3 +1,54 @@
+function initEphemeraGallery(root = document) {
+  const galleries = [];
+
+  if (root.matches?.("[data-ephemera-gallery]")) {
+    galleries.push(root);
+  }
+
+  galleries.push(...root.querySelectorAll?.("[data-ephemera-gallery]"));
+
+  galleries.forEach((gallery) => {
+    if (gallery.dataset.ephemeraReady === "true") return;
+
+    const slides = Array.from(gallery.querySelectorAll("[data-ephemera-slide]"));
+    const prevButton = gallery.querySelector("[data-ephemera-prev]");
+    const nextButton = gallery.querySelector("[data-ephemera-next]");
+    const status = gallery.querySelector("[data-ephemera-status]");
+
+    if (slides.length === 0) return;
+
+    let currentIndex = slides.findIndex((slide) => slide.classList.contains("is-active"));
+    if (currentIndex < 0) {
+      currentIndex = 0;
+    }
+
+    function render(index) {
+      currentIndex = index;
+
+      slides.forEach((slide, slideIndex) => {
+        const isActive = slideIndex === currentIndex;
+        slide.classList.toggle("is-active", isActive);
+        slide.setAttribute("aria-hidden", isActive ? "false" : "true");
+      });
+
+      if (status) {
+        status.textContent = `${currentIndex + 1} / ${slides.length}`;
+      }
+    }
+
+    prevButton?.addEventListener("click", () => {
+      render((currentIndex - 1 + slides.length) % slides.length);
+    });
+
+    nextButton?.addEventListener("click", () => {
+      render((currentIndex + 1) % slides.length);
+    });
+
+    gallery.dataset.ephemeraReady = "true";
+    render(currentIndex);
+  });
+}
+
 function initEphemeraViewer() {
   const viewer = document.getElementById("viewer");
   const list = document.querySelector(".ephemera-stream");
@@ -25,6 +76,7 @@ function initEphemeraViewer() {
 
     if (summary) {
       left.appendChild(summary);
+      initEphemeraGallery(left);
       viewer.classList.remove("viewer-empty-media");
     } else {
       viewer.classList.add("viewer-empty-media");
@@ -88,7 +140,11 @@ function initEphemeraViewer() {
 }
 
 if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initEphemeraViewer);
+  document.addEventListener("DOMContentLoaded", () => {
+    initEphemeraGallery();
+    initEphemeraViewer();
+  });
 } else {
+  initEphemeraGallery();
   initEphemeraViewer();
 }

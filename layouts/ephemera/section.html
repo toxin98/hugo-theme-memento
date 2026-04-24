@@ -14,7 +14,12 @@
         {{ range $paginator.Pages }}
           <div class="ephemera-item" data-infinite-scroll-item data-url="{{ .RelPermalink }}">
             <article class="ephemera-body">
-              {{ .Summary }}
+              <div class="ephemera-date">
+                {{ partial "date-format.html" (dict "date" .Page.Date "layout" "2006/01/02 15:04 Monday" "prefix" "") }}
+              </div>
+              <div class="ephemera-summary">
+                {{ .Summary }}
+              </div>
               <div class="ephemera-content">
                 {{ .ContentWithoutSummary }}
               </div>
