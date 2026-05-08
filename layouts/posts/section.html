@@ -67,6 +67,15 @@
     </div>
 
     <aside class="sidebar-right">
+      <ul>
+        {{ range $.Site.Taxonomies.tags.ByCount }}
+        {{ if gt .Count 0 }}
+          <li>
+            <a href="/tags/{{ .Name }}"> {{ .Name }} <small>({{ .Count }})</small></a>
+          </li>
+        {{ end }}
+        {{end}}
+      </ul>
     </aside>
 
   </div>
