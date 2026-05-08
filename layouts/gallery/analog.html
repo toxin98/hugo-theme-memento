@@ -1,9 +1,15 @@
 {{ define "main" }}
 
-  <!-- digital -->
+  {{ $data := dict }}
+  {{ $path := "metadata.json" }}
+  {{ with .Resources.Get $path }}
+    {{ with . | transform.Unmarshal }}
+      {{ $data = . }}
+    {{ end }}
+  {{ else }}
+    {{ errorf "Unable to get page resource %q" $path }}
+  {{ end }}
 
-  <!-- analog -->
-  {{ $data := hugo.Data.gallery.analog.metadata }}
   {{ $total := len $data }}
   {{ $filmCounts := dict }}
   {{ $cameraCounts := dict }}
