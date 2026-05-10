@@ -351,6 +351,11 @@ main > .wrapper {
   color: #000;
   border-bottom: 0.1rem solid #000;
 }
+/* main */
+.avatar {
+  width: 64px;
+  height: 64px;
+}
 /* docs */
 .docs-date-container {
   margin-top: 0.5rem;
