@@ -34,8 +34,8 @@ a {
   --nav-bar-bg-color: #fff;
   --nav-bar-height: 36px;
   --header-height: 84px;
-  --sidebar-width: 246px;
-  --middle-max-width: 768px;
+  --sidebar-width: 250px;
+  --middle-width: 768px;
   --z-header: 1000;
   --z-sidebar: 900;
   --z-overlay: 800;
@@ -189,7 +189,6 @@ footer > .wrapper {
 }
 
 main {
-  display: flex;
   flex: 1;
   background-color: #f8f8f8;
 }
@@ -200,7 +199,8 @@ main > .wrapper {
 }
 
 .middle-container {
-  flex: 0 0 var(--middle-max-width);
+  width: 100%;
+  max-width: var(--middle-width);
   padding: 0 0.8rem;
   display: flex;
   flex-direction: column;
@@ -224,7 +224,6 @@ main > .wrapper {
 .sidebar-left,
 .sidebar-right {
   flex: 0 0 var(--sidebar-width);
-  width: var(--sidebar-width);
   display: flex;
   flex-direction: column;
   position: sticky;
@@ -246,6 +245,7 @@ main > .wrapper {
   opacity: 0;
   transition: opacity 0.3s ease;
 }
+
 @media print {
 
   header, footer {
@@ -304,7 +304,6 @@ main > .wrapper {
   }
 
   .middle-container {
-    flex: auto;
     width: 100%;
     max-width: 100%;
   }
