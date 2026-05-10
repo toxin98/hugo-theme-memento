@@ -7,7 +7,26 @@
 
     <div class="middle-container">
 
-      {{ .Content }}
+        <img
+          class="avatar"
+          src="{{ .Site.Params.profile.avatar }}"
+          alt="avatar"
+        >
+
+      <h2>
+        {{ .Site.Params.profile.name }}
+      </h2>
+
+      {{ range site.Params.social }}
+        <a
+          href="{{ .url }}"
+          target="_blank"
+          aria-label="{{ .name }}"
+          title="{{ .name }}"
+        >
+          {{ partial "utils/icon.html" .name }}
+        </a>
+      {{ end }}
 
     </div>
 
