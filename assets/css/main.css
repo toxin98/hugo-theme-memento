@@ -224,13 +224,13 @@ main > .wrapper {
 .sidebar-left,
 .sidebar-right {
   flex: 0 0 var(--sidebar-width);
-  display: flex;
-  flex-direction: column;
   position: sticky;
   top: var(--header-height);
   max-height: calc(100vh - var(--header-height));
   /* 内容过长时允许内部滚动 */
   /* overflow-y: auto; */
+  display: flex;
+  flex-direction: column;
 }
 /* --- Overlay (遮罩层 - 仅移动端使用) --- */
 .overlay {
