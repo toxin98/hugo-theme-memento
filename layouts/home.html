@@ -7,15 +7,20 @@
 
     <div class="middle-container">
 
-      <img class="avatar" src="{{ .Site.Params.profile.avatar }}" alt="avatar">
+      <div class="profile">
 
-      <span>{{ .Site.Params.profile.name }}</span>
+        <img class="avatar" src="{{ .Site.Params.profile.avatar }}" alt="avatar">
 
-      {{ range site.Params.social }}
-        <li>
-          <a href="{{ .url }}" target="_blank" aria-label="{{ .name }}" title="{{ .name }}">{{ partial "utils/icon.html" .icon }}</a>
-        </li>
-      {{ end }}
+        <span>{{ .Site.Params.profile.name }}</span>
+
+        <ul class="social">
+          {{ range site.Params.social }}
+            <li>
+              <a href="{{ .url }}" target="_blank" aria-label="{{ .name }}" title="{{ .name }}">{{ partial "utils/icon.html" .icon }}</a>
+            </li>
+          {{ end }}
+        </ul>
+      </div>
 
     </div>
 

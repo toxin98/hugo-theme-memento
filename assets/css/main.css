@@ -366,10 +366,23 @@ main > .wrapper {
   color: #000;
   border-bottom: 0.1rem solid #000;
 }
-/* main */
+/* home */
 .avatar {
-  width: 64px;
-  height: 64px;
+  width: 128px;
+  height: 128px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.social {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  /* justify-content: center; */
+}
+.social a {
+  color: #222;
+  margin: 0 0.5rem;
 }
 /* docs */
 .docs-date-container {
