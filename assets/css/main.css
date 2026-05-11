@@ -351,12 +351,36 @@ main > .wrapper {
   border-bottom: 0.1rem solid #000;
 }
 /* home */
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 3rem;
+}
+
+.profile-header {
+  display: flex;
+
+  align-items: center;
+
+  gap: 2rem;
+}
+
+.profile-info {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 0.75rem;
+}
+
 .avatar {
   width: 128px;
   height: 128px;
   object-fit: cover;
   border-radius: 50%;
 }
+
 .social {
   list-style: none;
   margin: 0;
@@ -364,6 +388,7 @@ main > .wrapper {
   display: flex;
   /* justify-content: center; */
 }
+
 .social a {
   color: #222;
   margin: 0 0.5rem;
