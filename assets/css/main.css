@@ -118,7 +118,7 @@ header .wrapper {
   font-weight: bold;
 }
 
-.nav-bar {
+#navBar {
   background-color: var(--nav-bar-bg-color);
   height: var(--nav-bar-height);
   border-top: 1px solid #ddd;
