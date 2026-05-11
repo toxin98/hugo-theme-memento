@@ -1,6 +1,4 @@
-{{ $img := .Params.featured }}
-{{ $pattern := .Params.featured | default "*featured*" }}
-{{ with .Resources.GetMatch $pattern }}
-  {{ $img = .RelPermalink }}
+{{ with .Resources.Get "featured" }}
+  {{ $thumb := .Filter (slice images.AutoOrient (images.Process "fit 1600x1600")) }}
+  <img src="{{ $thumb.RelPermalink }}" width="{{ $thumb.Width }}" height="{{ $thumb.Height }}" alt="" loading="lazy" decoding="async"/>
 {{ end }}
-<img src="{{ $img }}" alt="featured">

@@ -42,10 +42,7 @@
             <span class="posts-date-day">{{ .Date.Format "02" }}</span>
           </time>
           <a class="posts-featured" aria-label="{{ .LinkTitle }}">
-            {{ with .Resources.Get "featured" }}
-              {{ $thumb := .Filter (slice images.AutoOrient (images.Process "fit 1600x1600")) }}
-              <img src="{{ $thumb.RelPermalink }}" width="{{ $thumb.Width }}" height="{{ $thumb.Height }}" alt="" loading="lazy" decoding="async"/>
-            {{ end }}
+            {{ partial "get-featured.html" . }}
           </a>
           <div class="posts-pro">
             <a href="{{ .RelPermalink }}" class="posts-title">{{ .LinkTitle }}</a>
