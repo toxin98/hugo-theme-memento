@@ -7,12 +7,26 @@
 
     <div class="middle-container">
 
-      <article class="content">
+      {{ $groups := dict }}
 
-        <h1>{{ .Title }}</h1>
+      {{ range .Pages }}
+
+        {{ $categories := .Params.categories | default (slice "misc") }}
+
+        {{ $existing := index $groups $categories | default (slice) }}
+
+        {{ $groups = merge $groups (dict $categories ($existing | append .)) }}
+
+      {{ end }}
+
+      {{ range $categories, $pages := $groups }}
+
+      <section>
+
+        <h2>{{ $categories }}</h2>
 
         <div class="projects-grid">
-          {{ range .Pages }}
+          {{ range $pages }}
             <div class="project-card">
               <div class="project-info">
                 <h2 class="project-title">{{ .Title }}</h2>
@@ -26,7 +40,9 @@
           {{ end }}
         </div>
 
-        </article>
+      </section>
+
+      {{ end }}
 
     </div>
 
