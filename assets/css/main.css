@@ -308,9 +308,10 @@ main > .wrapper {
 
 .content img {
   display: block;
-  max-width: 100%;
+  /* width: auto; */
   max-height: calc(70vh - var(--header-height));
   margin: 0 auto;
+  /* object-fit: contain; */
 }
 
 .content code {
