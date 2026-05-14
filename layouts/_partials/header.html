@@ -1,15 +1,28 @@
-<div class="wrapper top-bar">
-  <div class="top-bar-left">
-    <button class="menu-toggle" id="hamburger">{{ partial "utils/icon.html" "menu-2"}}</button>
-  </div>
-  <div class="site-brand">
-    <a href="/" class="site-brand"><span class="site-title">{{ site.Title }}</span></a>
-  </div>
-  <div class="top-bar-right">
-    <button>{{ partial "utils/icon.html" "search"}}</button>
+<div class="top-bar">
+  <div class="wrapper">
+    <div class="top-bar-left">
+      <button class="menu-toggle" id="hamburger">{{ partial "utils/icon.html" "menu-2"}}</button>
+    </div>
+    <div class="top-bar-middle">
+      <a href="/" class="site-brand">
+        {{ with .Site.Params.logo }}
+          <img
+            class="site-logo"
+            src="{{ . | relURL }}"
+            alt="logo"
+          >
+        {{ end }}
+        <span class="site-title">{{ site.Title }}</span>
+      </a>
+    </div>
+    <div class="top-bar-right">
+      <button>{{ partial "utils/icon.html" "search"}}</button>
+    </div>
   </div>
 </div>
 
-<div class="wrapper nav-bar" id="navBar">
-  {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
+<div class="nav-bar" id="navBar">
+  <div class="wrapper">
+    {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
+  </div>
 </div>

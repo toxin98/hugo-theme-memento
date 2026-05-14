@@ -73,15 +73,16 @@ header {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
 
-header .wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .top-bar {
   background-color: var(--top-bar-bg-color);
   height: var(--top-bar-height);
+}
+
+.top-bar > .wrapper,
+.nav-bar > .wrapper {
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .top-bar a {
@@ -90,9 +91,12 @@ header .wrapper {
 }
 
 .top-bar button {
-  cursor: pointer;
   border: none;
   background: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  display: flex;
 }
 
 .top-bar-left,
@@ -104,13 +108,16 @@ header .wrapper {
 
 .top-bar-right {
   justify-content: flex-end;
+}
+
+.site-brand {
+  display: inline-flex;
   align-items: center;
+  gap: 0.5rem;
 }
 
 .site-logo {
-  height: 1rem;
-  width: auto;
-  margin-right: 0.5rem;
+  width: 1.6rem;
 }
 
 .site-title {
@@ -118,10 +125,14 @@ header .wrapper {
   font-weight: bold;
 }
 
-#navBar {
+.nav-bar {
   background-color: var(--nav-bar-bg-color);
   height: var(--nav-bar-height);
   border-top: 1px solid #ddd;
+}
+
+#navBar nav {
+
 }
 
 #navBar ul {
