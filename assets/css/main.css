@@ -34,6 +34,7 @@ a {
   --nav-bar-bg-color: #fff;
   --sidebar-width: 250px;
   --middle-width: 768px;
+  --sticky-top-dist: 140px;
   --z-header: 1000;
   --z-sidebar: 900;
   --z-overlay: 800;
@@ -222,12 +223,7 @@ main > .wrapper {
 
 .sidebar-left,
 .sidebar-right {
-  flex: 0 0 var(--sidebar-width);
-  position: sticky;
-  top: var(--header-height);
-  max-height: calc(100vh - var(--header-height));
-  /* 内容过长时允许内部滚动 */
-  /* overflow-y: auto; */
+  width: var(--sidebar-width);
   display: flex;
   flex-direction: column;
 }
@@ -272,7 +268,7 @@ main > .wrapper {
 @media (max-width: 768px) {
 
   :root{
-    --header-height: var(--top-bar-height);
+    --sticky-top-dist: var(--top-bar-height);
   }
 
   #navBar {
@@ -332,7 +328,7 @@ main > .wrapper {
 .content img {
   display: block;
   /* width: auto; */
-  max-height: calc(70vh - var(--header-height));
+  max-height: calc(70vh - var(--sticky-top-dist));
   margin: 0 auto;
   /* object-fit: contain; */
 }
@@ -434,6 +430,9 @@ main > .wrapper {
 }
 
 .docs-tree {
+  position: sticky;
+  top: var(--sticky-top-dist);
+  height: calc(100vh - var(--sticky-top-dist));
   overflow-y: auto;
   font-size: 14px;
 }
