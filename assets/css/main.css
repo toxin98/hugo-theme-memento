@@ -31,6 +31,7 @@ a {
 :root {
   --top-bar-height: 48px;
   --top-bar-bg-color: #fff;
+  --nav-bar-height: 36px;
   --nav-bar-bg-color: #fff;
   --sidebar-width: 250px;
   --middle-width: 768px;
@@ -73,8 +74,8 @@ header {
 }
 
 .top-bar {
-  background-color: var(--top-bar-bg-color);
   height: var(--top-bar-height);
+  background-color: var(--top-bar-bg-color);
 }
 
 .top-bar > .wrapper {
@@ -125,23 +126,25 @@ header {
 }
 
 .nav-bar {
+  height: var(--nav-bar-height);
   background-color: var(--nav-bar-bg-color);
   border-top: 1px solid #ddd;
 }
 
-#navBar nav {
-  width: 600px;
-  margin-inline: auto;
+.nav-bar > .wrapper {
+  height: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 #navBar ul {
   list-style: none;
   margin: 0;
-  padding: 0.5rem 0;
+  padding: 0.5rem;
+  height: 100%;
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 0.5rem 1rem;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 #navBar a {
@@ -272,40 +275,19 @@ main > .wrapper {
   }
 
   #navBar {
-    position: fixed;
-
-    width: 100%;
-    height: 100%;
-
-    overflow-y: auto;
-
-    opacity: 0;
-
-    visibility: hidden;
-
-    transform: translateY(-1rem);
-
-    pointer-events: none;
-
-    transition:
-      opacity .2s ease,
-      transform .2s ease,
-      visibility .2s;
+    display: none;
   }
 
   #navBar.show {
-    opacity: 1;
-
-    visibility: visible;
-
-    transform: translateY(0);
-
-    pointer-events: auto;
+    display: block;
+    position: fixed;
+    width: 100%;
+    height: calc(100% - var(--top-bar-height));
+    overflow-y: auto;
   }
 
   #navBar ul {
     flex-direction: column;
-    padding-inline: 1rem;
   }
 
   .menu-toggle {
