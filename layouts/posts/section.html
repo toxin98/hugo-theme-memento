@@ -46,7 +46,7 @@
           </a>
           <div class="posts-pro">
             <a href="{{ .RelPermalink }}" class="posts-title">{{ .LinkTitle }}</a>
-            <p class="posts-summary">{{ .Summary | plainify | truncate 300 }}</p>
+            <p class="posts-summary">{{ .Summary | plainify | truncate 200 }}</p>
             {{ with .GetTerms "tags" }}
               <div class="posts-tags" aria-label="tags">
                 {{ range . }}
