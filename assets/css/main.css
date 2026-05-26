@@ -1015,16 +1015,14 @@ main > .wrapper {
   display: flex;
   flex-wrap: wrap;
   margin: 0.75rem 0;
-  row-gap: 0.5rem;
-  column-gap: 0.75rem;
 }
 
-.ephemera-body > .ephemera-date {
-  flex-basis: 100%; /* 占满整行 */
-  /* position: relative; */
+.ephemera-date {
+  flex-basis: 100%;
+  margin-bottom: 0.25rem;
 }
 
-.ephemera-content {
+.ephemera-ContentWithoutSummary {
   flex: 1;
   line-height: 1.3rem;
   max-height: calc(1.3rem * 7);
@@ -1034,7 +1032,7 @@ main > .wrapper {
   overflow: hidden;
 }
 
-.ephemera-content p {
+.ephemera-ContentWithoutSummary p {
   margin: 0;
 }
 
@@ -1042,17 +1040,12 @@ main > .wrapper {
   padding: 12px 0 24px;
 }
 
-.content .ephemera-content {
+.content .ephemera-ContentWithoutSummary {
   margin-top: 16px;
 }
 
-.content .ephemera-content > :first-child {
+.content .ephemera-ContentWithoutSummary > :first-child {
   margin-top: 0;
-}
-
-.ephemera-summary {
-  display: grid;
-  gap: 12px;
 }
 
 .ephemera-summary > img,
@@ -1145,11 +1138,11 @@ main > .wrapper {
   margin-top: 0;
 }
 
-.viewer-right .ephemera-content {
+.viewer-right .ephemera-ContentWithoutSummary {
   margin-top: 0;
 }
 
-.viewer-right .ephemera-content > :first-child {
+.viewer-right .ephemera-ContentWithoutSummary > :first-child {
   margin-top: 0;
 }
 
