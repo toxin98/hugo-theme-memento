@@ -1026,11 +1026,10 @@ main > .wrapper {
 
 .ephemera-content {
   flex: 1;
-  font-size: 16px;
-  line-height: 1.4rem;
-  max-height: calc(16px * 1.4rem * 6);
+  line-height: 1.3rem;
+  max-height: calc(1.3rem * 7);
   display: -webkit-box;
-  -webkit-line-clamp: 6;
+  -webkit-line-clamp: 7;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
