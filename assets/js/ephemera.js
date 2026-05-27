@@ -1,3 +1,36 @@
+console.log("ephemera loaded");
+
+window.addEventListener("DOMContentLoaded", () => {
+
+  const feed = document.getElementById("ephemeraFeed");
+
+  if (feed) {
+
+    document
+      .querySelectorAll(".view-toggle")
+      .forEach(button => {
+
+        button.addEventListener("click", () => {
+
+          feed.classList.toggle(
+            "gallery-view",
+            button.dataset.view === "gallery"
+          );
+
+          feed.classList.toggle(
+            "stream-view",
+            button.dataset.view === "stream"
+          );
+
+        });
+
+      });
+
+  }
+
+});
+
+
 function initEphemeraGallery(root = document) {
   const galleries = [];
 
@@ -51,7 +84,7 @@ function initEphemeraGallery(root = document) {
 
 function initEphemeraViewer() {
   const viewer = document.getElementById("viewer");
-  const list = document.querySelector(".ephemera-stream");
+  const list = document.querySelector(".ephemera-feed");
 
   if (!viewer || !list) return;
 
