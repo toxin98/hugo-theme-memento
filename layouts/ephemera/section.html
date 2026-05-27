@@ -7,22 +7,34 @@
 
     <div class="middle-container">
 
+      <div class="ephemera-toolbar">
+
+        <button class="view-toggle" data-view="stream">
+
+          Stream
+
+        </button>
+
+        <button class="view-toggle" data-view="gallery">
+
+          Gallery
+
+        </button>
+
+      </div>
+
       {{ $pages := .RegularPages.ByDate.Reverse }}
       {{ $paginator := .Paginate $pages }}
 
-      <div class="ephemera-stream" data-infinite-scroll-list>
+      <div class="ephemera-feed stream-view" id="ephemeraFeed" data-infinite-scroll-list>
         {{ range $paginator.Pages }}
           <div class="ephemera-item" data-infinite-scroll-item data-url="{{ .RelPermalink }}">
             <article class="ephemera-body">
               <div class="ephemera-date">
                 {{ partial "date-format.html" (dict "date" .Page.Date "layout" "2006/01/02 15:04 Monday" "prefix" "") }}
               </div>
-              <div class="ephemera-summary">
-                {{ .Summary }}
-              </div>
-              <div class="ephemera-ContentWithoutSummary">
-                {{ .ContentWithoutSummary }}
-              </div>
+              <div class="ephemera-summary">{{ .Summary }}</div>
+              <div class="ephemera-ContentWithoutSummary">{{ .ContentWithoutSummary }}</div>
             </article>
           </div>
         {{ end }}
