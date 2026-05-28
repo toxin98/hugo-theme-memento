@@ -7,12 +7,12 @@
         <li>
           <a href="{{ .FirstSection.RelPermalink }}"
             class="{{ if eq .RelPermalink .FirstSection.RelPermalink }}active{{ end }}">
-            {{ partial "utils/icon.html" "notebook"}}{{ .FirstSection.Title }}
+            {{ partial "utils/icon.html" "notebook" }}{{ .FirstSection.Title }}
           </a>
           <div class="docs-buttons">
-            <button>{{ partial "utils/icon.html" "search"}}</button>
-            <button>{{ partial "utils/icon.html" "copy-plus"}}</button>
-            <button>{{ partial "utils/icon.html" "copy-minus"}}</button>
+            <button>{{ partial "utils/icon.html" "search" }}</button>
+            <button>{{ partial "utils/icon.html" "copy-plus" }}</button>
+            <button>{{ partial "utils/icon.html" "copy-minus" }}</button>
           </div>
           <ul>
             {{ template "docs-recursive" (dict "context" .FirstSection "current" .Page ) }}
@@ -44,7 +44,7 @@
         <li>
           <a href="{{ .RelPermalink }}"
             class="{{ if eq .RelPermalink $current.RelPermalink }}active{{ end }}">
-            {{ partial "utils/icon.html" "file"}}
+            {{ partial "utils/icon.html" "file" }}
             <span>{{ .LinkTitle }}</span>
           </a>
         </li>
@@ -70,8 +70,8 @@
     </article>
 
     <div class="sticky-bottom-bar">
-      <button class="toggle-left">{{ partial "utils/icon.html" "layout-sidebar-left-expand"}}</button>
-      <button class="toggle-right">{{ partial "utils/icon.html" "list-tree"}}</button>
+      <button class="toggle-left">{{ partial "utils/icon.html" "layout-sidebar-left-expand" }}</button>
+      <button class="toggle-right">{{ partial "utils/icon.html" "list-tree" }}</button>
     </div>
 
   </div>

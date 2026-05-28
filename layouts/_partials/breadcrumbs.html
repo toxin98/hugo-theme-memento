@@ -13,7 +13,7 @@
           <span itemprop="name">{{.Title}}</span>
         </a>
         {{- /* pass the counter value into schema attribute */}}
-        <meta itemprop="position" content='{{ $data.Get "counter"}}' />
+        <meta itemprop="position" content='{{ $data.Get "counter" }}' />
       </li>
     {{- end }}
   {{- end }}
@@ -22,6 +22,6 @@
       {{- $data.Add "counter" 1 }}
         <span itemprop="name">{{.Title}}</span>
       {{- /* pass the counter value into schema attribute */}}
-      <meta itemprop="position" content='{{ $data.Get "counter"}}' />
+      <meta itemprop="position" content='{{ $data.Get "counter" }}' />
     </li>
 </ol>
