@@ -948,22 +948,6 @@ main > .wrapper {
   padding: 0.75rem 0.5rem;
 }
 
-.older-items {
-  min-height: 3rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #777;
-  font-size: 0.95rem;
-  letter-spacing: 0.04em;
-  margin: 0.5rem 0 1.5rem;
-}
-
-.older-items-fallback {
-  margin: 1rem 0 2rem;
-  text-align: center;
-}
-
 .ephemera-body {
   display: flex;
   flex-wrap: wrap;
@@ -1050,6 +1034,22 @@ main > .wrapper {
   cursor: pointer;
   display: flex;
   color: #222;
+}
+
+.ephemera-older-items {
+  min-height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #777;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  margin: 0.5rem 0 1.5rem;
+}
+
+.ephemera-older-items-fallback {
+  margin: 1rem 0 2rem;
+  text-align: center;
 }
 
 .ephemera-feed.stream-view .sudoku {
