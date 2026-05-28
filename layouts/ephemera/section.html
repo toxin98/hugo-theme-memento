@@ -33,7 +33,6 @@
               <div class="ephemera-date">
                 {{ partial "date-format.html" (dict "date" .Page.Date "layout" "2006/01/02 15:04 Monday" "prefix" "") }}
               </div>
-              <button>{{ partial "utils/icon.html" "maximize" }}</button>
               <div class="ephemera-summary">{{ .Summary }}</div>
               <div class="ephemera-ContentWithoutSummary">{{ .ContentWithoutSummary }}</div>
             </article>
@@ -51,23 +50,17 @@
         </noscript>
       {{ end }}
 
+      <div id="viewer" class="viewer hidden">
+        <div class="viewer-left"></div>
+        <div class="viewer-right"></div>
+        <button class="viewer-close" type="button" aria-label="Close viewer">×</button>
+      </div>
+
     </div>
 
     <aside class="sidebar-right">
     </aside>
 
-  </div>
-
-  <div id="viewer" class="viewer hidden">
-    <div class="viewer-inner">
-
-      <div class="viewer-left"></div>
-
-      <div class="viewer-right"></div>
-
-    </div>
-
-    <button class="viewer-close" type="button" aria-label="Close viewer">×</button>
   </div>
 
 {{ end }}
