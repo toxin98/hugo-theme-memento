@@ -1043,6 +1043,13 @@ main > .wrapper {
   position: absolute;
   top: 20px;
   right: 20px;
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  display: flex;
+  color: #222;
 }
 
 .ephemera-feed.stream-view .sudoku {
