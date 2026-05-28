@@ -13,8 +13,8 @@ window.addEventListener("DOMContentLoaded", () => {
         button.addEventListener("click", () => {
 
           feed.classList.toggle(
-            "gallery-view",
-            button.dataset.view === "gallery"
+            "grid-view",
+            button.dataset.view === "grid"
           );
 
           feed.classList.toggle(
@@ -31,22 +31,22 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 
-function initEphemeraGallery(root = document) {
-  const galleries = [];
+function initEphemeraGrid(root = document) {
+  const grids = [];
 
-  if (root.matches?.("[data-ephemera-gallery]")) {
-    galleries.push(root);
+  if (root.matches?.("[data-ephemera-grid]")) {
+    grids.push(root);
   }
 
-  galleries.push(...root.querySelectorAll?.("[data-ephemera-gallery]"));
+  grids.push(...root.querySelectorAll?.("[data-ephemera-grid]"));
 
-  galleries.forEach((gallery) => {
-    if (gallery.dataset.ephemeraReady === "true") return;
+  grids.forEach((grid) => {
+    if (grid.dataset.ephemeraReady === "true") return;
 
-    const slides = Array.from(gallery.querySelectorAll("[data-ephemera-slide]"));
-    const prevButton = gallery.querySelector("[data-ephemera-prev]");
-    const nextButton = gallery.querySelector("[data-ephemera-next]");
-    const status = gallery.querySelector("[data-ephemera-status]");
+    const slides = Array.from(grid.querySelectorAll("[data-ephemera-slide]"));
+    const prevButton = grid.querySelector("[data-ephemera-prev]");
+    const nextButton = grid.querySelector("[data-ephemera-next]");
+    const status = grid.querySelector("[data-ephemera-status]");
 
     if (slides.length === 0) return;
 
@@ -77,7 +77,7 @@ function initEphemeraGallery(root = document) {
       render((currentIndex + 1) % slides.length);
     });
 
-    gallery.dataset.ephemeraReady = "true";
+    grid.dataset.ephemeraReady = "true";
     render(currentIndex);
   });
 }
@@ -109,7 +109,7 @@ function initEphemeraViewer() {
 
     if (summary) {
       left.appendChild(summary);
-      initEphemeraGallery(left);
+      initEphemeraGrid(left);
       viewer.classList.remove("viewer-empty-media");
     } else {
       viewer.classList.add("viewer-empty-media");
@@ -174,10 +174,10 @@ function initEphemeraViewer() {
 
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", () => {
-    initEphemeraGallery();
+    initEphemeraGrid();
     initEphemeraViewer();
   });
 } else {
-  initEphemeraGallery();
+  initEphemeraGrid();
   initEphemeraViewer();
 }
