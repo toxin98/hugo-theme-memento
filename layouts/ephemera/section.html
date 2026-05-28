@@ -33,6 +33,7 @@
               <div class="ephemera-date">
                 {{ partial "date-format.html" (dict "date" .Page.Date "layout" "2006/01/02 15:04 Monday" "prefix" "") }}
               </div>
+              <button>{{ partial "utils/icon.html" "maximize" }}</button>
               <div class="ephemera-summary">{{ .Summary }}</div>
               <div class="ephemera-ContentWithoutSummary">{{ .ContentWithoutSummary }}</div>
             </article>
