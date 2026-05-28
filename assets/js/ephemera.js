@@ -101,8 +101,8 @@ function initEphemeraViewer() {
   }
 
   function renderViewerContent(ephemera) {
-    const summary = ephemera.querySelector(".ephemera-summary")?.cloneNode(true);
-    const content = ephemera.querySelector(".ephemera-content")?.cloneNode(true);
+    const summary = ephemera.querySelector(".ephemera-Summary")?.cloneNode(true);
+    const content = ephemera.querySelector(".ephemera-ContentWithoutSummary")?.cloneNode(true);
 
     left.innerHTML = "";
     right.innerHTML = "";

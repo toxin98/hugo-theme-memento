@@ -974,12 +974,12 @@ main > .wrapper {
   margin-bottom: 0.25rem;
 }
 
-.ephemera-summary:empty
+.ephemera-Summary:empty
 + .ephemera-ContentWithoutSummary {
   flex-basis: 100%;
 }
 
-.ephemera-summary:not(:empty)
+.ephemera-Summary:not(:empty)
 + .ephemera-ContentWithoutSummary {
   margin-left: 10px;
 }
@@ -1053,7 +1053,7 @@ main > .wrapper {
   width: 100%;
 }
 
-.viewer-left .ephemera-summary {
+.viewer-left .ephemera-Summary {
   margin-top: 0;
 }
 

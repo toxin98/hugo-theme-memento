@@ -10,7 +10,7 @@
         <div class="ephemera-date">
           {{ partial "date-format.html" (dict "date" .Page.Date "layout" "2006/01/02 15:04 Monday" "prefix" "") }}
         </div>
-        <div class="ephemera-summary">
+        <div class="ephemera-Summary">
           {{ $images := sort (.Page.Resources.ByType "image") "Name" }}
           {{ if gt (len $images) 0 }}
             <div class="ephemera-gallery{{ if gt (len $images) 1 }} has-controls{{ end }}" data-ephemera-gallery>
@@ -37,7 +37,7 @@
             </div>
           {{ end }}
         </div>
-        <div class="ephemera-content">
+        <div class="ephemera-ContentWithoutSummary">
           {{ .ContentWithoutSummary }}
         </div>
       </article>
