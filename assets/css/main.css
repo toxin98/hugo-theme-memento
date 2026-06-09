@@ -615,11 +615,11 @@ main > .wrapper {
   color: white;
 }
 
-.posts-year-section {
+.posts-year-collection {
   margin: 1.2rem 0;
 }
 
-.posts-year-section-header {
+.posts-year-collection-header {
   position: sticky;
   top: var(--header-height);
   justify-content: space-between;
@@ -628,14 +628,14 @@ main > .wrapper {
   /* margin-bottom: 0.7rem; */
 }
 
-.posts-year-section :target::before {
+.posts-year-collection :target::before {
   content: "";
   display: block;
   padding-top: 120px;
   margin-top: -120px;
 }
 
-.posts-year-section ul{
+.posts-year-collection ul{
   list-style: none;
   margin: 0;
   padding: 0;

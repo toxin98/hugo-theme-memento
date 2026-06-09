@@ -26,41 +26,41 @@
     </aside>
 
     <div class="middle-container">
-    {{ $posts := .RegularPagesRecursive }}
-    {{ range $posts.GroupByDate "2006" }}
-    <div class="posts-year-section">
+      {{ $posts := .RegularPagesRecursive }}
+      {{ range $posts.GroupByDate "2006" }}
+      <div class="posts-year-collection">
 
-      <div class="posts-year-section-header">
-        <span class="posts-date-year">{{ .Key }}</span>
+        <div class="posts-year-collection-header">
+          <span class="posts-date-year">{{ .Key }}</span>
+        </div>
+
+        <ul class="posts-list">
+          {{ range .Pages }}
+          <li class="posts-item">
+            <time class="posts-date" datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}" aria-label="{{ .Date.Format "2006-01-02" }}">
+              <span class="posts-date-month">{{ .Date.Format "Jan" }}</span>
+              <span class="posts-date-day">{{ .Date.Format "02" }}</span>
+            </time>
+            <a class="posts-featured" aria-label="{{ .LinkTitle }}">
+              {{ partial "get-featured.html" . }}
+            </a>
+            <div class="posts-pro">
+              <a href="{{ .RelPermalink }}" class="posts-title">{{ .LinkTitle }}</a>
+              <p class="posts-summary">{{ .Summary | plainify | truncate 200 }}</p>
+              {{ with .GetTerms "tags" }}
+                <div class="posts-tags" aria-label="tags">
+                  {{ range . }}
+                    <a href="{{ .RelPermalink }}" class="posts-tag">{{ .LinkTitle }}</a>
+                  {{ end }}
+                </div>
+              {{ end }}
+            </div>
+          </li>
+          {{ end }}
+        </ul>
+
       </div>
-
-      <ul>
-        {{ range .Pages }}
-        <li class="posts-item">
-          <time class="posts-date" datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}" aria-label="{{ .Date.Format "2006-01-02" }}">
-            <span class="posts-date-month">{{ .Date.Format "Jan" }}</span>
-            <span class="posts-date-day">{{ .Date.Format "02" }}</span>
-          </time>
-          <a class="posts-featured" aria-label="{{ .LinkTitle }}">
-            {{ partial "get-featured.html" . }}
-          </a>
-          <div class="posts-pro">
-            <a href="{{ .RelPermalink }}" class="posts-title">{{ .LinkTitle }}</a>
-            <p class="posts-summary">{{ .Summary | plainify | truncate 200 }}</p>
-            {{ with .GetTerms "tags" }}
-              <div class="posts-tags" aria-label="tags">
-                {{ range . }}
-                  <a href="{{ .RelPermalink }}" class="posts-tag">{{ .LinkTitle }}</a>
-                {{ end }}
-              </div>
-            {{ end }}
-          </div>
-        </li>
-        {{ end }}
-      </ul>
-
-    </div>
-    {{ end }}
+      {{ end }}
     </div>
 
     <aside class="sidebar-right">
