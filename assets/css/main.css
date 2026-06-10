@@ -642,7 +642,7 @@ main > .wrapper {
 }
 
 .posts-date-year {
-  font-size: 1.6rem;
+  font-size: 1.3rem;
   font-weight: 800;
   color: #1f2937;
 }
@@ -656,15 +656,14 @@ main > .wrapper {
 
 .posts-item {
   display: flex;
-  align-items: stretch;
-  gap: 0.7rem;
-  padding: 0.5rem;
   border-bottom: 1px solid #e8eaee;
-  height: calc(7rem + 0.5rem * 2);
+  gap: 1rem;
+  padding: 0.5rem;
+  height: 9rem;
 }
 
 .posts-date {
-  flex: 0 0 3rem;
+  flex: 0 0 2.3rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -672,7 +671,6 @@ main > .wrapper {
 
 .posts-date-month {
   align-self: flex-start;
-  font-size: 1.2rem;
   font-weight: 600;
   text-transform: uppercase;
   color: #111827;
@@ -680,9 +678,53 @@ main > .wrapper {
 
 .posts-date-day {
   align-self: flex-end;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
+  line-height: 1rem;
   font-weight: 600;
   color: #6b7280;
+}
+
+.posts-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.posts-main {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.posts-tags {
+  color: #7a8794;
+  font-size: 0.85rem;
+  overflow: hidden;
+}
+
+.posts-tag {
+  display: inline;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.posts-tag::before {
+  content: "#";
+  margin-right: 0.1rem;
+}
+
+.posts-tag + .posts-tag {
+  margin-left: 0.7rem;
+}
+
+.posts-tag:hover {
+  color: #0b63b8;
+  background: none;
 }
 
 .posts-featured {
@@ -710,7 +752,7 @@ main > .wrapper {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 0.25rem
+  gap: 0.5rem;
 }
 
 .posts-title {
@@ -718,53 +760,9 @@ main > .wrapper {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  text-decoration: none;
   color: #222;
   font-weight: 600;
-}
-
-.posts-summary {
-  margin: 0;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.posts-tags {
-  margin-top: auto;
-  min-width: 0;
-  color: #7a8794;
-  font-size: 0.85rem;
-  white-space: nowrap;
-  overflow: hidden;
-  height: 1.4rem;
-  display: flex;
-  align-items: flex-end;
-}
-
-.posts-tag {
-  display: inline;
-  color: inherit;
-  background: none;
-  border: 0;
-  padding: 0;
   text-decoration: none;
-  white-space: nowrap;
-}
-
-.posts-tag::before {
-  content: "#";
-  margin-right: 0.1rem;
-}
-
-.posts-tag + .posts-tag {
-  margin-left: 0.7rem;
-}
-
-.posts-tag:hover {
-  color: #0b63b8;
-  background: none;
 }
 
 .posts-title:hover {
@@ -773,11 +771,14 @@ main > .wrapper {
   text-underline-offset: 2px;
 }
 
-.page-featured img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;  /* 保持比例，裁切多余部分 */
-  object-position: center;
+.posts-summary {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: #444;
+  font-size: 0.85rem;
+  line-height: 1.2rem;
 }
 /* gallery / analog */
 .gallery-analog {

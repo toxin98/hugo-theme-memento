@@ -41,18 +41,22 @@
               <span class="posts-date-month">{{ .Date.Format "Jan" }}</span>
               <span class="posts-date-day">{{ .Date.Format "02" }}</span>
             </time>
-            <a class="posts-featured" aria-label="{{ .LinkTitle }}">
-              {{ partial "get-featured.html" . }}
-            </a>
-            <div class="posts-pro">
-              <a href="{{ .RelPermalink }}" class="posts-title">{{ .LinkTitle }}</a>
-              <p class="posts-summary">{{ .Summary | plainify | truncate 200 }}</p>
-              {{ with .GetTerms "tags" }}
-                <div class="posts-tags" aria-label="tags">
-                  {{ range . }}
-                    <a href="{{ .RelPermalink }}" class="posts-tag">{{ .LinkTitle }}</a>
-                  {{ end }}
+            <div class="posts-body">
+              <div class="posts-main">
+                <a class="posts-featured" aria-label="{{ .LinkTitle }}">
+                  {{ partial "get-featured.html" . }}
+                </a>
+                <div class="posts-pro">
+                  <a href="{{ .RelPermalink }}" class="posts-title">{{ .LinkTitle }}</a>
+                  <div class="posts-summary">{{ .Summary | plainify }}</div>
                 </div>
+              </div>
+              {{ with .GetTerms "tags" }}
+              <div class="posts-tags" aria-label="tags">
+                {{ range . }}
+                  <a href="{{ .RelPermalink }}" class="posts-tag">{{ .LinkTitle }}</a>
+                {{ end }}
+              </div>
               {{ end }}
             </div>
           </li>
