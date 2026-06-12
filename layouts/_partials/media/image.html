@@ -1,20 +1,29 @@
-{{ $count := $.Page.Resources.ByType "image" | len }}
-{{ $folderName := $.Page.File.ContentBaseName }}
-{{ $media := slice }}
+{{ $count := $.Resources.ByType "image" | len }}
+{{ $folderName := $.File.ContentBaseName }}
 
-{{ if gt $count 0 }}
+<div class="sudoku sudoku-{{ $count }}">
 
-  <div class="sudoku sudoku-{{ $count }}">
   {{ range $i := seq 1 $count }}
     {{ $index := printf "%02d" $i }}
-    {{ $mediaName := printf "*%s-%s*" $folderName $index }}
-    {{ with $.Page.Resources.GetMatch $mediaName }}
-      {{ $thumb := .Filter (slice images.AutoOrient (images.Process "fit 600x600")) }}
-      <img src="{{ $thumb.RelPermalink }}" alt="" loading="lazy" decoding="async">
-    {{ else }}
-      <span>{{ $index }}</span>
-    {{ end }}
-  {{ end }}
-  </div>
+    {{ $imageName := printf "*%s-%s*" $folderName $index }}
+    {{ with $.Resources.GetMatch $imageName }}
 
-{{ end }}
+      {{ $thumb := .Fill "200x200 webp q75" }}
+      {{ $large := .Resize "1800x webp q90" }}
+
+      <img
+        src="{{ $thumb.RelPermalink }}"
+        data-viewer-src="{{ $large.RelPermalink }}"
+        alt=""
+        loading="lazy"
+      >
+
+    {{ else }}
+
+      {{ errorf "Missing image: %s in %s" $imageName $.RelPermalink }}
+
+    {{ end }}
+
+  {{ end }}
+
+</div>
