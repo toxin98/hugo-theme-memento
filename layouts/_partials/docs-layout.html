@@ -61,8 +61,8 @@
 
     <article class="content">
       <div class="docs-date-container">
-        {{ partial "utils/date-format.html" (dict "date" .Lastmod "layout" ":date_long" "prefix" "Last updated: ") }}
-        {{ partial "utils/date-format.html" (dict "date" .PublishDate "layout" ":date_long" "prefix" "Publish date: ") }}
+        Last updated: {{ partial "utils/date-format.html" (dict "date" .Lastmod "layout" ":date_long") }}
+        Publish date: {{ partial "utils/date-format.html" (dict "date" .PublishDate "layout" ":date_long") }}
       </div>
       <h1>{{ .Title }}</h1>
       {{ .Content }}
