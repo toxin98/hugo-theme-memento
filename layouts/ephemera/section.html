@@ -28,25 +28,22 @@
 
       <div class="ephemera-feed stream-view" id="ephemeraFeed" data-infinite-scroll-list>
         {{ range $paginator.Pages }}
+          {{ $page := .}}
           <div class="ephemera-item" data-infinite-scroll-item>
             <article class="ephemera-body">
               <button class="ephemera-maximize">{{ partial "utils/icon.html" "maximize" }}</button>
               <div class="ephemera-date">
-                {{ partial "utils/date-format.html" (dict "date" .Page.Date "layout" "2006/01/02 15:04 Monday" "prefix" "") }}
+                {{ partial "utils/date-format.html" (dict "date" $page.Date "layout" "2006/01/02 15:04 Monday" "prefix" "") }}
               </div>
-              <div class="ephemera-media">
-                {{ with .Params.media }}
-                  {{ if eq . "image" }}
-                    {{ partial "media/image.html" $ }}
-                  {{ else if eq . "video" }}
-                    {{ partial "media/video.html" $ }}
-                  {{ else if eq . "audio" }}
-                    {{ partial "media/audio.html" $ }}
-                  {{ end }}
+              {{ with $mediaType := $page.Params.mediaType }}
+                {{ if not (in (slice "text" "image" "video" "audio") $mediaType) }}
+                  {{ errorf "Unknown media type '%s' in %s" $mediaType $page.File.Path }}
                 {{ else }}
-                   {{ errorf "Missing media field in %s" .File.Path }}
+                  <div class="ephemera-media">{{ partial (printf "media/%s.html" $mediaType) $page }}</div>
                 {{ end }}
-              </div>
+              {{ else }}
+                {{ errorf "Missing media field in %s" $page.File.Path }}
+              {{ end }}
               <div class="ephemera-content">
                 {{ .Content }}
               </div>
