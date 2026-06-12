@@ -1,6 +1,0 @@
-{{ $musicID := .Get "musicID" }}
-{{ if $musicID }}
-  {{ partial "music.html" (dict "id" $musicID) }}
-{{ else }}
-  {{ partial "sudoku.html" . }}
-{{ end }}

@@ -1,7 +1,9 @@
 console.log("ephemera loaded");
 
 window.addEventListener("DOMContentLoaded", () => {
-
+  /**
+   * 切换视图
+   */
   const feed = document.getElementById("ephemeraFeed");
 
   if (feed) {
@@ -28,156 +30,97 @@ window.addEventListener("DOMContentLoaded", () => {
 
   }
 
-});
+  document.addEventListener("click", (e) => {
 
+    const item = e.target.closest(".ephemera-item");
 
-function initEphemeraGrid(root = document) {
-  const grids = [];
-
-  if (root.matches?.("[data-ephemera-grid]")) {
-    grids.push(root);
-  }
-
-  grids.push(...root.querySelectorAll?.("[data-ephemera-grid]"));
-
-  grids.forEach((grid) => {
-    if (grid.dataset.ephemeraReady === "true") return;
-
-    const slides = Array.from(grid.querySelectorAll("[data-ephemera-slide]"));
-    const prevButton = grid.querySelector("[data-ephemera-prev]");
-    const nextButton = grid.querySelector("[data-ephemera-next]");
-    const status = grid.querySelector("[data-ephemera-status]");
-
-    if (slides.length === 0) return;
-
-    let currentIndex = slides.findIndex((slide) => slide.classList.contains("is-active"));
-    if (currentIndex < 0) {
-      currentIndex = 0;
-    }
-
-    function render(index) {
-      currentIndex = index;
-
-      slides.forEach((slide, slideIndex) => {
-        const isActive = slideIndex === currentIndex;
-        slide.classList.toggle("is-active", isActive);
-        slide.setAttribute("aria-hidden", isActive ? "false" : "true");
-      });
-
-      if (status) {
-        status.textContent = `${currentIndex + 1} / ${slides.length}`;
-      }
-    }
-
-    prevButton?.addEventListener("click", () => {
-      render((currentIndex - 1 + slides.length) % slides.length);
-    });
-
-    nextButton?.addEventListener("click", () => {
-      render((currentIndex + 1) % slides.length);
-    });
-
-    grid.dataset.ephemeraReady = "true";
-    render(currentIndex);
-  });
-}
-
-function initEphemeraViewer() {
-  const viewer = document.getElementById("viewer");
-  const list = document.querySelector(".ephemera-feed");
-
-  if (!viewer || !list) return;
-
-  const left = viewer.querySelector(".viewer-left");
-  const right = viewer.querySelector(".viewer-right");
-  const closeButton = viewer.querySelector(".viewer-close");
-
-  function closeViewer() {
-    viewer.classList.add("hidden");
-    viewer.classList.remove("viewer-empty-media");
-    left.innerHTML = "";
-    right.innerHTML = "";
-    document.body.style.overflow = "";
-  }
-
-  function renderViewerContent(ephemera) {
-    const summary = ephemera.querySelector(".ephemera-Summary")?.cloneNode(true);
-    const content = ephemera.querySelector(".ephemera-ContentWithoutSummary")?.cloneNode(true);
-
-    left.innerHTML = "";
-    right.innerHTML = "";
-
-    if (summary) {
-      left.appendChild(summary);
-      initEphemeraGrid(left);
-      viewer.classList.remove("viewer-empty-media");
-    } else {
-      viewer.classList.add("viewer-empty-media");
-    }
-
-    if (content) {
-      right.appendChild(content);
-    }
-  }
-
-  async function openViewer(url) {
-    if (!url) {
-      console.error("Ephemera card is missing data-url.");
-      return;
-    }
-
-    try {
-      const res = await fetch(url);
-      if (!res.ok) {
-        throw new Error(`Failed to fetch ${url}: ${res.status}`);
-      }
-
-      const html = await res.text();
-      const doc = new DOMParser().parseFromString(html, "text/html");
-      const ephemera = doc.querySelector(".content");
-
-      if (!ephemera) {
-        throw new Error(`Missing .content in ${url}`);
-      }
-
-      renderViewerContent(ephemera);
-      viewer.classList.remove("hidden");
-      document.body.style.overflow = "hidden";
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  list.addEventListener("click", (event) => {
-    if (event.target.closest("a, button")) return;
-
-    const item = event.target.closest(".ephemera-item");
     if (!item) return;
 
-    openViewer(item.dataset.url);
+    // const media =
+    //   e.target.closest("[data-ephemera-media]");
+
+    // if (!media) return;
+
+    // const item =
+    //   media.closest("[data-ephemera-item]");
+
+    // if (!item) return;
+
+    openViewer(item);
+
   });
 
-  closeButton?.addEventListener("click", closeViewer);
+  const viewer = document.getElementById("ephemeraViewer");
 
-  viewer.addEventListener("click", (event) => {
-    if (event.target === viewer) {
-      closeViewer();
+  const viewerLeft =
+    viewer.querySelector(".viewer-left");
+
+  const viewerRight =
+    viewer.querySelector(".viewer-right");
+
+  function openViewer(item) {
+
+    /*
+    * 右侧
+    */
+    viewerRight.innerHTML = `
+      ${item.querySelector(".ephemera-date").outerHTML}
+      ${item.querySelector(".ephemera-content").outerHTML}
+    `;
+
+    /*
+    * 左侧媒体单独处理
+    */
+    const media =
+      item.querySelector(".ephemera-media");
+
+    if (media) {
+
+      const clone = media.cloneNode(true);
+
+      /*
+      * Feed中的缩略图
+      * 换成Viewer大图
+      */
+      clone.querySelectorAll("img").forEach(img => {
+
+        if (img.dataset.viewerSrc) {
+
+          img.src = img.dataset.viewerSrc;
+
+        }
+
+      });
+
+      viewerLeft.replaceChildren(clone);
+
     }
-  });
 
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && !viewer.classList.contains("hidden")) {
+    viewer.classList.remove("hidden");
+
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeViewer() {
+
+    viewer.classList.add("hidden");
+
+    document.body.style.overflow = "";
+
+  }
+
+  document
+    .querySelector(".viewer-close")
+    ?.addEventListener("click", closeViewer);
+
+  document.addEventListener("keydown", (e) => {
+
+    if (e.key === "Escape") {
+
       closeViewer();
-    }
-  });
-}
 
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", () => {
-    initEphemeraGrid();
-    initEphemeraViewer();
+    }
+
   });
-} else {
-  initEphemeraGrid();
-  initEphemeraViewer();
-}
+
+});

@@ -682,6 +682,7 @@ main > .wrapper {
 }
 
 .posts-body {
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
@@ -723,6 +724,7 @@ main > .wrapper {
 }
 
 .posts-featured {
+  flex-shrink: 0;
   height: 100px;
   aspect-ratio: 3 / 2;
   border-radius: 6px;
@@ -746,7 +748,7 @@ main > .wrapper {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.5rem;
 }
 
 .posts-title {
@@ -756,6 +758,7 @@ main > .wrapper {
   overflow: hidden;
   color: #222;
   font-weight: 600;
+  line-height: 1.2rem;
   text-decoration: none;
 }
 
@@ -947,6 +950,34 @@ main > .wrapper {
 .ephemera-body {
   display: flex;
   flex-wrap: wrap;
+  position: relative;
+}
+
+.ephemera-maximize svg {
+  width: 16px;
+  height: 16px;
+}
+
+.ephemera-maximize {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  display: flex;
+  color: #222;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 28px;
+  height: 28px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+}
+
+.ephemera-maximize:hover {
+  background: rgba(0, 0, 0, 0.08);
 }
 
 .ephemera-date {
@@ -954,17 +985,17 @@ main > .wrapper {
   margin-bottom: 0.25rem;
 }
 
-.ephemera-Summary:empty
-+ .ephemera-ContentWithoutSummary {
+.ephemera-media:empty
++ .ephemera-content {
   flex-basis: 100%;
 }
 
-.ephemera-Summary:not(:empty)
-+ .ephemera-ContentWithoutSummary {
+.ephemera-media:not(:empty)
++ .ephemera-content {
   margin-left: 10px;
 }
 
-.ephemera-ContentWithoutSummary {
+.ephemera-content {
   flex: 1;
   min-width: 0;
   width: 100%;
@@ -976,7 +1007,7 @@ main > .wrapper {
   overflow: hidden;
 }
 
-.ephemera-ContentWithoutSummary p {
+.ephemera-content p {
   margin: 0;
 }
 
@@ -991,8 +1022,8 @@ main > .wrapper {
 }
 
 .ephemera-feed.grid-view
-.ephemera-summary:not(:empty)
-+ .ephemera-ContentWithoutSummary {
+.ephemera-media:not(:empty)
++ .ephemera-content {
   display: none;
 }
 

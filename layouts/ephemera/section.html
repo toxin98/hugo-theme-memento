@@ -28,13 +28,28 @@
 
       <div class="ephemera-feed stream-view" id="ephemeraFeed" data-infinite-scroll-list>
         {{ range $paginator.Pages }}
-          <div class="ephemera-item" data-infinite-scroll-item data-url="{{ .RelPermalink }}">
+          <div class="ephemera-item" data-infinite-scroll-item>
             <article class="ephemera-body">
+              <button class="ephemera-maximize">{{ partial "utils/icon.html" "maximize" }}</button>
               <div class="ephemera-date">
-                {{ partial "date-format.html" (dict "date" .Page.Date "layout" "2006/01/02 15:04 Monday" "prefix" "") }}
+                {{ partial "utils/date-format.html" (dict "date" .Page.Date "layout" "2006/01/02 15:04 Monday" "prefix" "") }}
               </div>
-              <div class="ephemera-Summary">{{ .Summary }}</div>
-              <div class="ephemera-ContentWithoutSummary">{{ .ContentWithoutSummary }}</div>
+              <div class="ephemera-media">
+                {{ with .Params.media }}
+                  {{ if eq . "image" }}
+                    {{ partial "media/image.html" $ }}
+                  {{ else if eq . "video" }}
+                    {{ partial "media/video.html" $ }}
+                  {{ else if eq . "audio" }}
+                    {{ partial "media/audio.html" $ }}
+                  {{ end }}
+                {{ else }}
+                   {{ errorf "Missing media field in %s" .File.Path }}
+                {{ end }}
+              </div>
+              <div class="ephemera-content">
+                {{ .Content }}
+              </div>
             </article>
           </div>
         {{ end }}
@@ -50,7 +65,7 @@
         </noscript>
       {{ end }}
 
-      <div id="viewer" class="viewer hidden">
+      <div id="ephemeraViewer" class="viewer hidden">
         <div class="viewer-left"></div>
         <div class="viewer-right"></div>
         <button class="viewer-close">{{ partial "utils/icon.html" "x" }}</button>
