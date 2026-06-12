@@ -36,6 +36,7 @@ a {
   --header-height: 80px;
   --sidebar-width: 250px;
   --middle-width: 768px;
+  --edge-gap: 12px;
   --theme-color: #f8f8f8;
   --z-header: 1000;
   --z-sidebar: 900;
@@ -83,7 +84,7 @@ header {
   height: 100%;
   display: flex;
   align-items: center;
-  padding: 0 0.75rem;
+  padding: 0 var(--edge-gap);
   gap: 2rem
 }
 
@@ -213,7 +214,7 @@ main > .wrapper {
 .middle-container {
   width: 100%;
   max-width: var(--middle-width);
-  padding: 0 0.75rem;
+  padding: 0 var(--edge-gap);
   display: flex;
   flex-direction: column;
 }
@@ -616,7 +617,7 @@ main > .wrapper {
 }
 
 .posts-year-collection {
-  margin: 1.2rem 0;
+  margin: 2rem 0;
 }
 
 .posts-year-collection-header {
@@ -642,7 +643,7 @@ main > .wrapper {
 }
 
 .posts-date-year {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   font-weight: 800;
   color: #1f2937;
 }
@@ -656,43 +657,38 @@ main > .wrapper {
 
 .posts-item {
   display: flex;
-  border-bottom: 1px solid #e8eaee;
+  border-bottom: 1px solid #ddd;
   gap: 1rem;
-  padding: 0.5rem;
-  height: 9rem;
+  padding: 1rem 0.5rem;
 }
 
 .posts-date {
-  flex: 0 0 2.3rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
 .posts-date-month {
-  align-self: flex-start;
   font-weight: 600;
   text-transform: uppercase;
   color: #111827;
 }
 
 .posts-date-day {
-  align-self: flex-end;
   font-size: 1.2rem;
-  line-height: 1rem;
+  line-height: 1.2rem;
   font-weight: 600;
   color: #6b7280;
+  margin-left: 1rem;
 }
 
 .posts-body {
-  flex: 1;
   display: flex;
   flex-direction: column;
+  gap: 0.25rem;
 }
 
 .posts-main {
-  flex: 1;
-  min-height: 0;
   display: flex;
   gap: 0.5rem;
 }
@@ -728,8 +724,7 @@ main > .wrapper {
 }
 
 .posts-featured {
-  flex-shrink: 0;
-  height: 100%;
+  height: 100px;
   aspect-ratio: 3 / 2;
   border-radius: 6px;
   overflow: hidden;
@@ -752,7 +747,7 @@ main > .wrapper {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.25rem;
 }
 
 .posts-title {

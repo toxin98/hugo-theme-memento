@@ -43,9 +43,9 @@
             </time>
             <div class="posts-body">
               <div class="posts-main">
-                <a class="posts-featured" aria-label="{{ .LinkTitle }}">
+                <div class="posts-featured">
                   {{ partial "get-featured.html" . }}
-                </a>
+                </div>
                 <div class="posts-pro">
                   <a href="{{ .RelPermalink }}" class="posts-title">{{ .LinkTitle }}</a>
                   <div class="posts-summary">{{ .Summary | plainify }}</div>
