@@ -287,7 +287,9 @@ main > .wrapper {
   #navBar.show {
     display: block;
     position: fixed;
-    width: 100%;
+    top: var(--top-bar-height);
+    left: 0;
+    right: 0;
     height: calc(100% - var(--top-bar-height));
     overflow-y: auto;
   }
@@ -627,7 +629,7 @@ main > .wrapper {
 .posts-year-collection-header {
   position: sticky;
   top: var(--header-height);
-  z-index: 999;
+  z-index: 1;
   justify-content: space-between;
   align-items: baseline;
   background-color: var(--theme-color);
@@ -946,7 +948,7 @@ main > .wrapper {
 .ephemera-topbar {
   position: sticky;
   top: var(--header-height);
-  z-index: 999;
+  z-index: 1;
   height: 64px;
   display: flex;
   align-items: center;
