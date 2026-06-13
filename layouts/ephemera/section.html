@@ -7,20 +7,10 @@
 
     <div class="middle-container">
 
-      <div class="ephemera-toolbar">
-
-        <button class="view-toggle" data-view="stream">
-
-          Stream
-
-        </button>
-
-        <button class="view-toggle" data-view="grid">
-
-          Grid
-
-        </button>
-
+      <div class="ephemera-topbar">
+        <img class="avatar avatar-small" src="{{ .Site.Params.profile.avatar | relURL }}" alt="avatar">
+        <button data-view="stream">{{ partial "utils/icon.html" "carousel-vertical" }}</button>
+        <button data-view="grid">{{ partial "utils/icon.html" "layout-grid" }}</button>
       </div>
 
       {{ $pages := .RegularPages.ByDate.Reverse }}
@@ -39,7 +29,7 @@
                 {{ if not (in (slice "text" "image" "video" "audio") $mediaType) }}
                   {{ errorf "Unknown media type '%s' in %s" $mediaType $page.File.Path }}
                 {{ else }}
-                  <div class="ephemera-media">{{ partial (printf "media/%s.html" $mediaType) $page }}</div>
+                  <div class="ephemera-media">{{ partial (printf "ephemera-media/%s.html" $mediaType) $page }}</div>
                 {{ end }}
               {{ else }}
                 {{ errorf "Missing media field in %s" $page.File.Path }}
