@@ -9,8 +9,8 @@
 
       <div class="ephemera-topbar">
         <img class="avatar avatar-small" src="{{ .Site.Params.profile.avatar | relURL }}" alt="avatar">
-        <button data-view="stream">{{ partial "utils/icon.html" "carousel-vertical" }}</button>
-        <button data-view="grid">{{ partial "utils/icon.html" "layout-grid" }}</button>
+        <button class="view-toggle" data-view="stream">{{ partial "utils/icon.html" "carousel-vertical" }}</button>
+        <button class="view-toggle" data-view="grid">{{ partial "utils/icon.html" "layout-grid" }}</button>
       </div>
 
       {{ $pages := .RegularPages.ByDate.Reverse }}
@@ -20,11 +20,9 @@
         {{ range $paginator.Pages }}
           {{ $page := .}}
           <div class="ephemera-item" data-infinite-scroll-item>
+            <button class="ephemera-maximize">{{ partial "utils/icon.html" "maximize" }}</button>
             <article class="ephemera-body">
-              <button class="ephemera-maximize">{{ partial "utils/icon.html" "maximize" }}</button>
-              <div class="ephemera-date">
-                {{ partial "utils/date-format.html" (dict "date" $page.Date "layout" "2006/01/02 15:04 Monday") }}
-              </div>
+              <div class="ephemera-date">{{ partial "utils/date-format.html" (dict "date" $page.Date "layout" "2006/01/02 15:04 Monday") }}</div>
               {{ with $mediaType := $page.Params.mediaType }}
                 {{ if not (in (slice "text" "image" "video" "audio") $mediaType) }}
                   {{ errorf "Unknown media type '%s' in %s" $mediaType $page.File.Path }}
@@ -34,9 +32,7 @@
               {{ else }}
                 {{ errorf "Missing media field in %s" $page.File.Path }}
               {{ end }}
-              <div class="ephemera-content">
-                {{ .Content }}
-              </div>
+              <div class="ephemera-content">{{ .Content }}</div>
             </article>
           </div>
         {{ end }}

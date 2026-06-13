@@ -4,8 +4,10 @@
 <div class="sudoku sudoku-{{ $count }}">
 
   {{ range $i := seq 1 $count }}
+
     {{ $index := printf "%02d" $i }}
     {{ $imageName := printf "*%s-%s*" $folderName $index }}
+
     {{ with $.Resources.GetMatch $imageName }}
 
       {{ $thumb := .Fill "200x200 webp q75" }}
@@ -16,6 +18,7 @@
         data-viewer-src="{{ $large.RelPermalink }}"
         alt=""
         loading="lazy"
+        decoding="async"
       >
 
     {{ else }}

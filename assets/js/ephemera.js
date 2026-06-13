@@ -32,19 +32,17 @@ window.addEventListener("DOMContentLoaded", () => {
 
   document.addEventListener("click", (e) => {
 
-    const item = e.target.closest(".ephemera-item");
+    const trigger = e.target.closest(
+      ".ephemera-maximize, .ephemera-media"
+    );
+
+    if (!trigger) return;
+
+    const item = trigger.closest(
+      ".ephemera-item"
+    );
 
     if (!item) return;
-
-    // const media =
-    //   e.target.closest("[data-ephemera-media]");
-
-    // if (!media) return;
-
-    // const item =
-    //   media.closest("[data-ephemera-item]");
-
-    // if (!item) return;
 
     openViewer(item);
 
@@ -60,45 +58,73 @@ window.addEventListener("DOMContentLoaded", () => {
 
   function openViewer(item) {
 
-    /*
-    * 右侧
-    */
-    viewerRight.innerHTML = `
-      ${item.querySelector(".ephemera-date").outerHTML}
-      ${item.querySelector(".ephemera-content").outerHTML}
-    `;
-
-    /*
-    * 左侧媒体单独处理
-    */
     const media =
       item.querySelector(".ephemera-media");
 
-    if (media) {
+    const date =
+      item.querySelector(".ephemera-date");
 
-      const clone = media.cloneNode(true);
+    const content =
+      item.querySelector(".ephemera-content");
 
-      /*
-      * Feed中的缩略图
-      * 换成Viewer大图
-      */
-      clone.querySelectorAll("img").forEach(img => {
+    viewerLeft.innerHTML = "";
 
-        if (img.dataset.viewerSrc) {
+    viewerRight.innerHTML = "";
 
-          img.src = img.dataset.viewerSrc;
+    const mediaClone =
+      media.cloneNode(true);
 
-        }
+    const dateClone =
+      date.cloneNode(true);
 
-      });
+    const contentClone =
+      content.cloneNode(true);
 
-      viewerLeft.replaceChildren(clone);
+    const sudoku =
+      mediaClone.querySelector(".sudoku");
+
+    if (sudoku) {
+
+      //
+      // 替换容器 class
+      //
+
+      sudoku.className =
+        "ephemera-image-gallery";
+
+      //
+      // 使用大图替换缩略图
+      //
+
+      sudoku
+        .querySelectorAll("img")
+        .forEach(img => {
+
+          const large =
+            img.dataset.viewerSrc;
+
+          if (large) {
+            img.src = large;
+          }
+
+        });
 
     }
 
+
+    viewerLeft.append(mediaClone);
+
+    viewerRight.append(
+      dateClone,
+      contentClone
+    );
+
     viewer.classList.remove("hidden");
 
-    document.body.style.overflow = "hidden";
+    document.body.classList.add(
+      "viewer-open"
+    );
+
   }
 
   function closeViewer() {
