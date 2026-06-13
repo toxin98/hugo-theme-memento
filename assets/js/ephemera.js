@@ -50,11 +50,11 @@ window.addEventListener("DOMContentLoaded", () => {
 
   const viewer = document.getElementById("ephemeraViewer");
 
-  const viewerLeft =
-    viewer.querySelector(".viewer-left");
+  const viewerMain =
+    viewer.querySelector(".overlay-main");
 
-  const viewerRight =
-    viewer.querySelector(".viewer-right");
+  const viewerSide =
+    viewer.querySelector(".overlay-side");
 
   function openViewer(item) {
 
@@ -67,9 +67,9 @@ window.addEventListener("DOMContentLoaded", () => {
     const content =
       item.querySelector(".ephemera-content");
 
-    viewerLeft.innerHTML = "";
+    viewerMain.innerHTML = "";
 
-    viewerRight.innerHTML = "";
+    viewerSide.innerHTML = "";
 
     const mediaClone =
       media.cloneNode(true);
@@ -111,19 +111,16 @@ window.addEventListener("DOMContentLoaded", () => {
 
     }
 
+    viewerMain.append(mediaClone);
 
-    viewerLeft.append(mediaClone);
-
-    viewerRight.append(
+    viewerSide.append(
       dateClone,
       contentClone
     );
 
     viewer.classList.remove("hidden");
 
-    document.body.classList.add(
-      "viewer-open"
-    );
+    document.documentElement.classList.add("overlay-open");
 
   }
 
@@ -131,12 +128,12 @@ window.addEventListener("DOMContentLoaded", () => {
 
     viewer.classList.add("hidden");
 
-    document.body.style.overflow = "";
+    document.documentElement.classList.remove("overlay-open");
 
   }
 
   document
-    .querySelector(".viewer-close")
+    .querySelector(".button-close")
     ?.addEventListener("click", closeViewer);
 
   document.addEventListener("keydown", (e) => {
