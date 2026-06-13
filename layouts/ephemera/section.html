@@ -24,7 +24,7 @@
             <article class="ephemera-body">
               <div class="ephemera-date">{{ partial "utils/date-format.html" (dict "date" $page.Date "layout" "2006/01/02 15:04 Monday") }}</div>
               {{ with $mediaType := $page.Params.mediaType }}
-                {{ if not (in (slice "text" "image" "video" "audio") $mediaType) }}
+                {{ if not (in (slice "empty" "image" "video" "audio") $mediaType) }}
                   {{ errorf "Unknown media type '%s' in %s" $mediaType $page.File.Path }}
                 {{ else }}
                   <div class="ephemera-media">{{ partial (printf "ephemera-media/%s.html" $mediaType) $page }}</div>

@@ -58,64 +58,23 @@ window.addEventListener("DOMContentLoaded", () => {
 
   function openViewer(item) {
 
-    const media =
-      item.querySelector(".ephemera-media");
-
-    const date =
-      item.querySelector(".ephemera-date");
-
-    const content =
-      item.querySelector(".ephemera-content");
-
-    viewerMain.innerHTML = "";
-
-    viewerSide.innerHTML = "";
-
-    const mediaClone =
-      media.cloneNode(true);
-
-    const dateClone =
-      date.cloneNode(true);
-
-    const contentClone =
-      content.cloneNode(true);
-
-    const sudoku =
-      mediaClone.querySelector(".sudoku");
+    const sudoku = item.querySelector(".sudoku");
 
     if (sudoku) {
 
-      //
-      // 替换容器 class
-      //
+      buildImageGallery(sudoku);
 
-      sudoku.className =
-        "ephemera-image-gallery";
+    } else {
 
-      //
-      // 使用大图替换缩略图
-      //
-
-      sudoku
-        .querySelectorAll("img")
-        .forEach(img => {
-
-          const large =
-            img.dataset.viewerSrc;
-
-          if (large) {
-            img.src = large;
-          }
-
-        });
+      viewerMain.replaceChildren(
+        item.querySelector(".ephemera-media").cloneNode(true)
+      );
 
     }
 
-    viewerMain.append(mediaClone);
-
-    viewerSide.append(
-      dateClone,
-      contentClone
+    viewerSide.replaceChildren(
+      item.querySelector(".ephemera-date").cloneNode(true),
+      item.querySelector(".ephemera-content").cloneNode(true)
     );
 
     viewer.classList.remove("hidden");
@@ -136,7 +95,132 @@ window.addEventListener("DOMContentLoaded", () => {
     .querySelector(".button-close")
     ?.addEventListener("click", closeViewer);
 
+  function buildImageGallery(sudoku) {
+
+    const images = [
+      ...sudoku.querySelectorAll(
+        "img[data-viewer-src]"
+      )
+    ];
+
+    let index = 0;
+
+    viewerMain.innerHTML = `
+      <div class="ephemera-image-gallery">
+
+        <img
+          class="ephemera-image-gallery-image"
+        >
+
+        <div class="ephemera-image-gallery-controls">
+
+          <button
+            type="button"
+            data-gallery-prev
+          >
+            ‹
+          </button>
+
+          <span
+            class="ephemera-image-gallery-status"
+          ></span>
+
+          <button
+            type="button"
+            data-gallery-next
+          >
+            ›
+          </button>
+
+        </div>
+
+      </div>
+    `;
+
+    const image =
+      viewerMain.querySelector(
+        ".ephemera-image-gallery-image"
+      );
+
+    const status =
+      viewerMain.querySelector(
+        ".ephemera-image-gallery-status"
+      );
+
+    function render() {
+
+      image.src =
+        images[index].dataset.viewerSrc;
+
+      status.textContent =
+        `${index + 1} / ${images.length}`;
+
+    }
+
+    render();
+
+    viewerMain
+      .querySelector("[data-gallery-prev]")
+      .addEventListener("click", () => {
+
+        index =
+          (index - 1 + images.length)
+          % images.length;
+
+        render();
+
+      });
+
+    viewerMain
+      .querySelector("[data-gallery-next]")
+      .addEventListener("click", () => {
+
+        index =
+          (index + 1)
+          % images.length;
+
+        render();
+
+      });
+
+  }
+
   document.addEventListener("keydown", (e) => {
+
+    if (
+      viewer.classList.contains(
+        "hidden"
+      )
+    ) return;
+
+    if (e.key === "ArrowLeft") {
+
+      gallery.index =
+        (
+          gallery.index
+          - 1
+          + gallery.images.length
+        )
+        %
+        gallery.images.length;
+
+      renderGallery();
+
+    }
+
+    if (e.key === "ArrowRight") {
+
+      gallery.index =
+        (
+          gallery.index
+          + 1
+        )
+        %
+        gallery.images.length;
+
+      renderGallery();
+
+    }
 
     if (e.key === "Escape") {
 
