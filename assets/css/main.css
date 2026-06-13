@@ -968,7 +968,7 @@ main > .wrapper {
 
 .ephemera-feed.stream-view .ephemera-item {
   border-bottom: 1px solid #ddd;
-  padding: 16px 24px;
+  padding: 16px;
 }
 
 .ephemera-maximize svg {
@@ -978,7 +978,7 @@ main > .wrapper {
 
 .ephemera-maximize {
   position: absolute;
-  top: 8px;
+  top: 0;
   right: 0;
   width: 28px;
   height: 28px;
