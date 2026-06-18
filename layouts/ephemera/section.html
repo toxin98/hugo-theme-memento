@@ -16,10 +16,12 @@
         {{ $imageNum := where $pages "Params.media.type" "image" }}
         {{ $videoNum := where $pages "Params.media.type" "video" }}
         {{ $audioNum := where $pages "Params.media.type" "audio" }}
-        text {{ len $textNum }}
-        image {{ len $imageNum }}
-        video {{ len $videoNum }}
-        audio {{ len $audioNum }}
+        <div class="ephemera-count">
+          <button>{{ partial "utils/icon.html" "message" }}{{ len $textNum }}</button>
+          <button>{{ partial "utils/icon.html" "photo" }}{{ len $imageNum }}</button>
+          <button>{{ partial "utils/icon.html" "video" }}{{ len $videoNum }}</button>
+          <button>{{ partial "utils/icon.html" "headphones" }}{{ len $audioNum }}</button>
+        </div>
         <button class="view-toggle" data-view="stream">{{ partial "utils/icon.html" "carousel-vertical" }}</button>
         <button class="view-toggle" data-view="grid">{{ partial "utils/icon.html" "layout-grid" }}</button>
       </div>
