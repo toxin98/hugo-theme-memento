@@ -29,9 +29,9 @@ a {
 
 
 :root {
-  --top-bar-height: 48px;
+  --top-bar-height: 60px;
   --top-bar-bg-color: #fff;
-  --nav-bar-height: 32px;
+  --nav-bar-height: 42px;
   --nav-bar-bg-color: #fff;
   --header-height: 80px;
   --sidebar-width: 250px;
@@ -88,7 +88,7 @@ header {
 
 .top-bar {
   height: var(--top-bar-height);
-  background-color: var(--top-bar-bg-color);
+  background: var(--top-bar-bg-color);
 }
 
 .top-bar > .wrapper {
@@ -131,7 +131,7 @@ header {
 
 .nav-bar {
   height: var(--nav-bar-height);
-  background-color: var(--nav-bar-bg-color);
+  background: var(--nav-bar-bg-color);
   border-top: 1px solid #ddd;
 }
 
@@ -194,7 +194,7 @@ header {
 }
 
 footer {
-  background-color: #eee;
+  background: #eee;
 }
 
 footer > .wrapper {
@@ -204,7 +204,7 @@ footer > .wrapper {
 
 main {
   flex: 1;
-  background-color: var(--theme-color);
+  background: var(--theme-color);
 }
 
 main > .wrapper {
@@ -402,15 +402,15 @@ main > .wrapper {
   right: 0;
   bottom: 0;
   z-index: -1; /* 在文字下方 */
-  transition: background-color 0.2s;
+  transition: background 0.2s;
 }
 
 .docs-tree a:hover::after {
-  background-color: #cec4b8;
+  background: #cec4b8;
 }
 
 .docs-tree a.active::after {
-  background-color: #7ca3cc;
+  background: #7ca3cc;
 }
 
 .docs-tree a:hover,
@@ -546,7 +546,7 @@ main > .wrapper {
   z-index: 1;
   justify-content: space-between;
   align-items: baseline;
-  background-color: var(--theme-color);
+  background: var(--theme-color);
   /* margin-bottom: 0.7rem; */
 }
 
@@ -864,12 +864,13 @@ main > .wrapper {
   top: var(--header-height);
   z-index: 1;
   height: 64px;
+  background: var(--theme-color);
   display: flex;
   align-items: center;
 }
 
-.ephemera-topbar .avatar {
-  margin-right: auto;
+.ephemera-topbar :nth-last-child(2) {
+  margin-left: auto;
 }
 
 .ephemera-feed {
@@ -1131,7 +1132,7 @@ main > .wrapper {
   display: flex;
   flex-direction: row;
   border-radius: 8px;
-  background-color: #fff;
+  background: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 

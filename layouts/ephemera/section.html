@@ -7,14 +7,22 @@
 
     <div class="middle-container">
 
+      {{ $pages := .RegularPages.ByDate.Reverse }}
+      {{ $paginator := .Paginate $pages }}
+
       <div class="ephemera-topbar">
         <img class="avatar avatar-small" src="{{ .Site.Params.profile.avatar | relURL }}" alt="avatar">
+        {{ $textNum := where $pages "Params.media.type" "empty" }}
+        {{ $imageNum := where $pages "Params.media.type" "image" }}
+        {{ $videoNum := where $pages "Params.media.type" "video" }}
+        {{ $audioNum := where $pages "Params.media.type" "audio" }}
+        text {{ len $textNum }}
+        image {{ len $imageNum }}
+        video {{ len $videoNum }}
+        audio {{ len $audioNum }}
         <button class="view-toggle" data-view="stream">{{ partial "utils/icon.html" "carousel-vertical" }}</button>
         <button class="view-toggle" data-view="grid">{{ partial "utils/icon.html" "layout-grid" }}</button>
       </div>
-
-      {{ $pages := .RegularPages.ByDate.Reverse }}
-      {{ $paginator := .Paginate $pages }}
 
       <div class="ephemera-feed stream-view" id="ephemeraFeed" data-infinite-scroll-list>
         {{ range $paginator.Pages }}
