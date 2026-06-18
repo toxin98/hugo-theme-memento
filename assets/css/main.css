@@ -33,7 +33,7 @@ a {
   --top-bar-bg-color: #fff;
   --nav-bar-height: 42px;
   --nav-bar-bg-color: #fff;
-  --header-height: 80px;
+  --header-height: 102px;
   --sidebar-width: 250px;
   --middle-width: 768px;
   --edge-gap: 12px;
@@ -871,6 +871,11 @@ main > .wrapper {
 
 .ephemera-topbar :nth-last-child(2) {
   margin-left: auto;
+}
+
+.ephemera-count {
+  display: flex;
+  gap: 0.5rem;
 }
 
 .ephemera-feed {
