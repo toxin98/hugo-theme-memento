@@ -1,4 +1,8 @@
 {{ $count := $.Resources.ByType "image" | len }}
+{{ if gt $count 9 }}
+  {{ warnf "Too many images (%d) in %s, only first 9 will be used" $count $.File.Path }}
+  {{ $count = 9 }}
+{{ end }}
 {{ $folderName := $.File.ContentBaseName }}
 
 <div class="sudoku sudoku-{{ $count }}">
