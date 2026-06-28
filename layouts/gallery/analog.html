@@ -98,19 +98,19 @@
               {{ end }}
             {{ end }}
 
-            <article class="gallery-analog-card">
-              <div class="gallery-analog-card-header">
-                <span class="gallery-analog-card-id">#{{ .id }}</span>
+            <article class="gallery-analog-item card">
+              <div class="gallery-analog-item-header">
+                <span class="gallery-analog-item-id">#{{ .id }}</span>
                 {{ if and (ne $started "") (ne $finished "") }}
-                  <span class="gallery-analog-card-date">{{ $started }} → {{ $finished }}</span>
+                  <span class="gallery-analog-item-date">{{ $started }} → {{ $finished }}</span>
                 {{ else if ne $started "" }}
-                  <span class="gallery-analog-card-date">Started {{ $started }}</span>
+                  <span class="gallery-analog-item-date">Started {{ $started }}</span>
                 {{ else if ne $finished "" }}
-                  <span class="gallery-analog-card-date">Finished {{ $finished }}</span>
+                  <span class="gallery-analog-item-date">Finished {{ $finished }}</span>
                 {{ end }}
               </div>
 
-              <dl class="gallery-analog-card-list">
+              <dl class="gallery-analog-item-list">
                 <div>
                   <dt>Film</dt>
                   <dd>{{ .film | default "-" }}</dd>
@@ -147,7 +147,7 @@
                     {{ end }}
                   </dd>
                 </div>
-                <div class="gallery-analog-card-note">
+                <div class="gallery-analog-item-note">
                   <dt>Note</dt>
                   <dd>{{ .note | default "-" }}</dd>
                 </div>

@@ -36,7 +36,7 @@
 
         <ul class="posts-list">
           {{ range .Pages }}
-          <li class="posts-item">
+          <li class="posts-item card">
             <time class="posts-date" datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}" aria-label="{{ .Date.Format "2006-01-02" }}">
               <span class="posts-date-month">{{ .Date.Format "Jan" }}</span>
               <span class="posts-date-day">{{ .Date.Format "02" }}</span>
