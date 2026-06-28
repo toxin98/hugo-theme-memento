@@ -647,7 +647,7 @@ main > .wrapper {
 .posts-featured {
   flex-shrink: 0;
   height: 100px;
-  aspect-ratio: 3 / 2;
+  aspect-ratio: 1.37 / 1;
   border-radius: 6px;
   overflow: hidden;
 }
