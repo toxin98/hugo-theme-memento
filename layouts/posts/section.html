@@ -2,33 +2,34 @@
 
   <div class="wrapper">
 
+    {{ $posts := .RegularPagesRecursive }}
+
     <aside class="sidebar-left">
-      <div  class="posts-category">
-        {{ with .Site.GetPage "Section" .Section }}
-          <ul>
-            <li>
-              <a href="{{ .RelPermalink }}"
-                class="{{ if eq $.RelPermalink .RelPermalink }}active{{ end }}">
-                Total #{{ .RegularPagesRecursive.Len }}
-              </a>
-            </li>
-            {{ range .Sections.ByTitle.Reverse }}
-            <li>
-              <a href="{{ .RelPermalink }}"
-                class="{{ if eq $.RelPermalink .RelPermalink }}active{{ end }}">
-                {{ .LinkTitle }} #{{ .Pages.Len }}
-              </a>
-            </li>
-            {{ end }}
-          </ul>
-        {{ end }}
+      <div class="posts-category">
+        <ul>
+          <li>
+            <button
+              class="posts-category-title active"
+              data-target="all">
+              All #{{ $posts.Len }}
+            </button>
+          </li>
+          {{ range $posts.GroupByDate "2006" }}
+          <li>
+            <button
+              class="posts-category-title"
+              data-target="year-{{ .Key }}">
+              {{ .Key }} #{{ .Pages.Len }}
+            </button>
+          </li>
+          {{ end }}
+        </ul>
       </div>
     </aside>
 
     <div class="middle-container">
-      {{ $posts := .RegularPagesRecursive }}
       {{ range $posts.GroupByDate "2006" }}
-      <div class="posts-year-collection">
+      <div class="posts-year-collection year-{{ .Key }}">
 
         <div class="posts-year-collection-header">
           <span class="posts-date-year">{{ .Key }}</span>

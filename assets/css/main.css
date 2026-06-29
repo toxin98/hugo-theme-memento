@@ -520,7 +520,7 @@ main > .wrapper {
   margin: 0.2rem;
 }
 /* 按钮样式 */
-.posts-category li a {
+.posts-category-title {
   display: block;
   text-align: center;
   padding: 0.2rem;
@@ -532,19 +532,24 @@ main > .wrapper {
 
   transition: all 0.2s ease;
 }
-/* hover 效果 */
-.posts-category li a:hover {
-  background: #333;
-  color: #fff;
+
+.posts-category-title:hover {
+  background: gray;
 }
-/* 当前选中（如果你之后加 active class） */
-.posts-category li a.active {
-  background: #0b9ddb;
-  color: white;
+
+.posts-category-title.active {
+  background: gray;
+  color: blue;
+  font-weight: 600;
 }
 
 .posts-year-collection {
   margin: 2rem 0;
+  display: none;
+}
+
+.posts-year-collection.show {
+  display: block;
 }
 
 .posts-year-collection-header {
