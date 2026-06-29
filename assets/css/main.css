@@ -228,8 +228,8 @@ main > .wrapper {
 
 .toggle-left,
 .toggle-right {
-  visibility: hidden;
   cursor: pointer;
+  visibility: hidden;
 }
 
 .toggle-left { margin-right: auto; }
@@ -1182,12 +1182,20 @@ main > .wrapper {
     display: none;
   }
 
+  .toggle-right {
+    visibility: visible;
+  }
+
 }
 
 @media (max-width: 1024px) {
 
   .sidebar-left {
     display: none;
+  }
+
+  .toggle-left {
+    visibility: visible;
   }
 
 }
