@@ -15,7 +15,7 @@
           {{ if templates.Exists ( printf "_partials/%s" $partialPath ) }}
             {{ partial $partialPath . }}
           {{ else }}
-            {{ partial "things/default.html" . }}
+            {{ partial "things-layout/default.html" . }}
           {{ end }}
         </li>
         {{ end }}
