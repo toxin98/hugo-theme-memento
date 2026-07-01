@@ -14,7 +14,7 @@
 
     {{ with $.Resources.GetMatch $imageName }}
 
-      {{ $thumb := .Filter (slice images.AutoOrient (images.Process "fit 300x300 webp q75")) }}
+      {{ $thumb := .Filter (slice images.AutoOrient (images.Process "fit 400x400 webp q75")) }}
       {{ $large := .Filter (slice images.AutoOrient (images.Process "resize 1800x webp q90")) }}
 
       <img
