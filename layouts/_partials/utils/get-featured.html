@@ -1,4 +1,4 @@
 {{ with .Resources.Get "featured" }}
-  {{ $thumb := .Filter (slice images.AutoOrient (images.Process "fit 200x200")) }}
-  <img src="{{ $thumb.RelPermalink }}" width="{{ $thumb.Width }}" height="{{ $thumb.Height }}" alt="" loading="lazy" decoding="async"/>
+  {{ $thumb := .Filter (slice images.AutoOrient (images.Process "fit 300x300 webp q75")) }}
+  <img src="{{ $thumb.RelPermalink }}" alt="" loading="lazy" decoding="async"/>
 {{ end }}
