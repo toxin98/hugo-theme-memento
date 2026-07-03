@@ -33,6 +33,7 @@
             <button class="ephemera-maximize">{{ partial "utils/icon.html" "maximize" }}</button>
             <article class="ephemera-body">
               <div class="ephemera-date">{{ partial "utils/date-format.html" (dict "date" $page.Date "layout" "2006/01/02 15:04 Monday") }}</div>
+              <div class="ephemera-content">{{ .Content }}</div>
               {{ with $mediaType := $page.Params.media.type }}
                 {{ if not (in (slice "empty" "image" "video" "audio") $mediaType) }}
                   {{ errorf "Unknown media type '%s' in %s" $mediaType $page.File.Path }}
@@ -42,7 +43,6 @@
               {{ else }}
                 {{ errorf "Missing media field in %s" $page.File.Path }}
               {{ end }}
-              <div class="ephemera-content">{{ .Content }}</div>
             </article>
           </div>
         {{ end }}

@@ -29,14 +29,14 @@ a {
 
 
 :root {
-  --top-bar-height: 60px;
+  --top-bar-height: 56px;
   --top-bar-bg-color: #fff;
   --nav-bar-height: 42px;
   --nav-bar-bg-color: #fff;
-  --header-height: 102px;
+  --header-height: 98px;
   --sidebar-width: 250px;
   --middle-width: 768px;
-  --edge-gap: 12px;
+  --edge-gap: 16px;
   --theme-color: #f8f8f8;
 }
 
@@ -924,24 +924,18 @@ main > .wrapper {
 
 .ephemera-body {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
 }
 
 .ephemera-date {
-  flex-basis: 100%;
-  margin-bottom: 0.25rem;
   color: #888;
   font-size: 0.875rem;
 }
 
 .ephemera-content {
-  flex: 1;
-  min-width: 0;
-  width: 100%;
   line-height: 1.3rem;
-  max-height: calc(1.3rem * 7);
   display: -webkit-box;
-  -webkit-line-clamp: 7;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -961,8 +955,8 @@ main > .wrapper {
 }
 
 .ephemera-feed.grid-view
-.ephemera-media:not(:empty)
-+ .ephemera-content {
+.ephemera-item:has(.ephemera-media:not(:empty))
+.ephemera-content {
   display: none;
 }
 
