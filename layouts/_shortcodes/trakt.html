@@ -6,7 +6,7 @@
 
 <div id="{{ $containerId }}" class="trakt-official-container">
   <div class="trakt-cards-grid" id="{{ $containerId }}-grid">
-    <div class="trakt-loading-state">loading...</div>
+    <!-- 初始由 JS 动态注入指定数量的骨架屏 -->
   </div>
   <div class="trakt-footer-bar">
     <span>Data provided by <a href="https://www.themoviedb.org" target="_blank" rel="noopener">TMDB</a> & <a href="https://app.trakt.tv" target="_blank" rel="noopener">Trakt</a></span>
@@ -27,7 +27,7 @@
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
-/* 网格排布：桌面 3 列，手机 2 列 */
+/* 桌面端 3 列，移动端 2 列 */
 .trakt-cards-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -51,7 +51,7 @@
   font-size: 0.9rem;
 }
 
-/* 单个卡片结构 */
+/* 卡片基础样式 */
 .trakt-exact-card {
   display: flex;
   position: relative;
@@ -59,7 +59,7 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;
   overflow: hidden;
-  height: 180px; /* 适当调高卡片高度以容纳换行标题 */
+  height: 180px;
   text-decoration: none !important;
   box-sizing: border-box;
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
@@ -78,6 +78,7 @@
   flex-shrink: 0;
   background-color: #27272a;
   overflow: hidden;
+  position: relative;
 }
 
 .trakt-card-poster {
@@ -85,6 +86,12 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.trakt-card-poster.is-loaded {
+  opacity: 1;
 }
 
 /* 右侧内容区域 */
@@ -93,30 +100,29 @@
   padding: 8px 10px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* 上下对齐：标题居上，时间居底 */
+  justify-content: space-between;
   min-width: 0;
   box-sizing: border-box;
 }
 
-/* 标题：允许多行换行展示（最多 2~3 行） */
+/* 标题样式：最多 3 行 */
 .trakt-title-text {
   color: #ffffff;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-weight: 700;
   line-height: 1.25;
   word-break: break-word;
   display: -webkit-box;
-  -webkit-line-clamp: 3; /* 最多显示 3 行 */
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-/* 时间容器 */
+/* 时间容器及样式 */
 .trakt-time-wrap {
   margin-top: 4px;
 }
 
-/* 日期与时间样式 */
 .trakt-date-text,
 .trakt-time-text {
   color: #a1a1aa;
@@ -126,6 +132,41 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+/* 骨架屏动画效果 */
+@keyframes traktPulse {
+  0% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+  100% { opacity: 0.3; }
+}
+
+.trakt-skeleton-block {
+  background-color: #27272a;
+  border-radius: 4px;
+  animation: traktPulse 1.5s infinite ease-in-out;
+}
+
+.trakt-skeleton-title {
+  width: 85%;
+  height: 14px;
+  margin-bottom: 6px;
+}
+
+.trakt-skeleton-subtitle {
+  width: 60%;
+  height: 12px;
+}
+
+.trakt-skeleton-date {
+  width: 70%;
+  height: 10px;
+  margin-bottom: 4px;
+}
+
+.trakt-skeleton-time {
+  width: 40%;
+  height: 10px;
 }
 
 /* 页脚注释栏 */
@@ -146,10 +187,11 @@
 
 <script>
 (function() {
-  const gridContainer = document.getElementById('{{ $containerId }}-grid');
+  const containerId = '{{ $containerId }}';
+  const gridContainer = document.getElementById(containerId + '-grid');
   const username = '{{ $username }}';
   const clientId = '{{ $clientId }}';
-  const limit = '{{ $limit }}';
+  const limit = parseInt('{{ $limit }}', 10) || 6;
   const tmdbKey = '{{ $tmdbApiKey }}';
 
   if (!username || !clientId) {
@@ -169,7 +211,32 @@
     }
   }
 
-  // 获取 TMDB 海报
+  // 1. 第一阶段：立即渲染骨架屏
+  function renderSkeletons() {
+    gridContainer.innerHTML = '';
+    for (let i = 0; i < limit; i++) {
+      const card = document.createElement('div');
+      card.className = 'trakt-exact-card';
+      card.innerHTML = `
+        <div class="trakt-card-poster-wrap trakt-skeleton-block"></div>
+        <div class="trakt-card-details">
+          <div>
+            <div class="trakt-skeleton-block trakt-skeleton-title"></div>
+            <div class="trakt-skeleton-block trakt-skeleton-subtitle"></div>
+          </div>
+          <div class="trakt-time-wrap">
+            <div class="trakt-skeleton-block trakt-skeleton-date"></div>
+            <div class="trakt-skeleton-block trakt-skeleton-time"></div>
+          </div>
+        </div>
+      `;
+      gridContainer.appendChild(card);
+    }
+  }
+
+  renderSkeletons();
+
+  // 异步拉取 TMDB 海报
   async function fetchPosterPath(type, tmdbId) {
     if (!tmdbKey || !tmdbId) return null;
     try {
@@ -177,10 +244,14 @@
       const res = await fetch(`https://api.themoviedb.org/3/${endpoint}/${tmdbId}?api_key=${tmdbKey}`);
       if (!res.ok) return null;
       const data = await res.json();
-      return data.poster_path ? `https://image.tmdb.org/t/p/w300${data.poster_path}` : null;
-    } catch { return null; }
+      if (!data.poster_path) return null;
+      return `https://image.tmdb.org/t/p/w300${data.poster_path}`;
+    } catch {
+      return null;
+    }
   }
 
+  // 2. 第二阶段：拉取 Trakt 历史数据
   fetch(`https://api.trakt.tv/users/${username}/history?limit=${limit}`, {
     headers: {
       'Content-Type': 'application/json',
@@ -195,9 +266,9 @@
       return;
     }
 
-    gridContainer.innerHTML = '';
+    gridContainer.innerHTML = ''; // 清空骨架屏
 
-    for (const item of data) {
+    data.forEach((item, index) => {
       let mainTitle = '';
       let tmdbId = null;
       let type = item.type;
@@ -216,11 +287,6 @@
         traktSlug = `shows/${item.show.ids.slug}/seasons/${s}/episodes/${e}`;
       }
 
-      let posterUrl = await fetchPosterPath(type, tmdbId);
-      if (!posterUrl) {
-        posterUrl = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="300" viewBox="0 0 200 300"><rect width="200" height="300" fill="%2327272a"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%2371717a" font-size="14" font-family="sans-serif">No Poster</text></svg>`;
-      }
-
       const dateObj = new Date(item.watched_at);
       const monthStr = months[dateObj.getMonth()];
       const dayNum = dateObj.getDate();
@@ -233,15 +299,19 @@
         hour12: true
       });
 
+      const fallbackPoster = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="300" viewBox="0 0 200 300"><rect width="200" height="300" fill="%2327272a"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%2371717a" font-size="14" font-family="sans-serif">No Poster</text></svg>`;
+
       const card = document.createElement('a');
       card.className = 'trakt-exact-card';
       card.href = `https://trakt.tv/${traktSlug}`;
       card.target = '_blank';
       card.rel = 'noopener';
 
+      const posterImgId = `trakt-poster-${containerId}-${index}`;
+
       card.innerHTML = `
         <div class="trakt-card-poster-wrap">
-          <img class="trakt-card-poster" src="${posterUrl}" alt="${mainTitle}" loading="lazy" />
+          <img id="${posterImgId}" class="trakt-card-poster" src="${fallbackPoster}" alt="${mainTitle}" />
         </div>
         <div class="trakt-card-details">
           <div class="trakt-title-text" title="${mainTitle}">${mainTitle}</div>
@@ -253,11 +323,22 @@
       `;
 
       gridContainer.appendChild(card);
-    }
+
+      // 3. 第三阶段：单独异步获取 TMDB 海报
+      fetchPosterPath(type, tmdbId).then(posterUrl => {
+        const imgEl = document.getElementById(posterImgId);
+        if (imgEl) {
+          if (posterUrl) {
+            imgEl.src = posterUrl;
+          }
+          imgEl.classList.add('is-loaded');
+        }
+      });
+    });
   })
   .catch(err => {
     console.error('Trakt Fetch Error:', err);
-    gridContainer.innerHTML = '<div class="trakt-loading-state" style="color:#ef4444;">无法加载观看记录</div>';
+    gridContainer.innerHTML = '<div class="trakt-loading-state" style="color:#ef4444;">无法拉取 Trakt 记录</div>';
   });
 })();
 </script>
