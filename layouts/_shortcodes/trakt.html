@@ -60,6 +60,40 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
+.trakt-exact-card.has-backdrop::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(90deg, rgba(24, 24, 27, 0.98) 0%, rgba(24, 24, 27, 0.88) 59%, rgba(24, 24, 27, 0.35) 100%);
+  pointer-events: none;
+}
+
+.trakt-card-backdrop {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 0;
+  width: auto;
+  height: 100%;
+  max-width: none;
+  opacity: 0;
+  pointer-events: none;
+  object-fit: contain;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.75) 28%, #000 58%);
+  mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.75) 28%, #000 58%);
+}
+
+.trakt-exact-card.has-backdrop .trakt-card-backdrop {
+  opacity: 1;
+}
+
+.trakt-exact-card > .trakt-card-poster-wrap,
+.trakt-exact-card > .trakt-card-details {
+  position: relative;
+  z-index: 2;
+}
+
 .trakt-exact-card:hover {
   transform: translateY(-2px);
   border-color: rgba(255, 255, 255, 0.25);
@@ -252,18 +286,20 @@
     gridContainer.appendChild(error);
   }
 
-  // 异步拉取 TMDB 海报
-  async function fetchPosterPath(type, tmdbId) {
-    if (!tmdbKey || !tmdbId) return null;
+  // 异步拉取 TMDB 海报和背景剧照
+  async function fetchTmdbImages(type, tmdbId) {
+    if (!tmdbKey || !tmdbId) return { posterUrl: null, backdropUrl: null };
     try {
       const endpoint = type === 'movie' ? 'movie' : 'tv';
       const res = await fetch(`https://api.themoviedb.org/3/${endpoint}/${tmdbId}?api_key=${tmdbKey}`);
-      if (!res.ok) return null;
+      if (!res.ok) return { posterUrl: null, backdropUrl: null };
       const data = await res.json();
-      if (!data.poster_path) return null;
-      return `https://image.tmdb.org/t/p/w300${data.poster_path}`;
+      return {
+        posterUrl: data.poster_path ? `https://image.tmdb.org/t/p/w300${data.poster_path}` : null,
+        backdropUrl: data.backdrop_path ? `https://image.tmdb.org/t/p/w780${data.backdrop_path}` : null
+      };
     } catch {
-      return null;
+      return { posterUrl: null, backdropUrl: null };
     }
   }
 
@@ -319,8 +355,16 @@
     return img;
   }
 
-  function loadPoster(imgEl, type, tmdbId) {
-    fetchPosterPath(type, tmdbId).then(posterUrl => {
+  function loadTmdbImages(card, imgEl, backdropImg, type, tmdbId) {
+    fetchTmdbImages(type, tmdbId).then(({ posterUrl, backdropUrl }) => {
+      if (!card || !card.isConnected) return;
+
+      if (backdropUrl && backdropImg) {
+        backdropImg.onload = () => card.classList.add('has-backdrop');
+        backdropImg.onerror = () => backdropImg.remove();
+        backdropImg.src = backdropUrl;
+      }
+
       if (!posterUrl || !imgEl || !imgEl.isConnected) return;
 
       // 先预加载，只有成功后才替换占位图；TMDB 失败时占位图保持可见。
@@ -397,6 +441,11 @@
       const posterImg = createPosterImage(fallbackPoster, mainTitle);
       posterWrap.appendChild(posterImg);
 
+      const backdropImg = document.createElement('img');
+      backdropImg.className = 'trakt-card-backdrop';
+      backdropImg.alt = '';
+      backdropImg.setAttribute('aria-hidden', 'true');
+
       const details = document.createElement('div');
       details.className = 'trakt-card-details';
       const title = document.createElement('div');
@@ -413,12 +462,12 @@
       time.textContent = timeFormatted;
       timeWrap.append(date, time);
       details.append(title, timeWrap);
-      card.append(posterWrap, details);
+      card.append(backdropImg, posterWrap, details);
 
       gridContainer.appendChild(card);
 
       // 第二阶段成功后，第三阶段单独异步获取 TMDB 海报。
-      loadPoster(posterImg, type, tmdbId);
+      loadTmdbImages(card, posterImg, backdropImg, type, tmdbId);
     });
     } catch (error) {
       console.error('Trakt Fetch Error:', error);
