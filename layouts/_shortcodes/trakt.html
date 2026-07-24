@@ -1,9 +1,9 @@
 {{ $username := .Get "username" }}
 {{ $limit := .Get "limit" | default "4" }}
-{{ $containerID := printf "trakt-history-%s" (substr (md5 (now.UnixNano)) 0 8) }}
+{{ $containerId := printf "trakt-history-%s" (substr (md5 (now.UnixNano)) 0 6) }}
 
-<div id="{{ $containerID }}" class="trakt-container">
-  <div class="trakt-cards-grid" id="grid-{{ $containerID }}">
+<div id="{{ $containerId }}" class="trakt-container">
+  <div class="trakt-cards-grid" id="{{ $containerId }}-grid">
     <!-- 初始由 JS 动态注入指定数量的骨架屏 -->
   </div>
   <div class="trakt-footer-bar">
@@ -220,8 +220,8 @@
 
 <script>
 (function() {
-  const containerID = '{{ $containerID }}';
-  const gridContainer = document.getElementByID('grid' + containerID);
+  const containerId = '{{ $containerId }}';
+  const gridContainer = document.getElementById(containerId + '-grid');
   const username = '{{ $username }}';
   const requestedLimit = parseInt('{{ $limit }}', 10);
   const limit = Math.min(Math.max(Number.isFinite(requestedLimit) ? requestedLimit : 6, 1), 20);
@@ -247,7 +247,7 @@
       card.setAttribute('aria-busy', 'true');
       card.innerHTML = `
         <div class="trakt-card-poster-wrap trakt-skeleton-block">
-          <span class="trakt-skeleton-loading">Loading...</span>
+          <span class="trakt-skeleton-loading">Loading…</span>
         </div>
         <div class="trakt-card-details">
           <div>
