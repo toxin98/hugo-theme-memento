@@ -43,7 +43,7 @@
       console.log('Netease latest song IDs:', songIDs);
 
       if (!songIDs.length) {
-        container.textContent = '没有获取到歌曲';
+        container.textContent = 'Not able to retrieve the song';
         return;
       }
 
@@ -57,7 +57,7 @@
     })
     .catch(error => {
       console.error('Netease playlist fetch error:', error);
-      container.textContent = '获取网易云歌单失败';
+      container.textContent = 'Netease playlist fetch failed';
     });
 })();
 </script>
