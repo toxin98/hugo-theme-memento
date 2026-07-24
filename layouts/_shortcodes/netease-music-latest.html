@@ -1,0 +1,63 @@
+{{ $playlistID := .Get "playlist_id" }}
+{{ $limit := .Get "limit" | default "4" }}
+{{ $containerID := printf "netease-latest-%s" (substr (md5 (now.UnixNano)) 0 8) }}
+
+<link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<script src="https://fastly.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<script>
+  var meting_api = 'https://api.injahow.cn/meting/?server=:server&type=:type&id=:id&auth=:auth&r=:r';
+</script>
+<script src="https://fastly.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script>
+
+<div id="{{ $containerID }}">Loading…</div>
+
+<script>
+(function() {
+  const container = document.getElementById('{{ $containerID }}');
+  const playlistID = '{{ $playlistID }}';
+  const limit = Math.min(Math.max(parseInt('{{ $limit }}', 10) || 4, 1), 20);
+  const apiURL = `https://api.injahow.cn/meting/?server=netease&type=playlist&id=${encodeURIComponent(playlistID)}`;
+
+  fetch(apiURL)
+    .then(response => {
+      if (!response.ok) throw new Error(`Playlist request failed: ${response.status}`);
+      return response.json();
+    })
+    .then(payload => {
+      const songs = Array.isArray(payload) ? payload : payload && payload.data;
+      const latest = Array.isArray(songs) ? songs.slice(0, limit) : [];
+
+      function getSongID(song) {
+        if (song && song.id) return String(song.id);
+        if (!song || !song.url) return null;
+
+        try {
+          return new URL(song.url).searchParams.get('id');
+        } catch {
+          const match = String(song.url).match(/[?&]id=(\d+)/);
+          return match ? match[1] : null;
+        }
+      }
+
+      const songIDs = latest.map(getSongID).filter(Boolean);
+      console.log('Netease latest song IDs:', songIDs);
+
+      if (!songIDs.length) {
+        container.textContent = '没有获取到歌曲';
+        return;
+      }
+
+      container.replaceChildren();
+      songIDs.forEach(songID => {
+        const player = document.createElement('meting-js');
+        player.setAttribute('auto', `https://music.163.com/#/song?id=${encodeURIComponent(songID)}`);
+        player.setAttribute('theme', '#760411');
+        container.appendChild(player);
+      });
+    })
+    .catch(error => {
+      console.error('Netease playlist fetch error:', error);
+      container.textContent = '获取网易云歌单失败';
+    });
+})();
+</script>
