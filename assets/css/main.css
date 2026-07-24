@@ -322,6 +322,10 @@ main > .wrapper {
   gap: 2rem;
 }
 
+.profile-content {
+  align-self: stretch;
+}
+
 .profile-info {
   display: flex;
 
