@@ -1,7 +1,5 @@
 {{ $username := .Get "username" }}
-{{ $clientId := .Get "client_id" }}
 {{ $limit := .Get "limit" | default "6" }}
-{{ $tmdbApiKey := .Get "tmdb_api_key" | default "52db9e0f76cdadcbc02480a4e35f6138" }}
 {{ $containerId := printf "trakt-history-%s" (substr (md5 (now.UnixNano)) 0 6) }}
 
 <div id="{{ $containerId }}" class="trakt-official-container">
@@ -11,8 +9,6 @@
   <div class="trakt-footer-bar">
     <span>
       Data provided by 
-      <a href="https://www.themoviedb.org" target="_blank" rel="noopener" class="tmdb-link">TMDB</a>
-      &
       <a href="https://app.trakt.tv" target="_blank" rel="noopener" class="trakt-link">Trakt</a>
       <a href="https://app.trakt.tv/profile/{{ $username }}" target="_blank" rel="noopener" class="trakt-user-link">@{{ $username }}</a>
     </span>
@@ -147,7 +143,7 @@
 /* 标题样式：最多 3 行 */
 .trakt-title-text {
   color: #ffffff;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   font-weight: 700;
   line-height: 1.25;
   word-break: break-word;
@@ -165,7 +161,7 @@
 .trakt-date-text,
 .trakt-time-text {
   color: #a1a1aa;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   line-height: 1.2;
   font-weight: 400;
   white-space: nowrap;
@@ -215,14 +211,12 @@
   align-items: center;
   gap: 6px;
   margin-top: 10px;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   color: #71717a;
 }
-.trakt-footer-bar a { color: inherit; text-decoration: none; }
-.tmdb-link:hover {color: #01b4e4;}
+.trakt-footer-bar a { font-weight: 500; color: inherit; text-decoration: none; }
 .trakt-link:hover {color: #9f42c6;}
-.trakt-user-link:hover {color: #000000;}
-.trakt-user-link { font-weight: 500; }
+.trakt-user-link:hover {color: #01b4e4;}
 .trakt-footer-bar .dot { font-size: 0.6rem; }
 </style>
 
@@ -231,10 +225,8 @@
   const containerId = '{{ $containerId }}';
   const gridContainer = document.getElementById(containerId + '-grid');
   const username = '{{ $username }}';
-  const clientId = '{{ $clientId }}';
   const requestedLimit = parseInt('{{ $limit }}', 10);
   const limit = Math.min(Math.max(Number.isFinite(requestedLimit) ? requestedLimit : 6, 1), 20);
-  const tmdbKey = '{{ $tmdbApiKey }}';
 
   const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
@@ -286,32 +278,16 @@
     gridContainer.appendChild(error);
   }
 
-  // 异步拉取 TMDB 海报和背景剧照
-  async function fetchTmdbImages(type, tmdbId) {
-    if (!tmdbKey || !tmdbId) return { posterUrl: null, backdropUrl: null };
-    try {
-      const endpoint = type === 'movie' ? 'movie' : 'tv';
-      const res = await fetch(`https://api.themoviedb.org/3/${endpoint}/${tmdbId}?api_key=${tmdbKey}`);
-      if (!res.ok) return { posterUrl: null, backdropUrl: null };
-      const data = await res.json();
-      return {
-        posterUrl: data.poster_path ? `https://image.tmdb.org/t/p/w300${data.poster_path}` : null,
-        backdropUrl: data.backdrop_path ? `https://image.tmdb.org/t/p/w780${data.backdrop_path}` : null
-      };
-    } catch {
-      return { posterUrl: null, backdropUrl: null };
-    }
+  function getTraktImageUrl(images, type) {
+    const rawImage = images && Array.isArray(images[type]) ? images[type][0] : null;
+    const rawUrl = typeof rawImage === 'string' ? rawImage : rawImage && rawImage.url;
+    if (!rawUrl) return null;
+    return `/api/trakt-image?url=${encodeURIComponent(rawUrl)}`;
   }
 
   async function fetchTraktHistory() {
     const encodedUsername = encodeURIComponent(username);
-    const res = await fetch(`https://api.trakt.tv/users/${encodedUsername}/history?limit=${limit}`, {
-      headers: {
-        'Content-Type': 'application/json',
-        'trakt-api-version': '2',
-        'trakt-api-key': clientId
-      }
-    });
+    const res = await fetch(`/api/trakt/history?username=${encodedUsername}&limit=${limit}`);
 
     let data = null;
     try {
@@ -336,7 +312,7 @@
 
   function getTraktErrorMessage(error) {
     if (error && (error.status === 401 || error.status === 403)) {
-      return '无法验证 Trakt API：Client ID 无效，或用户名与 API 配置不匹配';
+      return 'Trakt 拒绝了请求：请检查 Cloudflare Secret TRAKT_CLIENT_ID 是否为正确的 Client ID';
     }
     if (error && error.status === 404) {
       return '找不到该 Trakt 用户，请检查用户名是否正确';
@@ -355,33 +331,32 @@
     return img;
   }
 
-  function loadTmdbImages(card, imgEl, backdropImg, type, tmdbId) {
-    fetchTmdbImages(type, tmdbId).then(({ posterUrl, backdropUrl }) => {
-      if (!card || !card.isConnected) return;
+  function loadTraktImages(card, imgEl, backdropImg, images) {
+    const posterUrl = getTraktImageUrl(images, 'poster');
+    const backdropUrl = getTraktImageUrl(images, 'fanart') || getTraktImageUrl(images, 'thumb');
 
-      if (backdropUrl && backdropImg) {
-        backdropImg.onload = () => card.classList.add('has-backdrop');
-        backdropImg.onerror = () => backdropImg.remove();
-        backdropImg.src = backdropUrl;
-      }
+    if (backdropUrl && backdropImg) {
+      backdropImg.onload = () => card.classList.add('has-backdrop');
+      backdropImg.onerror = () => backdropImg.remove();
+      backdropImg.src = backdropUrl;
+    }
 
-      if (!posterUrl || !imgEl || !imgEl.isConnected) return;
-
-      // 先预加载，只有成功后才替换占位图；TMDB 失败时占位图保持可见。
+    if (posterUrl && imgEl && imgEl.isConnected) {
+      // 先预加载，失败时保留本地占位图。
       const remoteImg = new Image();
       remoteImg.onload = () => {
         if (imgEl.isConnected) imgEl.src = posterUrl;
       };
       remoteImg.src = posterUrl;
-    });
+    }
   }
 
   async function loadHistory() {
     // 给浏览器一个绘制骨架屏的机会，即使参数缺失也能看到加载状态。
     await new Promise(resolve => setTimeout(resolve, 0));
 
-    if (!username || !clientId) {
-      showError('错误：未设置 Trakt 用户名或 Client ID');
+    if (!username) {
+      showError('错误：未设置 Trakt 用户名');
       return;
     }
 
@@ -398,20 +373,17 @@
 
     data.forEach((item, index) => {
       let mainTitle = '';
-      let tmdbId = null;
       let type = item.type;
       let traktSlug = '';
 
       if (type === 'movie' && item.movie) {
         mainTitle = item.movie.title;
-        tmdbId = item.movie.ids ? item.movie.ids.tmdb : null;
         traktSlug = `movies/${item.movie.ids.slug}`;
       } else if (type === 'episode' && item.episode && item.show) {
         const s = item.episode.season;
         const e = item.episode.number;
         const epTitle = item.episode.title || '';
         mainTitle = `${item.show.title} S${s} • E${e}${epTitle ? ' - ' + epTitle : ''}`;
-        tmdbId = item.show.ids ? item.show.ids.tmdb : null;
         traktSlug = `shows/${item.show.ids.slug}/seasons/${s}/episodes/${e}`;
       }
 
@@ -466,8 +438,9 @@
 
       gridContainer.appendChild(card);
 
-      // 第二阶段成功后，第三阶段单独异步获取 TMDB 海报。
-      loadTmdbImages(card, posterImg, backdropImg, type, tmdbId);
+      // Trakt 历史响应已包含图片信息，第三阶段只通过 Worker 加载缓存后的图片。
+      const media = type === 'movie' ? item.movie : item.show;
+      loadTraktImages(card, posterImg, backdropImg, media && media.images);
     });
     } catch (error) {
       console.error('Trakt Fetch Error:', error);
