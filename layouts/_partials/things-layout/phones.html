@@ -13,13 +13,21 @@
 
     <div class="thing-info">
       <strong>{{ .Title }}</strong>
+      {{ $start := "" }}
+      {{ $end := "" }}
+
+      {{ with .Params.start }}
+        {{ $start = (time.AsTime (printf "%s-01" .)).Format "2006/01" }}
+      {{ end }}
+
+      {{ with .Params.end }}
+        {{ $end = (time.AsTime (printf "%s-01" .)).Format "2006/01" }}
+      {{ else }}
+        {{ $end = "present" }}
+      {{ end }}
+
       <small>
-        {{ .Params.start }}
-        {{ with .Params.end }}
-          - {{ . }}
-        {{ else }}
-          - now
-        {{ end }}
+        {{ $start }} - {{ $end }}
       </small>
     </div>
 
