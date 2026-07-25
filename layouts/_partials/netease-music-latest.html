@@ -1,5 +1,5 @@
-{{ $playlistID := .Get "playlist_id" }}
-{{ $limit := .Get "limit" | default "4" }}
+{{ $playlistID := .playlist_id }}
+{{ $limit := .limit | default 4 }}
 {{ $containerID := printf "netease-latest-%s" (substr (md5 (now.UnixNano)) 0 8) }}
 
 <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
