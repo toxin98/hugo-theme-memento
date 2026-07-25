@@ -1,7 +1,30 @@
-{{ range .Pages }}
+<div class="things-scroll">
 
-  <a href="{{ .RelPermalink }}">
-    {{ .Title }}
+{{ range sort .Pages "Params.start" "desc" }}
+
+  <a class="thing-item" href="{{ .RelPermalink }}">
+
+    <div class="thing-image">
+      {{ with .Resources.GetMatch .Params.image }}
+        {{ $img := .Resize "200x webp q80" }}
+        <img src="{{ $img.RelPermalink }}" alt="{{ $.Title }}">
+      {{ end }}
+    </div>
+
+    <div class="thing-info">
+      <strong>{{ .Title }}</strong>
+      <small>
+        {{ .Params.start }}
+        {{ with .Params.end }}
+          - {{ . }}
+        {{ else }}
+          - now
+        {{ end }}
+      </small>
+    </div>
+
   </a>
 
 {{ end }}
+
+</div>
