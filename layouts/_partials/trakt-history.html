@@ -1,9 +1,9 @@
 {{ $username := .username }}
 {{ $limit := .limit | default 4 }}
-{{ $containerId := printf "trakt-history-%s" (substr (md5 (now.UnixNano)) 0 6) }}
+{{ $containerId := printf "trakt-history-%s" (substr (md5 (now.UnixNano)) 0 7) }}
 
-<div id="{{ $containerId }}" class="trakt-container">
-  <div class="trakt-cards-grid" id="{{ $containerId }}-grid">
+<div class="trakt-container" id="{{ $containerId }}">
+  <div class="cards-grid" id="{{ $containerId }}-grid">
     <!-- 初始由 JS 动态注入指定数量的骨架屏 -->
   </div>
   <div class="trakt-footer-bar">
@@ -22,13 +22,6 @@
   margin: 1.5rem 0;
   width: 100%;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-}
-
-.trakt-cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 10px;
-  width: 100%;
 }
 
 .trakt-loading-state {

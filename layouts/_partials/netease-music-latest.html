@@ -1,19 +1,27 @@
 {{ $playlistID := .playlist_id }}
 {{ $limit := .limit | default 4 }}
-{{ $containerID := printf "netease-latest-%s" (substr (md5 (now.UnixNano)) 0 8) }}
+{{ $containerID := printf "netease-latest-%s" (substr (md5 (now.UnixNano)) 0 7) }}
 
-<link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
-<script src="https://fastly.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require APlayer -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<!-- /* 关键：使用自定义 API 节点以绕过 IP 封锁 */ -->
 <script>
   var meting_api = 'https://api.injahow.cn/meting/?server=:server&type=:type&id=:id&auth=:auth&r=:r';
 </script>
-<script src="https://fastly.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script>
 
-<div id="{{ $containerID }}">Loading...</div>
+<div id="{{ $containerID }}">
+  <div class="cards-grid" id="{{ $containerID }}-grid">
+    Loading...
+  </div>
+</div>
 
 <script>
 (function() {
-  const container = document.getElementById('{{ $containerID }}');
+  const containerID = '{{ $containerID }}';
+  const gridContainer = document.getElementById(containerID + '-grid');
   const playlistID = '{{ $playlistID }}';
   const limit = Math.min(Math.max(parseInt('{{ $limit }}', 10) || 4, 1), 20);
   const apiURL = `https://api.injahow.cn/meting/?server=netease&type=playlist&id=${encodeURIComponent(playlistID)}`;
@@ -43,21 +51,21 @@
       console.log('Netease latest song IDs:', songIDs);
 
       if (!songIDs.length) {
-        container.textContent = 'Not able to retrieve the song';
+        gridContainer.textContent = 'Not able to retrieve the song';
         return;
       }
 
-      container.replaceChildren();
+      gridContainer.replaceChildren();
       songIDs.forEach(songID => {
         const player = document.createElement('meting-js');
         player.setAttribute('auto', `https://music.163.com/#/song?id=${encodeURIComponent(songID)}`);
         player.setAttribute('theme', '#760411');
-        container.appendChild(player);
+        gridContainer.appendChild(player);
       });
     })
     .catch(error => {
       console.error('Netease playlist fetch error:', error);
-      container.textContent = 'Netease playlist fetch failed';
+      gridContainer.textContent = 'Netease playlist fetch failed';
     });
 })();
 </script>

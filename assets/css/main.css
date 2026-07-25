@@ -300,24 +300,37 @@ main > .wrapper {
   border-bottom: 0.1rem solid #000;
 }
 /* universal */
-.two-column-layout {
-  display: flex;
-  flex-wrap: wrap;       /* 空间不足时允许换行 */
-  gap: 20px;            /* 左右/上下间距 */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
   width: 100%;
-  max-width: 1200px;
+}
+
+.two-column-layout {
+  display: grid;
+  grid-template-columns: 1fr; /* 默认单列：两者等宽，同步变窄 */
+  width: 100%;
+  max-width: 1268px; /* 768 + 500 */
   margin: 0 auto;
-  padding: 20px;
+}
+
+/* 临界点计算：768(左) + 355(右最小) + 24(间距) + 40(左右内边距) = 1187px */
+@media (min-width: 1187px) {
+  .two-column-layout {
+    /* 左侧固定 768px，右侧在 355px 到 500px 之间自适应 */
+    grid-template-columns: 768px minmax(355px, 500px);
+    justify-content: center;
+    align-items: start;
+  }
 }
 
 .left {
-  flex: 1 1 500px; /* 当总宽度不足以让左侧保留 500px 时，自动触发折行 */
+  min-width: 0; /* 防止内容溢出撑破布局 */
 }
 
 .right {
-  flex-grow: 1;                     /* 换行后允许放大填满整行 */
-  width: min(100%, 500px);          /* 关键：宽度绝不大于 350px，但在换行且空间受限时支持 100% */
-  max-width: 100%;
+  width: 100%;
 }
 
 .card {
