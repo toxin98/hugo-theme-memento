@@ -2,41 +2,56 @@
 
   <div class="wrapper">
 
-    <div class="middle-container">
+    <div class="two-column-layout">
 
-      <section class="profile">
+      <div class="left">
 
-        <div class="profile-header">
+        <section class="profile">
 
-          <img class="avatar avatar-large" src="{{ .Site.Params.profile.avatar }}" alt="avatar">
+          <div class="profile-header">
 
-          <div class="profile-info">
+            <img class="avatar avatar-large" src="{{ .Site.Params.profile.avatar }}" alt="avatar">
 
-            <span class="profile-name">
-              {{ .Site.Params.profile.name }}
-            </span>
+            <div class="profile-info">
 
-            <span class="profile-tagline">
-              {{ .Site.Params.profile.tagline }}
-            </span>
+              <span class="profile-name">
+                {{ .Site.Params.profile.name }}
+              </span>
 
-            <ul class="social">
-              {{ range site.Params.social }}
-                <li>
-                  <a href="{{ .url }}" target="_blank" aria-label="{{ .name }}" title="{{ .name }}">{{ partial "utils/icon.html" .icon }}</a>
-                </li>
-              {{ end }}
-            </ul>
+              <span class="profile-tagline">
+                {{ .Site.Params.profile.tagline }}
+              </span>
+
+              <ul class="social">
+                {{ range site.Params.social }}
+                  <li>
+                    <a href="{{ .url }}" target="_blank" aria-label="{{ .name }}" title="{{ .name }}">{{ partial "utils/icon.html" .icon }}</a>
+                  </li>
+                {{ end }}
+              </ul>
+
+            </div>
 
           </div>
 
-        </div>
+          <div class="profile-content">
+            {{ .Content }}
+          </div>
 
-        <div class="profile-content">
-          {{ .Content }}
-        </div>
+        </section>
 
-      </section>
+      </div>
+
+      <aside class="right">
+        {{ with .Params.status.music }}
+          <h2>{{ .title }}</h2>
+          {{ partial "netease-music-latest.html" . }}
+        {{ end }}
+        {{ with .Params.status.trakt }}
+          <h2>{{ .title }}</h2>
+          {{ partial "trakt-history.html" . }}
+        {{ end }}
+      </aside>
 
     </div>
 

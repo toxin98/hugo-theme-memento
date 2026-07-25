@@ -300,6 +300,26 @@ main > .wrapper {
   border-bottom: 0.1rem solid #000;
 }
 /* universal */
+.two-column-layout {
+  display: flex;
+  flex-wrap: wrap;       /* 空间不足时允许换行 */
+  gap: 20px;            /* 左右/上下间距 */
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.left {
+  flex: 1 1 500px; /* 当总宽度不足以让左侧保留 500px 时，自动触发折行 */
+}
+
+.right {
+  flex-grow: 1;                     /* 换行后允许放大填满整行 */
+  width: min(100%, 500px);          /* 关键：宽度绝不大于 350px，但在换行且空间受限时支持 100% */
+  max-width: 100%;
+}
+
 .card {
   border: 1px solid #ddd;
   border-radius: 8px;
