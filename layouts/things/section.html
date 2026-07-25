@@ -11,7 +11,7 @@
         {{ range .Sections }}
         <li>
           <h2>{{ .Title }}</h2>
-          {{ $partialPath := printf "things/%s.html" .File.ContentBaseName }}
+          {{ $partialPath := printf "things-layout/%s.html" .File.ContentBaseName }}
           {{ if templates.Exists ( printf "_partials/%s" $partialPath ) }}
             {{ partial $partialPath . }}
           {{ else }}
