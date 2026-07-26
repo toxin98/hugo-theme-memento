@@ -7,13 +7,19 @@
 
     <div class="middle-container">
 
+      {{ $sections := slice }}
+
+      {{ range .Sections }}
+        {{ $weight := .Params.weight | default 1 }}
+        {{ $sections = $sections | append (dict "section" . "weight" $weight) }}
+      {{ end }}
+
       <ul>
-        {{ range .Sections }}
+        {{ range sort $sections "weight" }}
+        {{ $section := .section }}
         <li>
-          <h2>{{ .Title }}</h2>
-          {{ $pages := .Pages }}
-          {{ $pages = sort $pages ".Params.start" "desc" }}
-          {{ partial "things-cards.html" (dict "pages" $pages) }}
+          <h2>{{ $section.Title }}</h2>
+          {{ partial "things-cards.html" (dict "pages" $section.Pages) }}
         </li>
         {{ end }}
       </ul>

@@ -1,6 +1,9 @@
 <div class="things-scroll">
 
-{{ range .pages }}
+{{ $pages := .pages }}
+{{ $pages = sort $pages ".Params.start" "desc" }}
+
+{{ range $pages }}
 
   {{ $page := . }}
 
