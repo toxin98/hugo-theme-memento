@@ -1,5 +1,5 @@
 {{ $playlistID := .playlist_id }}
-{{ $limit := .limit | default 4 }}
+{{ $limit := .limit | default 3 }}
 {{ $containerID := printf "netease-latest-%s" (substr (md5 (now.UnixNano)) 0 7) }}
 
 <!-- require APlayer -->
@@ -13,7 +13,7 @@
 </script>
 
 <div id="{{ $containerID }}">
-  <div class="cards-grid" id="{{ $containerID }}-grid">
+  <div class="cards-grid music-grid" id="{{ $containerID }}-grid">
     Loading...
   </div>
 </div>

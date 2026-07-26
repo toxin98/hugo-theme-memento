@@ -3,7 +3,7 @@
 {{ $containerID := printf "trakt-history-%s" (substr (md5 (now.UnixNano)) 0 7) }}
 
 <div class="trakt-container" id="{{ $containerID }}">
-  <div class="cards-grid" id="{{ $containerID }}-grid">
+  <div class="cards-grid trakt-grid" id="{{ $containerID }}-grid">
     <!-- 初始由 JS 动态注入指定数量的骨架屏 -->
   </div>
   <div class="trakt-footer-bar">
