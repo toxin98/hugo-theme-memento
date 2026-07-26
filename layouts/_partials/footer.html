@@ -1,13 +1,12 @@
 <div class="wrapper">
   <div class="footer-copy">
-    <span>Copyright © {{ now.Year }}</span>
-    <span>{{ .Site.Params.profile.name }}</span>
+    <span>Copyright © {{ now.Year }} {{ .Site.Params.profile.name }}</span>
     <span class="separator">·</span>
-    <a href="{{ .Site.Params.copyright.licenseLink }}" target="_blank">{{ .Site.Params.copyright.license }}</a>
+    <a href="{{ .Site.Params.copyright.licenseLink }}" target="_blank" rel="noopener noreferrer">{{ .Site.Params.copyright.license }}</a>
   </div>
   <div class="footer-meta">
-    <span>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a></span>
+    <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer">Hugo</a></span>
     <span class="separator">&</span>
-    <span>Themed by <a href="https://github.com/toxin98/hugo-theme-memento" target="_blank">memento</a></span>
+    <span>Themed by <a href="https://github.com/toxin98/hugo-theme-memento" target="_blank" rel="noopener noreferrer">memento</a></span>
   </div>
 </div>
