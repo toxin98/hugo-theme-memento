@@ -4,6 +4,25 @@
 
   <a class="thing-item" href="{{ .RelPermalink }}">
 
+      <div class="thing-meta">
+
+        {{ $start := "" }}
+        {{ $end := "" }}
+
+        {{ with .Params.start }}
+          {{ $start = time.AsTime (printf "%s-01" .) | time.Format "2006/01" }}
+        {{ end }}
+
+        {{ with .Params.end }}
+          {{ $end = time.AsTime (printf "%s-01" .) | time.Format "2006/01" }}
+        {{ else }}
+          {{ $end = "present" }}
+        {{ end }}
+
+        {{ $start }} - {{ $end }}
+
+      </div>
+
     <div class="thing-image">
       {{ with .Resources.GetMatch .Params.image }}
         {{ $img := .Resize "200x webp q80" }}
@@ -11,24 +30,8 @@
       {{ end }}
     </div>
 
-    <div class="thing-info">
-      <strong>{{ .Title }}</strong>
-      {{ $start := "" }}
-      {{ $end := "" }}
-
-      {{ with .Params.start }}
-        {{ $start = (time.AsTime (printf "%s-01" .)).Format "2006/01" }}
-      {{ end }}
-
-      {{ with .Params.end }}
-        {{ $end = (time.AsTime (printf "%s-01" .)).Format "2006/01" }}
-      {{ else }}
-        {{ $end = "present" }}
-      {{ end }}
-
-      <small>
-        {{ $start }} - {{ $end }}
-      </small>
+    <div class="thing-title">
+      {{ .Title }}
     </div>
 
   </a>
