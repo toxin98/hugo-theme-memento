@@ -204,6 +204,14 @@ footer > .wrapper {
   text-align: center;
 }
 
+.footer-copy,
+.footer-meta {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;  /* critical */
+  gap: .5rem;
+}
+
 main {
   flex: 1;
   background: var(--theme-color);
