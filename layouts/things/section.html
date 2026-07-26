@@ -11,12 +11,9 @@
         {{ range .Sections }}
         <li>
           <h2>{{ .Title }}</h2>
-          {{ $partialPath := printf "things-layout/%s.html" .File.ContentBaseName }}
-          {{ if templates.Exists ( printf "_partials/%s" $partialPath ) }}
-            {{ partial $partialPath . }}
-          {{ else }}
-            {{ partial "things-layout/default.html" . }}
-          {{ end }}
+          {{ $pages := .Pages }}
+          {{ $pages = sort $pages ".Params.start" "desc" }}
+          {{ partial "things-cards.html" (dict "pages" $pages) }}
         </li>
         {{ end }}
       </ul>

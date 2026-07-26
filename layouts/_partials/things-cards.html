@@ -1,0 +1,41 @@
+<div class="things-scroll">
+
+{{ range .pages }}
+
+  {{ $page := . }}
+
+  <a class="thing-item" href="{{ .RelPermalink }}">
+
+    {{ with $page.Params.start }}
+    <div class="thing-meta">
+
+      {{ $start := time.AsTime (printf "%s-01" .) | time.Format "2006/01" }}
+
+      {{ $end := "present" }}
+
+      {{ with $page.Params.end }}
+        {{ $end = (time.AsTime (printf "%s-01" .)).Format "2006/01" }}
+      {{ end }}
+
+      {{ $start }} - {{ $end }}
+
+    </div>
+    {{ end }}
+
+
+    <div class="thing-image">
+      {{ with .Resources.GetMatch .Params.image }}
+        {{ $img := .Resize "200x webp q80" }}
+        <img src="{{ $img.RelPermalink }}" alt="{{ $.Title }}">
+      {{ end }}
+    </div>
+
+    <div class="thing-title">
+      {{ .Title }}
+    </div>
+
+  </a>
+
+{{ end }}
+
+</div>
