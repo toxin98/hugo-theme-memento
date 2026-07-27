@@ -317,11 +317,11 @@ main > .wrapper {
 }
 
 .music-grid {
-  grid-template-columns: repeat(auto-fit, minmax(363px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
 
 .trakt-grid {
-  grid-template-columns: repeat(auto-fit, minmax(179px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(192px, 1fr));
 }
 
 .two-column-layout {
