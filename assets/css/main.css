@@ -34,8 +34,9 @@ a {
   --nav-bar-height: 42px;
   --nav-bar-bg-color: #fff;
   --header-height: 98px;
-  --sidebar-width: 250px;
-  --middle-width: 768px;
+  --sidebar-width: 232px;
+  --middle-width: 736px;
+  --main-layout-gap: 24px;
   --edge-gap: 16px;
   --theme-color: #f8f8f8;
   --accent-color: #0b63b8;
@@ -220,11 +221,11 @@ main {
 main > .wrapper {
   display: flex;
   justify-content: center;
+  gap: var(--main-layout-gap);
 }
 
 .middle-container {
-  width: 100%;
-  max-width: var(--middle-width);
+  width: var(--middle-width);
   display: flex;
   flex-direction: column;
 }
@@ -316,11 +317,11 @@ main > .wrapper {
 }
 
 .music-grid {
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
 }
 
 .trakt-grid {
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
 .two-column-layout {
