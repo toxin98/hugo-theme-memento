@@ -317,11 +317,11 @@ main > .wrapper {
 }
 
 .music-grid {
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
 }
 
 .trakt-grid {
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
 }
 
 .two-column-layout {
@@ -330,13 +330,14 @@ main > .wrapper {
   width: 100%;
   max-width: 1268px; /* 768 + 500 */
   margin: 0 auto;
+  gap: 24px;
 }
 
-/* 临界点计算：768(左) + 355(右最小) + 24(间距) + 40(左右内边距) = 1187px */
-@media (min-width: 1187px) {
+/* 临界点计算：736(左) + 360(右最小) + 24(间距) + 32(左右内边距) = 1152px */
+@media (min-width: 1152px) {
   .two-column-layout {
-    /* 左侧固定 768px，右侧在 355px 到 500px 之间自适应 */
-    grid-template-columns: 768px minmax(355px, 500px);
+    /* 左侧固定 768px，右侧在 360px 到 500px 之间自适应 */
+    grid-template-columns: 736px minmax(360px, 500px);
     justify-content: center;
     align-items: start;
   }
