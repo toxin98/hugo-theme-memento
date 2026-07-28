@@ -316,12 +316,9 @@ main > .wrapper {
   width: 100%;
 }
 
-.music-grid {
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-}
-
+.music-grid,
 .trakt-grid {
-  grid-template-columns: repeat(auto-fit, minmax(192px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
 }
 
 .two-column-layout {
