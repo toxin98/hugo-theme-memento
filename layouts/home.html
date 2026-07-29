@@ -86,11 +86,9 @@
 
       <aside class="right">
         {{ with .Params.status.music }}
-          <h2>{{ .title }}</h2>
           {{ partial "netease-music-latest.html" . }}
         {{ end }}
         {{ with .Params.status.trakt }}
-          <h2>{{ .title }}</h2>
           {{ partial "trakt-history.html" . }}
         {{ end }}
       </aside>

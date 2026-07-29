@@ -2,6 +2,7 @@
 {{ $limit := .limit | default 4 }}
 {{ $containerID := printf "trakt-history-%s" (substr (md5 (now.UnixNano)) 0 7) }}
 
+<h2>最近看过</h2>
 <div class="trakt-container" id="{{ $containerID }}">
   <div class="cards-grid trakt-grid" id="{{ $containerID }}-grid">
     <!-- 初始由 JS 动态注入指定数量的骨架屏 -->
