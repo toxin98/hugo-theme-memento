@@ -1,4 +1,4 @@
-console.log("ephemera loaded");
+console.log("ephemera.js loaded");
 
 window.addEventListener("DOMContentLoaded", () => {
   /**
