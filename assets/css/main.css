@@ -218,7 +218,7 @@ main {
   background-color: var(--main-color);
 }
 
-main > .wrapper {
+.three-column-layout {
   display: grid;
   grid-template-columns: var(--sidebar-width) var(--middle-width) var(--sidebar-width);
   justify-content: center;
@@ -1290,7 +1290,7 @@ body:has(.sidebar-right.is-open)::before {
 
 @media (max-width: 1280px) {
 
-  main > .wrapper {
+  .three-column-layout {
     grid-template-columns: var(--sidebar-width) var(--middle-width);
   }
 
@@ -1317,7 +1317,7 @@ body:has(.sidebar-right.is-open)::before {
 
 @media (max-width: 1024px) {
 
-  main > .wrapper {
+  .three-column-layout {
     grid-template-columns: minmax(0, var(--middle-width));
   }
 
