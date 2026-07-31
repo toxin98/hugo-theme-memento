@@ -1264,6 +1264,7 @@ main > .wrapper {
   text-align: center;
   color: #333;
 }
+
 @media (max-width: 1280px) {
 
   .sidebar-right {
@@ -1276,12 +1277,12 @@ main > .wrapper {
     z-index: 1000;
   }
 
-  .toggle-right {
-    visibility: visible;
-  }
-
   .sidebar-right.is-open {
     transform: translateX(0);
+  }
+
+  .toggle-right {
+    visibility: visible;
   }
 
 }
@@ -1298,12 +1299,12 @@ main > .wrapper {
     z-index: 1000;
   }
 
-  .toggle-left {
-    visibility: visible;
-  }
-
   .sidebar-left.is-open {
     transform: translateX(0);
+  }
+
+  .toggle-left {
+    visibility: visible;
   }
 
 }
