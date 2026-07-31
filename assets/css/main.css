@@ -32,7 +32,7 @@ a {
   --top-bar-height: 56px;
   --nav-bar-height: 42px;
   --header-height: 98px;
-  --sidebar-width: 232px;
+  --sidebar-width: 250px;
   --middle-width: 736px;
   --edge-gap: 16px;
   --header-color: #fff;
@@ -220,7 +220,7 @@ main {
 
 main > .wrapper {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .middle-container {
