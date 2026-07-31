@@ -219,14 +219,15 @@ main {
 }
 
 main > .wrapper {
-  display: flex;
+  display: grid;
+  grid-template-columns: var(--sidebar-width) var(--middle-width) var(--sidebar-width);
   justify-content: center;
   padding: 0;
 }
 
+.sidebar-left,
+.sidebar-right,
 .middle-container {
-  width: var(--middle-width);
-  min-width: 0;
   display: flex;
   flex-direction: column;
 }
@@ -245,14 +246,6 @@ main > .wrapper {
 
 .toggle-left { margin-right: auto; }
 .toggle-right { margin-left: auto; }
-
-.sidebar-left,
-.sidebar-right {
-  width: var(--sidebar-width);
-  display: flex;
-  flex-direction: column;
-  padding: 0.75rem;
-}
 
 body::before {
   content: "";
@@ -282,16 +275,9 @@ body:has(.sidebar-right.is-open)::before {
   padding: 0 var(--edge-gap);
 }
 
-.content h1,
-.content h2,
-.content h3,
-.content h4 {
-  margin-top: 1.5rem;
-}
-
 .content img {
-  max-width: 70%;
-  max-height: 40vh;
+  max-width: 80%;
+  max-height: calc(100vh - var(--header-height) - 160px);
   display: block;
   margin: 0 auto;
 }
@@ -334,6 +320,19 @@ body:has(.sidebar-right.is-open)::before {
   border-bottom: 0.1rem solid #000;
 }
 /* universal */
+.page-featured {
+  grid-column: 1 / -1;
+  aspect-ratio: 4 / 3;
+  height: calc(100vh - var(--header-height) - 5rem);
+  margin: 0 auto;
+}
+
+.page-featured img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .cards-grid {
   display: grid;
   gap: 10px;
@@ -576,11 +575,6 @@ body:has(.sidebar-right.is-open)::before {
   line-height: 14px;
 }
 /* posts*/
-.page-featured img {
-  width: 100%;
-  height: calc(100vh - var(--header-height) - 8rem);
-  object-fit: cover;
-}
 .posts-category,
 .posts-tags-list {
   position: sticky;
@@ -1296,6 +1290,10 @@ body:has(.sidebar-right.is-open)::before {
 
 @media (max-width: 1280px) {
 
+  main > .wrapper {
+    grid-template-columns: var(--sidebar-width) var(--middle-width);
+  }
+
   .sidebar-right {
     position: fixed;
     top: 0;
@@ -1318,6 +1316,10 @@ body:has(.sidebar-right.is-open)::before {
 }
 
 @media (max-width: 1024px) {
+
+  main > .wrapper {
+    grid-template-columns: minmax(0, var(--middle-width));
+  }
 
   .sidebar-left {
     position: fixed;

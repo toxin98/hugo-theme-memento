@@ -2,6 +2,12 @@
 
   <div class="wrapper">
 
+    {{ with .Resources.Get .Params.featured }}
+    <div class="page-featured">
+      <img src="{{ .RelPermalink }}" alt="featured-img">
+    </div>
+    {{ end }}
+
     <aside class="sidebar-left">
       <h2><a href="{{ .FirstSection.RelPermalink }}">All posts</a></h2>
       <h3><a href="{{ .CurrentSection.RelPermalink }}"><span class="posts-date-year">{{ .Date.Format "2006" }}</span></h3></a>
@@ -12,12 +18,6 @@
     </aside>
 
     <div class="middle-container">
-
-      <div class="page-featured">
-        {{ with .Resources.Get .Params.featured }}
-          <img src="{{ .RelPermalink }}" alt="featured-img">
-        {{ end }}
-      </div>
 
       <article class="content">
         <h1>{{ .Title }}</h1>
