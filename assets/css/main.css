@@ -215,12 +215,12 @@ footer > .wrapper {
 
 main {
   flex: 1;
-  background: var(--main-color);
+  background-color: var(--main-color);
 }
 
 main > .wrapper {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .middle-container {
