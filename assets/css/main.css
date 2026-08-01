@@ -219,15 +219,13 @@ main {
 }
 
 .three-column-layout {
-  display: grid;
-  grid-template-columns: var(--sidebar-width) var(--middle-width) var(--sidebar-width);
+  display: flex;
   justify-content: center;
   padding: 0;
 }
 
-.sidebar-left,
-.sidebar-right,
 .middle-container {
+  width: var(--middle-width);
   display: flex;
   flex-direction: column;
 }
@@ -238,6 +236,13 @@ main {
   display: flex;
 }
 
+.sidebar-left,
+.sidebar-right {
+  width: var(--sidebar-width);
+  display: flex;
+  flex-direction: column;
+}
+
 .toggle-left,
 .toggle-right {
   cursor: pointer;
@@ -246,6 +251,11 @@ main {
 
 .toggle-left { margin-right: auto; }
 .toggle-right { margin-left: auto; }
+
+.one-column-layout {
+  max-width: 900px;
+  margin: 0 auto;
+}
 
 body::before {
   content: "";
@@ -1245,6 +1255,12 @@ body:has(.sidebar-right.is-open)::before {
   border-left: 1px solid #ddd;
 }
 /* things */
+.things-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
 .things-scroll {
   display: flex;
   gap: 1rem;
@@ -1290,10 +1306,6 @@ body:has(.sidebar-right.is-open)::before {
 
 @media (max-width: 1280px) {
 
-  .three-column-layout {
-    grid-template-columns: var(--sidebar-width) var(--middle-width);
-  }
-
   .sidebar-right {
     position: fixed;
     top: 0;
@@ -1316,10 +1328,6 @@ body:has(.sidebar-right.is-open)::before {
 }
 
 @media (max-width: 1024px) {
-
-  .three-column-layout {
-    grid-template-columns: minmax(0, var(--middle-width));
-  }
 
   .sidebar-left {
     position: fixed;

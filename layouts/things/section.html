@@ -1,33 +1,23 @@
 {{ define "main" }}
 
-  <div class="three-column-layout">
+  <div class="one-column-layout">
 
-    <aside class="sidebar-left">
-    </aside>
+    {{ $sections := slice }}
 
-    <div class="middle-container">
+    {{ range .Sections }}
+      {{ $weight := .Params.weight | default 1 }}
+      {{ $sections = $sections | append (dict "section" . "weight" $weight) }}
+    {{ end }}
 
-      {{ $sections := slice }}
-
-      {{ range .Sections }}
-        {{ $weight := .Params.weight | default 1 }}
-        {{ $sections = $sections | append (dict "section" . "weight" $weight) }}
+    <ul class="things-list">
+      {{ range sort $sections "weight" }}
+      {{ $section := .section }}
+      <li>
+        <h2>{{ $section.Title }}</h2>
+        {{ partial "things-cards.html" (dict "pages" $section.Pages) }}
+      </li>
       {{ end }}
-
-      <ul>
-        {{ range sort $sections "weight" }}
-        {{ $section := .section }}
-        <li>
-          <h2>{{ $section.Title }}</h2>
-          {{ partial "things-cards.html" (dict "pages" $section.Pages) }}
-        </li>
-        {{ end }}
-      </ul>
-
-    </div>
-
-    <aside class="sidebar-right">
-    </aside>
+    </ul>
 
   </div>
 

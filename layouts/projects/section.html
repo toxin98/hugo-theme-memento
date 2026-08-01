@@ -1,53 +1,43 @@
 {{ define "main" }}
 
-  <div class="three-column-layout">
+  <div class="one-column-layout">
 
-    <aside class="sidebar-left">
-    </aside>
+    {{ $groups := dict }}
 
-    <div class="middle-container">
+    {{ range .Pages }}
 
-      {{ $groups := dict }}
+      {{ $categories := .Params.categories | default (slice "misc") }}
 
-      {{ range .Pages }}
+      {{ $existing := index $groups $categories | default (slice) }}
 
-        {{ $categories := .Params.categories | default (slice "misc") }}
+      {{ $groups = merge $groups (dict $categories ($existing | append .)) }}
 
-        {{ $existing := index $groups $categories | default (slice) }}
+    {{ end }}
 
-        {{ $groups = merge $groups (dict $categories ($existing | append .)) }}
+    {{ range $categories, $pages := $groups }}
 
-      {{ end }}
+    <section>
 
-      {{ range $categories, $pages := $groups }}
+      <h2>{{ $categories }}</h2>
 
-      <section>
-
-        <h2>{{ $categories }}</h2>
-
-        <div class="projects-grid">
-          {{ range $pages }}
-            <div class="project-item card">
-              <div class="project-info">
-                <h2 class="project-title">{{ .Title }}</h2>
-                <p class="project-desc">{{ .Description | default "Description: -" }}</p>
-                <a href="{{ .RelPermalink }}" class="project-link">View Project</a>
-              </div>
-              <div class="project-featured">
-                {{ partial "utils/get-featured.html" . }}
-              </div>
+      <div class="projects-grid">
+        {{ range $pages }}
+          <div class="project-item card">
+            <div class="project-info">
+              <h2 class="project-title">{{ .Title }}</h2>
+              <p class="project-desc">{{ .Description | default "Description: -" }}</p>
+              <a href="{{ .RelPermalink }}" class="project-link">View Project</a>
             </div>
-          {{ end }}
-        </div>
+            <div class="project-featured">
+              {{ partial "utils/get-featured.html" . }}
+            </div>
+          </div>
+        {{ end }}
+      </div>
 
-      </section>
+    </section>
 
-      {{ end }}
-
-    </div>
-
-    <aside class="sidebar-right">
-    </aside>
+    {{ end }}
 
   </div>
 
