@@ -5,16 +5,7 @@
 </head>
 <body>
   <header>
-    <div class="header-top">
-      <div class="wrapper">
-        {{ partial "header.html" . }}
-      </div>
-    </div>
-    <div class="header-nav" id="siteNav">
-      <div class="wrapper">
-        {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
-      </div>
-    </div>
+    {{ partial "header.html" . }}
   </header>
   <main>
     <div class="wrapper">

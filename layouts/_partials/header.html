@@ -1,18 +1,27 @@
-<div class="header-top-left">
-  <button class="menu-toggle" id="hamburger">{{ partial "utils/icon.html" "menu-2" }}</button>
+<div class="header-top">
+  <div class="wrapper">
+    <div class="header-top-left">
+      <button class="menu-toggle" id="hamburger">{{ partial "utils/icon.html" "menu-2" }}</button>
+    </div>
+    <div class="header-top-middle">
+      <a href="/" class="site-brand">
+        {{ with .Site.Params.logo }}
+          <img
+            class="site-logo"
+            src="{{ . | relURL }}"
+            alt="logo"
+          >
+        {{ end }}
+        <span class="site-title">{{ site.Title }}</span>
+      </a>
+    </div>
+    <div class="header-top-right">
+      <button>{{ partial "utils/icon.html" "search" }}</button>
+    </div>
+  </div>
 </div>
-<div class="header-top-middle">
-  <a href="/" class="site-brand">
-    {{ with .Site.Params.logo }}
-      <img
-        class="site-logo"
-        src="{{ . | relURL }}"
-        alt="logo"
-      >
-    {{ end }}
-    <span class="site-title">{{ site.Title }}</span>
-  </a>
-</div>
-<div class="header-top-right">
-  <button>{{ partial "utils/icon.html" "search" }}</button>
+<div class="header-nav" id="siteNav">
+  <div class="wrapper">
+    {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
+  </div>
 </div>
