@@ -29,8 +29,8 @@ a {
 
 
 :root {
-  --top-bar-height: 56px;
-  --nav-bar-height: 42px;
+  --header-top-height: 56px;
+  --header-nav-height: 42px;
   --header-height: 98px;
   --sidebar-width: 250px;
   --middle-width: 768px;
@@ -90,30 +90,30 @@ header {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
 
-.top-bar {
-  height: var(--top-bar-height);
+.header-top {
+  height: var(--header-top-height);
   background-color: var(--header-color);
 }
 
-.top-bar > .wrapper {
+.header-top > .wrapper {
   height: 100%;
   display: flex;
   align-items: center;
   gap: 2rem
 }
 
-.top-bar a {
+.header-top a {
   text-decoration: none;
   color: #000;
 }
 
-.top-bar-left,
-.top-bar-right {
+.header-top-left,
+.header-top-right {
   flex: 1;
   display: flex;
 }
 
-.top-bar-right {
+.header-top-right {
   justify-content: flex-end;
 }
 
@@ -132,19 +132,19 @@ header {
   font-weight: bold;
 }
 
-.nav-bar {
-  height: var(--nav-bar-height);
+.header-nav {
+  height: var(--header-nav-height);
   background-color: var(--header-color);
   border-top: 1px solid #ddd;
 }
 
-.nav-bar > .wrapper {
+.header-nav > .wrapper {
   height: 100%;
   display: flex;
   justify-content: center;
 }
 
-#navBar ul {
+#siteNav ul {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -154,11 +154,11 @@ header {
   gap: 1.5rem;
 }
 
-#navBar li {
+#siteNav li {
   height: 100%;
 }
 
-#navBar a {
+#siteNav a {
   height: 100%;
   display: flex;
   align-items: center;
@@ -168,7 +168,7 @@ header {
   position: relative;
 }
 
-#navBar a::after {
+#siteNav a::after {
   content: "";
 
   position: absolute;
@@ -187,8 +187,8 @@ header {
   transition: transform 0.25s ease;
 }
 
-#navBar a:hover::after,
-#navBar a.active::after {
+#siteNav a:hover::after,
+#siteNav a.active::after {
   transform: scaleX(1);
 }
 
@@ -271,8 +271,8 @@ body:has(.sidebar-right.is-open)::before {
 
 /* content */
 .content {
+  max-width: 736px;
   color: #444;
-  padding: 0 var(--edge-gap);
 }
 
 .content img {
@@ -1345,24 +1345,24 @@ body:has(.sidebar-right.is-open)::before {
 @media (max-width: 768px) {
 
   :root{
-    --header-height: var(--top-bar-height);
+    --header-height: var(--header-top-height);
   }
 
-  #navBar {
+  #siteNav {
     display: none;
   }
 
-  #navBar.show {
+  #siteNav.show {
     display: block;
     position: fixed;
-    top: var(--top-bar-height);
+    top: var(--header-top-height);
     left: 0;
     right: 0;
-    height: calc(100% - var(--top-bar-height));
+    height: calc(100% - var(--header-top-height));
     overflow-y: auto;
   }
 
-  #navBar ul {
+  #siteNav ul {
     flex-direction: column;
   }
 
