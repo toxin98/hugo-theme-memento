@@ -33,7 +33,7 @@ a {
   --header-nav-height: 42px;
   --header-height: 98px;
   --sidebar-width: 250px;
-  --middle-width: 768px;
+  --primary-width: 768px;
   --edge-gap: 16px;
   --header-color: #fff;
   --main-color: #fcfcfc;
@@ -224,8 +224,8 @@ main {
   padding: 0;
 }
 
-.middle-container {
-  width: var(--middle-width);
+.primary-area {
+  width: var(--primary-width);
   display: flex;
   flex-direction: column;
 }
