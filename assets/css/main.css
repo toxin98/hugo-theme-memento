@@ -198,19 +198,15 @@ header {
 
 footer {
   background-color: var(--footer-color);
-}
-
-footer > .wrapper {
-  height: 5rem;
-  text-align: center;
+  padding-block: 0.6rem;
 }
 
 .footer-copy,
 .footer-meta {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;  /* critical */
   gap: .5rem;
+  flex-wrap: wrap;
 }
 
 main {
@@ -221,7 +217,6 @@ main {
 .three-column-layout {
   display: flex;
   justify-content: center;
-  padding: 0;
 }
 
 .primary-area {
@@ -251,6 +246,12 @@ main {
 
 .toggle-left { margin-right: auto; }
 .toggle-right { margin-left: auto; }
+
+.two-column-layout {
+  grid-template-columns: 736px minmax(360px, 500px);
+  justify-content: center;
+  align-items: start;
+}
 
 .one-column-layout {
   max-width: 900px;
@@ -287,9 +288,9 @@ body:has(.sidebar-right.is-open)::before {
 
 .content img {
   max-width: 80%;
-  max-height: calc(100vh - var(--header-height) - 160px);
+  max-height: calc(100vh - var(--header-height) - 15rem);
   display: block;
-  margin: 0 auto;
+  margin-inline: auto;
 }
 
 .content code {
@@ -354,32 +355,7 @@ body:has(.sidebar-right.is-open)::before {
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
 }
 
-.two-column-layout {
-  display: grid;
-  grid-template-columns: 1fr; /* 默认单列：两者等宽，同步变窄 */
-  width: 100%;
-  max-width: 1268px; /* 768 + 500 */
-  margin: 0 auto;
-  gap: 24px;
-}
 
-/* 临界点计算：736(左) + 360(右最小) + 24(间距) + 32(左右内边距) = 1152px */
-@media (min-width: 1152px) {
-  .two-column-layout {
-    /* 左侧固定 768px，右侧在 360px 到 500px 之间自适应 */
-    grid-template-columns: 736px minmax(360px, 500px);
-    justify-content: center;
-    align-items: start;
-  }
-}
-
-.left {
-  min-width: 0; /* 防止内容溢出撑破布局 */
-}
-
-.right {
-  width: 100%;
-}
 
 .card {
   border: 1px solid #ddd;
@@ -1351,6 +1327,12 @@ body:has(.sidebar-right.is-open)::before {
 }
 
 @media (max-width: 768px) {
+
+  .two-column-layout {
+    display: grid;
+    grid-template-columns: 1fr; /* 默认单列：两者等宽，同步变窄 */
+    width: 100%;
+  }
 
   :root{
     --header-height: var(--header-top-height);
