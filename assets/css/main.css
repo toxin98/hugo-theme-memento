@@ -355,7 +355,11 @@ body:has(.sidebar-right.is-open)::before {
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
 }
 
-
+.image-placeholder {
+  width: 100%;
+  height: 100%;
+  background-color: #eee;
+}
 
 .card {
   border: 1px solid #ddd;
@@ -1235,6 +1239,27 @@ body:has(.sidebar-right.is-open)::before {
   list-style: none;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.things-link-title {
+  text-decoration: none;
+  color: #222;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.things-link-title > .arrow {
+  font-size: 1.4em;
+  line-height: 0;
+  vertical-align: -0.06em;
+  margin-left: 0.2em;
+}
+
+.things-link-title:hover{
+  color: var(--accent-color)
 }
 
 .things-scroll {
@@ -1243,35 +1268,35 @@ body:has(.sidebar-right.is-open)::before {
   overflow-x: auto;
 }
 
-.thing-item {
+.things-item {
   flex: 0 0 120px;
   width: 120px;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 0.5rem;
   align-items: center;
   text-decoration: none;
 }
 
-.thing-meta {
+.things-meta {
   font-size: .75rem;
   color: #777;
 }
 
-.thing-image {
+.things-image {
   width: 90px;
   height: 90px;
   border-radius: 12px;
   background: var(--card-background);
 }
 
-.thing-image img {
+.things-image img {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
 
-.thing-title {
+.things-title {
   width: 100%;
   overflow: hidden;
   white-space: nowrap;
