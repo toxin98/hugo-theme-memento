@@ -1,84 +1,88 @@
 {{ define "main" }}
 
-  <div class="three-column-layout">
+  <div class="wrapper">
 
-    {{ $posts := .RegularPagesRecursive }}
+    <div class="three-column-layout">
 
-    <aside class="sidebar-left">
-      <div class="posts-category">
-        <ul>
-          <li>
-            <button
-              class="posts-category-title active"
-              data-target="all">
-              All #{{ $posts.Len }}
-            </button>
-          </li>
-          {{ range $posts.GroupByDate "2006" }}
-          <li>
-            <button
-              class="posts-category-title"
-              data-target="year-{{ .Key }}">
-              {{ .Key }} #{{ .Pages.Len }}
-            </button>
-          </li>
-          {{ end }}
-        </ul>
-      </div>
-    </aside>
+      {{ $posts := .RegularPagesRecursive }}
 
-    <div class="primary-area">
-      {{ range $posts.GroupByDate "2006" }}
-      <section class="posts-collection year-{{ .Key }}">
-
-        <div class="collection-header">
-          <span class="collection-title">{{ .Key }}</span>
+      <aside class="sidebar-left">
+        <div class="posts-category">
+          <ul>
+            <li>
+              <button
+                class="posts-category-title active"
+                data-target="all">
+                All #{{ $posts.Len }}
+              </button>
+            </li>
+            {{ range $posts.GroupByDate "2006" }}
+            <li>
+              <button
+                class="posts-category-title"
+                data-target="year-{{ .Key }}">
+                {{ .Key }} #{{ .Pages.Len }}
+              </button>
+            </li>
+            {{ end }}
+          </ul>
         </div>
+      </aside>
 
-        <ul class="posts-list">
-          {{ range .Pages }}
-          <li class="posts-item card">
-            <time class="posts-date" datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}" aria-label="{{ .Date.Format "2006-01-02" }}">
-              <span class="posts-date-month">{{ .Date.Format "Jan" }}</span>
-              <span class="posts-date-day">{{ .Date.Format "02" }}</span>
-            </time>
-            <div class="posts-body">
-              <div class="posts-main">
-                <div class="posts-featured">
-                  {{ partial "utils/get-featured.html" . }}
+      <div class="primary-area">
+        {{ range $posts.GroupByDate "2006" }}
+        <section class="posts-collection year-{{ .Key }}">
+
+          <div class="collection-header">
+            <span class="collection-title">{{ .Key }}</span>
+          </div>
+
+          <ul class="posts-list">
+            {{ range .Pages }}
+            <li class="posts-item card">
+              <time class="posts-date" datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}" aria-label="{{ .Date.Format "2006-01-02" }}">
+                <span class="posts-date-month">{{ .Date.Format "Jan" }}</span>
+                <span class="posts-date-day">{{ .Date.Format "02" }}</span>
+              </time>
+              <div class="posts-body">
+                <div class="posts-main">
+                  <div class="posts-featured">
+                    {{ partial "utils/get-featured.html" . }}
+                  </div>
+                  <div class="posts-pro">
+                    <a href="{{ .RelPermalink }}" class="posts-title">{{ .LinkTitle }}</a>
+                    <div class="posts-summary">{{ .Summary | plainify }}</div>
+                  </div>
                 </div>
-                <div class="posts-pro">
-                  <a href="{{ .RelPermalink }}" class="posts-title">{{ .LinkTitle }}</a>
-                  <div class="posts-summary">{{ .Summary | plainify }}</div>
+                {{ with .GetTerms "tags" }}
+                <div class="posts-tags" aria-label="tags">
+                  {{ range . }}
+                    <a href="{{ .RelPermalink }}" class="posts-tag">{{ .LinkTitle }}</a>
+                  {{ end }}
                 </div>
-              </div>
-              {{ with .GetTerms "tags" }}
-              <div class="posts-tags" aria-label="tags">
-                {{ range . }}
-                  <a href="{{ .RelPermalink }}" class="posts-tag">{{ .LinkTitle }}</a>
                 {{ end }}
               </div>
-              {{ end }}
-            </div>
-          </li>
-          {{ end }}
-        </ul>
+            </li>
+            {{ end }}
+          </ul>
 
-      </section>
-      {{ end }}
-    </div>
-
-    <aside class="sidebar-right">
-      <ul class="posts-tags-list">
-        {{ range .Site.Taxonomies.tags.ByCount }}
-        {{ if gt .Count 0 }}
-          <li>
-            <a href="{{ .Page.RelPermalink }}">{{ .Page.LinkTitle }}-{{ .Count }}</a>
-          </li>
+        </section>
         {{ end }}
-        {{end}}
-      </ul>
-    </aside>
+      </div>
+
+      <aside class="sidebar-right">
+        <ul class="posts-tags-list">
+          {{ range .Site.Taxonomies.tags.ByCount }}
+          {{ if gt .Count 0 }}
+            <li>
+              <a href="{{ .Page.RelPermalink }}">{{ .Page.LinkTitle }}-{{ .Count }}</a>
+            </li>
+          {{ end }}
+          {{end}}
+        </ul>
+      </aside>
+
+    </div>
 
   </div>
 

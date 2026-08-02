@@ -1,73 +1,77 @@
 {{ define "main" }}
 
-  <div class="three-column-layout">
+  <div class="wrapper">
 
-    <aside class="sidebar-left">
-    </aside>
+    <div class="three-column-layout">
 
-    <div class="primary-area">
+      <aside class="sidebar-left">
+      </aside>
 
-      {{ $pages := .RegularPages.ByDate.Reverse }}
-      {{ $paginator := .Paginate $pages }}
+      <div class="primary-area">
 
-      <div class="ephemera-topbar">
-        <img class="avatar avatar-small" src="{{ .Site.Params.profile.avatar | relURL }}" alt="avatar">
-        {{ $textNum := where $pages "Params.media.type" "empty" }}
-        {{ $imageNum := where $pages "Params.media.type" "image" }}
-        {{ $videoNum := where $pages "Params.media.type" "video" }}
-        {{ $audioNum := where $pages "Params.media.type" "audio" }}
-        <div class="ephemera-count">
-          <button>{{ partial "utils/icon.html" "message" }}{{ len $textNum }}</button>
-          <button>{{ partial "utils/icon.html" "photo" }}{{ len $imageNum }}</button>
-          <button>{{ partial "utils/icon.html" "video" }}{{ len $videoNum }}</button>
-          <button>{{ partial "utils/icon.html" "headphones" }}{{ len $audioNum }}</button>
-        </div>
-        <button class="view-toggle" data-view="stream">{{ partial "utils/icon.html" "carousel-vertical" }}</button>
-        <button class="view-toggle" data-view="grid">{{ partial "utils/icon.html" "layout-grid" }}</button>
-      </div>
+        {{ $pages := .RegularPages.ByDate.Reverse }}
+        {{ $paginator := .Paginate $pages }}
 
-      <div class="ephemera-feed stream-view" id="ephemeraFeed" data-infinite-scroll-list>
-        {{ range $paginator.Pages }}
-          {{ $page := .}}
-          <div class="ephemera-item" data-infinite-scroll-item>
-            <button class="ephemera-maximize">{{ partial "utils/icon.html" "maximize" }}</button>
-            <article class="ephemera-body">
-              <div class="ephemera-date">{{ partial "utils/date-format.html" (dict "date" $page.Date "layout" "2006/01/02 15:04 Monday") }}</div>
-              <div class="ephemera-content">{{ .Content }}</div>
-              {{ with $mediaType := $page.Params.media.type }}
-                {{ if not (in (slice "empty" "image" "video" "audio") $mediaType) }}
-                  {{ errorf "Unknown media type '%s' in %s" $mediaType $page.File.Path }}
-                {{ else }}
-                  <div class="ephemera-media">{{ partial (printf "ephemera-media/%s.html" $mediaType) $page }}</div>
-                {{ end }}
-              {{ else }}
-                {{ errorf "Missing media field in %s" $page.File.Path }}
-              {{ end }}
-            </article>
+        <div class="ephemera-topbar">
+          <img class="avatar avatar-small" src="{{ .Site.Params.profile.avatar | relURL }}" alt="avatar">
+          {{ $textNum := where $pages "Params.media.type" "empty" }}
+          {{ $imageNum := where $pages "Params.media.type" "image" }}
+          {{ $videoNum := where $pages "Params.media.type" "video" }}
+          {{ $audioNum := where $pages "Params.media.type" "audio" }}
+          <div class="ephemera-count">
+            <button>{{ partial "utils/icon.html" "message" }}{{ len $textNum }}</button>
+            <button>{{ partial "utils/icon.html" "photo" }}{{ len $imageNum }}</button>
+            <button>{{ partial "utils/icon.html" "video" }}{{ len $videoNum }}</button>
+            <button>{{ partial "utils/icon.html" "headphones" }}{{ len $audioNum }}</button>
           </div>
+          <button class="view-toggle" data-view="stream">{{ partial "utils/icon.html" "carousel-vertical" }}</button>
+          <button class="view-toggle" data-view="grid">{{ partial "utils/icon.html" "layout-grid" }}</button>
+        </div>
+
+        <div class="ephemera-feed stream-view" id="ephemeraFeed" data-infinite-scroll-list>
+          {{ range $paginator.Pages }}
+            {{ $page := .}}
+            <div class="ephemera-item" data-infinite-scroll-item>
+              <button class="ephemera-maximize">{{ partial "utils/icon.html" "maximize" }}</button>
+              <article class="ephemera-body">
+                <div class="ephemera-date">{{ partial "utils/date-format.html" (dict "date" $page.Date "layout" "2006/01/02 15:04 Monday") }}</div>
+                <div class="ephemera-content">{{ .Content }}</div>
+                {{ with $mediaType := $page.Params.media.type }}
+                  {{ if not (in (slice "empty" "image" "video" "audio") $mediaType) }}
+                    {{ errorf "Unknown media type '%s' in %s" $mediaType $page.File.Path }}
+                  {{ else }}
+                    <div class="ephemera-media">{{ partial (printf "ephemera-media/%s.html" $mediaType) $page }}</div>
+                  {{ end }}
+                {{ else }}
+                  {{ errorf "Missing media field in %s" $page.File.Path }}
+                {{ end }}
+              </article>
+            </div>
+          {{ end }}
+        </div>
+
+        {{ if $paginator.HasNext }}
+          {{ $nextURL := $paginator.Next.URL }}
+          <div class="ephemera-older-items" data-infinite-scroll-next data-next-url="{{ $nextURL }}" aria-hidden="true"></div>
+          <noscript>
+            <p class="ephemera-older-items-fallback">
+              <a href="{{ $nextURL }}">LOAD MORE</a>
+            </p>
+          </noscript>
         {{ end }}
+
+        <div id="ephemeraViewer" class="overlay hidden">
+          <div class="overlay-main"></div>
+          <div class="overlay-side"></div>
+          <button class="button-close">{{ partial "utils/icon.html" "x" }}</button>
+        </div>
+
       </div>
 
-      {{ if $paginator.HasNext }}
-        {{ $nextURL := $paginator.Next.URL }}
-        <div class="ephemera-older-items" data-infinite-scroll-next data-next-url="{{ $nextURL }}" aria-hidden="true"></div>
-        <noscript>
-          <p class="ephemera-older-items-fallback">
-            <a href="{{ $nextURL }}">LOAD MORE</a>
-          </p>
-        </noscript>
-      {{ end }}
-
-      <div id="ephemeraViewer" class="overlay hidden">
-        <div class="overlay-main"></div>
-        <div class="overlay-side"></div>
-        <button class="button-close">{{ partial "utils/icon.html" "x" }}</button>
-      </div>
+      <aside class="sidebar-right">
+      </aside>
 
     </div>
-
-    <aside class="sidebar-right">
-    </aside>
 
   </div>
 

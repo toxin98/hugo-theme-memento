@@ -1,70 +1,76 @@
 {{ define "main" }}
 
-  <div class="one-column-layout">
+  <div class="wrapper">
 
-    {{ $sections := slice }}
+    <div class="one-column-layout">
 
-    {{ range .Sections }}
-      {{ $weight := .Params.weight | default 1 }}
-      {{ $sections = $sections | append (dict "section" . "weight" $weight) }}
-    {{ end }}
+      {{ $sections := slice }}
 
-    <section class="things-collection">
+      {{ range .Sections }}
+        {{ $weight := .Params.weight | default 1 }}
+        {{ $sections = $sections | append (dict "section" . "weight" $weight) }}
+      {{ end }}
 
-      {{ range sort $sections "weight" }}
-      {{ $section := .section }}
+      <section class="things-collection">
 
-        <div class="collection-header">
-          <a class="collection-title" href="{{ $section.RelPermalink }}">{{ $section.Title }}</a>
-        </div>
+        {{ range sort $sections "weight" }}
 
-        {{ $pages := $section.Pages }}
-        {{ $pages = sort $pages ".Params.start" "desc" }}
+          <div class="collection-header">
+            <a class="collection-title" href="{{ .section.RelPermalink }}">{{ .section.Title }}</a>
+          </div>
 
-        <ul class="things-list">
+          {{ $pages := .section.Pages }}
+          {{ $pages = sort $pages ".Params.start" "desc" }}
 
-        {{ range $pages }}
+          <ul class="things-list">
 
-          {{ $page := . }}
+          {{ range $pages }}
 
-          <li>
-            <a class="things-item" href="{{ .RelPermalink }}" title="{{ .Title }}">
+            {{ $page := . }}
 
-              {{ with $page.Params.start }}
-              <div class="things-meta">
+            <li>
+              <a class="things-item" href="{{ .RelPermalink }}" title="{{ .Title }}">
 
-                {{ $start := time.AsTime (printf "%s-01" .) | time.Format "2006/01" }}
+                {{ with $page.Params.start }}
+                <div class="things-meta">
 
-                {{ $end := "present" }}
+                  {{ $start := time.AsTime (printf "%s-01" .) | time.Format "2006/01" }}
 
-                {{ with $page.Params.end }}
-                  {{ $end = (time.AsTime (printf "%s-01" .)).Format "2006/01" }}
+                  {{ $end := "present" }}
+
+                  {{ with $page.Params.end }}
+                    {{ $end = (time.AsTime (printf "%s-01" .)).Format "2006/01" }}
+                  {{ end }}
+
+                  {{ $start }} - {{ $end }}
+
+                </div>
                 {{ end }}
 
-                {{ $start }} - {{ $end }}
+                <div class="things-image">
+                  {{ with .Resources.GetMatch .Params.image }}
+                    {{ $img := .Resize "200x webp q80" }}
+                    <img src="{{ $img.RelPermalink }}" alt="{{ $.Title }}">
+                  {{ end }}
+                </div>
 
-              </div>
-              {{ end }}
+                <div class="things-title">
+                  {{ .LinkTitle }}
+                </div>
 
-              <div class="things-image">
-                {{ with .Resources.GetMatch .Params.image }}
-                  {{ $img := .Resize "200x webp q80" }}
-                  <img src="{{ $img.RelPermalink }}" alt="{{ $.Title }}">
-                {{ end }}
-              </div>
+              </a>
+            </li>
 
-              <div class="things-title">
-                {{ .LinkTitle }}
-              </div>
+          {{ end }}
 
-            </a>
-          </li>
+          </ul>
 
         {{ end }}
 
-        </ul>
-      {{ end }}
-    </section>
+      </section>
+
+    </div>
+
   </div>
 
 {{ end }}

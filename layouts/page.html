@@ -1,13 +1,17 @@
 {{ define "main" }}
 
-  <div class="primary-area">
+  <div class="wrapper">
 
-    <div class="content-container">
-      <article class="content">
-        <h1>{{ .Title }}</h1>
-        {{ .Content }}
-        {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
-      </article>
+    <div class="primary-area">
+
+      <div class="content-container">
+        <article class="content">
+          <h1>{{ .Title }}</h1>
+          {{ .Content }}
+          {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+        </article>
+      </div>
+
     </div>
 
   </div>

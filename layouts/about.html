@@ -1,21 +1,25 @@
 {{ define "main" }}
 
-  <div class="three-column-layout">
+  <div class="wrapper">
 
-    <aside class="sidebar-left">
-    </aside>
+    <div class="three-column-layout">
 
-    <div class="primary-area">
+      <aside class="sidebar-left">
+      </aside>
 
-      <article class="content">
-        <h1>{{ .Title }}</h1>
-        {{ .Content }}
-      </article>
+      <div class="primary-area">
+
+        <article class="content">
+          <h1>{{ .Title }}</h1>
+          {{ .Content }}
+        </article>
+
+      </div>
+
+      <aside class="sidebar-right">
+      </aside>
 
     </div>
-
-    <aside class="sidebar-right">
-    </aside>
 
   </div>
 

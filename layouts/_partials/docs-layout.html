@@ -1,83 +1,87 @@
-<div class="three-column-layout">
+<div class="wrapper">
 
-  <aside class="sidebar-left">
+  <div class="three-column-layout">
 
-    <nav class="docs-tree">
-      <ul>
-        <li>
-          <a href="{{ .FirstSection.RelPermalink }}"
-            class="{{ if eq .RelPermalink .FirstSection.RelPermalink }}active{{ end }}">
-            {{ partial "utils/icon.html" "notebook" }}{{ .FirstSection.Title }}
-          </a>
-          <div class="docs-buttons">
-            <button>{{ partial "utils/icon.html" "search" }}</button>
-            <button>{{ partial "utils/icon.html" "copy-plus" }}</button>
-            <button>{{ partial "utils/icon.html" "copy-minus" }}</button>
-          </div>
-          <ul>
-            {{ template "docs-recursive" (dict "context" .FirstSection "current" .Page ) }}
-          </ul>
-        </li>
-      </ul>
-    </nav>
+    <aside class="sidebar-left">
 
-    {{ define "docs-recursive" }}
-
-      {{ $context := .context }}
-      {{ $current := .current }}
-
-      {{ range $context.Sections.ByLinkTitle }}
-        <li>
-          <details {{ if .IsAncestor $current }}open{{ end }}>
-            <summary class="{{ if eq .RelPermalink $current.RelPermalink }}active{{ end }}">
-              <span class="docs-folder-closed">{{ partial "utils/icon.html" "folder" }}</span>
-              <span class="docs-folder-open">{{ partial "utils/icon.html" "folder-open" }}</span>
-              <span>{{ .LinkTitle }}</span>
-            </summary>
+      <nav class="docs-tree">
+        <ul>
+          <li>
+            <a href="{{ .FirstSection.RelPermalink }}"
+              class="{{ if eq .RelPermalink .FirstSection.RelPermalink }}active{{ end }}">
+              {{ partial "utils/icon.html" "notebook" }}{{ .FirstSection.Title }}
+            </a>
+            <div class="docs-buttons">
+              <button>{{ partial "utils/icon.html" "search" }}</button>
+              <button>{{ partial "utils/icon.html" "copy-plus" }}</button>
+              <button>{{ partial "utils/icon.html" "copy-minus" }}</button>
+            </div>
             <ul>
-              {{ template "docs-recursive" (dict "context" . "current" $current) }}
+              {{ template "docs-recursive" (dict "context" .FirstSection "current" .Page ) }}
             </ul>
-          </details>
-        </li>
+          </li>
+        </ul>
+      </nav>
+
+      {{ define "docs-recursive" }}
+
+        {{ $context := .context }}
+        {{ $current := .current }}
+
+        {{ range $context.Sections.ByLinkTitle }}
+          <li>
+            <details {{ if .IsAncestor $current }}open{{ end }}>
+              <summary class="{{ if eq .RelPermalink $current.RelPermalink }}active{{ end }}">
+                <span class="docs-folder-closed">{{ partial "utils/icon.html" "folder" }}</span>
+                <span class="docs-folder-open">{{ partial "utils/icon.html" "folder-open" }}</span>
+                <span>{{ .LinkTitle }}</span>
+              </summary>
+              <ul>
+                {{ template "docs-recursive" (dict "context" . "current" $current) }}
+              </ul>
+            </details>
+          </li>
+        {{ end }}
+        {{ range $context.RegularPages.ByLinkTitle }}
+          <li>
+            <a href="{{ .RelPermalink }}"
+              class="{{ if eq .RelPermalink $current.RelPermalink }}active{{ end }}">
+              {{ partial "utils/icon.html" "file" }}
+              <span>{{ .LinkTitle }}</span>
+            </a>
+          </li>
+        {{ end }}
+
       {{ end }}
-      {{ range $context.RegularPages.ByLinkTitle }}
-        <li>
-          <a href="{{ .RelPermalink }}"
-            class="{{ if eq .RelPermalink $current.RelPermalink }}active{{ end }}">
-            {{ partial "utils/icon.html" "file" }}
-            <span>{{ .LinkTitle }}</span>
-          </a>
-        </li>
-      {{ end }}
 
-    {{ end }}
-
-  </aside>
+    </aside>
 
 
-  <div class="primary-area">
+    <div class="primary-area">
 
-    <!-- {{ partial "breadcrumbs.html" . }} -->
+      <!-- {{ partial "breadcrumbs.html" . }} -->
 
-    <article class="content">
-      <div class="docs-date-container">
-        Last updated: {{ partial "utils/date-format.html" (dict "date" .Lastmod "layout" ":date_long") }}
-        Publish date: {{ partial "utils/date-format.html" (dict "date" .PublishDate "layout" ":date_long") }}
+      <article class="content">
+        <div class="docs-date-container">
+          Last updated: {{ partial "utils/date-format.html" (dict "date" .Lastmod "layout" ":date_long") }}
+          Publish date: {{ partial "utils/date-format.html" (dict "date" .PublishDate "layout" ":date_long") }}
+        </div>
+        <h1>{{ .Title }}</h1>
+        {{ .Content }}
+        {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+      </article>
+
+      <div class="sticky-bottom-bar">
+        <button class="toggle-left" data-target="sidebar-left">{{ partial "utils/icon.html" "layout-sidebar-left-expand" }}</button>
+        <button class="toggle-right" data-target="sidebar-right">{{ partial "utils/icon.html" "list-tree" }}</button>
       </div>
-      <h1>{{ .Title }}</h1>
-      {{ .Content }}
-      {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
-    </article>
 
-    <div class="sticky-bottom-bar">
-      <button class="toggle-left" data-target="sidebar-left">{{ partial "utils/icon.html" "layout-sidebar-left-expand" }}</button>
-      <button class="toggle-right" data-target="sidebar-right">{{ partial "utils/icon.html" "list-tree" }}</button>
     </div>
 
-  </div>
+    <aside class="sidebar-right">
+      {{ partial "toc.html" . }}
+    </aside>
 
-  <aside class="sidebar-right">
-    {{ partial "toc.html" . }}
-  </aside>
+  </div>
 
 </div>

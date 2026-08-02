@@ -1,47 +1,51 @@
 {{ define "main" }}
 
-  <div class="one-column-layout">
+  <div class="wrapper">
 
-    {{ $groups := dict }}
+    <div class="one-column-layout">
 
-    {{ range .Pages }}
+      {{ $groups := dict }}
 
-      {{ $categories := .Params.categories | default (slice "misc") }}
+      {{ range .Pages }}
 
-      {{ $existing := index $groups $categories | default (slice) }}
+        {{ $categories := .Params.categories | default (slice "misc") }}
 
-      {{ $groups = merge $groups (dict $categories ($existing | append .)) }}
+        {{ $existing := index $groups $categories | default (slice) }}
 
-    {{ end }}
+        {{ $groups = merge $groups (dict $categories ($existing | append .)) }}
 
-    {{ range $categories, $pages := $groups }}
-
-    <section class="projects-collection">
-
-      <div class="collection-header">
-        <span class="collection-title">{{ $categories }}</span>
-      </div>
-
-      <ul class="projects-list">
-      {{ range $pages }}
-        <li>
-          <div class="projects-item card">
-            <div class="projects-info">
-              <h2 class="projects-title">{{ .Title }}</h2>
-              <p class="projects-desc">{{ .Description | default "Description: -" }}</p>
-              <a href="{{ .RelPermalink }}" class="projects-link">View Project</a>
-            </div>
-            <div class="projects-featured">
-              {{ partial "utils/get-featured.html" . }}
-            </div>
-          </div>
-        </li>
       {{ end }}
-      </ul>
 
-    </section>
+      {{ range $categories, $pages := $groups }}
 
-    {{ end }}
+      <section class="projects-collection">
+
+        <div class="collection-header">
+          <span class="collection-title">{{ $categories }}</span>
+        </div>
+
+        <ul class="projects-list">
+        {{ range $pages }}
+          <li>
+            <div class="projects-item card">
+              <div class="projects-info">
+                <h2 class="projects-title">{{ .Title }}</h2>
+                <p class="projects-desc">{{ .Description | default "Description: -" }}</p>
+                <a href="{{ .RelPermalink }}" class="projects-link">View Project</a>
+              </div>
+              <div class="projects-featured">
+                {{ partial "utils/get-featured.html" . }}
+              </div>
+            </div>
+          </li>
+        {{ end }}
+        </ul>
+
+      </section>
+
+      {{ end }}
+
+    </div>
 
   </div>
 
