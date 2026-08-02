@@ -1268,8 +1268,8 @@ body:has(.sidebar-right.is-open)::before {
 }
 
 .things-item {
-  flex: 0 0 120px;
-  width: 120px;
+  flex: 0 0 140px;
+  width: 140px;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -1283,8 +1283,8 @@ body:has(.sidebar-right.is-open)::before {
 }
 
 .things-image {
-  width: 90px;
-  height: 90px;
+  width: 100px;
+  height: 100px;
   border-radius: 12px;
   background: var(--card-background);
 }
@@ -1296,6 +1296,7 @@ body:has(.sidebar-right.is-open)::before {
 }
 
 .things-title {
+  font-size: 0.875rem;
   width: 100%;
   overflow: hidden;
   white-space: nowrap;
