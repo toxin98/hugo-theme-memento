@@ -29,9 +29,9 @@
 
     <div class="primary-area">
       {{ range $posts.GroupByDate "2006" }}
-      <section class="posts-year-collection year-{{ .Key }}">
+      <section class="posts-collection year-{{ .Key }}">
 
-        <div class="posts-year-collection-header">
+        <div class="posts-collection-header">
           <span class="posts-date-year">{{ .Key }}</span>
         </div>
 

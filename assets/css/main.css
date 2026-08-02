@@ -199,15 +199,18 @@ header {
 footer {
   background-color: var(--footer-color);
   padding-block: 0.6rem;
-  font-size: 0.875rem;
 }
 
 .footer-copy,
 .footer-meta {
   display: flex;
   justify-content: center;
-  gap: .5rem;
   flex-wrap: wrap;
+}
+
+.separator {
+  width: 1.5rem;
+  text-align: center;
 }
 
 main {
@@ -224,6 +227,7 @@ main {
   width: var(--primary-width);
   display: flex;
   flex-direction: column;
+  margin: 0 auto;
 }
 
 .sticky-bottom-bar {
@@ -609,16 +613,16 @@ body:has(.sidebar-right.is-open)::before {
   font-weight: 600;
 }
 
-.posts-year-collection {
+.posts-collection {
   margin: 2rem 0;
   display: none;
 }
 
-.posts-year-collection.show {
+.posts-collection.show {
   display: block;
 }
 
-.posts-year-collection-header {
+.posts-collection-header {
   position: sticky;
   top: var(--header-height);
   z-index: 1;
@@ -627,7 +631,7 @@ body:has(.sidebar-right.is-open)::before {
   background-color: var(--main-color);
 }
 
-.posts-year-collection :target::before {
+.posts-collection :target::before {
   content: "";
   display: block;
   padding-top: 120px;
@@ -1235,36 +1239,38 @@ body:has(.sidebar-right.is-open)::before {
   border-left: 1px solid #ddd;
 }
 /* things */
-.things-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+.things-collection {
+
 }
 
-.things-link-title {
+.things-collection-title {
   text-decoration: none;
   color: #222;
   font-size: 1.5rem;
   font-weight: 700;
 }
 
-.things-link-title > .arrow {
-  font-size: 1.4em;
-  line-height: 0;
-  vertical-align: -0.06em;
-  margin-left: 0.2em;
+.things-collection-title::after {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-right: 3px solid currentColor;
+  border-top: 3px solid currentColor;
+  transform: rotate(45deg);
+  margin-left: 8px;
+  vertical-align: middle;
 }
 
-.things-link-title:hover{
+.things-collection-title:hover{
   color: var(--accent-color)
 }
 
-.things-scroll {
+.things-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: flex;
-  gap: 1rem;
   overflow-x: auto;
 }
 

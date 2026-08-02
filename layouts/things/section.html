@@ -9,16 +9,15 @@
       {{ $sections = $sections | append (dict "section" . "weight" $weight) }}
     {{ end }}
 
-    <ul class="things-list">
+    <section class="things-collection">
       {{ range sort $sections "weight" }}
       {{ $section := .section }}
-      <li>
-        <a class="things-link-title" href="{{ $section.RelPermalink }}">{{ $section.Title }}<span class="arrow">&rsaquo;</span></a>
-        {{ partial "things-cards.html" (dict "pages" $section.Pages) }}
-      </li>
+        <div class="things-collection-header">
+          <a class="things-collection-title" href="{{ $section.RelPermalink }}">{{ $section.Title }}</a>
+        </div>
+        {{ partial "things-collection.html" (dict "pages" $section.Pages) }}
       {{ end }}
-    </ul>
-
+    </section>
   </div>
 
 {{ end }}
