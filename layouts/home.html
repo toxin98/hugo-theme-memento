@@ -1,86 +1,82 @@
 {{ define "main" }}
 
-  <div class="two-column-layout">
+  <div class="one-column-layout">
 
-    <div class="primary-area">
+    <section class="profile">
 
-      <section class="profile">
+      <div class="profile-header">
 
-        <div class="profile-header">
+        <img class="avatar avatar-large" src="{{ .Site.Params.profile.avatar }}" alt="avatar">
 
-          <img class="avatar avatar-large" src="{{ .Site.Params.profile.avatar }}" alt="avatar">
+        <div class="profile-info">
 
-          <div class="profile-info">
+          <span class="profile-name">
+            {{ .Site.Params.profile.name }}
+          </span>
 
-            <span class="profile-name">
-              {{ .Site.Params.profile.name }}
-            </span>
+          <span class="profile-tagline">
+            {{ .Site.Params.profile.tagline }}
+          </span>
 
-            <span class="profile-tagline">
-              {{ .Site.Params.profile.tagline }}
-            </span>
-
-            <ul class="social">
-              {{ range site.Params.social }}
-                <li>
-                  <a href="{{ .url }}" target="_blank" aria-label="{{ .name }}" title="{{ .name }}">{{ partial "utils/icon.html" .icon }}</a>
-                </li>
-              {{ end }}
-            </ul>
-
-          </div>
+          <ul class="social">
+            {{ range site.Params.social }}
+              <li>
+                <a href="{{ .url }}" target="_blank" aria-label="{{ .name }}" title="{{ .name }}">{{ partial "utils/icon.html" .icon }}</a>
+              </li>
+            {{ end }}
+          </ul>
 
         </div>
 
-        <div class="profile-content">
-          {{ .Content }}
-        </div>
+      </div>
 
-      </section>
+      <div class="profile-content">
+        {{ .Content }}
+      </div>
 
-      <section class="recent-updates">
-        <h2>最近更新</h2>
-        <div class="cards-grid updates-card">
+    </section>
 
-          {{ $sections := slice "posts" "docs" "ephemera" }}
+    <section class="recent-updates">
+      <h2>最近更新</h2>
+      <div class="cards-grid updates-card">
 
-          {{ $updatePeriod := .Params.recentUpdateMonths | default 3 }}
-          {{ $updateSince := now.AddDate 0 (mul $updatePeriod -1) 0 }}
+        {{ $sections := slice "posts" "docs" "ephemera" }}
 
-          {{ range $sections }}
+        {{ $updatePeriod := .Params.recentUpdateMonths | default 3 }}
+        {{ $updateSince := now.AddDate 0 (mul $updatePeriod -1) 0 }}
 
-            {{ with $.Site.GetPage (printf "/%s" .) }}
+        {{ range $sections }}
 
-              <h3 class="update-tag">{{ .Title }}</h3>
+          {{ with $.Site.GetPage (printf "/%s" .) }}
 
-              {{ $recentPages := where .RegularPages "Lastmod" "ge" $updateSince }}
-              {{ $sortedPages := $recentPages.ByLastmod.Reverse | first 3 }}
+            <h3 class="update-tag">{{ .Title }}</h3>
 
-              {{ if $sortedPages }}
-                  {{ range $sortedPages }}
-                    <a href="{{ .RelPermalink }}" class="update-card">
-                      <div class="card-header">
-                        <time class="update-date" datetime="{{ .Lastmod.Format "2006-01-02" }}">
-                          {{ .Lastmod.Format "2006-01-02" }}
-                        </time>
-                      </div>
-                      <h3 class="card-title">{{ .Title }}</h3>
-                      <p class="card-summary">
-                        {{ .Summary | plainify | truncate 90 }}
-                      </p>
-                    </a>
-                  {{ end }}
-              {{ else }}
-                <p>最近{{ $updatePeriod }}个月没有更新</p>
-              {{ end }}
+            {{ $recentPages := where .RegularPages "Lastmod" "ge" $updateSince }}
+            {{ $sortedPages := $recentPages.ByLastmod.Reverse | first 3 }}
 
+            {{ if $sortedPages }}
+                {{ range $sortedPages }}
+                  <a href="{{ .RelPermalink }}" class="update-card">
+                    <div class="card-header">
+                      <time class="update-date" datetime="{{ .Lastmod.Format "2006-01-02" }}">
+                        {{ .Lastmod.Format "2006-01-02" }}
+                      </time>
+                    </div>
+                    <h3 class="card-title">{{ .Title }}</h3>
+                    <p class="card-summary">
+                      {{ .Summary | plainify | truncate 90 }}
+                    </p>
+                  </a>
+                {{ end }}
+            {{ else }}
+              <p>最近{{ $updatePeriod }}个月没有更新</p>
             {{ end }}
 
           {{ end }}
-        </div>
-      </section>
 
-    </div>
+        {{ end }}
+      </div>
+    </section>
 
     <aside class="secondary-area">
       {{ with .Params.status.music }}

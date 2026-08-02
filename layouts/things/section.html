@@ -10,12 +10,59 @@
     {{ end }}
 
     <section class="things-collection">
+
       {{ range sort $sections "weight" }}
       {{ $section := .section }}
-        <div class="things-collection-header">
-          <a class="things-collection-title" href="{{ $section.RelPermalink }}">{{ $section.Title }}</a>
+
+        <div class="collection-header">
+          <a class="collection-title" href="{{ $section.RelPermalink }}">{{ $section.Title }}</a>
         </div>
-        {{ partial "things-collection.html" (dict "pages" $section.Pages) }}
+
+        {{ $pages := $section.Pages }}
+        {{ $pages = sort $pages ".Params.start" "desc" }}
+
+        <ul class="things-list">
+
+        {{ range $pages }}
+
+          {{ $page := . }}
+
+          <li>
+            <a class="things-item" href="{{ .RelPermalink }}" title="{{ .Title }}">
+
+              {{ with $page.Params.start }}
+              <div class="things-meta">
+
+                {{ $start := time.AsTime (printf "%s-01" .) | time.Format "2006/01" }}
+
+                {{ $end := "present" }}
+
+                {{ with $page.Params.end }}
+                  {{ $end = (time.AsTime (printf "%s-01" .)).Format "2006/01" }}
+                {{ end }}
+
+                {{ $start }} - {{ $end }}
+
+              </div>
+              {{ end }}
+
+              <div class="things-image">
+                {{ with .Resources.GetMatch .Params.image }}
+                  {{ $img := .Resize "200x webp q80" }}
+                  <img src="{{ $img.RelPermalink }}" alt="{{ $.Title }}">
+                {{ end }}
+              </div>
+
+              <div class="things-title">
+                {{ .LinkTitle }}
+              </div>
+
+            </a>
+          </li>
+
+        {{ end }}
+
+        </ul>
       {{ end }}
     </section>
   </div>

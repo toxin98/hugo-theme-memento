@@ -31,8 +31,8 @@
       {{ range $posts.GroupByDate "2006" }}
       <section class="posts-collection year-{{ .Key }}">
 
-        <div class="posts-collection-header">
-          <span class="posts-date-year">{{ .Key }}</span>
+        <div class="collection-header">
+          <span class="collection-title">{{ .Key }}</span>
         </div>
 
         <ul class="posts-list">

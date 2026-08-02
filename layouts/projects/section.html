@@ -16,24 +16,28 @@
 
     {{ range $categories, $pages := $groups }}
 
-    <section>
+    <section class="projects-collection">
 
-      <h2>{{ $categories }}</h2>
+      <div class="collection-header">
+        <span class="collection-title">{{ $categories }}</span>
+      </div>
 
-      <div class="projects-grid">
-        {{ range $pages }}
-          <div class="project-item card">
-            <div class="project-info">
-              <h2 class="project-title">{{ .Title }}</h2>
-              <p class="project-desc">{{ .Description | default "Description: -" }}</p>
-              <a href="{{ .RelPermalink }}" class="project-link">View Project</a>
+      <ul class="projects-list">
+      {{ range $pages }}
+        <li>
+          <div class="projects-item card">
+            <div class="projects-info">
+              <h2 class="projects-title">{{ .Title }}</h2>
+              <p class="projects-desc">{{ .Description | default "Description: -" }}</p>
+              <a href="{{ .RelPermalink }}" class="projects-link">View Project</a>
             </div>
-            <div class="project-featured">
+            <div class="projects-featured">
               {{ partial "utils/get-featured.html" . }}
             </div>
           </div>
-        {{ end }}
-      </div>
+        </li>
+      {{ end }}
+      </ul>
 
     </section>
 
