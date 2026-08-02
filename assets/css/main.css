@@ -199,6 +199,7 @@ header {
 footer {
   background-color: var(--footer-color);
   padding-block: 0.6rem;
+  font-size: 0.875rem;
 }
 
 .footer-copy,
