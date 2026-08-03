@@ -9,12 +9,7 @@ window.addEventListener("DOMContentLoaded", () => {
   buttons.forEach(button => {
     button.addEventListener("click", () => {
       const layout = button.dataset.layout;
-
       feed.dataset.layout = layout;
-
-      buttons.forEach(btn => {
-        btn.classList.toggle("active", btn === button);
-      });
     });
   });
 

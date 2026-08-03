@@ -16,11 +16,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function showYear(year) {
     document.querySelectorAll(".posts-section").forEach(el => {
-        if (year === "all") {
-            el.classList.add("show");
-        } else {
-            el.classList.toggle("show", el.classList.contains(year));
-        }
+      if (year === "all") {
+        el.classList.add("show");
+      } else {
+        el.classList.toggle("show", el.classList.contains(year));
+      }
     });
   }
 
