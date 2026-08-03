@@ -1,7 +1,7 @@
 {{ define "main" }}
 
   {{ with .Resources.Get .Params.featured }}
-  <div class="page-featured">
+  <div class="page-hero">
     <img src="{{ .RelPermalink }}" alt="featured-img">
   </div>
   {{ end }}
