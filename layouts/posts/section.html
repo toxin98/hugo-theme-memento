@@ -31,7 +31,7 @@
 
       <div class="primary-area">
         {{ range $posts.GroupByDate "2006" }}
-        <section class="posts-section collection year-{{ .Key }}">
+        <div class="posts-section collection year-{{ .Key }}">
 
           <div class="collection-header">
             <span class="collection-title">{{ .Key }}</span>
@@ -66,7 +66,7 @@
             {{ end }}
           </ul>
 
-        </section>
+        </div>
         {{ end }}
       </div>
 
