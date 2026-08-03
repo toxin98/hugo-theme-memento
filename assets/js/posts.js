@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   showYear("all");
 
   function showYear(year) {
-    document.querySelectorAll(".posts-collection").forEach(el => {
+    document.querySelectorAll(".posts-section").forEach(el => {
         if (year === "all") {
             el.classList.add("show");
         } else {

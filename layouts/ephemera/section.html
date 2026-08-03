@@ -14,21 +14,25 @@
 
         <div class="ephemera-topbar">
           <img class="avatar avatar-small" src="{{ .Site.Params.profile.avatar | relURL }}" alt="avatar">
-          {{ $textNum := where $pages "Params.media.type" "empty" }}
-          {{ $imageNum := where $pages "Params.media.type" "image" }}
-          {{ $videoNum := where $pages "Params.media.type" "video" }}
-          {{ $audioNum := where $pages "Params.media.type" "audio" }}
+          {{ $textNum := where $pages "Params.media.type" "empty" | len}}
+          {{ $imageNum := where $pages "Params.media.type" "image" | len }}
+          {{ $videoNum := where $pages "Params.media.type" "video" | len }}
+          {{ $audioNum := where $pages "Params.media.type" "audio" | len }}
           <div class="ephemera-count">
-            <button>{{ partial "utils/icon.html" "message" }}{{ len $textNum }}</button>
-            <button>{{ partial "utils/icon.html" "photo" }}{{ len $imageNum }}</button>
-            <button>{{ partial "utils/icon.html" "video" }}{{ len $videoNum }}</button>
-            <button>{{ partial "utils/icon.html" "headphones" }}{{ len $audioNum }}</button>
+            <button>{{ partial "utils/icon.html" "message" }}{{ $textNum }}</button>
+            <button>{{ partial "utils/icon.html" "photo" }}{{ $imageNum }}</button>
+            <button>{{ partial "utils/icon.html" "video" }}{{ $videoNum }}</button>
+            <button>{{ partial "utils/icon.html" "headphones" }}{{ $audioNum }}</button>
           </div>
-          <button class="view-toggle" data-view="stream">{{ partial "utils/icon.html" "carousel-vertical" }}</button>
-          <button class="view-toggle" data-view="grid">{{ partial "utils/icon.html" "layout-grid" }}</button>
+          <div class="ephemera-control">
+            <div class="layout-toggle">
+              <button class="layout-btn" data-layout="stream">{{ partial "utils/icon.html" "carousel-vertical" }}</button>
+              <button class="layout-btn" data-layout="grid">{{ partial "utils/icon.html" "layout-grid" }}</button>
+            </div>
+          </div>
         </div>
 
-        <div class="ephemera-feed stream-view" id="ephemeraFeed" data-infinite-scroll-list>
+        <div class="ephemera-feed" id="ephemeraFeed" data-layout="stream" data-infinite-scroll-list>
           {{ range $paginator.Pages }}
             {{ $page := .}}
             <div class="ephemera-item" data-infinite-scroll-item>

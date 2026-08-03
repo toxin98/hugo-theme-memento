@@ -1,34 +1,22 @@
 console.log("ephemera.js loaded");
 
 window.addEventListener("DOMContentLoaded", () => {
-  /**
-   * 切换视图
-   */
+
   const feed = document.getElementById("ephemeraFeed");
 
-  if (feed) {
+  const buttons = document.querySelectorAll(".layout-btn");
 
-    document
-      .querySelectorAll(".view-toggle")
-      .forEach(button => {
+  buttons.forEach(button => {
+    button.addEventListener("click", () => {
+      const layout = button.dataset.layout;
 
-        button.addEventListener("click", () => {
+      feed.dataset.layout = layout;
 
-          feed.classList.toggle(
-            "grid-view",
-            button.dataset.view === "grid"
-          );
-
-          feed.classList.toggle(
-            "stream-view",
-            button.dataset.view === "stream"
-          );
-
-        });
-
+      buttons.forEach(btn => {
+        btn.classList.toggle("active", btn === button);
       });
-
-  }
+    });
+  });
 
   document.addEventListener("click", (e) => {
 

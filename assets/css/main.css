@@ -340,6 +340,17 @@ body:has(.sidebar-right.is-open)::before {
   border-bottom: 0.1rem solid #000;
 }
 /* universal */
+.collection {
+  margin-bottom: 3rem;
+}
+
+.collection-header {
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  background-color: var(--main-color);
+}
+
 .collection-title {
   text-decoration: none;
   color: #222;
@@ -624,28 +635,24 @@ body:has(.sidebar-right.is-open)::before {
   font-weight: 600;
 }
 
-.posts-collection {
+.posts-section {
   display: none;
 }
 
-.posts-collection.show {
+.posts-section.show {
   display: block;
 }
 
-.posts-collection :target::before {
+.posts-section :target::before {
   content: "";
   display: block;
   padding-top: var(--header-height);
   margin-top: calc( 0 - var(--header-height));
 }
 
-.posts-collection .collection-header {
+.posts-section .collection-header {
   position: sticky;
   top: var(--header-height);
-  z-index: 1;
-  justify-content: space-between;
-  align-items: baseline;
-  background-color: var(--main-color);
 }
 
 .posts-list {
@@ -946,18 +953,30 @@ body:has(.sidebar-right.is-open)::before {
 .ephemera-topbar {
   position: sticky;
   top: var(--header-height);
-  z-index: 1;
-  height: 64px;
-  background: var(--main-color);
+  height: 80px;
   display: flex;
   align-items: center;
+  gap: 10px;
+  background: var(--main-color);
+  z-index: 1;
 }
 
-.ephemera-topbar :nth-last-child(2) {
-  margin-left: auto;
+.ephemera-topbar :nth-child(2) {
+  margin-right: auto;
 }
 
 .ephemera-count {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.ephemera-count button {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.ephemera-control .layout-toggle {
   display: flex;
   gap: 0.5rem;
 }
@@ -970,7 +989,7 @@ body:has(.sidebar-right.is-open)::before {
   position: relative;
 }
 
-.ephemera-feed.stream-view .ephemera-item {
+.ephemera-feed[data-layout="stream"] .ephemera-item {
   border-bottom: 1px solid #ddd;
   padding: 12px;
 }
@@ -992,7 +1011,7 @@ body:has(.sidebar-right.is-open)::before {
 }
 
 .ephemera-maximize:hover {
-  background: rgba(0, 0, 0, 0.08);
+  background-color: rgba(0, 0, 0, 0.08);
 }
 
 .ephemera-body {
@@ -1017,27 +1036,27 @@ body:has(.sidebar-right.is-open)::before {
   margin: 0;
 }
 
-.ephemera-feed.grid-view {
+.ephemera-feed[data-layout="grid"] {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   gap: 4px;
 }
 
-.ephemera-feed.grid-view .ephemera-date {
+.ephemera-feed[data-layout="grid"] .ephemera-date {
   display: none;
 }
 
-.ephemera-feed.grid-view
+.ephemera-feed[data-layout="grid"]
 .ephemera-item:has(.ephemera-media:not(:empty))
 .ephemera-content {
   display: none;
 }
 
-.ephemera-feed.stream-view .sudoku {
+.ephemera-feed[data-layout="stream"] .sudoku {
   width: 142px;
 }
 
-.ephemera-feed.grid-view .sudoku {
+.ephemera-feed[data-layout="grid"] .sudoku {
   width: 100%;
 }
 
@@ -1246,7 +1265,7 @@ body:has(.sidebar-right.is-open)::before {
   object-position: center;
 }
 /* things */
-.things-collection .collection-title::after{
+.things-section .collection-title::after{
   content: "";
   display: inline-block;
   width: 8px;
@@ -1257,7 +1276,7 @@ body:has(.sidebar-right.is-open)::before {
   margin-left: 8px;
 }
 
-.things-collection .collection-title:hover{
+.things-section .collection-title:hover{
   color: var(--accent-color)
 }
 
