@@ -11,9 +11,9 @@
         {{ $sections = $sections | append (dict "section" . "weight" $weight) }}
       {{ end }}
 
-      <section class="things-collection">
+      {{ range sort $sections "weight" }}
 
-        {{ range sort $sections "weight" }}
+      <section class="things-collection">
 
           <div class="collection-header">
             <a class="collection-title" href="{{ .section.RelPermalink }}">{{ .section.Title }}</a>
@@ -65,9 +65,9 @@
 
           </ul>
 
-        {{ end }}
+         </section>
 
-      </section>
+      {{ end }}
 
     </div>
 
