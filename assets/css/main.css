@@ -29,9 +29,9 @@ a {
 
 
 :root {
-  --header-top-height: 60px;
+  --header-top-height: 52px;
   --header-nav-height: 42px;
-  --header-height: 98px;
+  --header-height: 94px;
   --main-padding-top: 24px;
   --main-padding-bottom: 48px;
   --column-layout-gap: 16px;
@@ -103,11 +103,6 @@ header {
   gap: 2rem
 }
 
-.header-top a {
-  text-decoration: none;
-  color: #000;
-}
-
 .header-top-left,
 .header-top-right {
   flex: 1;
@@ -119,18 +114,21 @@ header {
 }
 
 .site-brand {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  text-decoration: none;
+  color: #000;
   gap: 0.5rem;
 }
 
 .site-logo {
-  width: 1.6rem;
+  width: 24px;
 }
 
 .site-title {
-  font-size: 1.6rem;
-  font-weight: bold;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1;
 }
 
 .header-nav {
