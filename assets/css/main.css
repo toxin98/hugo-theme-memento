@@ -29,7 +29,7 @@ a {
 
 
 :root {
-  --header-top-height: 56px;
+  --header-top-height: 60px;
   --header-nav-height: 42px;
   --header-height: 98px;
   --main-padding-top: 24px;
@@ -1265,9 +1265,10 @@ html.overlay-open {
   object-position: center;
 }
 /* things */
-.things-section .collection-header svg {
+.things-section .collection-title svg {
   vertical-align: middle;
 }
+
 .things-section .collection-title:hover{
   color: var(--accent-color)
 }
