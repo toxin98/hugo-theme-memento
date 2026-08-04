@@ -194,12 +194,8 @@ footer {
 .footer-meta {
   display: flex;
   justify-content: center;
+  gap: 0.5rem;
   flex-wrap: wrap;
-}
-
-.separator {
-  width: 1.5rem;
-  text-align: center;
 }
 
 main {
