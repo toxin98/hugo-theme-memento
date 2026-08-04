@@ -16,7 +16,9 @@
         <div class="things-section collection">
 
           <div class="collection-header">
-            <a class="collection-title" href="{{ .section.RelPermalink }}">{{ .section.Title }}</a>
+            <a class="collection-title" href="{{ .section.RelPermalink }}">
+              {{ .section.Title }}{{ partial "utils/icon.html" "chevron-right" }}
+            </a>
           </div>
 
           {{ $pages := .section.Pages }}

@@ -354,7 +354,7 @@ body:has(.sidebar-right.is-open)::before {
   text-decoration: none;
   color: #222;
   font-size: 1.5rem;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .page-hero {
@@ -1265,17 +1265,9 @@ html.overlay-open {
   object-position: center;
 }
 /* things */
-.things-section .collection-title::after{
-  content: "";
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  border-right: 4px solid currentColor;
-  border-top: 4px solid currentColor;
-  transform: rotate(45deg) translateY(-3px);
-  margin-left: 8px;
+.things-section .collection-header svg {
+  vertical-align: middle;
 }
-
 .things-section .collection-title:hover{
   color: var(--accent-color)
 }
