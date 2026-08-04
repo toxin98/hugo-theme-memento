@@ -982,7 +982,7 @@ body:has(.sidebar-right.is-open)::before {
   position: relative;
 }
 
-.ephemera-feed[data-layout="stream"] .ephemera-item {
+.ephemera-feed[data-layout="list"] .ephemera-item {
   border-bottom: 1px solid #ddd;
   padding: 12px;
 }
@@ -1045,7 +1045,7 @@ body:has(.sidebar-right.is-open)::before {
   display: none;
 }
 
-.ephemera-feed[data-layout="stream"] .sudoku {
+.ephemera-feed[data-layout="list"] .sudoku {
   width: 142px;
 }
 
