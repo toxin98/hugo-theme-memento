@@ -40,7 +40,7 @@ a {
   --header-color: #fff;
   --main-color: #fcfcfc;
   --footer-color: #eee;
-  --accent-color: #0b63b8;
+  --accent-color: #38adf3;
 }
 
 * {
@@ -234,6 +234,7 @@ main {
 }
 
 .primary-area,
+.secondary-area,
 .sidebar-left,
 .sidebar-right {
   display: flex;
@@ -247,19 +248,30 @@ main {
   margin-inline: auto;
 }
 
-.sticky-bottom-bar {
-  position: sticky;
-  bottom: 60px;
+.sidebar-toggle {
+  position: fixed;
+  bottom: calc(var(--edge-gap) + 10px);
+  left: calc(var(--edge-gap) + 10px);
+  right: calc(var(--edge-gap) + 10px);
   display: flex;
 }
 
 .toggle-left,
 .toggle-right {
-  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-color);
+  color: #fff;
+  box-shadow: 0 4px 14px rgb(0 0 0 / .15);
+  transition: transform .2s ease, opacity .2s ease, box-shadow .2s ease;
   visibility: hidden;
 }
 
 .toggle-left { margin-right: auto; }
+
 .toggle-right { margin-left: auto; }
 
 body::before {
@@ -959,7 +971,6 @@ body:has(.sidebar-right.is-open)::before {
 }
 
 .ephemera-count button {
-  display: flex;
   align-items: center;
   gap: 2px;
 }

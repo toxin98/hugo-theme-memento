@@ -27,17 +27,17 @@
           {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
         </article>
 
-      <div class="sticky-bottom-bar">
-        <button class="toggle-left" data-target="sidebar-left">{{ partial "utils/icon.html" "layout-sidebar-left-expand" }}</button>
-        <button class="toggle-right"data-target="sidebar-right">{{ partial "utils/icon.html" "list-tree" }}</button>
-      </div>
-
       </div>
 
       <aside class="sidebar-right">
         {{ partial "toc.html" . }}
       </aside>
 
+    </div>
+
+    <div class="sidebar-toggle">
+      <button class="toggle-left" data-target="sidebar-left">{{ partial "utils/icon.html" "layout-sidebar-left-expand" }}</button>
+      <button class="toggle-right"data-target="sidebar-right">{{ partial "utils/icon.html" "list-tree" }}</button>
     </div>
 
   </div>
