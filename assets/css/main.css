@@ -1087,10 +1087,17 @@ swiper-slide img {
   z-index: 1000;
   display: flex;
   flex-direction: row;
+  transform: translateY(0);
+  opacity: 1;
+  transition: transform .25s ease, opacity .25s ease;
 }
 
 .viewer.hidden {
   display: none;
+}
+
+.viewer.is-dragging {
+  transition: none;
 }
 
 .viewer-main {
@@ -1380,6 +1387,10 @@ html.viewer-show {
 
   .viewer {
     flex-direction: column;
+  }
+
+  .viewer .button-close {
+    display: none;
   }
 
 }
