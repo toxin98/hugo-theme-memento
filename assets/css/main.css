@@ -194,6 +194,8 @@ footer {
 .footer-meta {
   display: flex;
   justify-content: center;
+  column-gap: 0.5rem;
+  row-gap: 0;
   flex-wrap: wrap;
 }
 
