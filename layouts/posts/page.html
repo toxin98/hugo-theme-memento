@@ -10,7 +10,7 @@
 
     <div class="three-column-layout">
 
-      <aside class="sidebar-left">
+      <aside class="sidebar" data-position="left">
         <h2><a href="{{ .FirstSection.RelPermalink }}">All posts</a></h2>
         <h3><a href="{{ .CurrentSection.RelPermalink }}"><span class="posts-date-year">{{ .Date.Format "2006" }}</span></h3></a>
         <time class="posts-date narrow" datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}" aria-label="{{ .Date.Format "2006-01-02" }}">
@@ -29,7 +29,7 @@
 
       </div>
 
-      <aside class="sidebar-right">
+      <aside class="sidebar" data-position="right">
         {{ partial "toc.html" . }}
       </aside>
 
@@ -37,7 +37,7 @@
 
     <div class="sidebar-toggle">
       <button class="toggle-left" data-target="sidebar-left">{{ partial "utils/icon.html" "layout-sidebar-left-expand" }}</button>
-      <button class="toggle-right"data-target="sidebar-right">{{ partial "utils/icon.html" "list-tree" }}</button>
+      <button class="toggle-right" data-target="sidebar-right">{{ partial "utils/icon.html" "list-tree" }}</button>
     </div>
 
     <div class="sidebar-overlay"></div>

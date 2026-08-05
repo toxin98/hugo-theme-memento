@@ -2,8 +2,8 @@ console.log("sidebar.js loaded");
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  const buttons = document.querySelectorAll('.toggle-left, .toggle-right');
-  const sidebars = document.querySelectorAll('.sidebar-left, .sidebar-right');
+  const buttons = document.querySelectorAll('.sidebar-toggle');
+  const sidebars = document.querySelectorAll('.sidebar');
   const overlay = document.querySelector(".sidebar-overlay");
 
   function closeSidebar(){
@@ -24,26 +24,16 @@ document.addEventListener('DOMContentLoaded', () => {
     lockScroll();
   }
 
-  let scrollPosition = 0;
-
-
   function lockScroll(){
 
-    scrollPosition = window.scrollY;
+    document.body.style.overflow = "hidden";
 
-    document.body.style.position = "fixed";
-    document.body.style.top = `-${scrollPosition}px`;
-    document.body.style.width = "100%";
   }
-
 
   function unlockScroll(){
 
-    document.body.style.position = "";
-    document.body.style.top = "";
-    document.body.style.width = "";
+    document.body.style.overflow = "";
 
-    window.scrollTo(0, scrollPosition);
   }
 
   buttons.forEach(button=>{
@@ -52,14 +42,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const target = button.dataset.target;
 
-      const sidebar = document.querySelector( `.` + target);
-
+      const sidebar = document.querySelector(`.sidebar[data-position="${target}"]`);
 
       const isOpen = sidebar.classList.contains("open");
 
-
       closeSidebar();
-
 
       if(!isOpen){
         openSidebar(sidebar);
@@ -71,24 +58,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   overlay.addEventListener("click",closeSidebar);
 
-
   // ESC关闭
   document.addEventListener("keydown",(e)=>{
     if(e.key==="Escape"){
       closeSidebar();
     }
   });
-
-  // document.querySelectorAll('.sidebar-left, .sidebar-right').forEach(sidebar => {
-  //   sidebar.addEventListener('click', e => {
-  //     e.stopPropagation();
-  //   });
-  // });
-
-  // document.addEventListener('click', () => {
-  //   document.querySelectorAll('.sidebar-left, .sidebar-right').forEach(sidebar => {
-  //     sidebar.classList.remove('is-open');
-  //   });
-  // });
 
 });

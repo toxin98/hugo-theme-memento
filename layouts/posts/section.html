@@ -6,7 +6,7 @@
 
       {{ $posts := .RegularPagesRecursive }}
 
-      <aside class="sidebar-left">
+      <aside class="sidebar" data-position="left">
         <div class="posts-category">
           <ul>
             <li>
@@ -70,7 +70,7 @@
         {{ end }}
       </div>
 
-      <aside class="sidebar-right">
+      <aside class="sidebar" data-position="right">
         <ul class="posts-tags-list">
           {{ range .Site.Taxonomies.tags.ByCount }}
           {{ if gt .Count 0 }}

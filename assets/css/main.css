@@ -34,7 +34,7 @@ a {
   --header-height: 94px;
   --main-padding-top: 24px;
   --main-padding-bottom: 48px;
-  --column-layout-gap: 16px;
+  --column-layout-gap: 20px;
   --sidebar-width: 270px;
   --edge-gap: 16px;
   --header-color: #fff;
@@ -118,7 +118,7 @@ header {
 }
 
 .site-logo {
-  width: 24px;
+  height: 24px;
 }
 
 .site-title {
@@ -194,7 +194,6 @@ footer {
 .footer-meta {
   display: flex;
   justify-content: center;
-  gap: 0.5rem;
   flex-wrap: wrap;
 }
 
@@ -219,8 +218,7 @@ main {
 
 .primary-area,
 .secondary-area,
-.sidebar-left,
-.sidebar-right {
+.sidebar {
   display: flex;
   flex-direction: column;
   min-width: 0;
@@ -232,7 +230,7 @@ main {
   margin-inline: auto;
 }
 
-.sidebar-toggle {
+.fixed-bottom-bar {
   position: fixed;
   bottom: calc(var(--edge-gap) + 10px);
   left: calc(var(--edge-gap) + 10px);
@@ -240,8 +238,7 @@ main {
   display: flex;
 }
 
-.toggle-left,
-.toggle-right {
+.sidebar-toggle {
   width: 40px;
   height: 40px;
   border-radius: 12px;
@@ -254,11 +251,11 @@ main {
   visibility: hidden;
 }
 
-.toggle-left {
+.sidebar-toggle[data-target="left"] {
   margin-right: auto;
 }
 
-.toggle-right {
+.sidebar-toggle[data-target="right"] {
   margin-left: auto;
 }
 
@@ -269,7 +266,7 @@ main {
   opacity: 0;
   pointer-events: none;
   transition: opacity .3s ease;
-  z-index: 90;
+  z-index: 1;
 }
 
 .sidebar-overlay.active {
@@ -1297,23 +1294,24 @@ html.overlay-open {
     grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
   }
 
-  .sidebar-right {
+  .sidebar[data-position="right"] {
     position: fixed;
     right: 0;
     top: var(--header-height);
     bottom: 0;
     width: var(--sidebar-width);
     background: #fff;
+    padding: 0 var(--edge-gap);
     transform: translateX(100%);
     transition: transform .3s ease;
-    z-index: 100;
+    z-index: 2;
   }
 
-  .sidebar-right.open {
+  .sidebar[data-position="right"].open {
     transform: translateX(0);
   }
 
-  .toggle-right {
+  .sidebar-toggle[data-target="right"] {
     visibility: visible;
   }
 
@@ -1329,23 +1327,24 @@ html.overlay-open {
     grid-template-columns: 1fr;
   }
 
-  .sidebar-left {
+  .sidebar[data-position="left"] {
     position: fixed;
     left: 0;
     top: var(--header-height);
     bottom: 0;
     width: var(--sidebar-width);
     background: #fff;
+    padding: 0 var(--edge-gap);
     transform: translateX(-100%);
     transition: transform .3s ease;
-    z-index: 100;
+    z-index: 2;
   }
 
-  .sidebar-left.open {
+  .sidebar[data-position="left"].open {
     transform: translateX(0);
   }
 
-  .toggle-left {
+  .sidebar-toggle[data-target="left"] {
     visibility: visible;
   }
 
