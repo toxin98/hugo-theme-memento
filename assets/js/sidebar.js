@@ -2,8 +2,8 @@ console.log("sidebar.js loaded");
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  const buttons = document.querySelectorAll('.sidebar-toggle');
-  const sidebars = document.querySelectorAll('.sidebar');
+  const buttons = document.querySelectorAll(".sidebar-toggle");
+  const sidebars = document.querySelectorAll(".sidebar");
   const overlay = document.querySelector(".sidebar-overlay");
 
   function closeSidebar(){

@@ -32,12 +32,8 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 
   const viewer = document.getElementById("ephemeraViewer");
-
-  const viewerMain =
-    viewer.querySelector(".overlay-main");
-
-  const viewerSide =
-    viewer.querySelector(".overlay-side");
+  const viewerMain = viewer.querySelector(".viewer-main");
+  const viewerSide = viewer.querySelector(".viewer-side");
 
   function openViewer(item) {
 
@@ -62,21 +58,16 @@ window.addEventListener("DOMContentLoaded", () => {
 
     viewer.classList.remove("hidden");
 
-    document.documentElement.classList.add("overlay-open");
+    document.documentElement.classList.add("viewer-show");
 
   }
 
   function closeViewer() {
-
     viewer.classList.add("hidden");
-
-    document.documentElement.classList.remove("overlay-open");
-
+    document.documentElement.classList.remove("viewer-show");
   }
 
-  document
-    .querySelector(".button-close")
-    ?.addEventListener("click", closeViewer);
+  document.querySelector(".button-close")?.addEventListener("click", closeViewer);
 
   function buildImageGallery(sudoku) {
 
@@ -89,54 +80,50 @@ window.addEventListener("DOMContentLoaded", () => {
     let index = 0;
 
     viewerMain.innerHTML = `
-      <div class="ephemera-image-gallery">
+      <div class="ephemera-media">
 
-        <img
-          class="ephemera-image-gallery-image"
-        >
+        <div class="ephemera-image-gallery">
 
-        <div class="ephemera-image-gallery-controls">
-
-          <button
-            type="button"
-            data-gallery-prev
+          <img
+            class="ephemera-image-gallery-image"
           >
-            ‹
-          </button>
 
-          <span
-            class="ephemera-image-gallery-status"
-          ></span>
+          <div class="ephemera-image-gallery-controls">
 
-          <button
-            type="button"
-            data-gallery-next
-          >
-            ›
-          </button>
+            <button
+              type="button"
+              data-gallery-prev
+            >
+              ‹
+            </button>
+
+            <span
+              class="ephemera-image-gallery-status"
+            ></span>
+
+            <button
+              type="button"
+              data-gallery-next
+            >
+              ›
+            </button>
+
+          </div>
 
         </div>
 
       </div>
     `;
 
-    const image =
-      viewerMain.querySelector(
-        ".ephemera-image-gallery-image"
-      );
+    const image = viewerMain.querySelector(".ephemera-image-gallery-image");
 
-    const status =
-      viewerMain.querySelector(
-        ".ephemera-image-gallery-status"
-      );
+    const status = viewerMain.querySelector(".ephemera-image-gallery-status");
 
     function render() {
 
-      image.src =
-        images[index].dataset.viewerSrc;
+      image.src = images[index].dataset.viewerSrc;
 
-      status.textContent =
-        `${index + 1} / ${images.length}`;
+      status.textContent = `${index + 1} / ${images.length}`;
 
     }
 

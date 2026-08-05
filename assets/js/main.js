@@ -5,8 +5,8 @@ import "./ephemera.js";
 import "./infinite-scroll.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  const hamburger = document.querySelector("#hamburger");
-  const siteNav = document.querySelector("#siteNav");
+  const hamburger = document.getElementById("hamburger");
+  const siteNav = document.getElementById("siteNav");
 
   hamburger.addEventListener("click", () => {
     siteNav.classList.toggle("show");
