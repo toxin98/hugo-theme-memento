@@ -1018,7 +1018,7 @@ swiper-slide img {
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
-  overflow: hidden;
+  overflow-y: hidden;
 }
 
 .ephemera-content p {
@@ -1125,13 +1125,13 @@ swiper-slide img {
 }
 
 .viewer-main {
-  flex: 6;
+  flex: 7;
   min-width: 0;
   min-height: 0;
 }
 
 .viewer-side {
-  flex: 4;
+  flex: 3;
   min-width: 0;
   min-height: 0;
   padding: 1rem;
@@ -1149,7 +1149,7 @@ swiper-slide img {
 }
 
 .viewer-side .ephemera-content {
-  height: calc(100vh - 80px);
+  height: 100%;
   overflow-y: auto;
 }
 
