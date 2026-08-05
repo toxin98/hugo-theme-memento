@@ -1,5 +1,3 @@
-console.log("sidebar.js loaded");
-
 document.addEventListener('DOMContentLoaded', () => {
 
   const buttons = document.querySelectorAll(".sidebar-toggle");
@@ -56,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   });
 
-  overlay.addEventListener("click",closeSidebar);
+  overlay?.addEventListener("click", closeSidebar);
 
   // ESC关闭
   document.addEventListener("keydown",(e)=>{

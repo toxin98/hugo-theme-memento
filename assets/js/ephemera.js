@@ -1,6 +1,4 @@
-console.log("ephemera.js loaded");
-
-window.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
 
   const feed = document.getElementById("ephemeraFeed");
 
@@ -32,8 +30,8 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 
   const viewer = document.getElementById("ephemeraViewer");
-  const viewerMain = viewer.querySelector(".viewer-main");
-  const viewerSide = viewer.querySelector(".viewer-side");
+  const viewerMain = viewer?.querySelector(".viewer-main");
+  const viewerSide = viewer?.querySelector(".viewer-side");
 
   function openViewer(item) {
 
