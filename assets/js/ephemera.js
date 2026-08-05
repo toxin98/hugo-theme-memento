@@ -37,19 +37,13 @@ window.addEventListener("DOMContentLoaded", () => {
 
   function openViewer(item) {
 
-    const sudoku = item.querySelector(".sudoku");
+    const mediaDiv = document.createElement("div");
+    mediaDiv.className = "ephemera-media";
+    mediaDiv.append(
+      createSwiper(item.querySelector(".ephemera-media"))
+    );
 
-    if (sudoku) {
-
-      buildImageGallery(sudoku);
-
-    } else {
-
-      viewerMain.replaceChildren(
-        item.querySelector(".ephemera-media").cloneNode(true)
-      );
-
-    }
+    viewerMain.replaceChildren(mediaDiv);
 
     viewerSide.replaceChildren(
       item.querySelector(".ephemera-date").cloneNode(true),
@@ -69,135 +63,37 @@ window.addEventListener("DOMContentLoaded", () => {
 
   document.querySelector(".button-close")?.addEventListener("click", closeViewer);
 
-  function buildImageGallery(sudoku) {
+  function createSwiper(itemMedia) {
 
-    const images = [
-      ...sudoku.querySelectorAll(
-        "img[data-viewer-src]"
-      )
-    ];
+    const swiper = document.createElement(
+      "swiper-container"
+    );
 
-    let index = 0;
+    swiper.setAttribute("pagination", "true");
+    swiper.setAttribute("pagination-type", "fraction");
+    swiper.setAttribute("navigation", "true")
 
-    viewerMain.innerHTML = `
-      <div class="ephemera-media">
 
-        <div class="ephemera-image-gallery">
+    itemMedia
+      .querySelectorAll("img[data-viewer-src]")
+      .forEach(img => {
 
-          <img
-            class="ephemera-image-gallery-image"
-          >
+        const slide = document.createElement(
+          "swiper-slide"
+        );
 
-          <div class="ephemera-image-gallery-controls">
+        const image = document.createElement("img");
 
-            <button
-              type="button"
-              data-gallery-prev
-            >
-              ‹
-            </button>
+        image.src = img.dataset.viewerSrc;
 
-            <span
-              class="ephemera-image-gallery-status"
-            ></span>
+        slide.append(image);
 
-            <button
-              type="button"
-              data-gallery-next
-            >
-              ›
-            </button>
-
-          </div>
-
-        </div>
-
-      </div>
-    `;
-
-    const image = viewerMain.querySelector(".ephemera-image-gallery-image");
-
-    const status = viewerMain.querySelector(".ephemera-image-gallery-status");
-
-    function render() {
-
-      image.src = images[index].dataset.viewerSrc;
-
-      status.textContent = `${index + 1} / ${images.length}`;
-
-    }
-
-    render();
-
-    viewerMain
-      .querySelector("[data-gallery-prev]")
-      .addEventListener("click", () => {
-
-        index =
-          (index - 1 + images.length)
-          % images.length;
-
-        render();
+        swiper.append(slide);
 
       });
 
-    viewerMain
-      .querySelector("[data-gallery-next]")
-      .addEventListener("click", () => {
 
-        index =
-          (index + 1)
-          % images.length;
-
-        render();
-
-      });
-
+    return swiper;
   }
-
-  document.addEventListener("keydown", (e) => {
-
-    if (
-      viewer.classList.contains(
-        "hidden"
-      )
-    ) return;
-
-    if (e.key === "ArrowLeft") {
-
-      gallery.index =
-        (
-          gallery.index
-          - 1
-          + gallery.images.length
-        )
-        %
-        gallery.images.length;
-
-      renderGallery();
-
-    }
-
-    if (e.key === "ArrowRight") {
-
-      gallery.index =
-        (
-          gallery.index
-          + 1
-        )
-        %
-        gallery.images.length;
-
-      renderGallery();
-
-    }
-
-    if (e.key === "Escape") {
-
-      closeViewer();
-
-    }
-
-  });
 
 });

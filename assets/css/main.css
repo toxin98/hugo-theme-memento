@@ -369,6 +369,31 @@ main {
   height: 100%;
   background-color: #eee;
 }
+
+swiper-container {
+  width: 100%;
+  height: 100%;
+  --swiper-pagination-fraction-color: #fff;
+  --swiper-navigation-size: 24px;
+  --swiper-theme-color: #bbb;
+}
+
+swiper-slide {
+  background: #000;
+  color: #fff;
+  /* text-align: center; */
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-items: center; */
+  padding: 2.1rem;
+}
+
+swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
 /* home */
 .profile {
   display: flex;
@@ -1089,6 +1114,7 @@ main {
 .viewer {
   position: fixed;
   inset: 0;
+  background: #fff;
   z-index: 1000;
   display: flex;
   flex-direction: row;
@@ -1102,14 +1128,12 @@ main {
   flex: 6;
   min-width: 0;
   min-height: 0;
-  background: #000;
 }
 
 .viewer-side {
   flex: 4;
   min-width: 0;
   min-height: 0;
-  background: #fff;
   padding: 1rem;
 }
 
