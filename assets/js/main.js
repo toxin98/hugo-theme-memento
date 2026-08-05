@@ -5,8 +5,13 @@ import "./ephemera.js";
 import "./infinite-scroll.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  const hamburger = document.getElementById('hamburger');
+  const hamburger = document.querySelector("#hamburger");
+  const siteNav = document.querySelector("#siteNav");
+
   hamburger.addEventListener("click", () => {
-    document.getElementById("siteNav").classList.toggle("show");
+    siteNav.classList.toggle("show");
+
+    document.body.style.overflow =
+      siteNav.classList.contains("show") ? "hidden" : "";
   });
 });

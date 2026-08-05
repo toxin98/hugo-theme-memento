@@ -139,7 +139,7 @@ header {
   justify-content: center;
 }
 
-#siteNav ul {
+.header-nav ul {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -149,11 +149,11 @@ header {
   gap: 1.5rem;
 }
 
-#siteNav li {
+.header-nav li {
   height: 100%;
 }
 
-#siteNav a {
+.header-nav a {
   height: 100%;
   display: flex;
   align-items: center;
@@ -163,7 +163,7 @@ header {
   position: relative;
 }
 
-#siteNav a::after {
+.header-nav a::after {
   content: "";
   position: absolute;
   left: 0;
@@ -176,8 +176,8 @@ header {
   transition: transform 0.25s ease;
 }
 
-#siteNav a:hover::after,
-#siteNav a.active::after {
+.header-nav a:hover::after,
+.header-nav a.active::after {
   transform: scaleX(1);
 }
 
@@ -1358,21 +1358,22 @@ html.overlay-open {
     --header-height: var(--header-top-height);
   }
 
-  #siteNav {
-    display: none;
-  }
-
-  #siteNav.show {
-    display: block;
+  .header-nav {
     position: fixed;
     top: var(--header-top-height);
     left: 0;
     right: 0;
-    height: calc(100% - var(--header-top-height));
-    overflow-y: auto;
+    height: 0;
+    overflow: hidden;
+    transition: height .3s ease;
   }
 
-  #siteNav ul {
+  .header-nav.show {
+    overflow: auto;
+    height: calc(100% - var(--header-top-height));
+  }
+
+  .header-nav ul {
     flex-direction: column;
   }
 
