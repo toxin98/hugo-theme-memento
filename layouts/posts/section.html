@@ -7,10 +7,10 @@
       {{ $posts := .RegularPagesRecursive }}
 
       <aside class="sidebar" data-position="left">
-        <div class="posts-year-filter">
-          <button class="active" data-filter="all"> All #{{ $posts.Len }}</button>
+        <div class="posts-year-list">
+          <button class="posts-year-filter active" data-filter="all"> All #{{ $posts.Len }}</button>
           {{ range $posts.GroupByDate "2006" }}
-          <button data-filter="{{ .Key }}">{{ .Key }} #{{ .Pages.Len }}</button>
+          <button class="posts-year-filter" data-filter="{{ .Key }}">{{ .Key }} #{{ .Pages.Len }}</button>
           {{ end }}
         </div>
       </aside>
@@ -25,7 +25,7 @@
 
           <ul class="posts-list">
             {{ range .Pages }}
-            <li class="posts-item card">
+            <li class="posts-item card" data-tags="{{ delimit .Params.tags "," }}">
               <time class="posts-date" datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}" aria-label="{{ .Date.Format "2006-01-02" }}">
                 <span class="posts-date-month">{{ .Date.Format "Jan" }}</span>
                 <span class="posts-date-day">{{ .Date.Format "02" }}</span>
@@ -57,15 +57,12 @@
       </div>
 
       <aside class="sidebar" data-position="right">
-        <ul class="posts-tags-list">
-          {{ range .Site.Taxonomies.tags.ByCount }}
-          {{ if gt .Count 0 }}
-            <li>
-              <a href="{{ .Page.RelPermalink }}">{{ .Page.LinkTitle }}-{{ .Count }}</a>
-            </li>
+        <div class="posts-tag-list">
+          <button class="posts-tag-filter" data-filter="all">All</button>
+          {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
+          <button class="posts-tag-filter" data-filter="{{ $name }}">{{ $name }}</button>
           {{ end }}
-          {{end}}
-        </ul>
+        </div>
       </aside>
 
     </div>

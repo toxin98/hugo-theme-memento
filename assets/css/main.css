@@ -550,20 +550,20 @@ swiper-slide img {
   line-height: 14px;
 }
 /* posts*/
-.posts-year-filter,
-.posts-tags-list {
+.posts-year-list,
+.posts-tag-list {
   position: sticky;
   top: calc(var(--header-height) + 50px);
   margin-top: 100px;
 }
 
-.posts-year-filter {
+.posts-year-list {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
 }
 
-.posts-year-filter button {
+.posts-year-filter {
   display: block;
   text-align: center;
   padding: .35rem .9rem;
@@ -574,11 +574,11 @@ swiper-slide img {
   transition: all 0.2s ease;
 }
 
-.posts-year-filter button:hover {
+.posts-year-filter:hover {
   background: #bbb;
 }
 
-.posts-year-filter button.active {
+.posts-year-filter.active {
   background: #222;
   color: #fff;
 }

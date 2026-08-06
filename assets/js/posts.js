@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  const buttons = document.querySelectorAll(".posts-year-filter button");
+  const buttons = document.querySelectorAll(".posts-year-filter");
   const sections = document.querySelectorAll(".posts-section");
 
   buttons.forEach(button => {
