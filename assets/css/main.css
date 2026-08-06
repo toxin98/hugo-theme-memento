@@ -113,10 +113,10 @@ header {
   list-style: none;
   margin: 0;
   padding: 0;
-  height: 100%;
   display: flex;
   align-items: center;
   gap: 1.5rem;
+  height: 100%;
 }
 
 .header-nav li {
@@ -208,6 +208,7 @@ main {
   left: calc(var(--edge-gap) + 10px);
   right: calc(var(--edge-gap) + 10px);
   display: flex;
+  justify-content: space-between;
 }
 
 .sidebar-toggle {
@@ -221,14 +222,6 @@ main {
   box-shadow: 0 4px 14px rgb(0 0 0 / .15);
   transition: transform .2s ease, opacity .2s ease, box-shadow .2s ease;
   visibility: hidden;
-}
-
-.sidebar-toggle[data-target="left"] {
-  margin-right: auto;
-}
-
-.sidebar-toggle[data-target="right"] {
-  margin-left: auto;
 }
 
 .sidebar-overlay {
@@ -557,53 +550,41 @@ swiper-slide img {
   line-height: 14px;
 }
 /* posts*/
-.posts-category,
+.posts-year-filter,
 .posts-tags-list {
   position: sticky;
   top: calc(var(--header-height) + 50px);
   margin-top: 100px;
 }
 
-.posts-category ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.posts-year-filter {
   display: flex;
   flex-wrap: wrap;
+  gap: 0.5rem;
 }
-/* 每个 item：控制宽度 */
-.posts-category li {
-  flex: 0 0 80px; /* 固定宽度，可改 */
-  margin: 0.2rem;
-}
-/* 按钮样式 */
-.posts-category-title {
+
+.posts-year-filter button {
   display: block;
   text-align: center;
-  padding: 0.2rem;
-  border-radius: 999px; /* pill 关键 */
+  padding: .35rem .9rem;
+  border-radius: 999px;
   text-decoration: none;
   background: #f2f2f2;
   color: #333;
   transition: all 0.2s ease;
 }
 
-.posts-category-title:hover {
-  background: gray;
+.posts-year-filter button:hover {
+  background: #bbb;
 }
 
-.posts-category-title.active {
-  background: gray;
-  color: blue;
-  font-weight: 600;
+.posts-year-filter button.active {
+  background: #222;
+  color: #fff;
 }
 
-.posts-section {
+.posts-section.hidden {
   display: none;
-}
-
-.posts-section.show {
-  display: block;
 }
 
 .posts-section :target::before {
