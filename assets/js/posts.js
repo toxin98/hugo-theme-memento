@@ -1,32 +1,125 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  const buttons = document.querySelectorAll(".posts-year-filter");
-  const sections = document.querySelectorAll(".posts-section");
+  const yearButtons = document.querySelectorAll(".posts-filter.year");
+  const tagButtons = document.querySelectorAll(".posts-filter.tag");
+  const tagsCleaner = document.querySelector("#tagsCleaner");
 
-  buttons.forEach(button => {
+  let currentYear = "all";
+  let currentTags = [];
+
+  yearButtons.forEach(button => {
 
     button.addEventListener("click", () => {
 
-      const year = button.dataset.filter;
+      currentYear = button.dataset.filter;
 
-      buttons.forEach(btn => {
-        btn.classList.remove("active");
+      yearButtons.forEach(btn => {
+        btn.classList.toggle(
+          "active",
+          btn === button
+        );
       });
 
-      button.classList.add("active");
-
-      sections.forEach(section => {
-
-        if (year === "all" || section.dataset.year === year) {
-          section.classList.remove("hidden");
-        } else {
-          section.classList.add("hidden");
-        }
-
-      });
+      filterPosts();
 
     });
 
   });
+
+  tagButtons.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      const tag = button.dataset.filter;
+
+      if (currentTags.includes(tag)) {
+        currentTags = currentTags.filter(item => item !== tag);
+        button.classList.remove("active");
+      } else {
+        currentTags.push(tag);
+        button.classList.add("active");
+      }
+
+      updateClearButton();
+
+      filterPosts();
+
+    });
+
+  });
+
+  tagsCleaner.addEventListener("click",()=>{
+
+    currentTags = [];
+
+    tagButtons.forEach(button=>{
+      button.classList.remove("active");
+    });
+
+    updateClearButton();
+
+    filterPosts();
+
+  });
+
+  function updateClearButton() {
+
+    tagsCleaner.classList.toggle(
+      "show",
+      currentTags.length > 0
+    );
+
+  }
+
+  function filterPosts() {
+
+    document.querySelectorAll(".posts-section")
+      .forEach(section => {
+
+
+        const yearMatch =
+          currentYear === "all" ||
+          section.dataset.year === currentYear;
+
+        let hasVisiblePost = false;
+
+
+        section.querySelectorAll(".posts-item")
+          .forEach(post => {
+
+            const tags = post.dataset.tags
+              .split(",")
+              .map(tag => tag.trim());
+
+            const tagMatch =
+              currentTags.length === 0 ||
+              currentTags.every(tag =>
+                tags.includes(tag)
+              );
+
+            const visible =
+              yearMatch && tagMatch;
+
+            post.classList.toggle(
+              "hidden",
+              !visible
+            );
+
+            if (visible) {
+              hasVisiblePost = true;
+            }
+
+          });
+
+
+        section.classList.toggle(
+          "hidden",
+          !hasVisiblePost
+        );
+
+
+      });
+
+  }
 
 });
