@@ -10,7 +10,11 @@
   --header-color: #fff;
   --main-color: #fcfcfc;
   --footer-color: #eee;
+  --text-size-secondary: 14px;
+  --text-color-secondary: #666;
   --accent-color: #6cb0d8;
+  --border-color: #ddd;
+  --card-background: #fff;
 }
 
 * {
@@ -99,7 +103,7 @@ header {
 .header-nav {
   height: var(--header-nav-height);
   background: var(--header-color);
-  border-top: 1px solid #ddd;
+  border-top: 1px solid var(--border-color);
 }
 
 .header-nav > .wrapper {
@@ -291,11 +295,9 @@ main {
   background: var(--main-color);
 }
 
-.collection-title {
+.collection-header a {
   text-decoration: none;
-  color: #222;
-  font-size: 1.5rem;
-  font-weight: 600;
+  color: inherit;
 }
 
 .page-hero img {
@@ -307,11 +309,12 @@ main {
 }
 
 .card {
-  background: linear-gradient(135deg, #ffffff, #f6f8fb);
-  margin: 5px;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.07), 0 1px 5px 0 rgba(0, 0, 0, 0.1);
   border-radius: 12px;
-  border: 1px solid #ddd;
+  overflow: hidden;
+  background: var(--card-background);
+  border: 1px solid var(--border-color);
+  transition: transform .25s ease;
+  margin: 5px;
 }
 
 .cards-grid {
@@ -701,14 +704,14 @@ swiper-slide img {
 }
 
 .posts-tags {
-  border-top: 1px solid #ddd;
+  border-top: 1px solid var(--border-color);
   overflow: hidden;
 }
 
 .posts-tag {
   display: inline;
   color: #7a8794;
-  font-size: 0.875rem;
+  font-size: var(--text-size-secondary);
   background: none;
   border: 0;
   padding: 0;
@@ -775,8 +778,8 @@ swiper-slide img {
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  color: #444;
-  font-size: 0.875rem;
+  color: var(--text-color-secondary);
+  font-size: var(--text-size-secondary);
   line-height: 1.2;
 }
 /* photography*/
@@ -793,8 +796,8 @@ swiper-slide img {
 
 .gallery-analog-eyebrow {
   margin: 0;
-  color: #7a8794;
-  font-size: 0.875rem;
+  color: var(--text-color-secondary);
+  font-size: var(--text-size-secondary);
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -972,7 +975,7 @@ swiper-slide img {
 }
 
 .ephemera-feed[data-layout="list"] .ephemera-item {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid var(--border-color);
   padding: 12px;
 }
 
@@ -1002,8 +1005,8 @@ swiper-slide img {
 }
 
 .ephemera-date {
-  color: #888;
-  font-size: 0.875rem;
+  color: var(--text-color-secondary);
+  font-size: var(--text-size-secondary);
 }
 
 .ephemera-content {
@@ -1196,8 +1199,8 @@ html.viewer-show {
 }
 
 .ephemera-image-gallery-status {
-  color: #fff;
-  font-size: 0.875rem;
+  color: var(--text-color-secondary);
+  font-size: var(--text-size-secondary);
   min-width: 4rem;
   text-align: center;
 }
@@ -1223,36 +1226,25 @@ html.viewer-show {
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 1.5rem;
-  padding: 1rem;
 }
 
 .projects-item {
-  overflow: hidden;
-  display: flex;
-  flex-direction: row;
+  
 }
 
-.projects-info {
-  flex: 1;
-  padding: 1rem;
+.projects-item:hover {
+  transform: translateY(-4px);
 }
 
-.projects-title {
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-}
-
-.projects-desc {
-  font-size: 0.95rem;
-  color: #555;
-  margin-bottom: 1rem;
+.projects-link {
+  text-decoration: none;
+  color: inherit;
 }
 
 .projects-featured {
-  width: 60px;
-  height: 60px;
+  aspect-ratio: 16 / 9;
 }
 
 .projects-featured img {
@@ -1260,6 +1252,20 @@ html.viewer-show {
   height: 100%;
   object-fit: cover;
   object-position: center;
+}
+
+.projects-pro {
+  padding: 1rem;
+}
+
+.projects-title {
+  margin: 0 0 0.5rem;
+}
+
+.projects-desc {
+  margin: 0;
+  color: var(--text-color-secondary);
+  font-size: var(--text-size-secondary);
 }
 /* things */
 .things-section .collection-title svg {
@@ -1275,6 +1281,7 @@ html.viewer-show {
   margin: 0;
   padding: 0;
   display: flex;
+  flex-direction: row;
   gap: 10px;
   overflow-x: auto;
   padding: 10px;
@@ -1309,7 +1316,7 @@ html.viewer-show {
 }
 
 .things-title {
-  font-size: 0.875rem;
+  font-size: var(--text-size-secondary);
   width: 100%;
   overflow: hidden;
   white-space: nowrap;
