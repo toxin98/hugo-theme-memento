@@ -4,33 +4,39 @@
 
     <div class="primary-area">
 
-      {{ $groups := dict }}
+      {{ $projects := .RegularPages }}
 
-      {{ range .Pages }}
+      {{ $categories := slice }}
 
-        {{ $categories := .Params.categories | default (slice "misc") }}
-
-        {{ $existing := index $groups $categories | default (slice) }}
-
-        {{ $groups = merge $groups (dict $categories ($existing | append .)) }}
-
+      {{ range $projects }}
+        {{ range .Params.categories }}
+          {{ $categories = $categories | append . }}
+        {{ end }}
       {{ end }}
 
-      {{ range $categories, $pages := $groups }}
+      {{ $categories = $categories | uniq | sort }}
+
+      {{ range $categories }}
+
+        {{ $cat := . }}
 
       <div class="projects-section collection">
 
         <div class="collection-header">
-          <span class="collection-title">{{ $categories }}</span>
+          <span class="collection-title">{{ $cat }}</span>
         </div>
 
         <ul class="projects-list">
-        {{ range $pages }}
+
+        {{ range $projects }}
+
+          {{ if in .Params.categories $cat }}
+
           <li>
             <div class="projects-item card">
               <div class="projects-info">
                 <h2 class="projects-title">{{ .Title }}</h2>
-                <p class="projects-desc">{{ .Description | default "Description: -" }}</p>
+                <p class="projects-desc">{{ .Description | default "There is no description." }}</p>
                 <a href="{{ .RelPermalink }}" class="projects-link">View Project</a>
               </div>
               <div class="projects-featured">
@@ -38,7 +44,11 @@
               </div>
             </div>
           </li>
+
+          {{ end }}
+
         {{ end }}
+
         </ul>
 
       </div>

@@ -7,7 +7,7 @@
       {{ $sections := slice }}
 
       {{ range .Sections }}
-        {{ $weight := .Params.weight | default 1 }}
+        {{ $weight := .Weight | default 1 }}
         {{ $sections = $sections | append (dict "section" . "weight" $weight) }}
       {{ end }}
 
@@ -21,31 +21,26 @@
             </a>
           </div>
 
-          {{ $pages := .section.Pages }}
-          {{ $pages = sort $pages ".Params.start" "desc" }}
-
           <ul class="things-list">
 
+          {{ $pages := .section.Pages }}
+          {{ $pages = sort $pages ".Params.dateStart" "desc" }}
           {{ range $pages }}
-
-            {{ $page := . }}
 
             <li>
               <a class="things-item" href="{{ .RelPermalink }}" title="{{ .Title }}">
 
-                {{ with $page.Params.start }}
+                {{ if .Params.dateStart }}
                 <div class="things-meta">
 
-                  {{ $start := time.AsTime (printf "%s-01" .) | time.Format "2006/01" }}
+                  {{ $dateStart := .Params.dateStart | time.Format "2006/01" }}
 
-                  {{ $end := "present" }}
-
-                  {{ with $page.Params.end }}
-                    {{ $end = (time.AsTime (printf "%s-01" .)).Format "2006/01" }}
+                  {{ $dateEnd := "Present" }}
+                  {{ with .Params.dateEnd }}
+                    {{ $dateEnd = . | time.Format "2006/01" }}
                   {{ end }}
 
-                  {{ $start }} - {{ $end }}
-
+                  {{ $dateStart }} - {{ $dateEnd }}
                 </div>
                 {{ end }}
 
