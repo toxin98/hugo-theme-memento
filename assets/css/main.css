@@ -1392,13 +1392,14 @@ html.viewer-show {
     left: 0;
     right: 0;
     height: 0;
-    overflow: hidden;
-    transition: height .3s ease;
+    opacity: 0;
+    transition: height .25s ease, opacity .25s ease;
+    overflow-y: auto;
   }
 
   .header-nav.show {
-    overflow: auto;
-    height: calc(100% - var(--header-top-height));
+    height: calc(100dvh - var(--header-height));
+    opacity: 1;
   }
 
   .header-nav ul {
