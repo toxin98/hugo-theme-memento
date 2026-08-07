@@ -23,7 +23,7 @@
       <div class="projects-section collection">
 
         <div class="collection-header">
-          <span class="collection-title">{{ $cat }}</span>
+          <h2 class="collection-title">{{ $cat }}</h2>
         </div>
 
         <ul class="projects-list">
@@ -34,14 +34,15 @@
 
           <li>
             <div class="projects-item card">
-              <div class="projects-info">
-                <h2 class="projects-title">{{ .Title }}</h2>
-                <p class="projects-desc">{{ .Description | default "There is no description." }}</p>
-                <a href="{{ .RelPermalink }}" class="projects-link">View Project</a>
-              </div>
-              <div class="projects-featured">
-                {{ partial "utils/get-featured.html" . }}
-              </div>
+              <a class="projects-link" href="{{ .RelPermalink }}">
+                <div class="projects-featured">
+                  {{ partial "utils/get-featured.html" . }}
+                </div>
+                <div class="projects-pro">
+                  <h3 class="projects-title">{{ .Title }}</h3>
+                  <p class="projects-desc">{{ .Description | default "There is no description." }}</p>
+                </div>
+              </a>
             </div>
           </li>
 
