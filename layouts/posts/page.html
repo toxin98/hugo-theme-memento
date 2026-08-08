@@ -1,12 +1,12 @@
 {{ define "main" }}
 
-  {{ with .Resources.Get .Params.featured }}
-  <div class="page-hero">
-    <img src="{{ .RelPermalink }}" alt="featured-img">
-  </div>
-  {{ end }}
-
   <div class="wrapper posts">
+
+    {{ with .Resources.Get .Params.featured }}
+    <section class="page-hero">
+      <img src="{{ .RelPermalink }}" alt="featured-img">
+    </section>
+    {{ end }}
 
     <div class="three-column-layout">
 

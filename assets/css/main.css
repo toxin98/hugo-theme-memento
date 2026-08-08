@@ -300,6 +300,10 @@ main {
   color: inherit;
 }
 
+.page-hero {
+  margin: 0 calc(var(--edge-gap) * -1);
+}
+
 .page-hero img {
   max-width: 100%;
   max-height: calc(100vh - var(--header-height) - var(--main-padding-top) - 5.75rem);
