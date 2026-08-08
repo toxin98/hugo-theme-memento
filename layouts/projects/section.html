@@ -1,6 +1,6 @@
 {{ define "main" }}
 
-  <div class="wrapper">
+  <div class="wrapper projects">
 
     <div class="primary-area">
 
@@ -20,27 +20,27 @@
 
         {{ $cat := . }}
 
-      <div class="projects-section collection">
+      <div class="collection-group">
 
-        <div class="collection-header">
-          <h2 class="collection-title">{{ $cat }}</h2>
+        <div class="collection-group-header">
+          <h2 class="collection-group-title">{{ $cat }}</h2>
         </div>
 
-        <ul class="projects-list">
+        <ul class="collection-item-list">
 
         {{ range $projects }}
 
           {{ if in .Params.categories $cat }}
 
           <li>
-            <div class="projects-item card">
-              <a class="projects-link" href="{{ .RelPermalink }}">
-                <div class="projects-featured">
+            <div class="collection-item card">
+              <a class="collection-item-link" href="{{ .RelPermalink }}">
+                <div class="collection-item-featured">
                   {{ partial "utils/get-featured.html" . }}
                 </div>
-                <div class="projects-pro">
-                  <h3 class="projects-title">{{ .Title }}</h3>
-                  <p class="projects-desc">{{ .Description | default "There is no description." }}</p>
+                <div class="collection-item-pro">
+                  <h3 class="collection-item-title">{{ .Title }}</h3>
+                  <p class="collection-item-desc">{{ .Description | default "There is no description." }}</p>
                 </div>
               </a>
             </div>

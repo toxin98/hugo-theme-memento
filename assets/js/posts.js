@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function filterPosts() {
 
-    document.querySelectorAll(".posts-section")
+    document.querySelectorAll(".posts .collection-group")
       .forEach(section => {
 
 
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let hasVisiblePost = false;
 
 
-        section.querySelectorAll(".posts-item")
+        section.querySelectorAll(".posts .collection-item")
           .forEach(post => {
 
             const tags = post.dataset.tags

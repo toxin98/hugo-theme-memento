@@ -1,6 +1,6 @@
 {{ define "main" }}
 
-  <div class="wrapper">
+  <div class="wrapper posts">
 
     <div class="three-column-layout">
 
@@ -17,33 +17,33 @@
 
       <div class="primary-area">
         {{ range $posts.GroupByDate "2006" }}
-        <div class="posts-section collection" data-year="{{ .Key }}">
+        <div class="collection-group" data-year="{{ .Key }}">
 
-          <div class="collection-header">
-            <h2 class="collection-title">{{ .Key }}</h2>
+          <div class="collection-group-header">
+            <h2 class="collection-group-title">{{ .Key }}</h2>
           </div>
 
-          <ul class="posts-list">
+          <ul class="collection-item-list">
             {{ range .Pages }}
-            <li class="posts-item card" data-tags="{{ delimit .Params.tags "," }}">
-              <time class="posts-date" datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}" aria-label="{{ .Date.Format "2006-01-02" }}">
-                <span class="posts-date-month">{{ .Date.Format "Jan" }}</span>
-                <span class="posts-date-day">{{ .Date.Format "02" }}</span>
+            <li class="collection-item card" data-tags="{{ delimit .Params.tags "," }}">
+              <time class="collection-date" datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}" aria-label="{{ .Date.Format "2006-01-02" }}">
+                <span class="collection-date-month">{{ .Date.Format "Jan" }}</span>
+                <span class="collection-date-day">{{ .Date.Format "02" }}</span>
               </time>
-              <div class="posts-body">
-                <div class="posts-main">
-                  <div class="posts-featured">
+              <div class="collection-body">
+                <div class="collection-main">
+                  <div class="collection-featured">
                     {{ partial "utils/get-featured.html" . }}
                   </div>
-                  <div class="posts-pro">
-                    <a href="{{ .RelPermalink }}" class="posts-title">{{ .LinkTitle }}</a>
-                    <div class="posts-summary">{{ .Summary | plainify }}</div>
+                  <div class="collection-pro">
+                    <a class="collection-title" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+                    <div class="collection-summary">{{ .Summary | plainify }}</div>
                   </div>
                 </div>
                 {{ with .GetTerms "tags" }}
-                <div class="posts-tags" aria-label="tags">
+                <div class="collection-tags" aria-label="tags">
                   {{ range . }}
-                    <a href="{{ .RelPermalink }}" class="posts-tag">{{ .LinkTitle }}</a>
+                    <a class="collection-tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
                   {{ end }}
                 </div>
                 {{ end }}

@@ -1,6 +1,6 @@
 {{ define "main" }}
 
-  <div class="wrapper">
+  <div class="wrapper things">
 
     <div class="primary-area">
 
@@ -13,25 +13,25 @@
 
       {{ range sort $sections "weight" }}
 
-        <div class="things-section collection">
+        <div class="collection-group">
 
-          <div class="collection-header">
+          <div class="collection-group-header">
             <a href="{{ .section.RelPermalink }}">
-              <h2 class="collection-title">{{ .section.Title }}{{ partial "utils/icon.html" "chevron-right" }}</h2> 
+              <h2 class="collection-group-title">{{ .section.Title }}{{ partial "utils/icon.html" "chevron-right" }}</h2> 
             </a>
           </div>
 
-          <ul class="things-list">
+          <ul class="collection-item-list">
 
           {{ $pages := .section.Pages }}
           {{ $pages = sort $pages ".Params.dateStart" "desc" }}
           {{ range $pages }}
 
             <li>
-              <a class="things-item" href="{{ .RelPermalink }}" title="{{ .Title }}">
+              <a class="collection-item" href="{{ .RelPermalink }}" title="{{ .Title }}">
 
                 {{ if .Params.dateStart }}
-                <div class="things-meta">
+                <div class="collection-item-meta">
 
                   {{ $dateStart := .Params.dateStart | time.Format "2006/01" }}
 
@@ -44,14 +44,14 @@
                 </div>
                 {{ end }}
 
-                <div class="things-image">
+                <div class="collection-item-image">
                   {{ with .Resources.GetMatch .Params.image }}
                     {{ $img := .Resize "200x webp q80" }}
                     <img src="{{ $img.RelPermalink }}" alt="{{ $.Title }}">
                   {{ end }}
                 </div>
 
-                <div class="things-title">
+                <div class="collection-item-title">
                   {{ .LinkTitle }}
                 </div>
 
