@@ -23,31 +23,35 @@
             <h2 class="collection-group-title">{{ .Key }}</h2>
           </div>
 
-          <ul class="collection-item-list">
+          <ul class="collection-list">
             {{ range .Pages }}
-            <li class="collection-item card" data-tags="{{ delimit .Params.tags "," }}">
-              <time class="collection-date" datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}" aria-label="{{ .Date.Format "2006-01-02" }}">
-                <span class="collection-date-month">{{ .Date.Format "Jan" }}</span>
-                <span class="collection-date-day">{{ .Date.Format "02" }}</span>
-              </time>
-              <div class="collection-body">
-                <div class="collection-main">
-                  <div class="collection-featured">
-                    {{ partial "utils/get-featured.html" . }}
+            <li class="collection card" data-tags="{{ delimit .Params.tags "," }}">
+              <a class="collection-link" href="{{ .RelPermalink }}">
+
+                <time class="collection-date" datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}" aria-label="{{ .Date.Format "2006-01-02" }}">
+                  <span class="collection-date-month">{{ .Date.Format "Jan" }}</span>
+                  <span class="collection-date-day">{{ .Date.Format "02" }}</span>
+                </time>
+                <div class="collection-body">
+                  <div class="collection-main">
+                    <div class="collection-featured">
+                      {{ partial "utils/get-featured.html" . }}
+                    </div>
+                    <div class="collection-pro">
+                      <h3 class="collection-title">{{ .LinkTitle }}</h3>
+                      <div class="collection-summary">{{ .Summary | plainify }}</div>
+                    </div>
                   </div>
-                  <div class="collection-pro">
-                    <a class="collection-title" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
-                    <div class="collection-summary">{{ .Summary | plainify }}</div>
+                  {{ with .GetTerms "tags" }}
+                  <div class="collection-tags" aria-label="tags">
+                    {{ range . }}
+                      <a class="collection-tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+                    {{ end }}
                   </div>
-                </div>
-                {{ with .GetTerms "tags" }}
-                <div class="collection-tags" aria-label="tags">
-                  {{ range . }}
-                    <a class="collection-tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
                   {{ end }}
                 </div>
-                {{ end }}
-              </div>
+
+              </a>
             </li>
             {{ end }}
           </ul>

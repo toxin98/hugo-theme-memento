@@ -26,24 +26,24 @@
           <h2 class="collection-group-title">{{ $cat }}</h2>
         </div>
 
-        <ul class="collection-item-list">
+        <ul class="collection-list">
 
         {{ range $projects }}
 
           {{ if in .Params.categories $cat }}
 
-          <li>
-            <div class="collection-item card">
-              <a class="collection-item-link" href="{{ .RelPermalink }}">
-                <div class="collection-item-featured">
-                  {{ partial "utils/get-featured.html" . }}
-                </div>
-                <div class="collection-item-pro">
-                  <h3 class="collection-item-title">{{ .Title }}</h3>
-                  <p class="collection-item-desc">{{ .Description | default "There is no description." }}</p>
-                </div>
-              </a>
-            </div>
+          <li class="collection card">
+            <a class="collection-link" href="{{ .RelPermalink }}">
+
+              <div class="collection-featured">
+                {{ partial "utils/get-featured.html" . }}
+              </div>
+              <div class="collection-pro">
+                <h3 class="collection-title">{{ .Title }}</h3>
+                <p class="collection-desc">{{ .Description | default "There is no description." }}</p>
+              </div>
+
+            </a>
           </li>
 
           {{ end }}

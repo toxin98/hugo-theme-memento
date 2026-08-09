@@ -21,17 +21,17 @@
             </a>
           </div>
 
-          <ul class="collection-item-list">
+          <ul class="collection-list">
 
           {{ $pages := .section.Pages }}
           {{ $pages = sort $pages ".Params.dateStart" "desc" }}
           {{ range $pages }}
 
-            <li>
-              <a class="collection-item" href="{{ .RelPermalink }}" title="{{ .Title }}">
+            <li class="collection card">
+              <a class="collection-link" href="{{ .RelPermalink }}" title="{{ .Title }}">
 
                 {{ if .Params.dateStart }}
-                <div class="collection-item-meta">
+                <div class="collection-meta">
 
                   {{ $dateStart := .Params.dateStart | time.Format "2006/01" }}
 
@@ -44,14 +44,14 @@
                 </div>
                 {{ end }}
 
-                <div class="collection-item-image">
+                <div class="collection-image">
                   {{ with .Resources.GetMatch .Params.image }}
                     {{ $img := .Resize "200x webp q80" }}
                     <img src="{{ $img.RelPermalink }}" alt="{{ $.Title }}">
                   {{ end }}
                 </div>
 
-                <div class="collection-item-title">
+                <div class="collection-title">
                   {{ .LinkTitle }}
                 </div>
 
