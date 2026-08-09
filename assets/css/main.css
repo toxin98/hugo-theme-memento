@@ -308,6 +308,8 @@ main {
 
 .collection-link {
   text-decoration: none;
+  color: inherit;
+  display: flex;
 }
 
 .collection-title {
@@ -1247,8 +1249,7 @@ html.viewer-show {
 }
 
 .projects .collection-link {
-  text-decoration: none;
-  color: inherit;
+  flex-direction: column;
 }
 
 .projects .collection-featured {
