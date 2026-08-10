@@ -10,9 +10,14 @@
   --header-color: #fff;
   --main-color: #fcfcfc;
   --footer-color: #eee;
-  --text-size-secondary: 14px;
+  --text-size-lg: 18px;
+  --text-size-base: 16px;
+  --text-size-sm: 14px;
+  --text-size-xs: 12px;
+  --text-color-primary: #222;
   --text-color-secondary: #666;
-  --text-size-minimal: 12px;
+  --text-color-tertiary: #777;
+  --text-color-muted: #888;
   --accent-color: #6cb0d8;
   --border-color: #ddd;
   --card-background: #fff;
@@ -23,9 +28,9 @@
 }
 
 body {
-  color: #222;
+  color: var(--text-color-primary);
   font-family: sans-serif;
-  font-size: 16px;
+  font-size: var(--text-size-base);
   line-height: 1.4;
   margin: 0;
   min-height: 100vh;
@@ -739,7 +744,7 @@ swiper-slide img {
 .posts .entry-tag {
   display: inline;
   color: #7a8794;
-  font-size: var(--text-size-secondary);
+  font-size: var(--text-size-sm);
   background: none;
   border: 0;
   padding: 0;
@@ -801,7 +806,7 @@ swiper-slide img {
   -webkit-box-orient: vertical;
   overflow: hidden;
   color: var(--text-color-secondary);
-  font-size: var(--text-size-secondary);
+  font-size: var(--text-size-sm);
   line-height: 1.2;
 }
 /* photography*/
@@ -819,7 +824,7 @@ swiper-slide img {
 .gallery-analog-eyebrow {
   margin: 0;
   color: var(--text-color-secondary);
-  font-size: var(--text-size-secondary);
+  font-size: var(--text-size-sm);
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -1028,7 +1033,7 @@ swiper-slide img {
 
 .ephemera-date {
   color: var(--text-color-secondary);
-  font-size: var(--text-size-secondary);
+  font-size: var(--text-size-sm);
 }
 
 .ephemera-content {
@@ -1222,7 +1227,7 @@ html.viewer-show {
 
 .ephemera-image-gallery-status {
   color: var(--text-color-secondary);
-  font-size: var(--text-size-secondary);
+  font-size: var(--text-size-sm);
   min-width: 4rem;
   text-align: center;
 }
@@ -1282,7 +1287,7 @@ html.viewer-show {
 .projects .entry-desc {
   margin: 0;
   color: var(--text-color-secondary);
-  font-size: var(--text-size-secondary);
+  font-size: var(--text-size-sm);
 }
 /* things */
 .things .entry-list {
@@ -1326,7 +1331,7 @@ html.viewer-show {
 }
 
 .things .entry-title {
-  font-size: var(--text-size-secondary);
+  font-size: var(--text-size-sm);
   width: 100%;
   overflow: hidden;
   white-space: nowrap;
