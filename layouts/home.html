@@ -22,10 +22,10 @@
                 {{ .Site.Params.profile.tagline }}
               </span>
 
-              <ul class="social">
+              <ul class="social-list">
                 {{ range site.Params.social }}
                   <li>
-                    <a href="{{ .url }}" target="_blank" aria-label="{{ .name }}" title="{{ .name }}">{{ partial "utils/icon.html" .icon }}</a>
+                    <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ .name }}" title="{{ .name }}">{{ partial "utils/icon.html" .icon }}</a>
                   </li>
                 {{ end }}
               </ul>

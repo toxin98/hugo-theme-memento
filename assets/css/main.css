@@ -433,17 +433,23 @@ swiper-slide img {
   height: 48px;
 }
 
-.social {
+.social-list {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
-  /* justify-content: center; */
+  flex-wrap: wrap;
+  column-gap: 12px;
+  row-gap: 8px;
+  justify-content: center;
 }
 
-.social a {
-  color: #222;
-  margin: 0 0.5rem;
+.social-list a {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  /* align-items: center; */
+  /* justify-content: center; */
 }
 /* docs */
 .docs-date-container {
