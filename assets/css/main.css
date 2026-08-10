@@ -12,6 +12,7 @@
   --footer-color: #eee;
   --text-size-secondary: 14px;
   --text-color-secondary: #666;
+  --text-size-minimal: 12px;
   --accent-color: #6cb0d8;
   --border-color: #ddd;
   --card-background: #fff;
@@ -40,6 +41,7 @@ button {
   margin: 0;
   cursor: pointer;
   display: flex;
+  font-size: 14px;
   color: #000;
 }
 
@@ -300,6 +302,14 @@ main {
   color: inherit;
 }
 
+.entry-group-header a:hover{
+  color: var(--accent-color)
+}
+
+.entry-group-header svg {
+  vertical-align: middle;
+}
+
 .entry-list {
   list-style: none;
   margin: 0;
@@ -313,7 +323,8 @@ main {
 }
 
 .entry-title {
-  margin: 0 0 0.25rem;
+  font-size: 1.125rem;
+  margin: 0;
 }
 
 .page-hero {
@@ -762,7 +773,6 @@ swiper-slide img {
 }
 
 .posts .entry-pro {
-  flex: 1;
   padding: 0 0.5rem;
   display: flex;
   flex-direction: column;
@@ -776,7 +786,6 @@ swiper-slide img {
   overflow: hidden;
   color: #222;
   font-weight: 600;
-  line-height: 1.2;
   text-decoration: none;
 }
 
@@ -1023,7 +1032,7 @@ swiper-slide img {
 }
 
 .ephemera-content {
-  line-height: 1.3rem;
+  line-height: 1.3;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
@@ -1265,6 +1274,9 @@ html.viewer-show {
 
 .projects .entry-pro {
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
 .projects .entry-desc {
@@ -1273,14 +1285,6 @@ html.viewer-show {
   font-size: var(--text-size-secondary);
 }
 /* things */
-.things .entry-group-title svg {
-  vertical-align: middle;
-}
-
-.things .entry-group-title:hover{
-  color: var(--accent-color)
-}
-
 .things .entry-list {
   display: flex;
   flex-direction: row;
@@ -1299,19 +1303,23 @@ html.viewer-show {
   text-decoration: none;
 }
 
+.things .entry-link {
+  flex-direction: column;
+}
+
 .things .entry-meta {
   font-size: .75rem;
   color: #777;
 }
 
-.things .entry-image {
+.things .entry-featured {
   width: 100px;
   height: 100px;
   border-radius: 12px;
   background: var(--card-background);
 }
 
-.things .entry-image img {
+.things .entry-featured img {
   width: 100%;
   height: 100%;
   object-fit: contain;

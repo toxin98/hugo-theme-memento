@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let hasVisiblePost = false;
 
 
-        section.querySelectorAll(".posts .entry-item")
+        section.querySelectorAll(".posts .entry")
           .forEach(post => {
 
             const tags = post.dataset.tags

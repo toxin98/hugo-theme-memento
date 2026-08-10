@@ -44,10 +44,10 @@
                 </div>
                 {{ end }}
 
-                <div class="entry-image">
-                  {{ with .Resources.GetMatch .Params.image }}
-                    {{ $img := .Resize "200x webp q80" }}
-                    <img src="{{ $img.RelPermalink }}" alt="{{ $.Title }}">
+                <div class="entry-featured">
+                  {{ with .Resources.GetMatch .Params.featured }}
+                    {{ $thumb := .Resize "200x webp q80" }}
+                    <img src="{{ $thumb.RelPermalink }}" alt="{{ $.Title }}">
                   {{ end }}
                 </div>
 
