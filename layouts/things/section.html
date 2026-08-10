@@ -13,25 +13,25 @@
 
       {{ range sort $sections "weight" }}
 
-        <div class="collection-group">
+        <div class="entry-group">
 
-          <div class="collection-group-header">
+          <div class="entry-group-header">
             <a href="{{ .section.RelPermalink }}">
-              <h2 class="collection-group-title">{{ .section.Title }}{{ partial "utils/icon.html" "chevron-right" }}</h2> 
+              <h2 class="entry-group-title">{{ .section.Title }}{{ partial "utils/icon.html" "chevron-right" }}</h2> 
             </a>
           </div>
 
-          <ul class="collection-list">
+          <ul class="entry-list">
 
           {{ $pages := .section.Pages }}
           {{ $pages = sort $pages ".Params.dateStart" "desc" }}
           {{ range $pages }}
 
-            <li class="collection card">
-              <a class="collection-link" href="{{ .RelPermalink }}" title="{{ .Title }}">
+            <li class="entry card">
+              <a class="entry-link" href="{{ .RelPermalink }}" title="{{ .Title }}">
 
                 {{ if .Params.dateStart }}
-                <div class="collection-meta">
+                <div class="entry-meta">
 
                   {{ $dateStart := .Params.dateStart | time.Format "2006/01" }}
 
@@ -44,14 +44,14 @@
                 </div>
                 {{ end }}
 
-                <div class="collection-image">
+                <div class="entry-image">
                   {{ with .Resources.GetMatch .Params.image }}
                     {{ $img := .Resize "200x webp q80" }}
                     <img src="{{ $img.RelPermalink }}" alt="{{ $.Title }}">
                   {{ end }}
                 </div>
 
-                <div class="collection-title">
+                <div class="entry-title">
                   {{ .LinkTitle }}
                 </div>
 
