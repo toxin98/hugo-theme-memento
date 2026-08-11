@@ -15,7 +15,7 @@
   --text-size-sm: 14px;
   --text-size-xs: 12px;
   --text-color-primary: #222;
-  --text-color-secondary: #666;
+  --text-color-secondary: #8a8f98;
   --text-color-tertiary: #777;
   --text-color-muted: #888;
   --accent-color: #6cb0d8;
@@ -208,6 +208,12 @@ main {
   margin-inline: auto;
 }
 
+.sidebar {
+  position: sticky;
+  top: var(--header-height);
+  height: calc(100vh - var(--header-height));
+}
+
 .fixed-bottom-bar {
   position: fixed;
   bottom: calc(var(--edge-gap) + 10px);
@@ -318,9 +324,21 @@ main {
 .content .code-copy:hover {
   color: #fff;
 }
+
 /* toc */
+.toc {
+  padding: 0 var(--edge-gap);
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.toc-header {
+  
+}
+
 #TableOfContents {
-  max-height: calc(100vh - 10rem);
   overflow-y: auto;
 }
 
@@ -340,7 +358,7 @@ main {
 
 #TableOfContents a {
   text-decoration: none;
-  color: #999;
+  color: var(--text-color-tertiary);
   /* transition: all 50ms ease-in-out; */
 }
 
@@ -520,33 +538,19 @@ swiper-slide img {
   color: #666;
 }
 
+.docs-nav {
+  overflow-y: auto;
+  font-size: 14px;
+  padding: 0 var(--edge-gap);
+}
+
 .docs-buttons {
   position: absolute;
   top: 0;
   right: 0;
 }
-
-.docs-tree {
-  position: sticky;
-  top: var(--header-height);
-  height: calc(100vh - var(--header-height));
-  overflow-y: auto;
-  font-size: 14px;
-}
-
-.docs-tree svg {
-  width: 18px;
-  height: 18px;
-  vertical-align: sub;
-}
-
-.docs-tree ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
 /* 普通链接样式 */
-.docs-tree a {
+.docs-nav a {
   display: block;
   text-decoration: none;
   color: #333;
@@ -554,7 +558,7 @@ swiper-slide img {
   position: relative; /* 让伪元素相对于 a 定位 */
 }
 /* 伪元素 */
-.docs-tree a::after {
+.docs-nav a::after {
   content: "";
   position: absolute;
   top: 0;
@@ -565,30 +569,36 @@ swiper-slide img {
   transition: background 0.2s;
 }
 
-.docs-tree a:hover::after {
+.docs-nav a:hover::after {
   background: #cec4b8;
 }
 
-.docs-tree a.active::after {
+.docs-nav a.active::after {
   background: #7ca3cc;
 }
 
-.docs-tree a:hover,
-.docs-tree a.active {
+.docs-nav a:hover,
+.docs-nav a.active {
   color: #fff;
 }
 
+.docs-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
 /* 层级的包含关系 */
-.docs-tree ul ul ul {
+.docs-nav ul ul ul {
   border-left: 1px solid #666;
   margin-left: 4px;
 }
 
-.docs-tree ul ul li {
+.docs-nav ul ul li {
   padding-left: 0.5rem;  /* 不同层级的缩进 */
 }
 
-.docs-tree-section {
+.docs-nav-section {
   font-weight: 600;
 }
 /* 默认隐藏子目录 */
@@ -698,7 +708,7 @@ swiper-slide img {
   margin-top: calc( 0 - var(--header-height)); */
 }
 
-.posts .entry-header {
+.posts .entry-group-header {
   position: sticky;
   top: var(--header-height);
 }
@@ -1418,7 +1428,6 @@ html.viewer-show {
     bottom: 0;
     width: var(--sidebar-width);
     background: #fff;
-    padding: 0 var(--edge-gap);
     transform: translateX(100%);
     transition: transform .3s ease;
     z-index: 2;
@@ -1451,7 +1460,6 @@ html.viewer-show {
     bottom: 0;
     width: var(--sidebar-width);
     background: #fff;
-    padding: 0 var(--edge-gap);
     transform: translateX(-100%);
     transition: transform .3s ease;
     z-index: 2;

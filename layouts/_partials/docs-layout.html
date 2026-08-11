@@ -4,18 +4,20 @@
 
     <aside class="sidebar" data-position="left">
 
-      <nav class="docs-tree">
-        <ul>
+      <nav class="docs-nav">
+        <div class="docs-nav-header">
+          <div class="docs-buttons">
+            <button>{{ partial "utils/icon.html" "search" }}</button>
+            <button>{{ partial "utils/icon.html" "copy-plus" }}</button>
+            <button>{{ partial "utils/icon.html" "copy-minus" }}</button>
+          </div>
+        </div>
+        <ul class="docs-tree">
           <li>
             <a href="{{ .FirstSection.RelPermalink }}"
               class="{{ if eq .RelPermalink .FirstSection.RelPermalink }}active{{ end }}">
               {{ partial "utils/icon.html" "notebook" }}{{ .FirstSection.Title }}
             </a>
-            <div class="docs-buttons">
-              <button>{{ partial "utils/icon.html" "search" }}</button>
-              <button>{{ partial "utils/icon.html" "copy-plus" }}</button>
-              <button>{{ partial "utils/icon.html" "copy-minus" }}</button>
-            </div>
             <ul>
               {{ template "docs-recursive" (dict "context" .FirstSection "current" .Page ) }}
             </ul>
