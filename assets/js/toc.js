@@ -1,0 +1,20 @@
+window.addEventListener('DOMContentLoaded', () => {
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const toc = document.getElementById("TableOfContents");
+      const id = entry.target.getAttribute('id');
+      if (entry.intersectionRatio > 0) {
+        toc.querySelector(`a[href="#${id}"]`).parentElement.classList.add('focus');
+      } else {
+        toc.querySelector(`a[href="#${id}"]`).parentElement.classList.remove('focus');
+      }
+    });
+  });
+
+  // Track all sections that have an `id` applied
+  document.querySelectorAll('section[id]').forEach((section) => {
+    observer.observe(section);
+  });
+  
+});
