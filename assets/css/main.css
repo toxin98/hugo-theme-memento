@@ -259,6 +259,21 @@ main {
   display: block;
   margin-inline: auto;
 }
+
+.content blockquote {
+  border-left: 0.25rem solid var(--border-color);
+  margin: 0;
+  padding: 0 1rem;
+  color: var(--text-color-secondary);
+}
+
+.content blockquote > :first-child {
+  margin-top: 0;
+}
+
+.content blockquote > :last-child {
+  margin-bottom: 0;
+}
 /* toc */
 #TableOfContents {
   max-height: calc(100vh - 10rem);
