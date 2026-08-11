@@ -4,3 +4,44 @@ import "./posts.js"
 import "./sidebar.js"
 import "./ephemera.js";
 import "./infinite-scroll.js";
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".highlight").forEach(block => {
+
+    const code = block.querySelector("code[data-lang]");
+
+    if (!code) return;
+
+    const span = document.createElement("span");
+    span.className = "code-lang";
+    span.textContent = code.dataset.lang;
+
+    block.appendChild(span);
+
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".highlight").forEach(block => {
+    const code = block.querySelector("code");
+
+    if (!code) return;
+
+    const button = document.createElement("button");
+
+    button.className = "code-copy";
+    button.textContent = "Copy";
+
+    button.addEventListener("click", async () => {
+      await navigator.clipboard.writeText(code.textContent);
+
+      button.textContent = "Copied";
+
+      setTimeout(() => {
+        button.textContent = "Copy";
+      }, 1500);
+    });
+
+    block.appendChild(button);
+  });
+});

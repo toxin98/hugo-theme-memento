@@ -50,10 +50,6 @@ button {
   color: #000;
 }
 
-pre {
-  overflow-x: auto;
-}
-
 .wrapper {
   max-width: 1360px;
   margin: 0 auto;
@@ -253,11 +249,15 @@ main {
   color: #444;
 }
 
+.content p {
+  margin: 1rem 0;
+}
+
 .content img {
   max-width: 75%;
   max-height: calc(100vh - var(--header-height) - var(--main-padding-top) - 15rem);
   display: block;
-  margin-inline: auto;
+  margin: 0 auto;
 }
 
 .content blockquote {
@@ -273,6 +273,50 @@ main {
 
 .content blockquote > :last-child {
   margin-bottom: 0;
+}
+
+.content :not(pre) > code {
+  padding: 0.2em;
+  color: #000;
+  background-color: #eee;
+  border-radius: 0.2em;
+}
+
+.content pre {
+  overflow-x: auto;
+  margin: 0;
+  padding: 2.5rem 1rem 0.5rem;
+}
+
+.content .highlight {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.content .code-lang,
+.content .code-copy {
+  position: absolute;
+  top: 0.5rem;
+}
+
+.content .code-lang {
+  left: 1rem;
+  color: #fff;
+}
+
+.content .code-copy {
+  right: 0.5rem;
+  /* z-index: 2; */
+  padding: 0.25rem 0.5rem;
+  color: var(--text-color-secondary);
+  /* background: transparent; */
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+}
+
+.content .code-copy:hover {
+  color: #fff;
 }
 /* toc */
 #TableOfContents {
