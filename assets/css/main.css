@@ -291,40 +291,39 @@ main {
 .content pre {
   overflow-x: auto;
   margin: 0;
-  padding: 2.5rem 1rem 0.5rem;
+  padding: 0.5rem 1rem;
 }
 
 .content .highlight {
   position: relative;
-  border-radius: 12px;
+  border-radius: 4px;
   overflow: hidden;
 }
 
-.content .code-lang,
+.content .highlight-header {
+  background: #000;
+  color: #fff;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+}
+
 .content .code-copy {
   position: absolute;
   top: 0.5rem;
-}
-
-.content .code-lang {
-  left: 1rem;
-  color: #fff;
-}
-
-.content .code-copy {
   right: 0.5rem;
-  /* z-index: 2; */
   padding: 0.25rem 0.5rem;
   color: var(--text-color-secondary);
   /* background: transparent; */
   border: 1px solid var(--border-color);
   border-radius: 4px;
+  /* z-index: 2; */
 }
 
 .content .code-copy:hover {
   color: #fff;
 }
-
 /* toc */
 .toc {
   padding: 0 var(--edge-gap);

@@ -13,11 +13,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!code) return;
 
-    const span = document.createElement("span");
-    span.className = "code-lang";
-    span.textContent = code.dataset.lang;
+    const header = document.createElement("div");
+    header.className = "highlight-header";
+    header.textContent = code.dataset.lang;
 
-    block.appendChild(span);
+    block.prepend(header);
 
   });
 });
