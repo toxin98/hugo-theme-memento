@@ -12,14 +12,12 @@
             <button>{{ partial "utils/icon.html" "copy-minus" }}</button>
           </div>
         </div>
-        <div class="docs-tree">
+        <div class="docs-nav-tree">
           <a class="docs-item docs-link {{ if eq .RelPermalink .FirstSection.RelPermalink }}active{{ end }}"
             href="{{ .FirstSection.RelPermalink }}">
             {{ partial "utils/icon.html" "notebook" }}{{ .FirstSection.Title }}
           </a>
-          <ul>
-            {{ template "docs-recursive" (dict "context" .FirstSection "current" . "depth" 1) }}
-          </ul>
+          {{ template "docs-recursive" (dict "context" .FirstSection "current" . "depth" 0) }}
         </div>
       </nav>
 
@@ -31,29 +29,30 @@
       {{ $current := .current }}
       {{ $depth := .depth }}
 
-      {{ range $context.Sections.ByLinkTitle }}
-        <li style="--depth: {{ $depth }}">
-          <details {{ if .IsAncestor $current }}open{{ end }}>
-            <summary class="docs-item {{ if eq .RelPermalink $current.RelPermalink }}active{{ end }}">
-              {{ partial "utils/icon.html" "folder" }}
-              {{ partial "utils/icon.html" "folder-open" }}
+      <ul style="--depth: {{ $depth }}">
+        {{ $depth = add $depth 1 }}
+        {{ range $context.Sections.ByLinkTitle }}
+          <li style="--depth: {{ $depth }}">
+            <details {{ if .IsAncestor $current }}open{{ end }}>
+              <summary class="docs-item {{ if eq .RelPermalink $current.RelPermalink }}active{{ end }}">
+                {{ partial "utils/icon.html" "folder" }}
+                {{ partial "utils/icon.html" "folder-open" }}
+                <span>{{ partial "utils/auto-linktitle.html" . }}</span>
+              </summary>
+              {{ template "docs-recursive" (dict "context" . "current" $current "depth" $depth) }}
+            </details>
+          </li>
+        {{ end }}
+        {{ range $context.RegularPages.ByLinkTitle }}
+          <li style="--depth: {{ $depth }}">
+            <a class="docs-item docs-link {{ if eq .RelPermalink $current.RelPermalink }}active{{ end }}"
+              href="{{ .RelPermalink }}">
+              {{ partial "utils/icon.html" "file" }}
               <span>{{ partial "utils/auto-linktitle.html" . }}</span>
-            </summary>
-            <ul>
-              {{ template "docs-recursive" (dict "context" . "current" $current "depth" (add $depth 1)) }}
-            </ul>
-          </details>
-        </li>
-      {{ end }}
-      {{ range $context.RegularPages.ByLinkTitle }}
-        <li style="--depth: {{ $depth }}">
-          <a class="docs-item docs-link {{ if eq .RelPermalink $current.RelPermalink }}active{{ end }}"
-            href="{{ .RelPermalink }}">
-            {{ partial "utils/icon.html" "file" }}
-            <span>{{ partial "utils/auto-linktitle.html" . }}</span>
-          </a>
-        </li>
-      {{ end }}
+            </a>
+          </li>
+        {{ end }}
+      </ul>
 
     {{ end }}
 
@@ -62,7 +61,7 @@
       <!-- {{ partial "breadcrumbs.html" . }} -->
 
       <article class="content">
-        <div class="docs-date-container">
+        <div class="meta-container">
           Last updated: {{ partial "utils/date-format.html" (dict "date" .Lastmod "layout" ":date_long") }}
           Publish date: {{ partial "utils/date-format.html" (dict "date" .PublishDate "layout" ":date_long") }}
         </div>
