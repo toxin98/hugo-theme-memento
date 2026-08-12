@@ -12,52 +12,49 @@
             <button>{{ partial "utils/icon.html" "copy-minus" }}</button>
           </div>
         </div>
-        <ul class="docs-tree">
-          <li>
-            <a href="{{ .FirstSection.RelPermalink }}"
-              class="{{ if eq .RelPermalink .FirstSection.RelPermalink }}active{{ end }}">
+        <details open class="docs-tree">
+          <summary class="docs-item docs-foler">
+            <a class="docs-link {{ if eq .RelPermalink .FirstSection.RelPermalink }}active{{ end }}"
+              href="{{ .FirstSection.RelPermalink }}">
               {{ partial "utils/icon.html" "notebook" }}{{ .FirstSection.Title }}
             </a>
-            <ul>
-              {{ template "docs-recursive" (dict "context" .FirstSection "current" .Page ) }}
-            </ul>
-          </li>
-        </ul>
+          </summary>
+          {{ template "docs-recursive" (dict "context" .FirstSection "current" . ) }}
+        </details>
       </nav>
 
-      {{ define "docs-recursive" }}
+    </aside>
 
-        {{ $context := .context }}
-        {{ $current := .current }}
+    {{ define "docs-recursive" }}
 
+      {{ $context := .context }}
+      {{ $current := .current }}
+
+      <ul>
         {{ range $context.Sections.ByLinkTitle }}
           <li>
             <details {{ if .IsAncestor $current }}open{{ end }}>
-              <summary class="{{ if eq .RelPermalink $current.RelPermalink }}active{{ end }}">
-                <span class="docs-folder-closed">{{ partial "utils/icon.html" "folder" }}</span>
-                <span class="docs-folder-open">{{ partial "utils/icon.html" "folder-open" }}</span>
-                <span>{{ .LinkTitle }}</span>
+              <summary class="docs-item docs-folder {{ if eq .RelPermalink $current.RelPermalink }}active{{ end }}">
+                {{ partial "utils/icon.html" "folder" }}
+                {{ partial "utils/icon.html" "folder-open" }}
+                <span>{{ partial "utils/auto-linktitle.html" . }}</span>
               </summary>
-              <ul>
-                {{ template "docs-recursive" (dict "context" . "current" $current) }}
-              </ul>
+              {{ template "docs-recursive" (dict "context" . "current" $current) }}
             </details>
           </li>
         {{ end }}
         {{ range $context.RegularPages.ByLinkTitle }}
-          <li>
-            <a href="{{ .RelPermalink }}"
-              class="{{ if eq .RelPermalink $current.RelPermalink }}active{{ end }}">
+          <li class="docs-item docs-file">
+            <a class="docs-link {{ if eq .RelPermalink $current.RelPermalink }}active{{ end }}"
+              href="{{ .RelPermalink }}">
               {{ partial "utils/icon.html" "file" }}
-              <span>{{ .LinkTitle }}</span>
+              <span>{{ partial "utils/auto-linktitle.html" . }}</span>
             </a>
           </li>
         {{ end }}
+      </ul>
 
-      {{ end }}
-
-    </aside>
-
+    {{ end }}
 
     <div class="primary-area">
 

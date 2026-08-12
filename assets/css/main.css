@@ -536,6 +536,111 @@ swiper-slide img {
   gap: 0.2rem 1rem;
   color: #666;
 }
+
+.docs-nav {
+  padding: 0 var(--edge-gap);
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  color: var(--text-color-secondary);
+  font-size: 14px;
+}
+
+.docs-tree {
+  overflow-y: auto;
+}
+
+.docs-nav details > summary {
+  list-style: none;
+}
+
+.docs-buttons {
+  display: flex;
+}
+
+.docs-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 4px 8px;
+}
+
+.docs-link:hover,
+.docs-link.active {
+  background: #f00;
+}
+
+/* .docs-nav a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  position: relative;
+}
+
+.docs-nav a::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -999px;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  transition: background 0.2s;
+}
+
+.docs-nav a:hover::after {
+  background: #cec4b8;
+}
+
+.docs-nav a.active::after {
+  background: #7ca3cc;
+}
+
+.docs-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.docs-tree ul ul {
+  border-left: 1px solid #666;
+}
+
+.docs-tree ul li {
+  padding-left: 1rem;
+}
+
+.docs-tree ul ul {
+  display: none;
+}
+
+.docs-tree li.open > ul {
+  display: block;
+}
+
+.docs-tree details > summary {
+  list-style: none;
+  cursor: pointer;
+}
+
+.docs-tree details > summary::-webkit-details-marker {
+  display: none;
+}
+
+.docs-folder-open {
+  display: none;
+}
+
+.docs-tree details[open] > summary .docs-folder-open {
+  display: inline-block;
+}
+
+.docs-tree details[open] > summary .docs-folder-closed {
+  display: none;
+} */
 /* breadcrumbs */
 .breadcrumbs-list {
   list-style: none;

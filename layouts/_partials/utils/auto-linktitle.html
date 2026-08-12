@@ -1,0 +1,19 @@
+{{ $title := "" }}
+
+{{ if .IsSection }}
+  {{ if .LinkTitle }}
+    {{ $title = .LinkTitle }}
+  {{ else if .Title }}
+    {{ $title = .Title }}
+  {{ else if .File }}
+    {{ $title = .File.ContentBaseName | humanize | title }}
+  {{ end }}
+{{ else if .IsPage }}
+  {{ if .LinkTitle }}
+    {{ $title = .LinkTitle }}
+  {{ else if .Title }}
+    {{ $title = .Title }}
+  {{ end }}
+{{ end }}
+
+{{ return $title }}
