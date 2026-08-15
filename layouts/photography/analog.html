@@ -1,13 +1,13 @@
 {{ define "main" }}
 
   {{ $data := dict }}
-  {{ $path := "metadata.json" }}
-  {{ with .Resources.Get $path }}
+  {{ $path := "analog.json" }}
+  {{ with resources.Get $path }}
     {{ with . | transform.Unmarshal }}
       {{ $data = . }}
     {{ end }}
   {{ else }}
-    {{ errorf "Unable to get page resource %q" $path }}
+    {{ errorf "Failed to load %q: file does not exist or contains no data" $path }}
   {{ end }}
 
   {{ $total := len $data }}
