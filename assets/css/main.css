@@ -518,7 +518,7 @@ main > .wrapper {
 
 .page-hero img {
   max-width: 100%;
-  max-height: calc(100vh - var(--header-height) - var(--main-padding-top) - 5.75rem);
+  max-height: calc(100vh - var(--header-top-height) - var(--main-padding-top) - 5.75rem);
   object-fit: contain;
   display: block;
   margin-inline: auto;
@@ -648,23 +648,49 @@ swiper-slide img {
   font-size: var(--text-size-sm);
 }
 
-.docs-nav-header {
-  display: flex;
-}
-
-.docs-nav-tree {
-  overflow-y: auto;
-  color: var(--text-color-secondary);
-}
-
-.docs-nav-tree ul {
+.docs-nav ul {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.docs-nav-tree details > summary {
+.docs-search {
+  padding: 0 16px;
+  display: flex;
+}
+
+.docs-search-input {
+  width: 100%;
+}
+
+.docs-header {
+  position: relative;
+  margin-top: 8px;
+}
+
+.docs-buttons {
+  position: absolute;
+  top: 0;
+  right: 16px;
+  display: flex;
+}
+
+.docs-buttons button:hover {
+  color: #f00;
+}
+
+.docs-tree {
+  overflow-y: auto;
+}
+
+.docs-tree details > summary {
   list-style: none;
+}
+
+.docs-nav svg {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
 }
 
 .docs-item {
@@ -673,13 +699,7 @@ swiper-slide img {
   width: 100%;
   cursor: pointer;
   gap: 4px;
-  padding: 1px 0 1px calc(var(--depth, 0) * 1rem + var(--edge-gap));
-}
-
-.docs-item svg {
-  flex-shrink: 0;
-  width: 20px;
-  height: 20px;
+  padding: 1px 0 1px calc(var(--depth, 0) * 1rem + 16px);
 }
 
 .docs-link {
@@ -695,29 +715,29 @@ swiper-slide img {
   background: #359aff;
 }
 
-.docs-nav-tree .icon-tabler-folder-open {
+.docs-tree .icon-tabler-folder-open {
   display: none;
 }
 
-.docs-nav-tree details[open] > summary .icon-tabler-folder {
+.docs-tree details[open] > summary .icon-tabler-folder {
   display: none;
 }
 
-.docs-nav-tree details[open] > summary .icon-tabler-folder-open {
+.docs-tree details[open] > summary .icon-tabler-folder-open {
   display: block;
 }
 
-.docs-nav-tree details[open] > ul {
+.docs-tree details[open] > ul {
   position: relative;
 }
 
-.docs-nav-tree details[open] > ul::before {
+.docs-tree details[open] > ul::before {
   content: "";
   position: absolute;
   top: 0;
   bottom: 0;
   border-left: 1px solid #000;
-  margin-left: calc(var(--depth) * 1rem + var(--edge-gap) + 4px);
+  margin-left: calc((var(--depth, 0) - 1) * 1rem + 16px + 4px);
   z-index: 2;
 }
 /* breadcrumbs */

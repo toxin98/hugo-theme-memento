@@ -5,19 +5,22 @@
     <aside class="sidebar" data-position="left">
 
       <nav class="docs-nav">
-        <div class="docs-nav-header">
-          <div class="docs-buttons">
-            <button>{{ partial "utils/icon.html" "search" }}</button>
-            <button>{{ partial "utils/icon.html" "copy-plus" }}</button>
-            <button>{{ partial "utils/icon.html" "copy-minus" }}</button>
-          </div>
+        <div class="docs-search">
+          <input class="docs-search-input" type="text" placeholder="Search" aria-label="Search">
+          <ul class="docs-search-results"></ul>
         </div>
-        <div class="docs-nav-tree">
+        <div class="docs-header">
           <a class="docs-item docs-link {{ if eq .RelPermalink .FirstSection.RelPermalink }}active{{ end }}"
             href="{{ .FirstSection.RelPermalink }}">
             {{ partial "utils/icon.html" "notebook" }}{{ .FirstSection.Title }}
           </a>
-          {{ template "docs-recursive" (dict "context" .FirstSection "current" . "depth" 0) }}
+          <div class="docs-buttons">
+            <button id="docs-expand" type="button" aria-label="Expand all">{{ partial "utils/icon.html" "copy-plus" }}</button>
+            <button id="docs-collapse" type="button" aria-label="Collapse all">{{ partial "utils/icon.html" "copy-minus" }}</button>
+          </div>
+        </div>
+        <div class="docs-tree">
+          {{ template "docs-recursive" (dict "context" .FirstSection "current" . "depth" 1) }}
         </div>
       </nav>
 
@@ -30,7 +33,6 @@
       {{ $depth := .depth }}
 
       <ul style="--depth: {{ $depth }}">
-        {{ $depth = add $depth 1 }}
         {{ range $context.Sections.ByLinkTitle }}
           <li style="--depth: {{ $depth }}">
             <details {{ if .IsAncestor $current }}open{{ end }}>
@@ -39,7 +41,7 @@
                 {{ partial "utils/icon.html" "folder-open" }}
                 <span>{{ partial "utils/auto-linktitle.html" . }}</span>
               </summary>
-              {{ template "docs-recursive" (dict "context" . "current" $current "depth" $depth) }}
+              {{ template "docs-recursive" (dict "context" . "current" $current "depth" (add $depth 1)) }}
             </details>
           </li>
         {{ end }}
