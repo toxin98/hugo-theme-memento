@@ -25,3 +25,13 @@
     {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
   </div>
 </div>
+{{ if and .IsPage (not .IsHome) }}
+  <div class="header-reading" aria-hidden="true">
+    <div class="wrapper">
+      <span class="header-reading-title">{{ .Title }}</span>
+      <button class="sidebar-toggle sidebar-toggle-reading" data-target="right" type="button" aria-label="Open table of contents" aria-expanded="false">
+        {{ partial "utils/icon.html" "list-tree" }}
+      </button>
+    </div>
+  </div>
+{{ end }}

@@ -9,7 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
       sidebar.classList.remove("open");
     });
 
-    overlay.classList.remove("active");
+    buttons.forEach(button => button.setAttribute("aria-expanded", "false"));
+    overlay?.classList.remove("active");
 
     unlockScroll();
   }
@@ -17,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function openSidebar(sidebar){
     sidebar.classList.add("open");
-    overlay.classList.add("active");
+    overlay?.classList.add("active");
 
     lockScroll();
   }
@@ -42,12 +43,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const sidebar = document.querySelector(`.sidebar[data-position="${target}"]`);
 
+      if (!sidebar) {
+        button.hidden = true;
+        return;
+      }
+
+      sidebar.id ||= `sidebar-${target}`;
+      button.setAttribute("aria-controls", sidebar.id);
+
       const isOpen = sidebar.classList.contains("open");
 
       closeSidebar();
 
       if(!isOpen){
         openSidebar(sidebar);
+        button.setAttribute("aria-expanded", "true");
       }
 
     });
