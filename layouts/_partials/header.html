@@ -1,22 +1,18 @@
 <div class="header-top">
   <div class="wrapper">
     <div class="header-top-left">
-      <button class="menu-toggle" id="hamburger">{{ partial "utils/icon.html" "menu-2" }}</button>
+      <button class="site-menu" id="hamburger">{{ partial "utils/icon.html" "menu-2" }}</button>
     </div>
     <div class="header-top-middle">
       <a href="/" class="site-brand">
         {{ with .Site.Params.logo }}
-          <img
-            class="site-logo"
-            src="{{ . | relURL }}"
-            alt="logo"
-          >
+        <img class="site-logo" src="{{ . | relURL }}" alt="logo">
         {{ end }}
         <span class="site-title">{{ site.Title }}</span>
       </a>
     </div>
     <div class="header-top-right">
-      <button>{{ partial "utils/icon.html" "search" }}</button>
+      <button class="site-search">{{ partial "utils/icon.html" "search" }}</button>
     </div>
   </div>
 </div>
@@ -26,12 +22,12 @@
   </div>
 </div>
 {{ if and .IsPage (not .IsHome) }}
-  <div class="header-reading" aria-hidden="true">
-    <div class="wrapper">
-      <span class="header-reading-title">{{ .Title }}</span>
-      <button class="sidebar-toggle sidebar-toggle-reading" data-target="right" type="button" aria-label="Open table of contents" aria-expanded="false">
-        {{ partial "utils/icon.html" "list-tree" }}
-      </button>
-    </div>
+<div class="header-reading" aria-hidden="true">
+  <div class="wrapper">
+    <span class="header-reading-title">{{ .Title }}</span>
+    <button class="sidebar-toggle sidebar-toggle-reading" data-target="right" type="button" aria-label="Open table of contents" aria-expanded="false">
+      {{ partial "utils/icon.html" "list-tree" }}
+    </button>
   </div>
+</div>
 {{ end }}
