@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const header = document.querySelector("header");
-  const readingHeader = header?.querySelector(".header-reading");
+  const readingHeader = document.querySelector("main > .header-reading");
   const sourceTitle = document.querySelector("main article.content > h1");
 
   if (!header || !readingHeader || !sourceTitle) return;
