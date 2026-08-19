@@ -12,6 +12,11 @@ document.addEventListener("DOMContentLoaded", () => {
   header.classList.toggle("has-reading-toc", hasToc);
   if (!hasToc) tocButton?.remove();
 
+  const layout = ["three", "two", "one"].find((name) =>
+    document.querySelector(`.${name}-column-layout`)
+  );
+  if (layout) header.classList.add(`reading-layout-${layout}`);
+
   let frame;
   let lastScrollY = window.scrollY;
   let pendingScrollDelta = 0;
