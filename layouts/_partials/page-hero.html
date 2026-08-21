@@ -1,0 +1,5 @@
+{{ with .Resources.Get .Params.featured }}
+<section class="page-hero">
+  <img src="{{ .RelPermalink }}" alt="featured-img">
+</section>
+{{ end }}

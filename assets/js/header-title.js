@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const header = document.querySelector("header");
-  const readingHeader = document.querySelector("main > .header-reading");
+  const readingHeader = document.querySelector("main > .reading-bar");
   const sourceTitle = document.querySelector("main article.content > h1");
 
   if (!header || !readingHeader || !sourceTitle) return;
@@ -29,9 +29,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const titleRect = sourceTitle.getBoundingClientRect();
     const titleTop = titleRect.top + window.scrollY;
     const titleBottom = titleRect.bottom + window.scrollY;
+    const visibleHeaderHeight = header.getBoundingClientRect().height;
 
-    readingStartAt = titleBottom;
-    readingEndAt = Math.max(0, titleTop - header.getBoundingClientRect().height);
+    readingStartAt = Math.max(0, titleBottom - visibleHeaderHeight);
+    readingEndAt = Math.max(0, titleTop - visibleHeaderHeight);
   }
 
   function hideReadingHeader() {

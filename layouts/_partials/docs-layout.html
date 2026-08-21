@@ -1,5 +1,7 @@
 <div class="wrapper">
 
+  {{ partial "reading-bar.html" . }}
+
   <div class="three-column-layout">
 
     <aside class="sidebar" data-position="left">
@@ -64,8 +66,8 @@
 
       <article class="content">
         <div class="meta-container">
-          Last updated: {{ partial "utils/date-format.html" (dict "date" .Lastmod "layout" ":date_long") }}
-          Publish date: {{ partial "utils/date-format.html" (dict "date" .PublishDate "layout" ":date_long") }}
+          <span>Last updated: {{ partial "utils/date-format.html" (dict "date" .Lastmod "layout" ":date_long") }}</span>
+          <span>Publish date: {{ partial "utils/date-format.html" (dict "date" .PublishDate "layout" ":date_long") }}</span>
         </div>
         <h1>{{ .Title }}</h1>
         {{ .Content }}
@@ -80,7 +82,6 @@
 
   </div>
 
-  <div class="fixed-bottom-bar">
-    <button class="sidebar-toggle" data-target="left">{{ partial "utils/icon.html" "layout-sidebar-left-expand" }}</button>
-  </div>
+  <button class="sidebar-toggle" data-target="left">{{ partial "utils/icon.html" "layout-sidebar-left-expand" }}</button>
+
 </div>

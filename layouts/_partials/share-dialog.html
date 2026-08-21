@@ -1,0 +1,64 @@
+<dialog class="share-dialog" data-share-dialog>
+  <div class="share-dialog-inner">
+
+    <div class="share-dialog-header">
+      <span>Share this page</span>
+
+      <button
+        class="share-dialog-close"
+        type="button"
+        aria-label="Close"
+        data-share-close
+      >
+        {{ partial "utils/icon.html" "x" }}
+      </button>
+    </div>
+
+    <div class="share-platforms">
+
+      <a
+        class="share-platform"
+        data-platform="x"
+        href="#"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {{ partial "utils/icon.html" "brand-x" }}
+        <span>X</span>
+      </a>
+
+      <a
+        class="share-platform"
+        data-platform="facebook"
+        href="#"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {{ partial "utils/icon.html" "facebook" }}
+        <span>Facebook</span>
+      </a>
+
+      <!-- <a
+        class="share-platform"
+        data-platform="linkedin"
+        href="#"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {{ partial "utils/icon.html" "linkedin" }}
+        <span>LinkedIn</span>
+      </a>
+
+      <button
+        class="share-platform"
+        type="button"
+        data-share-copy
+      >
+        {{ partial "utils/icon.html" "link" }}
+        <span>Copy link</span>
+      </button> -->
+
+    </div>
+
+  </div>
+</dialog>
