@@ -45,7 +45,7 @@
                   {{ with .GetTerms "tags" }}
                   <div class="entry-tags" aria-label="tags">
                     {{ range . }}
-                      <a class="entry-tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+                      <span class="entry-tag">{{ .LinkTitle }}</span>
                     {{ end }}
                   </div>
                   {{ end }}
