@@ -883,7 +883,7 @@ swiper-slide img {
   color: #6b7280;
 }
 
-.posts .entry {
+.posts .entry.card {
   display: flex;
   padding: 0.5rem;
 }
@@ -1441,7 +1441,7 @@ html.viewer-show {
   gap: 1.5rem;
 }
 
-.projects .entry {
+.projects .entry.card {
   
 }
 
@@ -1485,7 +1485,7 @@ html.viewer-show {
   padding: 10px;
 }
 
-.things .card {
+.things .entry.card {
   border-radius: 0;
   background: transparent;
   border: none;
