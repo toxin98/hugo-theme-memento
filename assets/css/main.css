@@ -317,7 +317,7 @@ main {
   position: sticky;
   top: var(--header-visible-height);
   height: calc(100vh - var(--header-visible-height));
-  padding-top: 1rem;
+  padding-top: 16px;
 }
 
 .sidebar-toggle {
@@ -333,23 +333,15 @@ main {
   color: #fff;
   box-shadow: 0 4px 14px rgb(0 0 0 / .15);
   transition: transform .2s ease, opacity .2s ease, box-shadow .2s ease;
-  visibility: hidden;
-}
-
-.sidebar-toggle-reading {
   display: none;
-  flex: 0 0 32px;
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  background: transparent;
-  color: inherit;
-  box-shadow: none;
-  visibility: visible;
 }
 
-.sidebar-toggle-reading:hover,
-.sidebar-toggle-reading[aria-expanded="true"] {
+.reading-bar-button {
+  
+}
+
+.reading-bar-button:hover,
+.reading-bar-button[aria-expanded="true"] {
   background: rgba(108, 176, 216, 0.18);
   transform: none;
 }
@@ -449,7 +441,6 @@ main {
   min-height: 0;
   display: flex;
   flex-direction: column;
-  padding: 0 var(--edge-gap);
 }
 
 .toc-header {
@@ -538,11 +529,10 @@ main {
 
 .card {
   border-radius: 12px;
-  overflow: hidden;
   background: var(--card-background);
   border: 1px solid var(--border-color);
+  overflow: hidden;
   transition: transform .25s ease;
-  margin: 5px;
 }
 
 .cards-grid {
@@ -668,6 +658,7 @@ swiper-slide img {
 
 .docs-search {
   padding: 0 16px;
+  margin-bottom: 8px;
   display: flex;
 }
 
@@ -677,7 +668,6 @@ swiper-slide img {
 
 .docs-header {
   position: relative;
-  margin-top: 8px;
 }
 
 .docs-buttons {
@@ -1062,7 +1052,7 @@ swiper-slide img {
 
 .gallery-analog-stats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 0.9rem;
   margin: 1.25rem 0;
 }
@@ -1447,7 +1437,7 @@ html.viewer-show {
 /* projects */
 .projects .entry-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 1.5rem;
 }
 
@@ -1495,18 +1485,16 @@ html.viewer-show {
   padding: 10px;
 }
 
-.things .entry {
-  flex: 0 0 140px;
-  width: 140px;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  align-items: center;
-  text-decoration: none;
+.things .card {
+  border-radius: 0;
+  background: transparent;
+  border: none;
+  flex: 0 0 120px;
 }
 
 .things .entry-link {
   flex-direction: column;
+  align-items: center;
 }
 
 .things .entry-meta {
@@ -1515,10 +1503,9 @@ html.viewer-show {
 }
 
 .things .entry-featured {
-  width: 100px;
-  height: 100px;
-  border-radius: 12px;
-  background: var(--card-background);
+  width: 80%;
+  aspect-ratio: 1;
+  overflow: hidden;
 }
 
 .things .entry-featured img {
@@ -1529,12 +1516,12 @@ html.viewer-show {
 
 .things .entry-title {
   font-size: var(--text-size-sm);
-  width: 100%;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  text-align: center;
   color: #333;
+  text-align: center;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
 }
 
 @media (max-width: 1280px) {
@@ -1592,7 +1579,7 @@ html.viewer-show {
   }
 
   .sidebar-toggle[data-target="left"] {
-    visibility: visible;
+    display: flex;
   }
 
 }
@@ -1615,7 +1602,7 @@ html.viewer-show {
   }
 
   .header-nav.show {
-    height: calc(100dvh - var(--header-base-height));
+    height: calc(100vh - var(--header-base-height));
     opacity: 1;
   }
 
@@ -1647,47 +1634,4 @@ html.viewer-show {
     padding-top: 0;
   }
 
-}
-
-@media (min-width: 1025px) {
-
-  header.reading-layout-three + main .reading-bar > .wrapper {
-    display: grid;
-    grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
-    gap: var(--column-layout-gap);
-    padding-inline: 24px;
-  }
-
-  header.reading-layout-three + main .reading-bar-content {
-    grid-column: 2;
-  }
-
-  header.reading-layout-two + main .reading-bar > .wrapper {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 400px;
-    gap: var(--column-layout-gap);
-    padding-inline: 24px;
-  }
-
-  header.reading-layout-two + main .reading-bar-content {
-    grid-column: 1;
-    width: min(100%, 800px);
-    margin-inline: auto;
-  }
-
-  header.reading-layout-one + main .reading-bar-content {
-    flex: 0 1 800px;
-    margin-inline: auto;
-  }
-}
-
-@media (min-width: 1281px) {
-
-  header.reading-layout-three + main .reading-bar > .wrapper {
-    grid-template-columns: var(--sidebar-width) minmax(0, 1fr) var(--sidebar-width);
-  }
-
-  header.reading-layout-three + main .reading-bar-content {
-    grid-column: 2;
-  }
 }
