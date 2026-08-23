@@ -62,8 +62,6 @@
 
       <!-- {{ partial "breadcrumbs.html" . }} -->
 
-      {{ partial "reading-helper.html" . }}
-
       <article class="content">
         <div class="meta-container">
           <span>Last updated: {{ partial "utils/date-format.html" (dict "date" .Lastmod "layout" ":date_long") }}</span>
@@ -73,6 +71,10 @@
         {{ .Content }}
         {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
       </article>
+
+      {{ partial "share.html" . }}
+
+      {{ partial "reading-header.html" . }}
 
     </div>
 

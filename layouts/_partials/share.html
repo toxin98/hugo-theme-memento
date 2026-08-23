@@ -1,20 +1,10 @@
-<div class="reading-bar" aria-hidden="true">
-  <div class="wrapper">
-    <div class="reading-bar-content">
-    <span class="reading-bar-title">{{ .Title }}</span>
-    <button class="reading-bar-button" type="button" data-share-open>{{ partial "utils/icon.html" "share" }}</button>
-    <button class="reading-bar-button" data-target="right" type="button" aria-label="Open table of contents" aria-expanded="false">
-      {{ partial "utils/icon.html" "list-tree" }}
-    </button>
-    </div>
-  </div>
-</div>
+<button class="share-fab" type="button" data-share-open>{{ partial "utils/icon.html" "share" }}<span>Share</span></button>
 
 <dialog class="share-dialog" data-share-dialog>
   <div class="share-dialog-inner">
 
     <div class="share-dialog-header">
-      <span>Share this page</span>
+      <span>Share</span>
 
       <button
         class="share-dialog-close"
@@ -37,6 +27,17 @@
       >
         {{ partial "utils/icon.html" "brand-x" }}
         <span>X</span>
+      </a>
+
+      <a
+        class="share-platform"
+        data-platform="bilibili"
+        href="#"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {{ partial "utils/icon.html" "brand-bilibili" }}
+        <span>Bilibili</span>
       </a>
 
     </div>
