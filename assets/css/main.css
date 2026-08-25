@@ -1,3 +1,6 @@
+@import "components/header.css";
+@import "components/footer.css";
+
 :root {
   --header-top-height: 52px;
   --header-nav-height: 42px;
