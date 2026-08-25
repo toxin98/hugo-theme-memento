@@ -1,0 +1,32 @@
+{{ $metadataPath := site.Params.photography.analog.metadataPath | default "analog/metadata" }}
+
+{{ range resources.Match (printf "%s/*.json" $metadataPath) }}
+
+  {{/* 读取 data */}}
+  {{ $data := . | transform.Unmarshal }}
+
+  {{/* 取得 slug */}}
+  {{ $slug := path.BaseName .Name }}
+
+  {{/* 校验 id 与文件名是否一致 */}}
+  {{ if and $data.id (ne (string $data.id) $slug) }}
+    {{ errorf "【Metadata ID 不匹配】文件 %s.json 中的 id 为 %q，与文件名 %q 不一致！请检查是否忘记修改！" $slug $data.id $slug }}
+  {{ end }}
+
+  {{ $title := $data.title }}
+  {{ $rawContent := $data.note }}
+
+  {{/* 创建页面 */}}
+  {{ $page := dict
+    "kind" "page"
+    "path" $slug
+    "title" $title
+    "params" $data
+    "content" (dict
+      "mediaType" "text/markdown"
+      "value" $rawContent
+    )
+  }}
+  {{ $.AddPage $page }}
+
+{{ end }}
