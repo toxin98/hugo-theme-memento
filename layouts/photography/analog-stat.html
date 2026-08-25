@@ -1,18 +1,18 @@
 {{ define "main" }}
 
-  {{ $data := slice }}
+  {{ $objects := slice }}
 
   {{ range resources.Match "analog/metadata/*.json" }}
     {{ $json := . | transform.Unmarshal }}
-    {{ $data = $data | append $json }}
+    {{ $objects = $objects | append $json }}
   {{ end }}
 
-  {{ $total := len $data }}
+  {{ $total := len $objects }}
   {{ $filmCounts := dict }}
   {{ $cameraCounts := dict }}
   {{ $labCounts := dict }}
 
-  {{ range $data }}
+  {{ range $objects }}
     {{ with .film }}
       {{ $current := index $filmCounts . | default 0 }}
       {{ $filmCounts = merge $filmCounts (dict . (add $current 1)) }}
@@ -85,7 +85,7 @@
           </section>
 
           <section class="gallery-analog-grid" aria-label="底片记录">
-            {{ range $data }}
+            {{ range $objects }}
               {{ $started := "" }}
               {{ $finished := "" }}
               {{ with .date }}
