@@ -64,6 +64,7 @@ button {
 .wrapper {
   max-width: 1360px;
   margin: 0 auto;
+  padding: 0 var(--edge-gap);
 }
 
 header {
@@ -89,7 +90,6 @@ header {
 }
 
 .header-top > .wrapper {
-  padding: 0 var(--edge-gap);
   height: 100%;
   align-items: center;
   display: grid;
@@ -140,7 +140,6 @@ header {
 }
 
 .header-nav > .wrapper {
-  padding: 0 var(--edge-gap);
   height: 100%;
   display: flex;
   justify-content: center;
@@ -267,10 +266,6 @@ header.reading-header-down + main .reading-bar {
 footer {
   background: var(--footer-color);
   padding-block: 1rem;
-}
-
-footer > .wrapper {
-  padding: 0 var(--edge-gap);
 }
 
 .footer-copy,
@@ -436,8 +431,8 @@ main {
 
   position: fixed;
   top: var(--header-visible-height);
-  left: var(--edge-gap);
-  right: var(--edge-gap);
+  left: 0;
+  right: 0;
 
   padding: 0.5rem 1.25rem;
 
@@ -492,7 +487,7 @@ main {
 }
 /* content */
 .content {
-  padding: 0 1.5rem;
+  padding: 0 0.5rem;
   color: #444;
 }
 
@@ -616,7 +611,6 @@ main {
 }
 
 .entry-group {
-  padding: 0 var(--edge-gap);
   margin-bottom: 1rem;
 }
 
@@ -1369,10 +1363,6 @@ swiper-slide img {
   line-height: 1.6;
 }
 /* ephemera */
-.ephemera .primary-area {
-  padding: 0 var(--edge-gap);
-}
-
 .ephemera-topbar {
   position: sticky;
   top: var(--header-visible-height);
