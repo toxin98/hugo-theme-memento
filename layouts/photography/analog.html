@@ -1,13 +1,10 @@
 {{ define "main" }}
 
-  {{ $data := dict }}
-  {{ $path := "analog.json" }}
-  {{ with resources.Get $path }}
-    {{ with . | transform.Unmarshal }}
-      {{ $data = . }}
-    {{ end }}
-  {{ else }}
-    {{ errorf "Failed to load %q: file does not exist or contains no data" $path }}
+  {{ $data := slice }}
+
+  {{ range resources.Match "analog/*.json" }}
+    {{ $json := . | transform.Unmarshal }}
+    {{ $data = $data | append $json }}
   {{ end }}
 
   {{ $total := len $data }}
