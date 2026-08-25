@@ -2,7 +2,7 @@
 
   {{ $data := slice }}
 
-  {{ range resources.Match "analog/*.json" }}
+  {{ range resources.Match "analog/metadata/*.json" }}
     {{ $json := . | transform.Unmarshal }}
     {{ $data = $data | append $json }}
   {{ end }}
@@ -99,7 +99,7 @@
 
               <article class="gallery-analog-item card">
                 <div class="gallery-analog-item-header">
-                  <span class="gallery-analog-item-id">#{{ .id }}</span>
+                  <a href="{{ .id }}"><span class="gallery-analog-item-id">#{{ .id }}</span></a>
                   {{ if and (ne $started "") (ne $finished "") }}
                     <span class="gallery-analog-item-date">{{ $started }} → {{ $finished }}</span>
                   {{ else if ne $started "" }}
