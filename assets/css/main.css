@@ -1,5 +1,6 @@
 @import "components/header.css";
 @import "components/footer.css";
+@import 'components/analog-stats.css';
 
 :root {
   --header-top-height: 52px;
