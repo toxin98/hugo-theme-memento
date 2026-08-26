@@ -1,0 +1,42 @@
+.projects .entry-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.5rem;
+}
+
+.projects .entry.card {
+  display: block;
+}
+
+.projects .entry:hover {
+  transform: translateY(-4px);
+}
+
+.projects .entry-link {
+  display: flex;
+  flex-direction: column;
+}
+
+.projects .entry-featured {
+  aspect-ratio: 16 / 9;
+}
+
+.projects .entry-featured img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.projects .entry-pro {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.projects .entry-desc {
+  margin: 0;
+  color: var(--text-color-secondary);
+  font-size: var(--text-size-sm);
+}

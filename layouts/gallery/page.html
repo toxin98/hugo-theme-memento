@@ -1,0 +1,34 @@
+{{ define "main" }}
+
+<div class="wrapper photography">
+
+  <div class="three-column-layout">
+
+    <aside class="sidebar" data-position="left">
+    </aside>
+
+    <div class="primary-area">
+
+      <div class="gallery-images">
+        {{ range .Resources.ByType "image" }}
+          <figure class="gallery-image">
+            <img
+              src="{{ .RelPermalink }}"
+              width="{{ .Width }}"
+              height="{{ .Height }}"
+              loading="lazy"
+            >
+          </figure>
+        {{ end }}
+      </div>
+
+    </div>
+
+    <aside class="sidebar" data-position="right">
+    </aside>
+
+  </div>
+
+</div>
+
+{{ end }}

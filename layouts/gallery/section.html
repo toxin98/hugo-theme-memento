@@ -1,0 +1,51 @@
+{{ define "main" }}
+
+<div class="wrapper photography">
+
+  <div class="three-column-layout">
+
+    <aside class="sidebar" data-position="left">
+    </aside>
+
+    <div class="primary-area">
+
+      <a href="/photography/analog/stats">
+        Film Statistics
+      </a>
+
+      <div class="gallery-list">
+        {{ range .Pages }}
+          <article class="gallery-card">
+            <a href="{{ .RelPermalink }}">
+              {{ with .Resources.GetMatch .Params.cover }}
+                <img
+                  src="{{ .RelPermalink }}"
+                  alt="{{ $.Title }}"
+                  loading="lazy"
+                >
+              {{ end }}
+
+              <div class="gallery-card-content">
+                <h2>{{ .Title }}</h2>
+
+                {{ with .Description }}
+                  <p>{{ . }}</p>
+                {{ end }}
+
+                <span>{{ .Date.Format "2006" }}</span>
+              </div>
+            </a>
+          </article>
+        {{ end }}
+      </div>
+
+    </div>
+
+    <aside class="sidebar" data-position="right">
+    </aside>
+
+  </div>
+
+</div>
+
+{{ end }}

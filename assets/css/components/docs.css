@@ -1,0 +1,140 @@
+.meta-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.2rem 1rem;
+  color: var(--text-color-secondary);
+}
+
+.docs-nav {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  font-size: var(--text-size-sm);
+}
+
+.docs-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.docs-search {
+  padding: 0 16px;
+  margin-bottom: 8px;
+  display: flex;
+}
+
+.docs-search-input {
+  width: 100%;
+}
+
+.docs-header {
+  position: relative;
+}
+
+.docs-buttons {
+  position: absolute;
+  top: 0;
+  right: 16px;
+  display: flex;
+}
+
+.docs-buttons button:hover {
+  color: #f00;
+}
+
+.docs-tree {
+  overflow-y: auto;
+}
+
+.docs-tree details > summary {
+  list-style: none;
+}
+
+.docs-nav svg {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.docs-item {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  cursor: pointer;
+  gap: 4px;
+  padding: 1px 0 1px calc(var(--depth, 0) * 1rem + 16px);
+}
+
+.docs-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.docs-item:hover {
+  background: var(--accent-color);
+}
+
+.docs-item.active {
+  background: #359aff;
+}
+
+.docs-tree .icon-tabler-folder-open {
+  display: none;
+}
+
+.docs-tree details[open] > summary .icon-tabler-folder {
+  display: none;
+}
+
+.docs-tree details[open] > summary .icon-tabler-folder-open {
+  display: block;
+}
+
+.docs-tree details[open] > ul {
+  position: relative;
+}
+
+.docs-tree details[open] > ul::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-left: 1px solid #000;
+  margin-left: calc((var(--depth, 0) - 1) * 1rem + 16px + 4px);
+  z-index: 2;
+}
+/* breadcrumbs */
+.breadcrumbs-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 6px 0;
+  padding: 0;
+  font-size: 14px;
+}
+
+.breadcrumbs-list li {
+  display: flex;
+  color: #555;
+}
+
+.breadcrumbs-list a {
+  text-decoration: none;
+  color: #0073e6;
+  transition: color 0.2s;
+}
+
+.breadcrumbs-list a:hover {
+  text-decoration: underline;
+  color: var(--accent-color);
+}
+
+.breadcrumbs-list li:not(:last-child)::after {
+  content: "›";
+  margin: 0 4px;
+  font-size: 24px;
+  line-height: 14px;
+}
