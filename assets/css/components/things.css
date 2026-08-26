@@ -1,3 +1,7 @@
+.wrapper.things {
+  max-width: 800px;
+}
+
 .things .entry-list {
   display: flex;
   flex-direction: row;

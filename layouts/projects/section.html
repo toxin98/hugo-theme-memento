@@ -2,61 +2,57 @@
 
   <div class="wrapper projects">
 
-    <div class="primary-area">
+    {{ $projects := .RegularPages }}
 
-      {{ $projects := .RegularPages }}
+    {{ $categories := slice }}
 
-      {{ $categories := slice }}
-
-      {{ range $projects }}
-        {{ range .Params.categories }}
-          {{ $categories = $categories | append . }}
-        {{ end }}
+    {{ range $projects }}
+      {{ range .Params.categories }}
+        {{ $categories = $categories | append . }}
       {{ end }}
+    {{ end }}
 
-      {{ $categories = $categories | uniq | sort }}
+    {{ $categories = $categories | uniq | sort }}
 
-      {{ range $categories }}
+    {{ range $categories }}
 
-        {{ $cat := . }}
+      {{ $cat := . }}
 
-      <div class="entry-group">
+    <div class="entry-group">
 
-        <div class="entry-group-header">
-          <h2 class="entry-group-title">{{ $cat }}</h2>
-        </div>
-
-        <ul class="entry-list">
-
-        {{ range $projects }}
-
-          {{ if in .Params.categories $cat }}
-
-          <li class="entry card">
-            <a class="entry-link" href="{{ .RelPermalink }}">
-
-              <div class="entry-featured">
-                {{ partial "utils/get-featured.html" . }}
-              </div>
-              <div class="entry-pro">
-                <h3 class="entry-title">{{ .Title }}</h3>
-                <p class="entry-desc">{{ .Description | default "There is no description." }}</p>
-              </div>
-
-            </a>
-          </li>
-
-          {{ end }}
-
-        {{ end }}
-
-        </ul>
-
+      <div class="entry-group-header">
+        <h2 class="entry-group-title">{{ $cat }}</h2>
       </div>
 
+      <ul class="entry-list">
+
+      {{ range $projects }}
+
+        {{ if in .Params.categories $cat }}
+
+        <li class="entry card">
+          <a class="entry-link" href="{{ .RelPermalink }}">
+
+            <div class="entry-featured">
+              {{ partial "utils/get-featured.html" . }}
+            </div>
+            <div class="entry-pro">
+              <h3 class="entry-title">{{ .Title }}</h3>
+              <p class="entry-desc">{{ .Description | default "There is no description." }}</p>
+            </div>
+
+          </a>
+        </li>
+
+        {{ end }}
+
       {{ end }}
 
+      </ul>
+
     </div>
+
+    {{ end }}
 
   </div>
 
