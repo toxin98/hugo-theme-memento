@@ -4,7 +4,6 @@
 @import 'components/things.css';
 @import 'components/gallery.css';
 @import 'components/ephemera.css';
-@import 'components/analog-stats.css';
 
 :root {
   --header-top-height: 52px;

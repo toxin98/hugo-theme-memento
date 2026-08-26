@@ -11,9 +11,15 @@
 
   {{ $js := printf "const metadataList = %s;" ($data | jsonify) }}
 
-  {{ $resource := resources.FromString "js/analog-metadata.js" $js }}
+  {{ $metadata := resources.FromString "analog-metadata.js" $js }}
 
-  <script src="{{ $resource.RelPermalink }}"></script>
+  <script src="{{ $metadata.RelPermalink }}"></script>
+
+  <!-- 引入 static/analog-stats.js -->
+  <script src="{{ "analog-stats.js" | relURL }}"></script>
+
+  <!-- 引入 static/analog-stats.css -->
+  <link rel="stylesheet" href="{{ "analog-stats.css" | relURL }}">
 
   <div class="wrapper photography">
 

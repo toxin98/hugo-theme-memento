@@ -8,7 +8,6 @@ import "./posts.js"
 import "./sidebar.js"
 import "./ephemera.js";
 import "./infinite-scroll.js";
-import "./analog-stats.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".highlight").forEach(block => {
