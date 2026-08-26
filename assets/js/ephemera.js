@@ -30,8 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   const viewer = document.getElementById("ephemeraViewer");
-  const viewerMain = viewer?.querySelector(".viewer-main");
-  const viewerSide = viewer?.querySelector(".viewer-side");
 
   function openViewer(item) {
 
@@ -44,15 +42,14 @@ document.addEventListener("DOMContentLoaded", () => {
       createSwiper(item.querySelector(".ephemera-media"))
     );
 
-    viewerMain.replaceChildren(mediaDiv);
+    viewer?.querySelector(".viewer-main").replaceChildren(mediaDiv);
 
-    viewerSide.replaceChildren(
+    viewer?.querySelector(".viewer-side").replaceChildren(
       item.querySelector(".ephemera-date").cloneNode(true),
       item.querySelector(".ephemera-content").cloneNode(true)
     );
 
     viewer.classList.remove("hidden");
-
     document.documentElement.classList.add("viewer-show");
 
   }
