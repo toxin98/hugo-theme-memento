@@ -1,3 +1,14 @@
+.ephemera-masonry {
+  display: flex;
+  flex-wrap: wrap; /* 一行放不下自动换行 */
+  gap: 2px;
+}
+
+.ephemera-masonry img {
+  height: 90px;
+}
+
+
 .ephemera-topbar {
   position: sticky;
   top: var(--header-visible-height);
