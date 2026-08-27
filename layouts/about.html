@@ -14,6 +14,78 @@
           {{ .Content }}
         </article>
 
+        {{ with .Params.education }}
+        <section class="profile-section education">
+          <h2>Education</h2>
+
+          <div class="profile-list">
+            {{ range . }}
+              <article class="profile-item">
+                <div class="profile-date">
+                  {{ .start }} — {{ .end }}
+                </div>
+
+                <div class="profile-content">
+                  <h3>{{ .degree }} in {{ .field }}</h3>
+                  <p>{{ .institution }}</p>
+                  {{ with .location }}
+                    <span>{{ . }}</span>
+                  {{ end }}
+                </div>
+              </article>
+            {{ end }}
+          </div>
+        </section>
+        {{ end }}
+
+        {{ with .Params.publications }}
+        <section class="profile-section publications">
+          <h2>Publications</h2>
+
+          <div class="publications-list">
+            {{ range sort . "year" "desc" }}
+              <article class="publication">
+
+                <div class="publication-year">
+                  {{ .year }}
+                </div>
+
+                <div class="publication-content">
+
+                  <h3>{{ .title }}</h3>
+
+                  {{ with .authors }}
+                    <p class="publication-authors">
+                      {{ delimit . ", " }}
+                    </p>
+                  {{ end }}
+
+                  <p class="publication-venue">
+                    {{ .venue }}
+                  </p>
+
+                  {{ with .links }}
+                    <div class="publication-links">
+
+                      {{ with .doi }}
+                        <a href="{{ printf "https://doi.org/%s" . }}" target="_blank" rel="noopener">DOI</a>
+                      {{ end }}
+
+                      {{ with .pdf }}
+                        <a href="{{ . }}" target="_blank" rel="noopener">PDF</a>
+                      {{ end }}
+
+                    </div>
+                  {{ end }}
+
+                </div>
+
+              </article>
+            {{ end }}
+          </div>
+        </section>
+        {{ end }}
+
       </div>
 
       <aside class="sidebar" data-position="right">
