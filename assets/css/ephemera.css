@@ -5,7 +5,7 @@
 
 .ephemera-topbar {
   position: sticky;
-  top: var(--header-visible-height);
+  top: 0;
   height: 80px;
   display: flex;
   align-items: center;
@@ -101,11 +101,7 @@
 }
 
 .ephemera-feed[data-layout="list"] .ephemera-media {
-  height: 160px;
-}
-
-.ephemera-feed[data-layout="grid"] .ephemera-media {
-  height: 100%;
+  height: 180px;
 }
 
 .ephemera-media > * {
