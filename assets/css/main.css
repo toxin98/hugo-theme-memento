@@ -802,7 +802,7 @@ swiper-slide img {
   }
 
   .header-nav.show {
-    height: calc(100vh - var(--header-base-height));
+    height: calc(100dvh - var(--header-base-height));
     opacity: 1;
   }
 
