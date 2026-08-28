@@ -7,6 +7,7 @@ import "./docs.js"
 import "./posts.js"
 import "./sidebar.js"
 import "./ephemera.js";
+import "./gallery.js";
 import "./infinite-scroll.js";
 
 document.addEventListener("DOMContentLoaded", () => {
