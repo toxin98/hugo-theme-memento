@@ -50,8 +50,8 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  const island = document.querySelector("[data-navigation-island]");
-  const header = island?.querySelector(".island-header");
+  const island = document.querySelector("[data-navigation]");
+  const header = island?.querySelector(".segment-row");
 
   if (!island || !header) return;
 

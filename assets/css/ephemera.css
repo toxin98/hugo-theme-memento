@@ -3,42 +3,43 @@
   max-width: 656px;
 }
 
-.ephemera-topbar {
-  position: sticky;
-  top: 0;
-  height: 80px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: var(--main-color);
-  z-index: 1;
-}
-
-.ephemera-topbar :nth-child(2) {
-  margin-right: auto;
-}
-
 .ephemera-avatar {
+  position: sticky;
   width: 48px;
+  height: 48px;
+  border-radius: 4px;
+  overflow: hidden;
 }
 
 .ephemera-avatar img {
   width: 100%;
 }
 
-.ephemera-count {
+.ephemera-topbar {
+  position: sticky;
+  top: 0;
+  height: 60px;
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  background: var(--main-color);
+  z-index: 1000;
+}
+
+.ephemera-topbar :nth-last-child(1) {
+  margin-left: auto;
+}
+
+.ephemera-count,
+.ephemera-control {
   display: flex;
   gap: 0.5rem;
 }
 
-.ephemera-count button {
+.ephemera-count button,
+.ephemera-control button {
   align-items: center;
   gap: 2px;
-}
-
-.ephemera-control .layout-toggle {
-  display: flex;
-  gap: 0.5rem;
 }
 
 .ephemera-item {

@@ -7,14 +7,14 @@
 @import 'ephemera.css';
 
 :root {
-  --island-height: 52px;
+  --topbar-height: 52px;
   --main-padding-block: 24px;
   --column-layout-gap: 20px;
   --sidebar-width: 270px;
   --edge-gap: 16px;
   --header-color: #281313;
-  --main-color: #fcfcfc;
-  --footer-color: #eee;
+  --main-color: #eee;
+  --footer-color: #d0edf5;
   --text-size-lg: 18px;
   --text-size-base: 16px;
   --text-size-sm: 14px;
@@ -57,86 +57,60 @@ button {
 
 .wrapper {
   max-width: 1360px;
-  margin: 0 auto;
+  margin-inline: auto;
   padding: 0 var(--edge-gap);
 }
 
-header {
+.topbar {
+  z-index: 999;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 999;
-  pointer-events: none;
+  height: var(--topbar-height);
+  padding: 6px var(--edge-gap);
+  display: flex;
+  justify-content: space-between;
 }
 
-header::before {
-  content: "";
-  display: block;
-  height: 16px;
-}
-
-.island {
-  flex-direction: column;
-
-  width: fit-content;
-  max-width: 100%;
-
-  height: var(--island-height);
-
-  overflow: hidden;
-
-  border: 1px solid #000;
-  border-radius: 999px;
-
-  background: white;
-
-  color: inherit;
-
-  pointer-events: auto;
-  cursor: pointer;
-
-  transition:
-    width 0.4s cubic-bezier(.22, 1, .36, 1),
-    height 0.4s cubic-bezier(.22, 1, .36, 1),
-    border-radius 0.4s cubic-bezier(.22, 1, .36, 1);
-}
-
-.island.is-open {
+.topbar-left.is-open {
   width: min(18rem, 100%);
   height: 20rem;
-
-  border-radius: 1.5rem;
 }
 
-.island-header {
+.topbar-left {
+  background: #fff;
+  border-radius: 8px;
+  padding: 6px;
   display: flex;
-  align-items: center;
-
-  min-width: 0;
-  height: 3rem;
+  flex-direction: column;
+  overflow: hidden;
 }
 
-.island-avatar {
-  flex: 0 0 3rem;
+.segment-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.topbar-avatar {
+  flex: 0 0 32px;
 
   display: grid;
   place-items: center;
 
-  width: 3rem;
-  height: 3rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
 }
 
-.island-avatar img {
-  width: 2.4rem;
-  height: 2.4rem;
-
-  border-radius: 50%;
-
+.topbar-avatar img {
+  width: 100%;
   object-fit: cover;
 }
 
-.island-location {
+.topbar-location {
   min-width: 0;
 
   padding-right: 1rem;
@@ -170,7 +144,7 @@ header::before {
   transition-delay: 0s;
 }
 
-.island.is-open nav {
+.topbar-left.is-open nav {
   opacity: 1;
 
   transform: translateY(0);
@@ -180,7 +154,7 @@ header::before {
   transition-delay: 0.15s;
 }
 
-.island > .nav > ul {
+.topbar-left > .nav > ul {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -191,11 +165,11 @@ header::before {
   flex-direction: column;
 }
 
-.navigation li {
+.topbar-left li {
   height: 100%;
 }
 
-.navigation a {
+.topbar-left a {
   height: 100%;
   display: flex;
   align-items: center;
@@ -205,7 +179,7 @@ header::before {
   position: relative;
 }
 
-.navigation a::after {
+.topbar-left a::after {
   content: "";
   position: absolute;
   left: 0;
@@ -218,25 +192,19 @@ header::before {
   transition: transform 0.25s ease;
 }
 
-.navigation a:hover::after,
-.navigation a.active::after,
-.navigation a.ancestor::after {
+.topbar-left a:hover::after,
+.topbar-left a.active::after,
+.topbar-left a.ancestor::after {
   transform: scaleX(1);
 }
 
-header .wrapper {
-  display: flex;
-  align-items: flex-start;
-}
-
-.island-right {
-  margin-left: auto;
+.topbar-right {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.island-right svg {
+.topbar-right svg {
   width: 52px;
 }
 
@@ -257,10 +225,7 @@ footer {
 main {
   flex: 1;
   background: var(--main-color);
-}
-
-main .wrapper {
-  padding-top: calc(var(--island-height) + var(--main-padding-block));
+  padding-top: calc(var(--topbar-height) + var(--main-padding-block));
   padding-bottom: var(--main-padding-block);
 }
 
@@ -286,8 +251,8 @@ main .wrapper {
 
 .sidebar {
   position: sticky;
-  top: var(--island-height);
-  height: calc(100dvh - var(--island-height));
+  top: var(--topbar-height);
+  height: calc(100dvh - var(--topbar-height));
 }
 
 .sidebar-toggle {
@@ -400,7 +365,7 @@ main .wrapper {
 
 .overlay {
   position: fixed;
-  inset: var(--island-height) 0 0;
+  inset: var(--topbar-height) 0 0;
   background: rgba(0,0,0,.35);
   opacity: 0;
   pointer-events: none;
@@ -649,7 +614,7 @@ swiper-slide img {
   .sidebar[data-position="right"] {
     position: fixed;
     right: 0;
-    top: var(--island-height);
+    top: var(--topbar-height);
     bottom: 0;
     width: var(--sidebar-width);
     background: #fff;
@@ -666,10 +631,6 @@ swiper-slide img {
 
 @media (max-width: 1024px) {
 
-  header::before {
-    height: 0;
-  }
-
   .three-column-layout {
     grid-template-columns: 1fr;
   }
@@ -685,7 +646,7 @@ swiper-slide img {
   .sidebar[data-position="left"] {
     position: fixed;
     left: 0;
-    top: var(--island-height);
+    top: var(--topbar-height);
     bottom: 0;
     width: var(--sidebar-width);
     background: #fff;

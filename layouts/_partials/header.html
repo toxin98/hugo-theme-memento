@@ -1,19 +1,19 @@
-<div class="wrapper">
-  <div class="island island-left" data-navigation-island aria-expanded="false">
-    <div class="island-header">
+<div class="wrapper topbar">
+  <div class="topbar-left" data-navigation aria-expanded="false">
+    <div class="segment-row">
       {{ with resources.Get site.Params.profile.avatar }}
         {{ $thumb := .Fill "70x70 center" }}
-        <div class="island-avatar">
+        <div class="segment topbar-avatar">
           <img src="{{ $thumb.RelPermalink }}" alt="avatar">
         </div>
       {{ end }}
-      <span class="island-location">
+      <div class="segment topbar-location">
         / {{ .FirstSection.Title }}
-      </span>
+      </div>
     </div>
     {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
   </div>
-  <div class="island island-right hidden">
+  <div class="topbar-right hidden">
     <button>
       {{ partial "utils/icon.html" "share" }}
     </button>
