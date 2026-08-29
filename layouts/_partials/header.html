@@ -1,13 +1,21 @@
 <div class="wrapper">
-  <div class="island" data-navigation-island aria-expanded="false">
-    <span class="island-header">
-      <span class="island-avatar">
-        <img src="{{ .Site.Params.profile.avatar | relURL }}" alt="avatar">
-      </span>
+  <div class="island island-left" data-navigation-island aria-expanded="false">
+    <div class="island-header">
+      {{ with resources.Get site.Params.profile.avatar }}
+        {{ $thumb := .Fill "70x70 center" }}
+        <div class="island-avatar">
+          <img src="{{ $thumb.RelPermalink }}" alt="avatar">
+        </div>
+      {{ end }}
       <span class="island-location">
         / {{ .FirstSection.Title }}
       </span>
-    </span>
+    </div>
     {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
+  </div>
+  <div class="island island-right hidden">
+    <button>
+      {{ partial "utils/icon.html" "share" }}
+    </button>
   </div>
 </div>

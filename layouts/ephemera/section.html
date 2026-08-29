@@ -2,61 +2,62 @@
 
   <div class="wrapper ephemera">
 
-    <div class="primary-area">
+    {{ $pages := .RegularPages.ByDate.Reverse }}
+    {{ $paginator := .Paginate $pages }}
 
-      {{ $pages := .RegularPages.ByDate.Reverse }}
-      {{ $paginator := .Paginate $pages }}
-
-      <div class="ephemera-topbar">
-        <img class="avatar avatar-small" src="{{ .Site.Params.profile.avatar | relURL }}" alt="avatar">
-        {{ $textNum := where $pages "Params.media.type" "empty" | len}}
-        {{ $imageNum := where $pages "Params.media.type" "image" | len }}
-        {{ $videoNum := where $pages "Params.media.type" "video" | len }}
-        {{ $audioNum := where $pages "Params.media.type" "audio" | len }}
-        <div class="ephemera-count">
-          <button>{{ partial "utils/icon.html" "message" }}{{ $textNum }}</button>
-          <button>{{ partial "utils/icon.html" "photo" }}{{ $imageNum }}</button>
-          <button>{{ partial "utils/icon.html" "video" }}{{ $videoNum }}</button>
-          <button>{{ partial "utils/icon.html" "headphones" }}{{ $audioNum }}</button>
+    <div class="ephemera-topbar">
+      {{ with resources.Get site.Params.profile.avatar }}
+        {{ $image := .Fill "200x200 center" }}
+        <div class="ephemera-avatar">
+          <img src="{{$image.RelPermalink }}" alt="avatar">
         </div>
-        <div class="ephemera-control">
-          <div class="layout-toggle">
-            <button class="layout-btn" data-layout="list">{{ partial "utils/icon.html" "layout-list" }}</button>
-            <button class="layout-btn" data-layout="grid">{{ partial "utils/icon.html" "layout-grid" }}</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="ephemera-feed" id="ephemeraFeed" data-layout="list" data-infinite-scroll-list>
-        {{ range $paginator.Pages }}
-          {{ $page := .}}
-          <div class="ephemera-item" data-infinite-scroll-item>
-            <button class="ephemera-maximize">{{ partial "utils/icon.html" "maximize" }}</button>
-            <article class="ephemera-body">
-              <div class="ephemera-date">{{ partial "utils/date-format.html" (dict "date" $page.Date "layout" "2006/01/02 15:04 Monday") }}</div>
-              <div class="ephemera-content">{{ .Content }}</div>
-              <div class="ephemera-media">{{ partial "ephemera-media.html" $page }}</div>
-            </article>
-          </div>
-        {{ end }}
-      </div>
-
-      {{ if $paginator.HasNext }}
-        {{ $nextURL := $paginator.Next.URL }}
-        <div class="ephemera-older-items" data-infinite-scroll-next data-next-url="{{ $nextURL }}" aria-hidden="true"></div>
-        <noscript>
-          <p class="ephemera-older-items-fallback">
-            <a href="{{ $nextURL }}">LOAD MORE</a>
-          </p>
-        </noscript>
       {{ end }}
-
-      <div class="viewer hidden" id="ephemeraViewer">
-        <div class="viewer-main"></div>
-        <div class="viewer-side"></div>
-        <button class="button-close">{{ partial "utils/icon.html" "x" }}</button>
+      {{ $textNum := where $pages "Params.media.type" "empty" | len}}
+      {{ $imageNum := where $pages "Params.media.type" "image" | len }}
+      {{ $videoNum := where $pages "Params.media.type" "video" | len }}
+      {{ $audioNum := where $pages "Params.media.type" "audio" | len }}
+      <div class="ephemera-count">
+        <button>{{ partial "utils/icon.html" "message" }}{{ $textNum }}</button>
+        <button>{{ partial "utils/icon.html" "photo" }}{{ $imageNum }}</button>
+        <button>{{ partial "utils/icon.html" "video" }}{{ $videoNum }}</button>
+        <button>{{ partial "utils/icon.html" "headphones" }}{{ $audioNum }}</button>
       </div>
+      <div class="ephemera-control">
+        <div class="layout-toggle">
+          <button class="layout-btn" data-layout="list">{{ partial "utils/icon.html" "layout-list" }}</button>
+          <button class="layout-btn" data-layout="grid">{{ partial "utils/icon.html" "layout-grid" }}</button>
+        </div>
+      </div>
+    </div>
 
+    <div class="ephemera-feed" id="ephemeraFeed" data-layout="list" data-infinite-scroll-list>
+      {{ range $paginator.Pages }}
+        {{ $page := .}}
+        <div class="ephemera-item" data-infinite-scroll-item>
+          <button class="ephemera-maximize">{{ partial "utils/icon.html" "maximize" }}</button>
+          <article class="ephemera-body">
+            <div class="ephemera-date">{{ partial "utils/date-format.html" (dict "date" $page.Date "layout" "2006/01/02 15:04 Monday") }}</div>
+            <div class="ephemera-content">{{ .Content }}</div>
+            <div class="ephemera-media">{{ partial "ephemera-media.html" $page }}</div>
+          </article>
+        </div>
+      {{ end }}
+    </div>
+
+    {{ if $paginator.HasNext }}
+      {{ $nextURL := $paginator.Next.URL }}
+      <div class="ephemera-older-items" data-infinite-scroll-next data-next-url="{{ $nextURL }}" aria-hidden="true"></div>
+      <noscript>
+        <p class="ephemera-older-items-fallback">
+          <a href="{{ $nextURL }}">LOAD MORE</a>
+        </p>
+      </noscript>
+    {{ end }}
+
+    <div class="viewer hidden" id="ephemeraViewer">
+      <div class="viewer-main"></div>
+      <div class="viewer-side"></div>
+      <button class="button-close">{{ partial "utils/icon.html" "x" }}</button>
     </div>
 
   </div>

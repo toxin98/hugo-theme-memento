@@ -18,6 +18,14 @@
   margin-right: auto;
 }
 
+.ephemera-avatar {
+  width: 48px;
+}
+
+.ephemera-avatar img {
+  width: 100%;
+}
+
 .ephemera-count {
   display: flex;
   gap: 0.5rem;

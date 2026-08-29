@@ -10,7 +10,12 @@
 
           <div class="profile-header">
 
-            <img class="avatar avatar-large" src="{{ .Site.Params.profile.avatar }}" alt="avatar">
+            {{ with resources.Get site.Params.profile.avatar }}
+              {{ $image := .Fill "200x200 center" }}
+              <div class="profile-avatar">
+                <img src="{{$image.RelPermalink }}" alt="avatar">
+              </div>
+            {{ end }}
 
             <div class="profile-info">
 
