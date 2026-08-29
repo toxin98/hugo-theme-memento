@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const buttons = document.querySelectorAll(".sidebar-toggle");
   const sidebars = document.querySelectorAll(".sidebar");
-  const overlay = document.querySelector(".sidebar-overlay");
+  const overlay = document.querySelector(".overlay");
 
   function closeSidebar(){
     sidebars.forEach(sidebar=>{

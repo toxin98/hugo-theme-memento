@@ -38,7 +38,9 @@
           <article class="ephemera-body">
             <div class="ephemera-date">{{ partial "utils/date-format.html" (dict "date" $page.Date "layout" "2006/01/02 15:04 Monday") }}</div>
             <div class="ephemera-content">{{ .Content }}</div>
-            <div class="ephemera-media">{{ partial "ephemera-media.html" $page }}</div>
+            {{ with $page.Params.media }}
+              <div class="ephemera-media">{{ partial "ephemera-media.html" $page }}</div>
+            {{ end }}
           </article>
         </div>
       {{ end }}

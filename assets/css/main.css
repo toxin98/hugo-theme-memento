@@ -398,7 +398,7 @@ main .wrapper {
   background: rgb(0 0 0 / 5%);
 }
 
-.sidebar-overlay {
+.overlay {
   position: fixed;
   inset: var(--island-height) 0 0;
   background: rgba(0,0,0,.35);
@@ -408,7 +408,7 @@ main .wrapper {
   z-index: 1;
 }
 
-.sidebar-overlay.active {
+.overlay.active {
   opacity: 1;
   pointer-events: auto;
 }
