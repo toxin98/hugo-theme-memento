@@ -77,7 +77,6 @@ button {
   border-radius: 4px;
   padding: 6px 12px;
   display: flex;
-  gap: 1rem;
 }
 
 .segment-row {
@@ -93,6 +92,7 @@ button {
   height: 24px;
   border-radius: 50%;
   overflow: hidden;
+  align-self: center;
 }
 
 .topbar-avatar img {
@@ -341,7 +341,7 @@ main {
 
 .content img {
   max-width: 75%;
-  max-height: calc(100vh - var(--topbar-height) - 15rem);
+  max-height: calc(100dvh - var(--topbar-height) - 15rem);
   display: block;
   margin: 0 auto;
 }
@@ -444,11 +444,12 @@ main {
 /* universal */
 .page-hero {
   background: #000;
+  margin-bottom: 1rem;
 }
 
 .page-hero img {
   max-width: 100%;
-  max-height: 80dvh;
+  max-height: 60dvh;
   aspect-ratio: 21 / 9;
   object-fit: contain;
   display: block;
