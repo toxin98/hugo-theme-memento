@@ -1,79 +1,79 @@
 {{ define "main" }}
 
-  <div class="wrapper posts">
+  <div class="wrapper three-column-layout posts">
 
-    <div class="three-column-layout">
+    {{ $posts := .RegularPagesRecursive }}
 
-      {{ $posts := .RegularPagesRecursive }}
-
-      <aside class="sidebar" data-position="left">
-        <div class="posts-years-list">
-          <button class="posts-filter year active" data-filter="all"> All #{{ $posts.Len }}</button>
-          {{ range $posts.GroupByDate "2006" }}
-          <button class="posts-filter year" data-filter="{{ .Key }}">{{ .Key }} #{{ .Pages.Len }}</button>
-          {{ end }}
-        </div>
-      </aside>
-
-      <div class="primary-area">
+    <aside class="sidebar" data-position="left">
+      <div class="posts-years-list">
+        <button class="posts-filter year active" data-filter="all"> All #{{ $posts.Len }}</button>
         {{ range $posts.GroupByDate "2006" }}
-        <div class="entry-group" data-year="{{ .Key }}">
-
-          <div class="entry-group-header">
-            <h2 class="entry-group-title">{{ .Key }}</h2>
-          </div>
-
-          <ul class="entry-list">
-            {{ range .Pages }}
-            <li class="entry card" data-tags="{{ delimit .Params.tags "," }}">
-              <a class="entry-link" href="{{ .RelPermalink }}">
-
-                <time class="entry-date" datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}" aria-label="{{ .Date.Format "2006-01-02" }}">
-                  <span class="entry-date-month">{{ .Date.Format "Jan" }}</span>
-                  <span class="entry-date-day">{{ .Date.Format "02" }}</span>
-                </time>
-                <div class="entry-body">
-                  <div class="entry-main">
-                    <div class="entry-featured">
-                      {{ partial "utils/get-featured.html" . }}
-                    </div>
-                    <div class="entry-pro">
-                      <h3 class="entry-title">{{ .LinkTitle }}</h3>
-                      <div class="entry-summary">{{ .Summary | plainify }}</div>
-                    </div>
-                  </div>
-                  {{ with .GetTerms "tags" }}
-                  <div class="entry-tags" aria-label="tags">
-                    {{ range . }}
-                      <span class="entry-tag">{{ .LinkTitle }}</span>
-                    {{ end }}
-                  </div>
-                  {{ end }}
-                </div>
-
-              </a>
-            </li>
-            {{ end }}
-          </ul>
-
-        </div>
+        <button class="posts-filter year" data-filter="{{ .Key }}">{{ .Key }} #{{ .Pages.Len }}</button>
         {{ end }}
       </div>
+    </aside>
 
-      <aside class="sidebar" data-position="right">
-        <div class="posts-tags-list">
-          <div><span>Tags: </span><button id="tagsCleaner">{{ partial "utils/icon.html" "x" }}Clear</button></div>
-          {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
-          <button class="posts-filter tag" data-filter="{{ $name }}">{{ $name }}</button>
-          {{ end }}
+    <div class="primary-area">
+
+      <h1>{{ .Title }}</h1>
+
+      {{ range $posts.GroupByDate "2006" }}
+      <div class="entry-group" data-year="{{ .Key }}">
+
+        <div class="entry-group-header">
+          <h2 class="entry-group-title">{{ .Key }}</h2>
         </div>
-      </aside>
 
+        <ul class="entry-list">
+          {{ range .Pages }}
+          <li class="entry card" data-tags="{{ delimit .Params.tags "," }}">
+            <a class="entry-link" href="{{ .RelPermalink }}">
+
+              <time class="entry-date" datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}" aria-label="{{ .Date.Format "2006-01-02" }}">
+                <span class="entry-date-month">{{ .Date.Format "Jan" }}</span>
+                <span class="entry-date-day">{{ .Date.Format "02" }}</span>
+              </time>
+              <div class="entry-body">
+                <div class="entry-main">
+                  <div class="entry-featured">
+                    {{ partial "utils/get-featured.html" . }}
+                  </div>
+                  <div class="entry-pro">
+                    <h3 class="entry-title">{{ .LinkTitle }}</h3>
+                    <div class="entry-summary">{{ .Summary | plainify }}</div>
+                  </div>
+                </div>
+                {{ with .GetTerms "tags" }}
+                <div class="entry-tags" aria-label="tags">
+                  {{ range . }}
+                    <span class="entry-tag">{{ .LinkTitle }}</span>
+                  {{ end }}
+                </div>
+                {{ end }}
+              </div>
+
+            </a>
+          </li>
+          {{ end }}
+        </ul>
+
+      </div>
+      {{ end }}
     </div>
 
-    <div class="fixed-bottom-bar">
-      <button class="sidebar-toggle" data-target="left">{{ partial "utils/icon.html" "layout-sidebar-left-expand" }}</button>
-    </div>
+    <aside class="sidebar" data-position="right">
+      <div class="posts-tags-list">
+        <div><span>Tags: </span><button id="tagsCleaner">{{ partial "utils/icon.html" "x" }}Clear</button></div>
+        {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
+        <button class="posts-filter tag" data-filter="{{ $name }}">{{ $name }}</button>
+        {{ end }}
+      </div>
+    </aside>
+
+  </div>
+
+  <div class="fixed-bottom-bar">
+    <button class="sidebar-toggle" data-target="left">{{ partial "utils/icon.html" "layout-sidebar-left-expand" }}</button>
   </div>
 
 {{ end }}

@@ -2,6 +2,8 @@
 
   <div class="wrapper gallery">
 
+    <h1>{{ .Title }}</h1>
+
     <div class="albums-list">
       {{ range .Pages }}
         <a class="albums-card" href="{{ .RelPermalink }}" title="{{ .Title }}">

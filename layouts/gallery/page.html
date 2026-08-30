@@ -1,21 +1,24 @@
 {{ define "main" }}
 
-<script src="https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2.1/dist/fjGallery.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2.1/dist/fjGallery.min.js"></script>
 
-<div class="wrapper gallery">
+  <div class="wrapper gallery">
 
-  <div class="fj-gallery">
-    {{ range .Resources.ByType "image" }}
+    <h1>{{ .Title }}</h1>
+    {{ .Description }}
 
-      {{ $thumb := .Filter (slice images.AutoOrient (images.Process "fit 600x600 webp")) }}
-      {{ $color := index $thumb.Colors 0 | default "transparent" }}
-      <figure class="fj-gallery-item" style="background-color: {{ $color }}; aspect-ratio: {{ $thumb.Width }} / {{ $thumb.Height }}">
-        <img src="{{ $thumb.RelPermalink }}" width="{{ $thumb.Width }}" height="{{ $thumb.Height }}" alt="" loading="lazy" decoding="async">
-      </figure>
+    <div class="fj-gallery">
+      {{ range .Resources.ByType "image" }}
 
-    {{ end }}
+        {{ $thumb := .Filter (slice images.AutoOrient (images.Process "fit 600x600 webp")) }}
+        {{ $color := index $thumb.Colors 0 | default "transparent" }}
+        <figure class="fj-gallery-item" style="background-color: {{ $color }}; aspect-ratio: {{ $thumb.Width }} / {{ $thumb.Height }}">
+          <img src="{{ $thumb.RelPermalink }}" width="{{ $thumb.Width }}" height="{{ $thumb.Height }}" alt="" loading="lazy" decoding="async">
+        </figure>
+
+      {{ end }}
+    </div>
+
   </div>
-
-</div>
 
 {{ end }}

@@ -2,33 +2,29 @@
 
   {{ partial "page-hero.html" . }}
 
-  <div class="wrapper posts">
+  <div class="wrapper three-column-layout posts">
 
-    <div class="three-column-layout">
+    <aside class="sidebar" data-position="left">
+    </aside>
 
-      <aside class="sidebar" data-position="left">
-      </aside>
+    <div class="primary-area">
 
-      <div class="primary-area">
+      <article class="content">
+        <time datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}" aria-label="{{ .Date.Format "2006-01-02" }}">
+          <span>{{ .Date.Format "January 02, 2006" }}</span>
+        </time>
+        <h1>{{ .Title }}</h1>
+        {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+        {{ .Content }}
+      </article>
 
-        <article class="content">
-          <h1>{{ .Title }}</h1>
-          <time datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}" aria-label="{{ .Date.Format "2006-01-02" }}">
-            <span>{{ .Date.Format "January 02, 2006" }}</span>
-          </time>
-          {{ .Content }}
-          {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
-        </article>
-
-        {{ partial "share.html" . }}
-
-      </div>
-
-      <aside class="sidebar" data-position="right">
-        {{ partial "toc.html" . }}
-      </aside>
+      {{ partial "share.html" . }}
 
     </div>
+
+    <aside class="sidebar" data-position="right">
+      {{ partial "toc.html" . }}
+    </aside>
 
   </div>
 

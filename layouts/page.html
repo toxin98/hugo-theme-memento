@@ -4,8 +4,9 @@
 
     <article class="content">
       <h1>{{ .Title }}</h1>
-      {{ .Content }}
       {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+      {{ .Content }}
+
     </article>
 
   </div>

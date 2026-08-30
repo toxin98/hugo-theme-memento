@@ -2,6 +2,8 @@
 
   <div class="wrapper ephemera">
 
+    <h1>{{ .Title }}</h1>
+
     {{ $pages := .RegularPages.ByDate.Reverse }}
     {{ $paginator := .Paginate $pages }}
 
@@ -31,7 +33,7 @@
     <div class="ephemera-feed" id="ephemeraFeed" data-layout="list" data-infinite-scroll-list>
       {{ range $paginator.Pages }}
         {{ $page := .}}
-        <div class="ephemera-item" data-infinite-scroll-item>
+        <div class="ephemera-item" data-id={{ $page.Date }} data-infinite-scroll-item>
           <button class="ephemera-maximize">{{ partial "utils/icon.html" "maximize" }}</button>
           <article class="ephemera-body">
             <div class="ephemera-date">{{ partial "utils/date-format.html" (dict "date" $page.Date "layout" "2006/01/02 15:04 Monday") }}</div>

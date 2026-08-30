@@ -13,19 +13,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.addEventListener("click", (e) => {
 
-    const trigger = e.target.closest(
-      ".ephemera-maximize, .ephemera-media"
-    );
+    const trigger = e.target.closest(".ephemera-maximize, .ephemera-media");
 
     if (!trigger) return;
 
-    const item = trigger.closest(
-      ".ephemera-item"
-    );
+    const item = trigger.closest(".ephemera-item");
 
     if (!item) return;
 
+    const id = item.dataset.id;
+
+    if (!id) return;
+
     openViewer(item);
+
+    const url = new URL(window.location.href);
+    url.searchParams.set("post", id);
+
+    history.pushState(
+      { post: id },
+      "",
+      url
+    );
 
   });
 
@@ -52,13 +61,6 @@ document.addEventListener("DOMContentLoaded", () => {
     viewer.classList.remove("hidden");
     document.documentElement.classList.add("viewer-show");
 
-  }
-
-  function closeViewer() {
-    viewer.style.transform = "";
-    viewer.style.opacity = "";
-    viewer.classList.add("hidden");
-    document.documentElement.classList.remove("viewer-show");
   }
 
   document.querySelector(".button-close")?.addEventListener("click", closeViewer);
@@ -162,6 +164,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     return swiper;
+  }
+
+  window.addEventListener("popstate", () => {
+    const url = new URL(window.location.href);
+    const id = url.searchParams.get("post");
+
+    if (id) {
+      const item = document.querySelector(
+        `.ephemera-item[data-ephemera-id="${CSS.escape(id)}"]`
+      );
+
+      if (item) {
+        openViewer(item);
+      }
+    } else {
+      closeViewer();
+    }
+  });
+
+  function closeViewer() {
+
+    viewer.style.transform = "";
+    viewer.style.opacity = "";
+    viewer.classList.add("hidden");
+    document.documentElement.classList.remove("viewer-show");
+
+    const url = new URL(window.location.href);
+    url.searchParams.delete("post");
+
+    history.pushState({}, "", url);
   }
 
 });

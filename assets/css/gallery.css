@@ -39,6 +39,10 @@
   --fj-row-height: 300;
 }
 /* fj-gallery */
+figure.fj-gallery-item {
+  margin: 0;
+}
+
 .fj-gallery {
   position: relative;
   overflow: hidden;
