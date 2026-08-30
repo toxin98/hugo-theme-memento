@@ -5,7 +5,7 @@
   <div class="wrapper gallery">
 
     <h1>{{ .Title }}</h1>
-    {{ .Description }}
+    <p>{{ .Description }}</p>
 
     <div class="fj-gallery">
       {{ range .Resources.ByType "image" }}

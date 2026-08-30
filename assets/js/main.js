@@ -48,32 +48,3 @@ document.addEventListener("DOMContentLoaded", () => {
     block.appendChild(button);
   });
 });
-
-document.addEventListener("DOMContentLoaded", () => {
-  const island = document.querySelector("[data-navigation]");
-  const header = island?.querySelector(".segment-row");
-
-  if (!island || !header) return;
-
-  const toggleIsland = () => {
-    const isOpen = island.classList.toggle("is-open");
-
-    island.setAttribute("aria-expanded", String(isOpen));
-  };
-
-  header.addEventListener("click", toggleIsland);
-
-  document.addEventListener("click", (event) => {
-    if (!island.contains(event.target)) {
-      island.classList.remove("is-open");
-      island.setAttribute("aria-expanded", "false");
-    }
-  });
-
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-      island.classList.remove("is-open");
-      island.setAttribute("aria-expanded", "false");
-    }
-  });
-});

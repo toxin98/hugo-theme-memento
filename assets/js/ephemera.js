@@ -28,10 +28,10 @@ document.addEventListener("DOMContentLoaded", () => {
     openViewer(item);
 
     const url = new URL(window.location.href);
-    url.searchParams.set("post", id);
+    url.searchParams.set("id", id);
 
     history.pushState(
-      { post: id },
+      { id: id },
       "",
       url
     );
@@ -168,7 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.addEventListener("popstate", () => {
     const url = new URL(window.location.href);
-    const id = url.searchParams.get("post");
+    const id = url.searchParams.get("id");
 
     if (id) {
       const item = document.querySelector(
@@ -191,7 +191,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.documentElement.classList.remove("viewer-show");
 
     const url = new URL(window.location.href);
-    url.searchParams.delete("post");
+    url.searchParams.delete("id");
 
     history.pushState({}, "", url);
   }

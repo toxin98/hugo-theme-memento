@@ -1,17 +1,25 @@
 <div class="wrapper topbar">
   <div class="topbar-left" data-navigation aria-expanded="false">
+    {{ with resources.Get site.Params.profile.avatar }}
+      {{ $thumb := .Fill "70x70 center" }}
+      <div class="topbar-avatar">
+        <img src="{{ $thumb.RelPermalink }}" alt="avatar">
+      </div>
+    {{ end }}
     <div class="segment-row">
-      {{ with resources.Get site.Params.profile.avatar }}
-        {{ $thumb := .Fill "70x70 center" }}
-        <div class="segment topbar-avatar">
-          <img src="{{ $thumb.RelPermalink }}" alt="avatar">
-        </div>
-      {{ end }}
       <div class="segment topbar-location">
-        / {{ .FirstSection.Title }}
+        {{ if not .IsHome }}
+          <nav class="back-nav">
+            {{ with .Parent }}
+              <a href="{{ .RelPermalink }}" class="back-link">Back</a>
+            {{ else }}
+              <!-- 兜底：如果某页面没有明确的父级目录，直接指向顶层首页 -->
+              <a href="{{ site.Home.RelPermalink }}" class="back-link">Home</a>
+            {{ end }}
+          </nav>
+        {{ end }}
       </div>
     </div>
-    {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
   </div>
   <div class="topbar-right hidden">
     <button>
