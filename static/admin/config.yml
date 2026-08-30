@@ -7,11 +7,19 @@ backend:
 media_folder: /static/media
 public_folder: /media
 
+slug:
+  encoding: unicode
+  clean_accents: false
+  sanitize_replacement: '-'
+  trim: true
+  lowercase: true
+  timezone: utc
+
 collections:
   - name: posts
     label: Posts
     folder: content/posts
-    path: '{{year}}/{{year}}-{{month}}-{{day}}T{{hour}}-{{minute}}-{{second}}Z-{{slug}}/index'
+    path: '{{year}}/{{year}}-{{month}}/{{year}}-{{month}}-{{day}}T{{hour}}{{minute}}{{second}}Z-{{slug}}/index'
     fields:
       - { name: tags, label: Tags, widget: list, field: { name: tag, label: Tag, widget: string }, required: false }
       - { name: featured, label: Featured, widget: image, required: false }
@@ -20,6 +28,6 @@ collections:
   - name: ephemera
     label: Ephemera
     folder: content/ephemera
-    path: '{{year}}/{{year}}-{{month}}/{{year}}-{{month}}-{{day}}T{{hour}}-{{minute}}-{{second}}/index'
+    path: '{{year}}/{{year}}-{{month}}/{{year}}-{{month}}-{{day}}T{{hour}}{{minute}}{{second}}Z/index'
     fields:
       - { name: body, label: Body, widget: richtext }
