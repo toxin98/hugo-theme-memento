@@ -70,7 +70,7 @@
                     {{ end }}
 
                     {{ with .pdf }}
-                      <a href="{{ . }}" target="_blank" rel="noopener noreferrer">PDF</a>
+                      <a href="{{ . | relURL }}" target="_blank" rel="noopener noreferrer">PDF</a>
                     {{ end }}
 
                   </div>
