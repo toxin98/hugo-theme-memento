@@ -1,34 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  document.querySelectorAll(".ephemera .local-time").forEach(el => {
-    const isoStr = el.getAttribute('datetime');
-    if (!isoStr) return;
-
-    const date = new Date(isoStr);
-
-    // 获取用户本地时区的各个时间分量
-    const formatter = new Intl.DateTimeFormat('en-US', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
-      weekday: 'long',
-      hour12: false // 使用 24 小时制
-    });
-
-    // 解析格式化后的各部分
-    const parts = {};
-    formatter.formatToParts(date).forEach(({ type, value }) => {
-      parts[type] = value;
-    });
-
-    // 拼接成固定格式：2021/12/30 16:50 Thursday
-    el.textContent = `${parts.year}/${parts.month}/${parts.day} ${parts.hour}:${parts.minute} ${parts.weekday}`;
-
-    el.hidden = false;
-  });
-
   const feed = document.getElementById("ephemeraFeed");
 
   const buttons = document.querySelectorAll(".layout-btn");

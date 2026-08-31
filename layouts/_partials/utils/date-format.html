@@ -1,7 +1,10 @@
-{{ $dateMachine := .Format "2006-01-02T15:04:05-07:00" }}
-{{ $dateHuman := .Format "2006/01/02 15:04:05 UTC" }}
+{{ $date := .date }}
+{{ $layout := .layout }}
 
-<time class="local-time" datetime="{{ $dateMachine }}" hidden>{{ $dateHuman }}</time>
+{{ $dateMachine := $date | time.Format "2006-01-02T15:04:05-07:00" }}
+{{ $dateHuman := $date | time.Format "2006/01/02 15:04:05 UTC" }}
+
+<time class="local-time" data-time-layout="{{ $layout }}" datetime="{{ $dateMachine }}" hidden>{{ $dateHuman }}</time>
 
 <noscript>
   <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
