@@ -44,3 +44,13 @@
   /* align-items: center; */
   /* justify-content: center; */
 }
+
+.updates-card a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.updates-card a:hover{
+  text-decoration: underline;
+  color: var(--accent-color);
+}
