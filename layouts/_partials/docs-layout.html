@@ -62,8 +62,8 @@
 
     <article class="content">
       <div class="meta-container">
-        <span>Last updated: {{ partial "utils/date-format.html" (dict "date" .Lastmod "layout" ":date_long") }}</span>
-        <span>Publish date: {{ partial "utils/date-format.html" (dict "date" .PublishDate "layout" ":date_long") }}</span>
+        <span>Last updated: {{ partial "utils/date-format.html" . }}</span>
+        <span>Publish date: {{ partial "utils/date-format.html" . }}</span>
       </div>
       <h1>{{ .Title }}</h1>
       {{ .Content }}
