@@ -23,7 +23,7 @@
 
         <ul class="entry-list">
 
-        {{ $pages := .section.Pages }}
+        {{ $pages := .section.RegularPagesRecursive }}
         {{ $pages = sort $pages ".Params.dateStart" "desc" }}
         {{ range $pages }}
 

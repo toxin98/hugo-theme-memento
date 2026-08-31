@@ -74,9 +74,18 @@ button {
 
 .topbar-left {
   background: #fff;
-  border-radius: 4px;
-  padding: 6px 12px;
+  border-radius: 6px;
+  padding: 6px;
   display: flex;
+}
+
+.topbar-left a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.topbar-left a:hover {
+  text-decoration: underline;
 }
 
 .segment-row {
@@ -104,6 +113,11 @@ button {
   
 }
 
+nav.back-nav {
+  margin-left: 8px;
+  margin-top: 2px;
+}
+
 main > nav {
   
 }
@@ -115,9 +129,15 @@ main > nav > ul {
   display: flex;
   gap: 1.5rem;
   flex-wrap: wrap;
+  justify-self: center;
 }
 
-.topbar-left a {
+main > nav > ul a {
+  text-decoration: none;
+  color: inherit;
+}
+
+main > nav > ul a {
   height: 100%;
   display: flex;
   align-items: center;
@@ -127,7 +147,7 @@ main > nav > ul {
   position: relative;
 }
 
-.topbar-left a::after {
+main > nav > ul a::after {
   content: "";
   position: absolute;
   left: 0;
@@ -140,9 +160,9 @@ main > nav > ul {
   transition: transform 0.25s ease;
 }
 
-.topbar-left a:hover::after,
-.topbar-left a.active::after,
-.topbar-left a.ancestor::after {
+main > nav > ul a:hover::after,
+main > nav > ul a.active::after,
+main > nav > ul a.ancestor::after {
   transform: scaleX(1);
 }
 
