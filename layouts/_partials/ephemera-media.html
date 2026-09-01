@@ -1,60 +1,32 @@
 {{ $page := . }}
+{{ $page.RelPermalink}}
 
-{{ if eq $page.Params.media.type "image"}}
+{{ $count := $page.Resources.ByType "image" | len }}
+{{ if gt $count 9 }}
+  {{ warnf "Too many images (%d) in %s, only first 9 will be used" $count $page.File.Path }}
+  {{ $count = 9 }}
+{{ end }}
+{{ $folderName := $page.File.ContentBaseName }}
+{{ $folderName }} 
 
-  {{ $count := $page.Resources.ByType "image" | len }}
-  {{ if gt $count 9 }}
-    {{ warnf "Too many images (%d) in %s, only first 9 will be used" $count $page.File.Path }}
-    {{ $count = 9 }}
-  {{ end }}
-  {{ $folderName := $page.File.ContentBaseName }}
+<div class="sudoku sudoku-{{ $count }}">
 
-  <div class="sudoku sudoku-{{ $count }}">
+  {{ range $i := seq 1 $count }}
 
-    {{ range $i := seq 1 $count }}
+    {{ $index := printf "%02d" $i }}
+    {{ $imageName := printf "*%s_%s*" $folderName $index }}
 
-      {{ $index := printf "%02d" $i }}
-      {{ $imageName := printf "*%s-%s*" $folderName $index }}
+    {{ with $page.Resources.GetMatch $imageName }}
 
-      {{ with $page.Resources.GetMatch $imageName }}
+      {{ $thumb := .Filter (slice images.AutoOrient (images.Process "resize x300 webp")) }}
+      <img src="{{ $thumb.RelPermalink }}" width="{{ $thumb.Width }}" height="{{ $thumb.Height }}" alt="" loading="lazy" decoding="async" data-viewer-src="{{ .RelPermalink }}"/>
 
-        {{ $thumb := .Filter (slice images.AutoOrient (images.Process "resize x300 webp")) }}
-        {{ $large := .Filter (slice images.AutoOrient (images.Process "resize 1600x webp")) }}
-        <img src="{{ $thumb.RelPermalink }}" width="{{ $thumb.Width }}" height="{{ $thumb.Height }}" alt="" loading="lazy" decoding="async" data-viewer-src="{{ $large.RelPermalink }}"/>
+    {{ else }}
 
-      {{ else }}
 
-        {{ errorf "Missing image: %s in %s" $imageName $page.RelPermalink }}
-
-      {{ end }}
 
     {{ end }}
 
-  </div>
-
-{{ else if eq $page.Params.media.type "video"}}
-
-  {{ $folderName := $page | path.Dir | path.BaseName }}
-
-  {{ $videoName := printf "%s-%s" $folderName "video.mp4" }}
-  {{ $thumbName := printf "%s-%s" $folderName "video-thumb.png" }}
-
-  {{ $video := $page.Resources.Get $videoName }}
-  {{ $thumb := $page.Resources.Get $thumbName }}
-
-  {{ $videoURL := "" }}
-  {{ $thumbURL := "" }}
-
-  {{ if $video }}
-    {{ $videoURL := $video.RelPermalink }}
-  {{ end }}
-  {{ if $thumb }}
-    {{ $thumbURL := $thumb.RelPermalink }}
   {{ end }}
 
-  <div class="video-card" onclick="openVideoModal('{{ $videoURL }}')">
-    <img src="{{ $thumbURL }}" class="video-thumb" />
-    <div class="play-btn">&#9658;</div>
-  </div>
-
-{{ end }}
+</div>
