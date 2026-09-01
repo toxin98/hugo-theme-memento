@@ -1,5 +1,4 @@
 {{ $page := . }}
-{{ $page.RelPermalink}}
 
 {{ $count := $page.Resources.ByType "image" | len }}
 {{ if gt $count 9 }}
