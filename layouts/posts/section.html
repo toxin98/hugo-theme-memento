@@ -64,7 +64,7 @@
     <aside class="sidebar" data-position="right">
       <div class="posts-tags-list">
         <div><span>Tags: </span><button id="tagsCleaner">{{ partial "utils/icon.html" "x" }}Clear</button></div>
-        {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
+        {{ range $name, $taxonomy := site.Taxonomies.tags }}
         <button class="posts-filter tag" data-filter="{{ $name }}">{{ $name }}</button>
         {{ end }}
       </div>

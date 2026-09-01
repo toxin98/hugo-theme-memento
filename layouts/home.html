@@ -20,11 +20,11 @@
           <div class="profile-info">
 
             <span class="profile-name">
-              {{ .Site.Params.profile.name }}
+              {{ site.Params.profile.name }}
             </span>
 
             <span class="profile-tagline">
-              {{ .Site.Params.profile.tagline }}
+              {{ site.Params.profile.tagline }}
             </span>
 
             <ul class="social-list">
@@ -56,7 +56,7 @@
 
           {{ range $sections }}
 
-            {{ with $.Site.GetPage (printf "/%s" .) }}
+            {{ with site.GetPage (printf "/%s" .) }}
 
               <h3 class="update-tag">{{ .Title }}</h3>
 

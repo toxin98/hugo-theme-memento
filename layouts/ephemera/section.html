@@ -4,6 +4,10 @@
 
     <h1>{{ .Title }}</h1>
 
+    {{ site.Params.logo }}
+
+    {{ $tz := or site.Params.timeZone "UTC" }}
+
     {{ $pages := .RegularPages.ByDate.Reverse }}
     {{ $paginator := .Paginate $pages }}
 
