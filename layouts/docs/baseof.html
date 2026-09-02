@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="{{ site.Language.Locale }}" dir="{{ or site.Language.Direction `ltr` }}">
+<head>
+  {{ partial "head.html" . }}
+</head>
+<body>
+  <header>
+    {{ partial "header.html" . }}
+  </header>
+
+  <main>
+    <div class="wrapper three-column-layout docs">
+
+      <aside class="sidebar" data-position="left">
+
+        <nav class="docs-nav">
+          <div class="docs-search">
+            <input class="docs-search-input" type="text" placeholder="Search" aria-label="Search">
+            <ul class="docs-search-results"></ul>
+          </div>
+          <div class="docs-header">
+            <a class="docs-item docs-link {{ if eq .RelPermalink .FirstSection.RelPermalink }}active{{ end }}"
+              href="{{ .FirstSection.RelPermalink }}">
+              {{ partial "utils/icon.html" "notebook" }}{{ .FirstSection.Title }}
+            </a>
+            <div class="docs-buttons">
+              <button id="docs-expand" type="button" aria-label="Expand all">{{ partial "utils/icon.html" "copy-plus" }}</button>
+              <button id="docs-collapse" type="button" aria-label="Collapse all">{{ partial "utils/icon.html" "copy-minus" }}</button>
+            </div>
+          </div>
+          <div class="docs-tree">
+            {{ template "docs-recursive" (dict "context" .FirstSection "current" . "depth" 1) }}
+          </div>
+        </nav>
+
+      </aside>
+
+      {{ define "docs-recursive" }}
+
+        {{ $context := .context }}
+        {{ $current := .current }}
+        {{ $depth := .depth }}
+
+        <ul style="--depth: {{ $depth }}">
+          {{ range $context.Sections.ByLinkTitle }}
+            <li style="--depth: {{ $depth }}">
+              <details {{ if .IsAncestor $current }}open{{ end }}>
+                <summary class="docs-item {{ if eq .RelPermalink $current.RelPermalink }}active{{ end }}">
+                  {{ partial "utils/icon.html" "folder" }}
+                  {{ partial "utils/icon.html" "folder-open" }}
+                  <span>{{ partial "utils/auto-linktitle.html" . }}</span>
+                </summary>
+                {{ template "docs-recursive" (dict "context" . "current" $current "depth" (add $depth 1)) }}
+              </details>
+            </li>
+          {{ end }}
+          {{ range $context.RegularPages.ByLinkTitle }}
+            <li style="--depth: {{ $depth }}">
+              <a class="docs-item docs-link {{ if eq .RelPermalink $current.RelPermalink }}active{{ end }}"
+                href="{{ .RelPermalink }}">
+                {{ partial "utils/icon.html" "file" }}
+                <span>{{ partial "utils/auto-linktitle.html" . }}</span>
+              </a>
+            </li>
+          {{ end }}
+        </ul>
+
+      {{ end }}
+
+      <div class="primary-area">
+
+        <!-- {{ partial "breadcrumbs.html" . }} -->
+
+        <article class="content">
+          <div class="meta-container">
+            <span>Last updated: {{ partial "utils/date-format.html" (dict "date" .Lastmod "layout" "docs") }}</span>
+            <span>Publish date: {{ partial "utils/date-format.html" (dict "date" .PublishDate "layout" "docs") }}</span>
+          </div>
+          <h1>{{ .Title }}</h1>
+          {{ .Content }}
+          {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+        </article>
+
+        {{ partial "share.html" . }}
+
+      </div>
+
+      <aside class="sidebar" data-position="right">
+        {{ partial "toc.html" . }}
+      </aside>
+
+    </div>
+
+    <button class="sidebar-toggle" data-target="left">{{ partial "utils/icon.html" "layout-sidebar-left-expand" }}</button>
+
+  </main>
+
+  <div class="overlay"></div>
+
+  <footer>
+    {{ partial "footer.html" . }}
+  </footer>
+
+</body>
+</html>
