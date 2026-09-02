@@ -1,31 +1,37 @@
 {{ $page := . }}
+{{ $pagePath := $page.File.Path }}
+{{ $pageFolder := $page.File.ContentBaseName }}
 
 {{ $count := $page.Resources.ByType "image" | len }}
-{{ if gt $count 9 }}
-  {{ warnf "Too many images (%d) in %s, only first 9 will be used" $count $page.File.Path }}
-  {{ $count = 9 }}
-{{ end }}
-{{ $folderName := $page.File.ContentBaseName }}
-{{ $folderName }} 
 
-<div class="sudoku sudoku-{{ $count }}">
+{{ if gt $count 0 }}
 
-  {{ range $i := seq 1 $count }}
+  {{ if gt $count 9 }}
+    {{ warnf "Too many images (%d) in %s, only first 9 will be used" $count $pagePath }}
+    {{ $count = 9 }}
+  {{ end }}
 
-    {{ $index := printf "%02d" $i }}
-    {{ $imageName := printf "*%s_%s*" $folderName $index }}
+  <div class="sudoku sudoku-{{ $count }}">
 
-    {{ with $page.Resources.GetMatch $imageName }}
+    {{ range $i := seq 1 $count }}
 
-      {{ $thumb := .Filter (slice images.AutoOrient (images.Process "resize x300 webp")) }}
-      <img src="{{ $thumb.RelPermalink }}" width="{{ $thumb.Width }}" height="{{ $thumb.Height }}" alt="" loading="lazy" decoding="async" data-viewer-src="{{ .RelPermalink }}"/>
+      {{ $index := printf "%02d" $i }}
+      {{ $imageName := printf "*%s_%s*" $pageFolder $index }}
 
-    {{ else }}
+      {{ with $page.Resources.GetMatch $imageName }}
 
+        {{ $thumb := .Filter (slice images.AutoOrient (images.Process "resize x300 webp")) }}
+        {{ $large := .Filter (slice images.AutoOrient (images.Process "resize 1600x webp")) }}
+        <img src="{{ $thumb.RelPermalink }}" width="{{ $thumb.Width }}" height="{{ $thumb.Height }}" alt="" loading="lazy" decoding="async" data-viewer-src="{{ $large.RelPermalink }}"/>
 
+      {{ else }}
+
+        {{ errorf "Missing image: %s in %s" $imageName $page.RelPermalink }}
+
+      {{ end }}
 
     {{ end }}
 
-  {{ end }}
+  </div>
 
-</div>
+{{ end }}
