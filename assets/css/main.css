@@ -13,7 +13,7 @@
   --edge-gap: 16px;
   --header-color: #281313;
   --main-color: #eee;
-  --footer-color: #d0edf5;
+  --footer-color: #e0d6d6;;
   --text-size-lg: 18px;
   --text-size-base: 16px;
   --text-size-sm: 14px;
@@ -49,15 +49,20 @@ button {
   padding: 0;
   margin: 0;
   cursor: pointer;
+
   display: flex;
-  font-size: 14px;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+
   color: #000;
+  font-size: 14px;
+  line-height: 1;
 }
 
 .wrapper {
   max-width: 1360px;
   margin-inline: auto;
-  padding: 0 var(--edge-gap);
 }
 
 .topbar {
@@ -70,6 +75,10 @@ button {
   padding: 6px var(--edge-gap);
   display: flex;
   justify-content: space-between;
+}
+
+h2, h3, h4, h5 {
+  scroll-margin-top: var(--topbar-height);
 }
 
 .topbar-left {
@@ -192,9 +201,12 @@ footer {
 
 main {
   flex: 1;
+  min-width: 0;
   background: var(--main-color);
-  padding-top: var(--topbar-height);
-  padding-bottom: 1rem;
+}
+
+main.fornow {
+  padding-top: 78px;
 }
 
 .three-column-layout {
@@ -214,7 +226,6 @@ main {
 .sidebar {
   display: flex;
   flex-direction: column;
-  min-width: 0;
 }
 
 .sidebar {
@@ -239,11 +250,14 @@ main {
   display: none;
 }
 
-.share-fab {
-  position: fixed;
-  right: 24px;
-  bottom: 24px;
-  z-index: 100;
+.reading-title {
+  display: none;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.reading-title.show {
+  display: flex;
 }
 
 .share-dialog {
@@ -351,6 +365,8 @@ main {
 }
 /* content */
 .content {
+  flex: 1;
+  min-width: 0;
   padding: 0 0.5rem;
   color: #444;
 }
@@ -425,15 +441,16 @@ main {
   color: #fff;
 }
 /* toc */
-.toc {
+.toc-container {
   flex: 1;
   min-height: 0;
   display: flex;
   flex-direction: column;
+  padding-left: 0.75rem;
 }
 
 .toc-header {
-  
+
 }
 
 #TableOfContents {
@@ -444,10 +461,6 @@ main {
 #TableOfContents ul {
   list-style: none;
   margin: 0;
-  padding: 0;
-}
-
-#TableOfContents ul {
   padding-left: 0.75rem;
 }
 
@@ -606,10 +619,6 @@ swiper-slide img {
 
   .two-column-layout {
     grid-template-columns: 1fr;
-  }
-
-  .share-fab {
-    display: none;
   }
 
   .sidebar[data-position="left"] {
