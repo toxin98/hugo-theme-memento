@@ -22,7 +22,7 @@ collections:
     nested:
       depth: 100
       summary: '{{title}}'
-      subfolders: true
+      subfolders: false
     meta: { path: { index_file: _index } }
     fields:
       - { name: title, label: Title }
@@ -32,7 +32,7 @@ collections:
     folder: content/posts
     nested:
       depth: 100
-      subfolders: false
+      subfolders: true
     meta: { path: { index_file: _index } }
     path: '{{year}}/{{year}}-{{month}}-{{day}}-{{slug}}/index'
     fields:
