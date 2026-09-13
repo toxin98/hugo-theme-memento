@@ -16,9 +16,24 @@ slug:
   timezone: utc
 
 collections:
+  - name: docs
+    label: Docs
+    folder: /content/docs
+    nested:
+      depth: 100
+      summary: '{{title}}'
+      subfolders: true
+    meta: { path: { index_file: _index } }
+    fields:
+      - { name: title, label: Title }
+      - { name: body, label: Body, widget: markdown }
   - name: posts
     label: Posts
     folder: content/posts
+    nested:
+      depth: 100
+      subfolders: false
+    meta: { path: { index_file: _index } }
     path: '{{year}}/{{year}}-{{month}}-{{day}}-{{slug}}/index'
     fields:
       - { name: tags, label: Tags, widget: list, field: { name: tag, label: Tag, widget: string }, required: false }
