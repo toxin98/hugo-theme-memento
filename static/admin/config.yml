@@ -30,11 +30,11 @@ collections:
   - name: posts
     label: Posts
     folder: content/posts
+    path: '{{year}}/{{year}}-{{month}}-{{day}}-{{slug}}/index'
     nested:
       depth: 100
       subfolders: true
     meta: { path: { index_file: _index } }
-    path: '{{year}}/{{year}}-{{month}}-{{day}}-{{slug}}/index'
     fields:
       - { name: tags, label: Tags, widget: list, field: { name: tag, label: Tag, widget: string }, required: false }
       - { name: featured, label: Featured, widget: image, required: false }
