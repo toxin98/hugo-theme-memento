@@ -25,12 +25,15 @@ collections:
       subfolders: false
     meta: { path: { index_file: _index } }
     fields:
-      - { name: title, label: Title }
+      - { name: lastmod, label: Last modified, widget: datetime, required:true }
+      - { name: publishDate, label: Publish date, widget: datetime }
+      - { name: tags, label: Tags, widget: list, required: false }
+      - { name: title, label: Title, widget: string }
       - { name: body, label: Body, widget: markdown }
   - name: posts
     label: Posts
     folder: content/posts
-    path: '{{year}}/{{year}}-{{month}}-{{day}}-{{slug}}/index'
+    path: '{{year}}-{{month}}-{{day}}-{{slug}}/index'
     nested:
       depth: 100
       subfolders: true
@@ -42,7 +45,143 @@ collections:
       - { name: body, label: Body, widget: richtext }
   - name: ephemera
     label: Ephemera
-    folder: content/ephemera
+    folder: /content/ephemera
     path: '{{year}}/{{year}}-{{month}}/{{year}}-{{month}}-{{day}}_{{hour}}-{{minute}}-{{second}}/index'
+    nested:
+      depth: 100
+      summary: '{{title}}'
+      subfolders: true
+    meta: { path: { index_file: _index } }
     fields:
-      - { name: body, label: Body, widget: richtext }
+      - name: date
+        label: Date
+        widget: datetime
+        picker_utc: true
+        default: '{{now}}'
+      - name: tags
+        label: Tags
+        widget: list
+        required: false
+      - name: body
+        label: Body
+        widget: markdown
+        required: false
+      - name: resources
+        label: Resources
+        widget: list
+        required: false
+        fields:
+          - name: src
+            label: src
+            widget: file
+            required: false
+  - name: gallery
+    label: Gallery
+    folder: /content/gallery
+    path: '{{slug}}/index'
+    fields:
+      - name: cover
+        label: Cover
+        widget: image
+        required: false
+      - name: title
+        label: Title
+        widget: string
+        required: true
+      - name: description
+        label: Description
+        widget: string
+        required: false
+      - name: resources
+        label: Resources
+        widget: list
+        fields:
+          - name: src
+            label: src
+            widget: image
+            required: true
+          - name: params
+            label: Parameters
+            widget: object
+            required: false
+            fields:
+              - name: caption
+                label: Caption
+                widget: text
+                maxlength: 200
+                required: false
+  - name: projects
+    label: Projects
+    folder: /content/projects
+    path: '{{slug}}/index'
+    fields:
+      - name: featured
+        label: Featured
+        widget: image
+        required: false
+      - name: title
+        label: Title
+        widget: string
+        required: true
+      - name: description
+        label: Description
+        widget: string
+        required: false
+      - name: resources
+        label: Resources
+        widget: list
+        fields:
+          - name: src
+            label: src
+            widget: image
+            required: false
+          - name: params
+            label: Parameters
+            widget: object
+            required: false
+            fields:
+              - name: caption
+                label: Caption
+                widget: text
+                maxlength: 200
+                required: false
+  - name: things
+    label: Things
+    folder: /content/things
+    path: '{{slug}}/index'
+    nested:
+      depth: 100
+      summary: '{{title}}'
+      subfolders: true
+    meta: { path: { index_file: _index } }
+    fields:
+      - name: featured
+        label: Featured
+        widget: image
+        required: false
+      - name: title
+        label: Title
+        widget: string
+        required: true
+      - name: description
+        label: Description
+        widget: string
+        required: false
+      - name: resources
+        label: Resources
+        widget: list
+        fields:
+          - name: src
+            label: src
+            widget: image
+            required: false
+          - name: params
+            label: Parameters
+            widget: object
+            required: false
+            fields:
+              - name: caption
+                label: Caption
+                widget: text
+                maxlength: 200
+                required: false
