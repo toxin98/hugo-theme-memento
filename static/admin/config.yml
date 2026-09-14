@@ -25,11 +25,11 @@ collections:
       subfolders: true
     meta: { path: { index_file: _index } }
     fields:
-      - { name: lastmod, label: Last modified, widget: datetime, required:true }
-      - { name: publishDate, label: Publish date, widget: datetime }
+      - { name: lastmod, label: Last modified, widget: datetime, picker_utc: true, required: true }
+      - { name: publishDate, label: Publish date, widget: datetime, picker_utc: true, required: true }
       - { name: tags, label: Tags, widget: list, required: false }
-      - { name: title, label: Title, widget: string }
-      - { name: body, label: Body, widget: markdown }
+      - { name: title, label: Title, widget: string, required: true }
+      - { name: body, label: Body, widget: markdown, required: true }
   - name: posts
     label: Posts
     folder: content/posts
@@ -39,33 +39,29 @@ collections:
       subfolders: true
     meta: { path: { index_file: _index } }
     fields:
-      - { name: tags, label: Tags, widget: list, field: { name: tag, label: Tag, widget: string }, required: false }
       - { name: featured, label: Featured, widget: image, required: false }
-      - { name: title, label: Title, widget: string }
-      - { name: body, label: Body, widget: richtext }
+      - { name: tags, label: Tags, widget: list, field: { name: tag, label: Tag, widget: string }, required: false }
+      - { name: title, label: Title, widget: string, required: true }
+      - { name: body, label: Body, widget: markdown, required: true }
   - name: ephemera
     label: Ephemera
     folder: /content/ephemera
-    path: '{{year}}/{{year}}-{{month}}/{{year}}-{{month}}-{{day}}_{{hour}}-{{minute}}-{{second}}/index'
+    path: '{{year}}/{{year}}-{{month}}/{{year}}-{{month}}-{{day}}_{{hour}}-{{minute}}-00/index'
+    summary: '{{date}} - {{body | truncate(50)}}'
     nested:
       depth: 100
-      summary: '{{date}}'
+      summary: '{{title}}'
       subfolders: true
-    meta: { path: { index_file: _index } }
     fields:
-      - name: date
-        label: Date
-        widget: datetime
-        picker_utc: true
-        default: '{{now}}'
       - name: tags
         label: Tags
         widget: list
         required: false
-      - name: body
-        label: Body
-        widget: markdown
-        required: false
+      - name: date
+        label: Date Time
+        widget: datetime
+        picker_utc: true
+        default: '{{now}}'
       - name: resources
         label: Resources
         widget: list
@@ -75,6 +71,10 @@ collections:
             label: src
             widget: file
             required: false
+      - name: body
+        label: Body
+        widget: markdown
+        required: false
   - name: gallery
     label: Gallery
     folder: /content/gallery
@@ -155,33 +155,29 @@ collections:
       subfolders: true
     meta: { path: { index_file: _index } }
     fields:
-      - name: featured
-        label: Featured
-        widget: image
-        required: false
+      - name: linkTitle
+        label: Link Title
+        widget: string
+        required: true
       - name: title
         label: Title
         widget: string
         required: true
-      - name: description
-        label: Description
-        widget: string
+      - name: featured
+        label: Featured
+        widget: image
         required: false
-      - name: resources
-        label: Resources
-        widget: list
-        fields:
-          - name: src
-            label: src
-            widget: image
-            required: false
-          - name: params
-            label: Parameters
-            widget: object
-            required: false
-            fields:
-              - name: caption
-                label: Caption
-                widget: text
-                maxlength: 200
-                required: false
+      - name: dateStart
+        label: Date Start
+        widget: datetime
+        picker_utc: true
+        required: false
+      - name: dateEnd
+        label: Date End
+        widget: datetime
+        picker_utc: true
+        required: false
+      - name: body
+        label: Body
+        widget: markdown
+        required: true
