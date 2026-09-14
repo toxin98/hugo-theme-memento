@@ -3,13 +3,12 @@
   display: flex;
 }
 
-.docs-sidebar {
+.docs-wrapper .sidebar {
   width: 296px;
   flex-shrink: 0;
 
   position: sticky;
   top: 0;
-  z-index: 99;
   height: 100dvh;
 
   padding-top: var(--topbar-height);
@@ -25,14 +24,11 @@
   min-width: 0;
 }
 
-.docs-topbar {
+.docs-main .topbar {
   position: sticky;
   top: 0;
-  z-index: 99;
 
   height: var(--topbar-height);
-
-  padding: 0 var(--edge-gap);
 
   display: flex;
   justify-content: space-between;
@@ -45,12 +41,6 @@
 
 .docs-topbar-left {
 
-}
-
-.docs-topbar-right {
-  display: flex;
-  gap: 10px;
-  align-items: center;
 }
 
 .docs-reading {
@@ -69,6 +59,7 @@
 
   display: flex;
   flex-direction: column;
+  padding: 0 0.75rem;
 }
 
 .meta-container {
@@ -231,63 +222,17 @@
     border-radius: 12px;
     border: 1px solid #ebebeb;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    max-height: calc(100dvh - var(--topbar-height) - 12px - 24px);
+    max-height: calc(100dvh - var(--topbar-height) - 12px - 88px);
     overflow-y: auto;
     animation: fadeIn 0.2s ease-out;
   }
 
+  .docs-reading-aside.open {
+    display: flex;
+  }
+
   .docs-aside-toggle {
     display: flex;
-    padding: 4px;
-    border-radius: 6px;
-  }
-
-  .docs-aside-toggle:hover {
-    background: #eee;
-  }
-
-  .docs-reading-aside.active {
-    display: flex;
-  }
-
-}
-
-@media (max-width: 768px) {
-
-  .docs-sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    transform: translateX(-100%);
-    box-shadow: 4px 0 10px rgba(0,0,0,0.1);
-  }
-
-  .docs-sidebar.is-active {
-    transform: translateX(0);
-  }
-
-  .docs-sidebar-toggle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: fixed;
-    bottom: 30px;
-    left: 20px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: #000;
-    color: #fff;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    z-index: 101; /* 确保按钮在最上层 */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    transition: background-color 0.2s;
-  }
-
-  .docs-sidebar-toggle:active {
-    background-color: #333;
   }
 
 }

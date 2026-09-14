@@ -75,8 +75,8 @@ document.addEventListener("DOMContentLoaded", () => {
         output = `${year}/${month}/${day} ${hours}:${minutes}`;
         break;
 
-      case "post":
-        output = `${year}/${month}/${day}`;
+      case "posts":
+        output = `${month}/${day}`;
         break;
 
       case "ephemera": {
@@ -128,16 +128,16 @@ document.addEventListener("DOMContentLoaded", () => {
     // 1. 点击按钮呼出/收起卡片[cite: 1]
     asideToggleBtn.addEventListener("click", (e) => {
       e.stopPropagation(); // 阻止事件冒泡[cite: 1]
-      asideContainer.classList.toggle("active");
+      asideContainer.classList.toggle("open");
     });
 
     // 2. 点击空白处关闭侧边栏[cite: 1]
     document.addEventListener("click", (e) => {
       // 仅在窄屏且目录显示时处理[cite: 1]
-      if (window.innerWidth <= 768 && asideContainer.classList.contains("active")) {
+      if (window.innerWidth <= 768 && asideContainer.classList.contains("open")) {
         // 如果点击的目标不是 aside 容器内部，也不是触发按钮本身，则关闭[cite: 1]
         if (!asideContainer.contains(e.target) && !asideToggleBtn.contains(e.target)) {
-          asideContainer.classList.remove("active");
+          asideContainer.classList.remove("open");
         }
       }
     });
@@ -155,16 +155,16 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  const readingTitle = document.querySelector(".reading-title");
+  const readingTitle = document.querySelector(".topbar-reading");
   const sentinel = document.createElement("div")
   const pageTitle = document.querySelector(".page-title")
   pageTitle.before(sentinel)
 
   const observer = new IntersectionObserver((entries) => {
     const entry = entries[0];
-    readingTitle.classList.toggle("show", !entry.isIntersecting)
+    readingTitle.classList.toggle("hidden", entry.isIntersecting)
   }, {
-    rootMargin: "10px 0px 0px 0px"
+    rootMargin: "16px 0px 0px 0px"
   })
 
   observer.observe(sentinel)

@@ -38,8 +38,9 @@
 }
 /* page */
 .gallery .fj-gallery {
+  margin: 0 calc(0px - var(--edge-gap));
   --fj-gutter: 4;
-  --fj-row-height: 180;
+  --fj-row-height: 160;
 }
 /* fj-gallery */
 figure.fj-gallery-item {

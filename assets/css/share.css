@@ -1,0 +1,84 @@
+.share-dialog {
+  width: min(420px, calc(100vw - 32px));
+  padding: 0;
+
+  border: none;
+  border-radius: 16px;
+
+  background: #fff;
+  color: #000;
+
+  box-shadow:
+    0 24px 80px rgb(0 0 0 / 20%);
+}
+
+.share-dialog::backdrop {
+  background: rgb(0 0 0 / 40%);
+
+  animation: share-backdrop-in 0.2s ease;
+}
+
+.share-dialog-inner {
+  padding: 20px;
+}
+
+.share-dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 20px;
+
+  font-weight: 600;
+}
+
+.share-dialog-close {
+  display: grid;
+  place-items: center;
+
+  width: 36px;
+  height: 36px;
+
+  padding: 0;
+
+  border: none;
+  border-radius: 8px;
+
+  background: transparent;
+  color: inherit;
+
+  cursor: pointer;
+}
+
+.share-dialog-close:hover {
+  background: rgb(0 0 0 / 6%);
+}
+
+.share-platforms {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.share-platform {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  min-height: 48px;
+  padding: 0 14px;
+
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+
+  background: transparent;
+  color: inherit;
+
+  text-decoration: none;
+
+  cursor: pointer;
+}
+
+.share-platform:hover {
+  background: rgb(0 0 0 / 5%);
+}

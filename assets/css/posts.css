@@ -6,43 +6,67 @@
 
 .posts .entry.card {
   display: flex;
-  padding: 0.5rem;
-}
-
-.posts .entry-link {
-  display: flex;
   flex-direction: row;
-}
-
-.posts .entry-date {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 3rem;
-}
-
-.posts .entry-date-month {
-  font-weight: 600;
-  text-transform: uppercase;
-  color: #111827;
-}
-
-.posts .entry-date-day {
-  font-size: 1.2rem;
-  line-height: 1.2;
-  font-weight: 600;
-  color: #6b7280;
+  height: 220px; /* 核心：强制统一卡片高度 */
+  /* 基础美化（沿用之前的设计） */
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #eaecef;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
 }
 
 .posts .entry-body {
   flex: 1;
+  /* min-width: 0; */
+  padding: 1.5rem 2rem;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
 }
 
-.posts .entry-main {
+.posts .entry-title,
+.posts .entry-summary {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-wrap: break-word; /* 保证单词能断行 */
+}
+
+.posts .entry-title {
+  -webkit-line-clamp: 2; /* 标题最多 2 行，超出显示 ... */
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.posts .entry-summary {
+  -webkit-line-clamp: 2; /* 摘要同样限制 2 行 */
+  font-size: 0.95rem;
+  color: #57606a;
+}
+
+.posts .entry-tags {
+  margin-top: auto; 
   display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  position: relative;
+  z-index: 2; /* 保证能独立点击 */
+}
+
+.posts .entry-featured {
+  flex-shrink: 0; /* 防止被左侧长文本挤压缩小 */
+  height: 100%;   /* 撑满卡片的 220px 高度 */
+  aspect-ratio: 4 / 3; /* 核心：基于固定的高度，强制图片比例为 4:3 */
+  /* overflow: hidden; */
+}
+
+.posts .entry-featured img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .posts .entry-tags {
@@ -58,51 +82,6 @@
 .posts .entry-tag::before {
   content: "#";
   margin-right: 0.1rem;
-}
-
-.posts .entry-featured {
-  flex-shrink: 0;
-  height: 100px;
-  aspect-ratio: 1.37 / 1;
-  border-radius: 6px;
-  overflow: hidden;
-}
-
-.posts .entry-featured img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-.posts .entry-pro {
-  padding: 0 0.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.posts .entry-title {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  overflow: hidden;
-}
-
-.posts .entry-title:hover {
-  color: var(--accent-color);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-
-.posts .entry-summary {
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  font-size: var(--text-size-sm);
-  color: var(--text-color-secondary);
-  line-height: 1.2;
 }
 
 .posts-years-list,
@@ -146,17 +125,10 @@
   display: none;
 }
 
-.posts .entry-group :target::before {
-  /* content: "";
-  display: block;
-  padding-top: var(--topbar-height);
-  margin-top: calc( 0 - var(--topbar-height)); */
-}
-
 .posts .entry-group-header {
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 999;
 }
 
 .posts-filter.tag {

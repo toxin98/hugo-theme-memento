@@ -5,11 +5,12 @@
 @import 'things.css';
 @import 'gallery.css';
 @import 'ephemera.css';
+@import 'share.css';
 
 :root {
   --topbar-height: 52px;
+  --sidebar-width: 280px;
   --column-layout-gap: 20px;
-  --sidebar-width: 270px;
   --edge-gap: 16px;
   --header-color: #281313;
   --main-color: #eee;
@@ -63,10 +64,11 @@ button {
 .wrapper {
   max-width: 1360px;
   margin-inline: auto;
+  padding: 0 var(--edge-gap)
 }
 
 .topbar {
-  z-index: 999;
+  z-index: 99;
   position: fixed;
   top: 0;
   left: 0;
@@ -78,7 +80,16 @@ button {
 }
 
 h2, h3, h4, h5 {
-  scroll-margin-top: var(--topbar-height);
+  scroll-margin-top: calc(var(--topbar-height) + 1rem);
+}
+
+.topbar button {
+  padding: 6px;
+  border-radius: 6px;
+}
+
+.topbar button:hover {
+  background: #eee;
 }
 
 .topbar-left {
@@ -179,10 +190,7 @@ main > nav > ul a.ancestor::after {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.topbar-right svg {
-  width: 52px;
+  gap: 10px;
 }
 
 footer {
@@ -210,9 +218,8 @@ main.fornow {
 }
 
 .three-column-layout {
-  display: grid;
-  grid-template-columns: var(--sidebar-width) minmax(0, 1fr) var(--sidebar-width);
-  gap: var(--column-layout-gap);
+  display: flex;
+  gap: 0;
 }
 
 .two-column-layout {
@@ -221,128 +228,52 @@ main.fornow {
   gap: var(--column-layout-gap);
 }
 
-.primary-area,
-.secondary-area,
-.sidebar {
+.primary-area {
+  flex: 1;
   display: flex;
   flex-direction: column;
 }
 
 .sidebar {
+  width: var(--sidebar-width);
+  flex-shrink: 0;
+
   position: sticky;
   top: var(--topbar-height);
   height: calc(100dvh - var(--topbar-height));
+
+  display: flex;
+  flex-direction: column;
 }
 
 .sidebar-toggle {
-  position: sticky;
-  bottom: 10px;
-  left: 10px;
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  align-items: center;
-  justify-content: center;
-  background: var(--accent-color);
-  color: #fff;
-  box-shadow: 0 4px 14px rgb(0 0 0 / .15);
-  transition: transform .2s ease, opacity .2s ease, box-shadow .2s ease;
   display: none;
 }
 
-.reading-title {
-  display: none;
+.topbar-reading {
+  display: flex;
   font-size: 24px;
   font-weight: 600;
 }
 
-.reading-title.show {
-  display: flex;
+/* 【核心】使用 ::after 伪元素铺满整个卡片 */
+.stretched-link::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1; /* 层级位于卡片内容底端，但覆盖整个容器 */
 }
 
-.share-dialog {
-  width: min(420px, calc(100vw - 32px));
-  padding: 0;
-
-  border: none;
-  border-radius: 16px;
-
-  background: #fff;
-  color: #000;
-
-  box-shadow:
-    0 24px 80px rgb(0 0 0 / 20%);
-}
-
-.share-dialog::backdrop {
-  background: rgb(0 0 0 / 40%);
-
-  animation: share-backdrop-in 0.2s ease;
-}
-
-.share-dialog-inner {
-  padding: 20px;
-}
-
-.share-dialog-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  margin-bottom: 20px;
-
-  font-weight: 600;
-}
-
-.share-dialog-close {
-  display: grid;
-  place-items: center;
-
-  width: 36px;
-  height: 36px;
-
-  padding: 0;
-
-  border: none;
-  border-radius: 8px;
-
-  background: transparent;
-  color: inherit;
-
-  cursor: pointer;
-}
-
-.share-dialog-close:hover {
-  background: rgb(0 0 0 / 6%);
-}
-
-.share-platforms {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-}
-
-.share-platform {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  min-height: 48px;
-  padding: 0 14px;
-
-  border: 1px solid var(--color-border);
-  border-radius: 10px;
-
-  background: transparent;
-  color: inherit;
-
+.stretched-link {
   text-decoration: none;
-
-  cursor: pointer;
+  color: inherit;
 }
 
-.share-platform:hover {
-  background: rgb(0 0 0 / 5%);
+.stretched-link:hover {
+  color: #0969da;
 }
 
 .overlay {
@@ -446,7 +377,6 @@ main.fornow {
   min-height: 0;
   display: flex;
   flex-direction: column;
-  padding-left: 0.75rem;
 }
 
 .toc-header {
@@ -589,16 +519,11 @@ swiper-slide img {
 
 @media (max-width: 1280px) {
 
-  .three-column-layout {
-    grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
-  }
-
   .sidebar[data-position="right"] {
     position: fixed;
     right: 0;
     top: var(--topbar-height);
     bottom: 0;
-    width: var(--sidebar-width);
     background: #fff;
     transform: translateX(100%);
     transition: transform .3s ease;
@@ -613,24 +538,15 @@ swiper-slide img {
 
 @media (max-width: 1024px) {
 
-  .three-column-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .two-column-layout {
-    grid-template-columns: 1fr;
-  }
-
   .sidebar[data-position="left"] {
     position: fixed;
     left: 0;
-    top: var(--topbar-height);
+    top: 0;
     bottom: 0;
-    width: var(--sidebar-width);
     background: #fff;
     transform: translateX(-100%);
     transition: transform .3s ease;
-    z-index: 2;
+    z-index: 1000;
   }
 
   .sidebar[data-position="left"].open {
@@ -639,11 +555,35 @@ swiper-slide img {
 
   .sidebar-toggle[data-target="left"] {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 30px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1001; /* 确保按钮在最上层 */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: background-color 0.2s;
   }
 
 }
 
 @media (max-width: 768px) {
+
+  .three-column-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .two-column-layout {
+    grid-template-columns: 1fr;
+  }
 
   .viewer {
     flex-direction: column;

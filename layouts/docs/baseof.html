@@ -4,18 +4,14 @@
   {{ partial "head.html" . }}
 </head>
 <body>
+  <header>
+    {{ partial "header.html" }}
+  </header>
   <main class="docs-wrapper">
 
-    <button class="docs-sidebar-toggle" data-target="left">{{ partial "utils/icon.html" "layout-sidebar-left-expand" }}</button>
+    <button class="sidebar-toggle" data-target="left">{{ partial "utils/icon.html" "layout-sidebar-left-expand" }}</button>
 
-    <aside class="docs-sidebar">
-
-      <div class="docs-sidebar-header">
-        <a href="/">
-          <span>﹤Home</span>
-        </a>
-        <span> Notes</span>
-      </div>
+    <aside class="sidebar" data-position="left">
 
       <nav class="docs-nav">
         <div class="docs-search">
@@ -41,12 +37,12 @@
 
     <div class="docs-main">
 
-      <div class="docs-topbar">
+      <div class="topbar">
         <!-- {{ partial "breadcrumbs.html" . }} -->
-        <div class="docs-topbar-left">
-          <span class="reading-title">{{ .Title }}</span>
+        <div class="topbar-left">
+          <span class="topbar-reading">{{ .Title }}</span>
         </div>
-        <div class="docs-topbar-right">
+        <div class="topbar-right">
           {{ partial "share.html" . }}
           <button class="docs-aside-toggle">{{ partial "utils/icon.html" "list-tree" }}</button>
         </div>
