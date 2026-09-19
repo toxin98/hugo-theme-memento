@@ -131,6 +131,10 @@
   margin-left: calc(0px - var(--edge-gap));
 }
 
+.wrapper.notes .topbar {
+  padding-left: var(--edge-gap);
+}
+
 .notes-reading {
   flex: 1;
   display: flex;

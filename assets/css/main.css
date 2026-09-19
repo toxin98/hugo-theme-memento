@@ -64,7 +64,7 @@ button {
 .wrapper {
   max-width: 1360px;
   margin-inline: auto;
-  padding: 0 var(--edge-gap)
+  padding: 0 var(--edge-gap);
 }
 
 header {
@@ -445,7 +445,7 @@ main {
 }
 
 .entry-group-header a:hover{
-  color: var(--accent-color)
+  color: var(--accent-color);
 }
 
 .entry-group-header svg {
