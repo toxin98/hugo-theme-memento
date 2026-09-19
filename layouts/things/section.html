@@ -2,68 +2,94 @@
 
   <div class="wrapper things">
 
-    <h1>{{ .Title }}</h1>
-
-    {{ $sections := slice }}
-
-    {{ range .Sections }}
-      {{ $weight := .Weight | default 1 }}
-      {{ $sections = $sections | append (dict "section" . "weight" $weight) }}
-    {{ end }}
-
-    {{ range sort $sections "weight" }}
-
-      <div class="entry-group">
-
-        <div class="entry-group-header">
-          <a href="{{ .section.RelPermalink }}">
-            <h2 class="entry-group-title">{{ .section.Title }}{{ partial "utils/icon.html" "chevron-right" }}</h2> 
-          </a>
-        </div>
-
-        <ul class="entry-list">
-
-        {{ $pages := .section.Pages }}
-        {{ $pages = sort $pages ".Params.dateStart" "desc" }}
-        {{ range $pages }}
-
-          <li class="entry card">
-            <a class="entry-link" href="{{ .RelPermalink }}" title="{{ .Title }}">
-
-              {{ if .Params.dateStart }}
-              <div class="entry-meta">
-
-                {{ $dateStart := .Params.dateStart | time.Format "2006/01" }}
-
-                {{ $dateEnd := "Present" }}
-                {{ with .Params.dateEnd }}
-                  {{ $dateEnd = . | time.Format "2006/01" }}
-                {{ end }}
-
-                {{ $dateStart }} - {{ $dateEnd }}
-              </div>
-              {{ end }}
-
-              <div class="entry-featured">
-                {{ with .Resources.GetMatch .Params.featured }}
-                  {{ $thumb := .Resize "200x webp q80" }}
-                  <img src="{{ $thumb.RelPermalink }}" alt="{{ $.Title }}">
-                {{ end }}
-              </div>
-
-              <h3 class="entry-title">{{ .LinkTitle }}</h3>
-
-            </a>
-          </li>
-
+    <div class="topbar">
+      <div class="topbar-left">
+        {{ if and .Parent (ne .Parent.Kind "home") }}
+        <a href="{{ .Parent.RelPermalink }}" class="back-link" aria-label="back">{{ partial "utils/icon.html" "chevron-left" }}</a>
         {{ end }}
-
-        </ul>
+      </div>
+      <div class="topbar-middle">
+        <h1>{{ .Title }}</h1>
+      </div>
+      <div class="topbar-right">
 
       </div>
+    </div>
+
+    {{ if .Sections }}
+
+      {{ $sections := slice }}
+      {{ range .Sections }}
+        {{ $weight := .Weight | default 1 }}
+        {{ $sections = $sections | append (dict "section" . "weight" $weight) }}
+      {{ end }}
+
+      {{ range sort $sections "weight" }}
+
+        <div class="entry-group">
+
+          <div class="entry-group-header">
+            <a href="{{ .section.RelPermalink }}">
+              <h2 class="entry-group-title">{{ .section.Title }}{{ partial "utils/icon.html" "chevron-right" }}</h2> 
+            </a>
+          </div>
+
+          {{ $pages := .section.RegularPagesRecursive }}
+          {{ $pages = sort $pages ".Params.dateStart" "desc" }}
+
+          {{ template "things-grid" $pages }}
+
+        </div>
+
+      {{ end }}
+
+    {{ else }}
+
+      {{ template "things-grid" .Pages }}
 
     {{ end }}
 
   </div>
+
+{{ end }}
+
+{{ define "things-grid" }}
+
+  <ul class="entry-list">
+
+  {{ range . }}
+
+    <li class="entry card">
+      <a class="entry-link" href="{{ .RelPermalink }}" title="{{ .Title }}">
+
+        {{ if .Params.dateStart }}
+        <div class="entry-meta">
+
+          {{ $dateStart := .Params.dateStart | time.Format "2006/01" }}
+
+          {{ $dateEnd := "Present" }}
+          {{ with .Params.dateEnd }}
+            {{ $dateEnd = . | time.Format "2006/01" }}
+          {{ end }}
+
+          {{ $dateStart }} - {{ $dateEnd }}
+        </div>
+        {{ end }}
+
+        <div class="entry-featured">
+          {{ with .Resources.GetMatch .Params.featured }}
+            {{ $thumb := .Resize "200x webp q80" }}
+            <img src="{{ $thumb.RelPermalink }}" alt="{{ .Title }}">
+          {{ end }}
+        </div>
+
+        <h3 class="entry-title">{{ .LinkTitle }}</h3>
+
+      </a>
+    </li>
+
+  {{ end }}
+
+  </ul>
 
 {{ end }}

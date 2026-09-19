@@ -15,7 +15,20 @@
 
     <div class="primary-area">
 
-      <h1>{{ .Title }}</h1>
+      <div class="topbar">
+        <div class="topbar-left">
+
+        </div>
+        <div class="topbar-middle">
+          {{ if and .Parent (ne .Parent.Kind "home") }}
+          <a href="{{ .Parent.RelPermalink }}" class="back-link" aria-label="back">{{ partial "utils/icon.html" "chevron-left" }}</a>
+          {{ end }}
+          <h1>{{ .Title }}</h1>
+        </div>
+        <div class="topbar-right">
+
+        </div>
+      </div>
 
       {{ range $posts.GroupByDate "2006" }}
       <div class="entry-group" data-year="{{ .Key }}">

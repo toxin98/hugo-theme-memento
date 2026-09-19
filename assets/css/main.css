@@ -1,5 +1,5 @@
 @import 'home.css';
-@import 'docs.css';
+@import 'notes.css';
 @import 'posts.css';
 @import 'projects.css';
 @import 'things.css';
@@ -67,27 +67,63 @@ button {
   padding: 0 var(--edge-gap)
 }
 
+header {
+  background: var(--main-color);
+}
+
 .topbar {
-  z-index: 999;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
   height: var(--topbar-height);
-  padding: 6px var(--edge-gap);
+  padding: 0 var(--edge-gap);
   display: flex;
-<<<<<<< HEAD
-  justify-content: space-between;
-=======
   align-items: center;
   gap: 1rem;
   z-index: 999;
   margin-bottom: 1rem;
->>>>>>> 19a1098 (fix)
 }
 
-h2, h3, h4, h5 {
-  scroll-margin-top: calc(var(--topbar-height) + 1rem);
+.topbar-left {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.topbar-middle {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.topbar-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.site-brand {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #000;
+  gap: .5rem;
+}
+
+.site-title {
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.topbar-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  overflow: hidden;
+  align-self: center;
+}
+
+.topbar-avatar img {
+  width: 100%;
+  object-fit: cover;
 }
 
 .topbar button {
@@ -99,45 +135,8 @@ h2, h3, h4, h5 {
   background: #eee;
 }
 
-.topbar-left {
-  background: #fff;
-  border-radius: 6px;
-  padding: 6px;
-  display: flex;
-}
-
-.topbar-left a {
-  text-decoration: none;
-  color: inherit;
-}
-
-.topbar-left a:hover {
-  text-decoration: underline;
-}
-
-.segment-row {
-  display: flex;
-  gap: 10px;
-  /* justify-content: center;
-  align-items: center; */
-  position: relative; /* 相对定位，作为药丸绝对定位的参考 */
-}
-
-.topbar-avatar {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  overflow: hidden;
-  align-self: center;
-}
-
-.topbar-avatar img {
-  width: 100%;
-  object-fit: cover;
-}
-
-.topbar-location {
-  
+h2, h3, h4, h5 {
+  scroll-margin-top: calc(var(--topbar-height) + 1rem);
 }
 
 nav.back-nav {
@@ -146,7 +145,7 @@ nav.back-nav {
 }
 
 main > nav {
-  padding: 0 36px;
+  padding: 12px 36px;
 }
 
 main > nav > ul {
@@ -193,13 +192,6 @@ main > nav > ul a.ancestor::after {
   transform: scaleX(1);
 }
 
-.topbar-right {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-
 footer {
   background: var(--footer-color);
   padding-block: 1rem;
@@ -216,27 +208,11 @@ footer {
 
 main {
   flex: 1;
-  min-width: 0;
   background: var(--main-color);
 }
 
-main.fornow {
-  padding-top: 78px;
-}
-
 .three-column-layout {
-<<<<<<< HEAD
-<<<<<<< HEAD
-  display: grid;
-  grid-template-columns: var(--sidebar-width) minmax(0, 1fr) var(--sidebar-width);
-  gap: var(--column-layout-gap);
-=======
   display: flex;
->>>>>>> 19a1098 (fix)
-=======
-  display: flex;
-  gap: 0;
->>>>>>> bd46cdff26141dad1b13586b43ec160f3f0a346e
 }
 
 .two-column-layout {
@@ -245,20 +221,9 @@ main.fornow {
   gap: var(--column-layout-gap);
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-.primary-area,
-.secondary-area,
-.sidebar {
-=======
 .primary-area {
   flex: 1;
   min-width: 0;
->>>>>>> 19a1098 (fix)
-=======
-.primary-area {
-  flex: 1;
->>>>>>> bd46cdff26141dad1b13586b43ec160f3f0a346e
   display: flex;
   flex-direction: column;
 }
@@ -267,12 +232,16 @@ main.fornow {
   width: var(--sidebar-width);
   flex-shrink: 0;
 
-  position: sticky;
-  top: var(--topbar-height);
-  height: calc(100dvh - var(--topbar-height));
-
   display: flex;
   flex-direction: column;
+}
+
+.sidebar[data-position=left] {
+  margin-right: 1rem;
+}
+
+.sidebar[data-position=right] {
+  margin-left: 1rem;
 }
 
 .sidebar-toggle {
@@ -280,9 +249,13 @@ main.fornow {
 }
 
 .topbar-reading {
-  display: flex;
+  display: none;
   font-size: 24px;
   font-weight: 600;
+}
+
+.topbar-reading.show {
+  display: flex;
 }
 
 /* 【核心】使用 ::after 伪元素铺满整个卡片 */
@@ -434,21 +407,6 @@ main.fornow {
   border-bottom: 0.1rem solid #000;
 }
 /* universal */
-<<<<<<< HEAD
-<<<<<<< HEAD
-.page-hero {
-  background: #000;
-  margin-bottom: 1rem;
-}
-
-.page-hero img {
-  max-width: 100%;
-  max-height: 60dvh;
-  aspect-ratio: 21 / 9;
-  object-fit: contain;
-  display: block;
-  margin-inline: auto;
-=======
 .wrapper .topbar {
   position: sticky;
   top: 0;
@@ -468,11 +426,8 @@ main.fornow {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
->>>>>>> 19a1098 (fix)
 }
 
-=======
->>>>>>> bd46cdff26141dad1b13586b43ec160f3f0a346e
 .entry-group {
   margin-bottom: 1rem;
 }
@@ -588,7 +543,7 @@ swiper-slide img {
     transform: translateX(0);
   }
 
-  .sidebar-toggle[data-target="right"] {
+  .sidebar-toggle[data-target=right] {
     display: flex;
   }
 

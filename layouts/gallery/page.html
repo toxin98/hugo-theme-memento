@@ -4,8 +4,10 @@
 
   <div class="wrapper gallery">
 
-    <h1>{{ .Title }}</h1>
-    <p>{{ .Description }}</p>
+    <div class="content album">
+      <h1>{{ .Title }}</h1>
+      <p>{{ .Description }}</p>
+    </div>
 
     <div class="fj-gallery">
       {{ range .Resources.ByType "image" }}

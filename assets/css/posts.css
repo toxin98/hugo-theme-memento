@@ -19,15 +19,8 @@
 
 .posts .entry-body {
   flex: 1;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-  padding: 1.5rem 2rem;
->>>>>>> 19a1098 (fix)
-=======
   /* min-width: 0; */
   padding: 1.5rem 2rem;
->>>>>>> bd46cdff26141dad1b13586b43ec160f3f0a346e
   display: flex;
   flex-direction: column;
 }
@@ -134,7 +127,7 @@
 
 .posts .entry-group-header {
   position: sticky;
-  top: 0;
+  top: var(--topbar-height);
   z-index: 1;
 }
 
