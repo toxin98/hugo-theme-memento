@@ -129,10 +129,12 @@
 .wrapper.notes .topbar,
 .wrapper.notes footer {
   margin-left: calc(0px - var(--edge-gap));
+  margin-right: calc(0px - var(--edge-gap));
 }
 
 .wrapper.notes .topbar {
   padding-left: var(--edge-gap);
+  padding-right: calc(var(--sidebar-width) + var(--edge-gap)*2);
 }
 
 .notes-reading {
@@ -188,6 +190,10 @@
 }
 
 @media (max-width: 1280px) {
+
+  .wrapper.notes .topbar {
+    padding-right: 0;
+  }
 
   .wrapper.notes .sidebar[data-position="right"] {
     display: none;
