@@ -1,11 +1,13 @@
 <div class="wrapper topbar">
   <div class="topbar-left" data-navigation aria-expanded="false">
-    {{ with resources.Get site.Params.profile.avatar }}
-      {{ $thumb := .Fill "70x70 center" }}
-      <div class="topbar-avatar">
+    <div class="topbar-avatar">
+      {{ with resources.Get site.Params.profile.avatar }}
+        {{ $thumb := .Fill "70x70 center" }}
         <img src="{{ $thumb.RelPermalink }}" alt="avatar">
-      </div>
-    {{ end }}
+      {{ else }}
+        <img src="">
+      {{ end }}
+    </div>
     <div class="segment-row">
       <div class="segment topbar-location">
         {{ if not .IsHome }}
@@ -22,8 +24,6 @@
     </div>
   </div>
   <div class="topbar-right hidden">
-    <button>
-      {{ partial "utils/icon.html" "share" }}
-    </button>
+    {{ partial "share.html" . }}
   </div>
 </div>

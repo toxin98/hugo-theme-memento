@@ -27,32 +27,26 @@
         <ul class="entry-list">
           {{ range .Pages }}
           <li class="entry card" data-tags="{{ delimit .Params.tags "," }}">
-            <a class="entry-link" href="{{ .RelPermalink }}">
 
-              <time class="entry-date" datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}" aria-label="{{ .Date.Format "2006-01-02" }}">
-                <span class="entry-date-month">{{ .Date.Format "Jan" }}</span>
-                <span class="entry-date-day">{{ .Date.Format "02" }}</span>
-              </time>
-              <div class="entry-body">
-                <div class="entry-main">
-                  <div class="entry-featured">
-                    {{ partial "utils/get-featured.html" . }}
-                  </div>
-                  <div class="entry-pro">
-                    <h3 class="entry-title">{{ .LinkTitle }}</h3>
-                    <div class="entry-summary">{{ .Summary | plainify }}</div>
-                  </div>
-                </div>
-                {{ with .GetTerms "tags" }}
-                <div class="entry-tags" aria-label="tags">
-                  {{ range . }}
-                    <span class="entry-tag">{{ .LinkTitle }}</span>
-                  {{ end }}
-                </div>
+            <div class="entry-body">
+              <div class="entry-meta">
+                {{ partial "utils/date-format.html" (dict "date" .Date "layout" "posts") }}
+              </div>
+              <h3 class="entry-title">
+                <a href="{{ .RelPermalink}}" class="stretched-link">{{ .Title }}</a>
+              </h3>
+              <p class="entry-summary">{{ .Summary | plainify }}</p>
+              <div class="entry-tags">
+                {{ range .Params.tags }}
+                  <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="tag-badge">#{{ . }}</a>
                 {{ end }}
               </div>
+            </div>
 
-            </a>
+            <div class="entry-featured">
+              {{ partial "utils/get-featured.html" . }}
+            </div>
+
           </li>
           {{ end }}
         </ul>
@@ -64,7 +58,7 @@
     <aside class="sidebar" data-position="right">
       <div class="posts-tags-list">
         <div><span>Tags: </span><button id="tagsCleaner">{{ partial "utils/icon.html" "x" }}Clear</button></div>
-        {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
+        {{ range $name, $taxonomy := site.Taxonomies.tags }}
         <button class="posts-filter tag" data-filter="{{ $name }}">{{ $name }}</button>
         {{ end }}
       </div>

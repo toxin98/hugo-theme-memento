@@ -12,27 +12,11 @@ document.addEventListener('DOMContentLoaded', () => {
     buttons.forEach(button => button.setAttribute("aria-expanded", "false"));
     overlay?.classList.remove("active");
 
-    unlockScroll();
   }
-
 
   function openSidebar(sidebar){
     sidebar.classList.add("open");
     overlay?.classList.add("active");
-
-    lockScroll();
-  }
-
-  function lockScroll(){
-
-    document.body.style.overflow = "hidden";
-
-  }
-
-  function unlockScroll(){
-
-    document.body.style.overflow = "";
-
   }
 
   buttons.forEach(button=>{
