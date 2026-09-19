@@ -16,151 +16,73 @@ slug:
   timezone: utc
 
 collections:
-<<<<<<< HEAD
   - name: notes
     label: Notes
     folder: /content/notes
     nested: { depth: 100, summary: '{{title}}', subfolders: true }
     meta: { path: { index_file: _index } }
+    summary: '{{title}} - {{body | truncate(50)}}'
+    path: '{{slug}}/index'
     fields:
       - { name: lastmod, label: Last modified, widget: datetime, input_timezone: Asia/Shanghai, output_utc: false, required: true }
       - { name: publishDate, label: Publish date, widget: datetime, input_timezone: Asia/Shanghai, output_utc: false, required: true }
-=======
-  - name: docs
-    label: Docs
-    folder: /content/docs
-    nested:
-      depth: 100
-      summary: '{{title}}'
-      subfolders: true
-    meta: { path: { index_file: _index } }
-    fields:
-      - { name: lastmod, label: Last modified, widget: datetime, picker_utc: true, required: true }
-      - { name: publishDate, label: Publish date, widget: datetime, picker_utc: true, required: true }
->>>>>>> bd46cdff26141dad1b13586b43ec160f3f0a346e
       - { name: tags, label: Tags, widget: list, required: false }
       - { name: title, label: Title, widget: string, required: true }
       - { name: body, label: Body, widget: markdown, required: true }
   - name: posts
     label: Posts
     folder: content/posts
-<<<<<<< HEAD
-    path: '{{year}}/{{year}}-{{month}}-{{day}}-{{slug}}/index'
-    summary: '{{dirname}} | {{title}}'
     nested: { depth: 100, summary: '{{title}}', subfolders: true }
+    meta: { path: { index_file: index } }
+    summary: '{{dirname}} | {{title}}'
+    path: '{{slug}}/index'
     fields:
       - { name: tags, label: Tags, widget: list, required: false }
       - { name: featured, label: Featured, widget: image, required: false }
-=======
-    path: '{{year}}-{{month}}-{{day}}-{{slug}}/index'
-    nested:
-      depth: 100
-      subfolders: true
-    meta: { path: { index_file: _index } }
-    fields:
-      - { name: featured, label: Featured, widget: image, required: false }
-      - { name: tags, label: Tags, widget: list, field: { name: tag, label: Tag, widget: string }, required: false }
->>>>>>> bd46cdff26141dad1b13586b43ec160f3f0a346e
       - { name: title, label: Title, widget: string, required: true }
       - { name: body, label: Body, widget: markdown, required: true }
   - name: ephemera
     label: Ephemera
     folder: /content/ephemera
-    path: '{{year}}/{{year}}-{{month}}/{{year}}-{{month}}-{{day}}_{{hour}}-{{minute}}-00/index'
-<<<<<<< HEAD
-    summary: '{{dirname}} {{body | truncate(50)}}'
     nested: { depth: 100, summary: '{{title}}', subfolders: true }
+    meta: { path: { index_file: index } }
+    summary: '{{dirname}} {{body | truncate(50)}}'
+    path: '{{slug}}/index'
     fields:
       - { name: date, label: Date Time, widget: datetime, input_timezone: Asia/Shanghai, output_utc: false, default: '{{now}}', required: true }
       - { name: tags, label: Tags, widget: list, required: false }
       - { name: resources, label: Resources, widget: list, required: false, fields: [ { name: src, label: src, widget: file, required: false } ] }
-=======
-    summary: '{{date}} - {{body | truncate(50)}}'
-    nested:
-      depth: 100
-      summary: '{{title}}'
-      subfolders: true
-    fields:
-      - { name: date, label: Date Time, widget: datetime, picker_utc: true, default: '{{now}}' }
-      - name: tags
-        label: Tags
-        widget: list
-        required: false
-      - name: resources
-        label: Resources
-        widget: list
-        required: false
-        fields:
-          - name: src
-            label: src
-            widget: file
-            required: false
->>>>>>> bd46cdff26141dad1b13586b43ec160f3f0a346e
       - { name: body, label: Body, widget: markdown, required: false }
   - name: gallery
     label: Gallery
     folder: /content/gallery
+    nested: {}
+    meta: {}
+    summary: '{{title}} · {{description | truncate(50)}}'
     path: '{{slug}}/index'
     fields:
       - { name: cover, label: Cover, widget: image, required: true }
       - { name: title, label: Title, widget: string, required: true }
       - { name: description, label: Description, widget: string, required: true }
-<<<<<<< HEAD
       - { name: resources, label: Resources, widget: list, required: false, fields: [ { name: src, label: src, widget: image, required: true }, { name: params, label: Parameters, widget: object, required: false, fields: [ { name: caption, label: Caption, widget: text, maxlength: 200, required: false } ] } ] }
-=======
-      - { name: resources, label: Resources, widget: list, fields: [ { name: src, label: src, widget: image, required: true }, { name: params, label: Parameters, widget: object, required: false, fields: [ { name: caption, label: Caption, widget: text, maxlength: 200, required: false } ] } ] }
->>>>>>> bd46cdff26141dad1b13586b43ec160f3f0a346e
   - name: projects
     label: Projects
     folder: /content/projects
-    path: '{{slug}}/index'
-<<<<<<< HEAD
     nested: { depth: 100, summary: '{{title}}', subfolders: true }
-    meta: { path: { index_file: _index } }
+    meta: { path: { index_file: index } }
+    summary: '{{title}} · {{description | truncate(50)}}'
+    path: '{{slug}}/index'
     fields:
       - { name: featured, label: Featured, widget: image, required: true }
       - { name: title, label: Title, widget: string, required: true }
       - { name: description, label: Description, widget: string, required: true }
-=======
-    fields:
-      - name: featured
-        label: Featured
-        widget: image
-        required: false
-      - name: title
-        label: Title
-        widget: string
-        required: true
-      - name: description
-        label: Description
-        widget: string
-        required: false
-      - name: resources
-        label: Resources
-        widget: list
-        fields:
-          - name: src
-            label: src
-            widget: image
-            required: false
-          - name: params
-            label: Parameters
-            widget: object
-            required: false
-            fields:
-              - name: caption
-                label: Caption
-                widget: text
-                maxlength: 200
-                required: false
->>>>>>> bd46cdff26141dad1b13586b43ec160f3f0a346e
   - name: things
     label: Things
     folder: /content/things
-    path: '{{slug}}/index'
-<<<<<<< HEAD
     nested: { depth: 100, summary: '{{title}}', subfolders: true }
-    meta: { path: { index_file: _index } }
+    meta: { path: { index_file: index } }
+    summary: '{{title}}'
+    path: '{{slug}}/index'
     fields:
       - { name: dateStart, label: Date Start, widget: datetime, input_timezone: Asia/Shanghai, output_utc: false, required: false }
       - { name: dateEnd, label: Date End, widget: datetime, input_timezone: Asia/Shanghai, output_utc: false, required: false }
@@ -168,37 +90,3 @@ collections:
       - { name: linkTitle, label: Link Title, widget: string, required: true }
       - { name: title, label: Title, widget: string, required: true }
       - { name: body, label: Body, widget: markdown, required: true }
-=======
-    nested:
-      depth: 100
-      summary: '{{title}}'
-      subfolders: true
-    meta: { path: { index_file: _index } }
-    fields:
-      - name: linkTitle
-        label: Link Title
-        widget: string
-        required: true
-      - name: title
-        label: Title
-        widget: string
-        required: true
-      - name: featured
-        label: Featured
-        widget: image
-        required: false
-      - name: dateStart
-        label: Date Start
-        widget: datetime
-        picker_utc: true
-        required: false
-      - name: dateEnd
-        label: Date End
-        widget: datetime
-        picker_utc: true
-        required: false
-      - name: body
-        label: Body
-        widget: markdown
-        required: true
->>>>>>> bd46cdff26141dad1b13586b43ec160f3f0a346e
