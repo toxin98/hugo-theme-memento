@@ -87,7 +87,7 @@
 .posts-years-list,
 .posts-tags-list {
   position: sticky;
-  top: calc(var(--topbar-height) + 140px);
+  top: calc(var(--topbar-height)*2 + 1rem*2);
 }
 
 .posts-years-list,
