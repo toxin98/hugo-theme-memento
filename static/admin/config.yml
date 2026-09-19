@@ -53,15 +53,11 @@ collections:
       summary: '{{title}}'
       subfolders: true
     fields:
+      - { name: date, label: Date Time, widget: datetime, picker_utc: true, default: '{{now}}' }
       - name: tags
         label: Tags
         widget: list
         required: false
-      - name: date
-        label: Date Time
-        widget: datetime
-        picker_utc: true
-        default: '{{now}}'
       - name: resources
         label: Resources
         widget: list
@@ -71,45 +67,16 @@ collections:
             label: src
             widget: file
             required: false
-      - name: body
-        label: Body
-        widget: markdown
-        required: false
+      - { name: body, label: Body, widget: markdown, required: false }
   - name: gallery
     label: Gallery
     folder: /content/gallery
     path: '{{slug}}/index'
     fields:
-      - name: cover
-        label: Cover
-        widget: image
-        required: false
-      - name: title
-        label: Title
-        widget: string
-        required: true
-      - name: description
-        label: Description
-        widget: string
-        required: false
-      - name: resources
-        label: Resources
-        widget: list
-        fields:
-          - name: src
-            label: src
-            widget: image
-            required: true
-          - name: params
-            label: Parameters
-            widget: object
-            required: false
-            fields:
-              - name: caption
-                label: Caption
-                widget: text
-                maxlength: 200
-                required: false
+      - { name: cover, label: Cover, widget: image, required: true }
+      - { name: title, label: Title, widget: string, required: true }
+      - { name: description, label: Description, widget: string, required: true }
+      - { name: resources, label: Resources, widget: list, fields: [ { name: src, label: src, widget: image, required: true }, { name: params, label: Parameters, widget: object, required: false, fields: [ { name: caption, label: Caption, widget: text, maxlength: 200, required: false } ] } ] }
   - name: projects
     label: Projects
     folder: /content/projects
