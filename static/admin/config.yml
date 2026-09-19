@@ -1,0 +1,83 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+
+backend:
+  name: github
+  repo: user/repo
+
+media_folder: /static/media
+public_folder: /media
+
+slug:
+  encoding: unicode
+  clean_accents: false
+  sanitize_replacement: '-'
+  trim: true
+  lowercase: true
+  timezone: utc
+
+collections:
+  - name: notes
+    label: Notes
+    folder: /content/notes
+    nested: { depth: 100, summary: '{{title}}', subfolders: true }
+    meta: { path: { index_file: _index } }
+    fields:
+      - { name: lastmod, label: Last modified, widget: datetime, input_timezone: Asia/Shanghai, output_utc: false, required: true }
+      - { name: publishDate, label: Publish date, widget: datetime, input_timezone: Asia/Shanghai, output_utc: false, required: true }
+      - { name: tags, label: Tags, widget: list, required: false }
+      - { name: title, label: Title, widget: string, required: true }
+      - { name: body, label: Body, widget: markdown, required: true }
+  - name: posts
+    label: Posts
+    folder: content/posts
+    path: '{{year}}/{{year}}-{{month}}-{{day}}-{{slug}}/index'
+    summary: '{{dirname}} | {{title}}'
+    nested: { depth: 100, summary: '{{title}}', subfolders: true }
+    fields:
+      - { name: tags, label: Tags, widget: list, required: false }
+      - { name: featured, label: Featured, widget: image, required: false }
+      - { name: title, label: Title, widget: string, required: true }
+      - { name: body, label: Body, widget: markdown, required: true }
+  - name: ephemera
+    label: Ephemera
+    folder: /content/ephemera
+    path: '{{year}}/{{year}}-{{month}}/{{year}}-{{month}}-{{day}}_{{hour}}-{{minute}}-00/index'
+    summary: '{{dirname}} {{body | truncate(50)}}'
+    nested: { depth: 100, summary: '{{title}}', subfolders: true }
+    fields:
+      - { name: date, label: Date Time, widget: datetime, input_timezone: Asia/Shanghai, output_utc: false, default: '{{now}}', required: true }
+      - { name: tags, label: Tags, widget: list, required: false }
+      - { name: resources, label: Resources, widget: list, required: false, fields: [ { name: src, label: src, widget: file, required: false } ] }
+      - { name: body, label: Body, widget: markdown, required: false }
+  - name: gallery
+    label: Gallery
+    folder: /content/gallery
+    path: '{{slug}}/index'
+    fields:
+      - { name: cover, label: Cover, widget: image, required: true }
+      - { name: title, label: Title, widget: string, required: true }
+      - { name: description, label: Description, widget: string, required: true }
+      - { name: resources, label: Resources, widget: list, required: false, fields: [ { name: src, label: src, widget: image, required: true }, { name: params, label: Parameters, widget: object, required: false, fields: [ { name: caption, label: Caption, widget: text, maxlength: 200, required: false } ] } ] }
+  - name: projects
+    label: Projects
+    folder: /content/projects
+    path: '{{slug}}/index'
+    nested: { depth: 100, summary: '{{title}}', subfolders: true }
+    meta: { path: { index_file: _index } }
+    fields:
+      - { name: featured, label: Featured, widget: image, required: true }
+      - { name: title, label: Title, widget: string, required: true }
+      - { name: description, label: Description, widget: string, required: true }
+  - name: things
+    label: Things
+    folder: /content/things
+    path: '{{slug}}/index'
+    nested: { depth: 100, summary: '{{title}}', subfolders: true }
+    meta: { path: { index_file: _index } }
+    fields:
+      - { name: dateStart, label: Date Start, widget: datetime, input_timezone: Asia/Shanghai, output_utc: false, required: false }
+      - { name: dateEnd, label: Date End, widget: datetime, input_timezone: Asia/Shanghai, output_utc: false, required: false }
+      - { name: featured, label: Featured, widget: image, required: true }
+      - { name: linkTitle, label: Link Title, widget: string, required: true }
+      - { name: title, label: Title, widget: string, required: true }
+      - { name: body, label: Body, widget: markdown, required: true }

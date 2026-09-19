@@ -69,7 +69,14 @@ button {
   height: var(--topbar-height);
   padding: 6px var(--edge-gap);
   display: flex;
+<<<<<<< HEAD
   justify-content: space-between;
+=======
+  align-items: center;
+  gap: 1rem;
+  z-index: 999;
+  margin-bottom: 1rem;
+>>>>>>> 19a1098 (fix)
 }
 
 .topbar-left {
@@ -198,9 +205,13 @@ main {
 }
 
 .three-column-layout {
+<<<<<<< HEAD
   display: grid;
   grid-template-columns: var(--sidebar-width) minmax(0, 1fr) var(--sidebar-width);
   gap: var(--column-layout-gap);
+=======
+  display: flex;
+>>>>>>> 19a1098 (fix)
 }
 
 .two-column-layout {
@@ -209,9 +220,15 @@ main {
   gap: var(--column-layout-gap);
 }
 
+<<<<<<< HEAD
 .primary-area,
 .secondary-area,
 .sidebar {
+=======
+.primary-area {
+  flex: 1;
+  min-width: 0;
+>>>>>>> 19a1098 (fix)
   display: flex;
   flex-direction: column;
   min-width: 0;
@@ -462,6 +479,7 @@ main {
   border-bottom: 0.1rem solid #000;
 }
 /* universal */
+<<<<<<< HEAD
 .page-hero {
   background: #000;
   margin-bottom: 1rem;
@@ -474,6 +492,27 @@ main {
   object-fit: contain;
   display: block;
   margin-inline: auto;
+=======
+.wrapper .topbar {
+  position: sticky;
+  top: 0;
+  padding: 0;
+  background: var(--main-color);
+}
+
+.topbar-left .back-link {
+  margin-left: auto;
+}
+
+.topbar svg {
+  vertical-align: middle;
+}
+
+.topbar .primary-area {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+>>>>>>> 19a1098 (fix)
 }
 
 .entry-group {
@@ -594,6 +633,10 @@ swiper-slide img {
 
   .sidebar[data-position="right"].open {
     transform: translateX(0);
+  }
+
+  .sidebar-toggle[data-target="right"] {
+    display: flex;
   }
 
 }

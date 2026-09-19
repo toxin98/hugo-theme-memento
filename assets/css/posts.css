@@ -36,6 +36,10 @@
 
 .posts .entry-body {
   flex: 1;
+<<<<<<< HEAD
+=======
+  padding: 1.5rem 2rem;
+>>>>>>> 19a1098 (fix)
   display: flex;
   flex-direction: column;
   gap: 0.5rem;

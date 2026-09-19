@@ -1,13 +1,18 @@
 {{ define "main" }}
 
-  {{ partial "page-hero.html" . }}
-
   <div class="wrapper three-column-layout posts">
 
     <aside class="sidebar" data-position="left">
     </aside>
 
     <div class="primary-area">
+
+      <div class="topbar">
+        <div class="topbar-right">
+          {{ partial "share.html" . }}
+          <button class="sidebar-toggle" data-target="right">{{ partial "utils/icon.html" "list-tree" }}</button>
+        </div>
+      </div>
 
       <article class="content">
         <time datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}" aria-label="{{ .Date.Format "2006-01-02" }}">
