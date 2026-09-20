@@ -50,7 +50,7 @@
   flex-wrap: wrap;
   gap: 8px;
   position: relative;
-  z-index: 2; /* 保证能独立点击 */
+  z-index: 99; /* 保证能独立点击 */
 }
 
 .posts .entry-featured {
@@ -126,7 +126,7 @@
 .posts .entry-group-header {
   position: sticky;
   top: var(--topbar-height);
-  z-index: 1;
+  z-index: 99;
 }
 
 .posts-filter.tag {
