@@ -16,7 +16,7 @@
         <div class="sidebar-header">
           <a href="/" class="back-link" aria-label="back">{{ partial "utils/icon.html" "chevron-left" }}</a>
           <a class="notes-root" href="{{ .FirstSection.RelPermalink }}">
-            <div class="avatar-md">
+            <div class="avatar md">
               {{ with resources.Get site.Params.profile.avatar }}
                 {{ $thumb := .Fill "70x70 center" }}
                 <img src="{{ $thumb.RelPermalink }}" alt="avatar">

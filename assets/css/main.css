@@ -389,14 +389,22 @@ main {
   border-bottom: 0.1rem solid #000;
 }
 /* universal */
-.avatar-md {
-  width: 36px;
-  height: 36px;
+.avatar {
   border-radius: 50%;
   overflow: hidden;
 }
 
-.avatar-md img {
+.avatar.lg {
+  width: 48px;
+  height: 48px;
+}
+
+.avatar.md {
+  width: 36px;
+  height: 36px;
+}
+
+.avatar img {
   width: 100%;
   object-fit: cover;
 }

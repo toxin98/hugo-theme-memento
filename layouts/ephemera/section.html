@@ -8,12 +8,6 @@
     {{ $paginator := .Paginate $pages }}
 
     <div class="ephemera-topbar">
-      {{ with resources.Get site.Params.profile.avatar }}
-        {{ $image := .Fill "200x200 center" }}
-        <div class="ephemera-avatar">
-          <img src="{{$image.RelPermalink }}" alt="avatar">
-        </div>
-      {{ end }}
       {{ $textNum := where $pages "Params.media.type" "empty" | len}}
       {{ $imageNum := where $pages "Params.media.type" "image" | len }}
       {{ $videoNum := where $pages "Params.media.type" "video" | len }}
@@ -42,8 +36,21 @@
 
         <div class="ephemera-item" data-id={{ $date | time.Format "20060102_150405-0700" }} data-infinite-scroll-item>
           <button class="ephemera-maximize">{{ partial "utils/icon.html" "maximize" }}</button>
+          <div class="ephemera-sidebar">
+            <div class="avatar lg">
+              {{ with resources.Get site.Params.profile.avatar }}
+                {{ $thumb := .Fill "70x70 center" }}
+                <img src="{{ $thumb.RelPermalink }}" alt="avatar">
+              {{ else }}
+                <img src="">
+              {{ end }}
+            </div>
+          </div>
           <article class="ephemera-body">
-            <div class="ephemera-date">{{ partial "utils/date-format.html" (dict "date" $date "layout" "ephemera") }}</div>
+            <div class="ephemera-meta">
+              <div class="ephemera-author">{{ site.Params.profile.name }}</div>
+              <div class="ephemera-dateline">{{ partial "utils/date-format.html" (dict "date" $date "layout" "ephemera") }}</div>
+            </div>
             <div class="ephemera-content">{{ .Content }}</div>
             {{ if gt (len .Resources) 0 }}
               <div class="ephemera-media">{{ partial "ephemera-media.html" $page }}</div>

@@ -18,7 +18,7 @@
 .ephemera-topbar {
   position: sticky;
   top: 0;
-  height: 60px;
+  height: var(--topbar-height);
   align-items: center;
   display: flex;
   gap: 10px;
@@ -43,6 +43,17 @@
 .ephemera-feed[data-layout="list"] .ephemera-item {
   border-bottom: 1px solid var(--border-color);
   padding: 12px;
+  display: flex;
+  gap: 14px;
+}
+
+.ephemera-sidebar {
+
+}
+
+.ephemera-sidebar .avatar {
+  position: sticky;
+  top: var(--topbar-height);
 }
 
 .ephemera-maximize svg {
@@ -66,17 +77,23 @@
 }
 
 .ephemera-body {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 4px;
 }
 
-.ephemera-date {
+.ephemera-author {
+  font-weight: 600;
+}
+
+.ephemera-dateline {
+  display: flex;
+  font-size: var(--text-size-sm);
   color: var(--text-color-secondary);
 }
 
 .ephemera-content {
-  
+  margin-top: 4px;
 }
 
 .ephemera-content p {
@@ -89,7 +106,7 @@
   gap: 4px;
 }
 
-.ephemera-feed[data-layout="grid"] .ephemera-date {
+.ephemera-feed[data-layout="grid"] .ephemera-meta {
   display: none;
 }
 
@@ -101,7 +118,7 @@
 
 .ephemera-feed[data-layout="list"] .ephemera-media {
   height: 180px;
-  margin-top: 4px;
+  margin-top: 8px;
 }
 
 .ephemera-media > * {
