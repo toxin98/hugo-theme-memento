@@ -3,17 +3,7 @@
 
   </div>
   <div class="topbar-middle">
-    <a href="/" class="site-brand">
-      <div class="topbar-avatar">
-        {{ with resources.Get site.Params.profile.avatar }}
-          {{ $thumb := .Fill "70x70 center" }}
-          <img src="{{ $thumb.RelPermalink }}" alt="avatar">
-        {{ else }}
-          <img src="">
-        {{ end }}
-      </div>
-      <span class="site-title">{{ site.Title }}</span>
-    </a>
+    <a href="/" class="site-brand">{{ site.Title }}</a>
   </div>
   <div class="topbar-right">
     <button>{{ partial "utils/icon.html" "search"}}</button>

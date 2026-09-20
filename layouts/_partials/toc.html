@@ -1,6 +1,8 @@
-<div class="toc-container">
-  <div class="toc-header">
-    <span>On this page</span>
+{{ if in .TableOfContents "li" }}
+  <div class="toc-container">
+    <div class="toc-header">
+      <span>On this page</span>
+    </div>
+    {{ .TableOfContents }}
   </div>
-  {{ .TableOfContents }}
-</div>
+{{ end }}

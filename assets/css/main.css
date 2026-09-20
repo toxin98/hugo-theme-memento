@@ -100,30 +100,11 @@ header {
 }
 
 .site-brand {
-  display: flex;
-  align-items: center;
   text-decoration: none;
-  color: #000;
-  gap: .5rem;
-}
-
-.site-title {
+  color: inherit;
   font-size: 26px;
   font-weight: 700;
   line-height: 1;
-}
-
-.topbar-avatar {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  overflow: hidden;
-  align-self: center;
-}
-
-.topbar-avatar img {
-  width: 100%;
-  object-fit: cover;
 }
 
 .topbar button {
@@ -168,7 +149,7 @@ main > nav > ul a {
   display: flex;
   align-items: center;
   text-decoration: none;
-  color: #222;
+  color: inherit;
   font-weight: 500;
   position: relative;
 }
@@ -408,6 +389,18 @@ main {
   border-bottom: 0.1rem solid #000;
 }
 /* universal */
+.avatar-md {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.avatar-md img {
+  width: 100%;
+  object-fit: cover;
+}
+
 .wrapper .topbar {
   position: sticky;
   top: 0;

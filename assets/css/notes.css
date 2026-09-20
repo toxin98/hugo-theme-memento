@@ -22,7 +22,15 @@
 }
 
 .notes-root {
-  margin-left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  text-decoration: none;
+  color: inherit;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1;
 }
 
 .notes-nav {
