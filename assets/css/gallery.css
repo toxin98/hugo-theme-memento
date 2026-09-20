@@ -27,12 +27,18 @@
 }
 
 .albums-card-pro {
+
+}
+
+.albums-card-pro .row {
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: space-between;
 }
 
-.albums-card-pro h3 {
+.albums-card-pro h3,
+.albums-card-pro p {
   margin: 0;
 }
 /* page */

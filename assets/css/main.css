@@ -474,7 +474,7 @@ main {
 }
 
 .entry-meta {
-  font-size: var(--text-size-xs);
+  font-size: var(--text-size-sm);
   color: var(--text-color-secondary);
 }
 

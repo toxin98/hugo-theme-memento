@@ -7,7 +7,7 @@
 .posts .entry.card {
   display: flex;
   flex-direction: row;
-  height: 220px; /* 核心：强制统一卡片高度 */
+  height: 200px; /* 核心：强制统一卡片高度 */
   /* 基础美化（沿用之前的设计） */
   position: relative;
   background-color: #ffffff;
@@ -19,8 +19,7 @@
 
 .posts .entry-body {
   flex: 1;
-  /* min-width: 0; */
-  padding: 1.5rem 2rem;
+  padding: 1rem 2rem;
   display: flex;
   flex-direction: column;
 }
@@ -35,15 +34,14 @@
 
 .posts .entry-title {
   -webkit-line-clamp: 2; /* 标题最多 2 行，超出显示 ... */
-  font-size: 1.35rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
 }
 
 .posts .entry-summary {
   -webkit-line-clamp: 2; /* 摘要同样限制 2 行 */
-  font-size: 0.95rem;
-  color: #57606a;
+  font-size: var(--text-size-sm);
+  color: var(--text-color-secondary);
 }
 
 .posts .entry-tags {

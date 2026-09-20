@@ -35,17 +35,25 @@
 
 
           <div class="albums-card-pro">
-            <h3>{{ .Title }}</h3>
+            <div class="row">
+              <h3>{{ .Title }}</h3>
 
+              {{ with .Date }}
+                <span>{{ .Format "2006" }}</span>
+              {{ end }}
+
+              {{ $publicCount := 0 }}
+              {{ range .Resources }}
+                {{ if ne .Params.parivate true }}
+                  {{ $publicCount = add $publicCount 1 }}
+                {{ end }}
+              {{ end }}
+              <span>{{ $publicCount }}</span>
+            </div>
             {{ with .Description }}
               <p>{{ . }}</p>
             {{ end }}
 
-            {{ with .Date }}
-              <span>{{ .Format "2006" }}</span>
-            {{ end }}
-
-            <span>count</span>
 
           </div>
         </a>
