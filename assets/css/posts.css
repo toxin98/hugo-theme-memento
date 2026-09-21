@@ -50,7 +50,16 @@
   flex-wrap: wrap;
   gap: 8px;
   position: relative;
-  z-index: 99; /* 保证能独立点击 */
+  z-index: 1; /* 保证能独立点击 */
+}
+
+.posts .tag-badge {
+  text-decoration: none;
+  color: inherit;
+}
+
+.posts .tag-badge:hover {
+  color: var(--accent-color);
 }
 
 .posts .entry-featured {
