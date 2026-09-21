@@ -106,7 +106,8 @@
   gap: 4px;
 }
 
-.ephemera-feed[data-layout="grid"] .ephemera-meta {
+.ephemera-feed[data-layout="grid"] .ephemera-meta,
+.ephemera-feed[data-layout="grid"] .ephemera-sidebar {
   display: none;
 }
 
