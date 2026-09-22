@@ -2,7 +2,7 @@
 
   {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
 
-  <div class="wrapper two-column-layout">
+  <div class="wrapper">
 
     <div class="primary-area">
 
@@ -35,6 +35,12 @@
 
       <div class="profile-content">
         {{ .Content }}
+      </div>
+
+      <div class="secondary-area">
+        {{ with .Params.status.music }}
+          {{ partial "netease-music-latest.html" . }}
+        {{ end }}
       </div>
 
       <section class="recent-updates">
@@ -79,14 +85,6 @@
         </div>
       </section>
 
-    </div>
-
-    <div class="secondary-area">
-      {{ with .Params.status.music }}
-        {{ partial "netease-music-latest.html" . }}
-      {{ end }}
-
-      <a href="https://analog.jiayong.org" target="_blank" rel="noopener noreferrer">Analog stats</a>
     </div>
 
   </div>

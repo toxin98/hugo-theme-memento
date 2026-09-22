@@ -196,12 +196,6 @@ main {
   display: flex;
 }
 
-.two-column-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 400px;
-  gap: var(--column-layout-gap);
-}
-
 .primary-area {
   flex: 1;
   min-width: 0;
@@ -283,6 +277,8 @@ main {
   min-width: 0;
   padding: 0 0.5rem;
   color: #444;
+  max-width: 768px;
+  margin: 0 auto;
 }
 
 .content p {
@@ -591,14 +587,6 @@ swiper-slide img {
 }
 
 @media (max-width: 768px) {
-
-  .three-column-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .two-column-layout {
-    grid-template-columns: 1fr;
-  }
 
   .viewer {
     flex-direction: column;
