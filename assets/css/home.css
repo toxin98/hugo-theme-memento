@@ -1,3 +1,7 @@
+.wrapper.home {
+  max-width: 800px;
+}
+
 .profile {
   display: flex;
   flex-direction: column;
