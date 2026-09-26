@@ -1,88 +1,84 @@
 {{ define "main" }}
 
-  {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
+  {{ $destinations := where site.Menus.main "URL" "ne" "/" }}
+  {{ $avatar := resources.Get site.Params.profile.avatar }}
+  <section class="mirror-home" aria-labelledby="mirror-home-title">
 
-  <div class="wrapper home">
+    <div class="mirror" aria-label="网站入口">
+      <svg class="mirror__svg" viewBox="0 0 800 800" role="img" aria-labelledby="mirror-title mirror-desc">
+        <title id="mirror-title">七片碎裂的圆形镜子</title>
+        <desc id="mirror-desc">七个镜片分别通往网站的不同栏目。</desc>
 
-    <section class="profile">
+        <defs>
+          <clipPath id="mirror-circle"><circle cx="400" cy="400" r="338" /></clipPath>
+          <clipPath id="mirror-piece-1"><path d="M390 365 L360 67 Q402 51 447 67 L430 365 L409 391 Z" /></clipPath>
+          <clipPath id="mirror-piece-2"><path d="M445 370 L482 75 Q590 104 660 181 L483 401 L458 392 Z" /></clipPath>
+          <clipPath id="mirror-piece-3"><path d="M477 409 L679 204 Q741 297 735 405 L492 441 L480 430 Z" /></clipPath>
+          <clipPath id="mirror-piece-4"><path d="M475 452 L721 451 Q702 575 610 665 L439 481 L450 463 Z" /></clipPath>
+          <clipPath id="mirror-piece-5"><path d="M425 470 L585 690 Q501 744 400 740 L375 481 L398 467 Z" /></clipPath>
+          <clipPath id="mirror-piece-6"><path d="M365 461 L370 720 Q260 685 185 600 L335 430 L355 442 Z" /></clipPath>
+          <clipPath id="mirror-piece-7"><path d="M339 405 L100 220 Q158 119 300 80 L366 349 L355 383 Z" /></clipPath>
+        </defs>
 
-      {{ with resources.Get site.Params.profile.avatar }}
-        {{ $image := .Fill "200x200 center" }}
-        <div class="avatar">
-          <img src="{{ $image.RelPermalink }}" alt="avatar">
-        </div>
-      {{ end }}
-
-      <span class="profile-name">
-        {{ site.Params.profile.name }}
-      </span>
-
-      <span class="profile-tagline">
-        {{ site.Params.profile.tagline }}
-      </span>
-
-      <ul class="social-list">
-        {{ range site.Params.profile.social }}
-          <li>
-            <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ .name }}" title="{{ .name }}">{{ partial "utils/icon.html" .icon }}</a>
-          </li>
+        <circle class="mirror__base" cx="400" cy="400" r="338" />
+        {{ with $avatar }}
+          <image class="mirror__avatar" href="{{ .RelPermalink }}" x="62" y="62" width="676" height="676" preserveAspectRatio="xMidYMid slice" clip-path="url(#mirror-circle)" />
         {{ end }}
-      </ul>
 
-    </section>
-
-    <div class="profile-content">
-      {{ .Content }}
-    </div>
-
-    <div class="secondary-area">
-      {{ with .Params.status.music }}
-        {{ partial "netease-music-latest.html" . }}
-      {{ end }}
-    </div>
-
-    <section class="recent-updates">
-      <h2>最近更新</h2>
-      <div class="cards-grid updates-card">
-
-        {{ $sections := slice "posts" "docs" "ephemera" }}
-
-        {{ $updatePeriod := .Params.recentUpdateMonths | default 3 }}
-        {{ $updateSince := now.AddDate 0 (mul $updatePeriod -1) 0 }}
-
-        {{ range $sections }}
-
-          {{ with site.GetPage (printf "/%s" .) }}
-
-            <h3 class="update-tag">{{ .Title }}</h3>
-
-            {{ $recentPages := where .RegularPages "Lastmod" "ge" $updateSince }}
-            {{ $sortedPages := $recentPages.ByLastmod.Reverse | first 3 }}
-
-            {{ if $sortedPages }}
-                {{ range $sortedPages }}
-                  <a href="{{ .RelPermalink }}" class="update-card">
-                    <div class="card-header">
-                      <time class="update-date" datetime="{{ .Lastmod.Format "2006-01-02" }}">
-                        {{ .Lastmod.Format "2006-01-02" }}
-                      </time>
-                    </div>
-                    <h3 class="card-title">{{ .Title }}</h3>
-                    <p class="card-summary">
-                      {{ .Summary | plainify | truncate 90 }}
-                    </p>
-                  </a>
-                {{ end }}
-            {{ else }}
-              <p>最近{{ $updatePeriod }}个月没有更新</p>
-            {{ end }}
-
-          {{ end }}
-
+        {{ with index $destinations 0 }}
+          <a class="mirror-piece-link" href="{{ .URL }}" aria-label="进入 {{ .Name }}">
+            <path class="mirror-piece mirror-piece--1" d="M390 365 L360 67 Q402 51 447 67 L430 365 L409 391 Z" />
+            {{ with $avatar }}<image class="mirror-piece-image" href="{{ .RelPermalink }}" x="62" y="62" width="676" height="676" preserveAspectRatio="xMidYMid slice" clip-path="url(#mirror-piece-1)" />{{ end }}
+            <text class="mirror-label mirror-label--1" x="403" y="160">{{ .Name }}</text>
+          </a>
         {{ end }}
-      </div>
-    </section>
+        {{ with index $destinations 1 }}
+          <a class="mirror-piece-link" href="{{ .URL }}" aria-label="进入 {{ .Name }}">
+            <path class="mirror-piece mirror-piece--2" d="M445 370 L482 75 Q590 104 660 181 L483 401 L458 392 Z" />
+            {{ with $avatar }}<image class="mirror-piece-image" href="{{ .RelPermalink }}" x="62" y="62" width="676" height="676" preserveAspectRatio="xMidYMid slice" clip-path="url(#mirror-piece-2)" />{{ end }}
+            <text class="mirror-label mirror-label--2" x="548" y="195">{{ .Name }}</text>
+          </a>
+        {{ end }}
+        {{ with index $destinations 2 }}
+          <a class="mirror-piece-link" href="{{ .URL }}" aria-label="进入 {{ .Name }}">
+            <path class="mirror-piece mirror-piece--3" d="M477 409 L679 204 Q741 297 735 405 L492 441 L480 430 Z" />
+            {{ with $avatar }}<image class="mirror-piece-image" href="{{ .RelPermalink }}" x="62" y="62" width="676" height="676" preserveAspectRatio="xMidYMid slice" clip-path="url(#mirror-piece-3)" />{{ end }}
+            <text class="mirror-label mirror-label--3" x="624" y="354">{{ .Name }}</text>
+          </a>
+        {{ end }}
+        {{ with index $destinations 3 }}
+          <a class="mirror-piece-link" href="{{ .URL }}" aria-label="进入 {{ .Name }}">
+            <path class="mirror-piece mirror-piece--4" d="M475 452 L721 451 Q702 575 610 665 L439 481 L450 463 Z" />
+            {{ with $avatar }}<image class="mirror-piece-image" href="{{ .RelPermalink }}" x="62" y="62" width="676" height="676" preserveAspectRatio="xMidYMid slice" clip-path="url(#mirror-piece-4)" />{{ end }}
+            <text class="mirror-label mirror-label--4" x="564" y="560">{{ .Name }}</text>
+          </a>
+        {{ end }}
+        {{ with index $destinations 4 }}
+          <a class="mirror-piece-link" href="{{ .URL }}" aria-label="进入 {{ .Name }}">
+            <path class="mirror-piece mirror-piece--5" d="M425 470 L585 690 Q501 744 400 740 L375 481 L398 467 Z" />
+            {{ with $avatar }}<image class="mirror-piece-image" href="{{ .RelPermalink }}" x="62" y="62" width="676" height="676" preserveAspectRatio="xMidYMid slice" clip-path="url(#mirror-piece-5)" />{{ end }}
+            <text class="mirror-label mirror-label--5" x="402" y="628">{{ .Name }}</text>
+          </a>
+        {{ end }}
+        {{ with index $destinations 5 }}
+          <a class="mirror-piece-link" href="{{ .URL }}" aria-label="进入 {{ .Name }}">
+            <path class="mirror-piece mirror-piece--6" d="M365 461 L370 720 Q260 685 185 600 L335 430 L355 442 Z" />
+            {{ with $avatar }}<image class="mirror-piece-image" href="{{ .RelPermalink }}" x="62" y="62" width="676" height="676" preserveAspectRatio="xMidYMid slice" clip-path="url(#mirror-piece-6)" />{{ end }}
+            <text class="mirror-label mirror-label--6" x="245" y="557">{{ .Name }}</text>
+          </a>
+        {{ end }}
+        {{ with index $destinations 6 }}
+          <a class="mirror-piece-link" href="{{ .URL }}" aria-label="进入 {{ .Name }}">
+            <path class="mirror-piece mirror-piece--7" d="M339 405 L100 220 Q158 119 300 80 L366 349 L355 383 Z" />
+            {{ with $avatar }}<image class="mirror-piece-image" href="{{ .RelPermalink }}" x="62" y="62" width="676" height="676" preserveAspectRatio="xMidYMid slice" clip-path="url(#mirror-piece-7)" />{{ end }}
+            <text class="mirror-label mirror-label--7" x="205" y="260">{{ .Name }}</text>
+          </a>
+        {{ end }}
 
-  </div>
+        <circle class="mirror__glint" cx="272" cy="180" r="3" />
+        <path class="mirror__crack" d="M400 400 L346 337 M400 400 L462 353 M400 400 L468 451 M400 400 L348 478 M400 400 L329 407" />
+      </svg>
+    </div>
+  </section>
 
 {{ end }}

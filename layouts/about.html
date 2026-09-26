@@ -7,6 +7,39 @@
 
     <div class="primary-area">
 
+      <section class="profile">
+
+        {{ with resources.Get site.Params.profile.avatar }}
+          {{ $image := .Fill "200x200 center" }}
+          <div class="avatar">
+            <img src="{{ $image.RelPermalink }}" alt="avatar">
+          </div>
+        {{ end }}
+
+        <span class="profile-name">
+          {{ site.Params.profile.name }}
+        </span>
+
+        <span class="profile-tagline">
+          {{ site.Params.profile.tagline }}
+        </span>
+
+        <ul class="social-list">
+          {{ range site.Params.profile.social }}
+            <li>
+              <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ .name }}" title="{{ .name }}">{{ partial "utils/icon.html" .icon }}</a>
+            </li>
+          {{ end }}
+        </ul>
+
+      </section>
+
+      <div class="secondary-area">
+        {{ with .Params.status.music }}
+          {{ partial "netease-music-latest.html" . }}
+        {{ end }}
+      </div>
+
       <article class="content">
         <h1>{{ .Title }}</h1>
         {{ .Content }}
