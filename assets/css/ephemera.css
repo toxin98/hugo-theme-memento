@@ -22,7 +22,7 @@
   align-items: center;
   display: flex;
   gap: 10px;
-  background: var(--body-color);
+  background: var(--main-color);
   z-index: 1000;
 }
 
@@ -43,17 +43,6 @@
 .ephemera-feed[data-layout="list"] .ephemera-item {
   border-bottom: 1px solid var(--border-color);
   padding: 12px;
-  display: flex;
-  gap: 14px;
-}
-
-.ephemera-sidebar {
-
-}
-
-.ephemera-sidebar .avatar {
-  position: sticky;
-  top: var(--topbar-height);
 }
 
 .ephemera-maximize svg {
@@ -77,9 +66,19 @@
 }
 
 .ephemera-body {
-  flex: 1;
   display: flex;
   flex-direction: column;
+}
+
+.ephemera-header {
+  display: flex;
+  gap: 8px;
+}
+
+.ephemera-meta {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .ephemera-author {
@@ -106,8 +105,7 @@
   gap: 4px;
 }
 
-.ephemera-feed[data-layout="grid"] .ephemera-meta,
-.ephemera-feed[data-layout="grid"] .ephemera-sidebar {
+.ephemera-feed[data-layout="grid"] .ephemera-header {
   display: none;
 }
 
