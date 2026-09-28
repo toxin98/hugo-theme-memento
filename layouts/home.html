@@ -11,13 +11,13 @@
 
         <defs>
           <clipPath id="mirror-circle"><circle cx="400" cy="400" r="338" /></clipPath>
-          <clipPath id="mirror-piece-1"><path d="M390 365 L360 67 Q402 51 447 67 L430 365 L409 391 Z" /></clipPath>
-          <clipPath id="mirror-piece-2"><path d="M445 370 L482 75 Q590 104 660 181 L483 401 L458 392 Z" /></clipPath>
-          <clipPath id="mirror-piece-3"><path d="M477 409 L679 204 Q741 297 735 405 L492 441 L480 430 Z" /></clipPath>
-          <clipPath id="mirror-piece-4"><path d="M475 452 L721 451 Q702 575 610 665 L439 481 L450 463 Z" /></clipPath>
-          <clipPath id="mirror-piece-5"><path d="M425 470 L585 690 Q501 744 400 740 L375 481 L398 467 Z" /></clipPath>
-          <clipPath id="mirror-piece-6"><path d="M365 461 L370 720 Q260 685 185 600 L335 430 L355 442 Z" /></clipPath>
-          <clipPath id="mirror-piece-7"><path d="M339 405 L100 220 Q158 119 300 80 L366 349 L355 383 Z" /></clipPath>
+          <clipPath id="mirror-piece-1"><path d="M400 400 L400 62 A338 338 0 0 1 664.2 189.2 Z" /></clipPath>
+          <clipPath id="mirror-piece-2"><path d="M400 400 L664.2 189.2 A338 338 0 0 1 729.6 475.2 Z" /></clipPath>
+          <clipPath id="mirror-piece-3"><path d="M400 400 L729.6 475.2 A338 338 0 0 1 548 704 Z" /></clipPath>
+          <clipPath id="mirror-piece-4"><path d="M400 400 L548 704 A338 338 0 0 1 252 704 Z" /></clipPath>
+          <clipPath id="mirror-piece-5"><path d="M400 400 L252 704 A338 338 0 0 1 70.4 475.2 Z" /></clipPath>
+          <clipPath id="mirror-piece-6"><path d="M400 400 L70.4 475.2 A338 338 0 0 1 135.8 189.2 Z" /></clipPath>
+          <clipPath id="mirror-piece-7"><path d="M400 400 L135.8 189.2 A338 338 0 0 1 400 62 Z" /></clipPath>
         </defs>
 
         <circle class="mirror__base" cx="400" cy="400" r="338" />
@@ -27,51 +27,51 @@
 
         {{ with index $destinations 0 }}
           <a class="mirror-piece-link" href="{{ .URL }}" aria-label="进入 {{ .Name }}">
-            <path class="mirror-piece mirror-piece--1" d="M390 365 L360 67 Q402 51 447 67 L430 365 L409 391 Z" />
+            <path class="mirror-piece mirror-piece--1" d="M400 400 L400 62 A338 338 0 0 1 664.2 189.2 Z" />
             {{ with $avatar }}<image class="mirror-piece-image" href="{{ .RelPermalink }}" x="62" y="62" width="676" height="676" preserveAspectRatio="xMidYMid slice" clip-path="url(#mirror-piece-1)" />{{ end }}
-            <text class="mirror-label mirror-label--1" x="403" y="160">{{ .Name }}</text>
+            <text class="mirror-label mirror-label--1" x="492" y="211">{{ .Name }}</text>
           </a>
         {{ end }}
         {{ with index $destinations 1 }}
           <a class="mirror-piece-link" href="{{ .URL }}" aria-label="进入 {{ .Name }}">
-            <path class="mirror-piece mirror-piece--2" d="M445 370 L482 75 Q590 104 660 181 L483 401 L458 392 Z" />
+            <path class="mirror-piece mirror-piece--2" d="M400 400 L664.2 189.2 A338 338 0 0 1 729.6 475.2 Z" />
             {{ with $avatar }}<image class="mirror-piece-image" href="{{ .RelPermalink }}" x="62" y="62" width="676" height="676" preserveAspectRatio="xMidYMid slice" clip-path="url(#mirror-piece-2)" />{{ end }}
-            <text class="mirror-label mirror-label--2" x="548" y="195">{{ .Name }}</text>
+            <text class="mirror-label mirror-label--2" x="605" y="353">{{ .Name }}</text>
           </a>
         {{ end }}
         {{ with index $destinations 2 }}
           <a class="mirror-piece-link" href="{{ .URL }}" aria-label="进入 {{ .Name }}">
-            <path class="mirror-piece mirror-piece--3" d="M477 409 L679 204 Q741 297 735 405 L492 441 L480 430 Z" />
+            <path class="mirror-piece mirror-piece--3" d="M400 400 L729.6 475.2 A338 338 0 0 1 548 704 Z" />
             {{ with $avatar }}<image class="mirror-piece-image" href="{{ .RelPermalink }}" x="62" y="62" width="676" height="676" preserveAspectRatio="xMidYMid slice" clip-path="url(#mirror-piece-3)" />{{ end }}
-            <text class="mirror-label mirror-label--3" x="624" y="354">{{ .Name }}</text>
+            <text class="mirror-label mirror-label--3" x="564" y="531">{{ .Name }}</text>
           </a>
         {{ end }}
         {{ with index $destinations 3 }}
           <a class="mirror-piece-link" href="{{ .URL }}" aria-label="进入 {{ .Name }}">
-            <path class="mirror-piece mirror-piece--4" d="M475 452 L721 451 Q702 575 610 665 L439 481 L450 463 Z" />
+            <path class="mirror-piece mirror-piece--4" d="M400 400 L548 704 A338 338 0 0 1 252 704 Z" />
             {{ with $avatar }}<image class="mirror-piece-image" href="{{ .RelPermalink }}" x="62" y="62" width="676" height="676" preserveAspectRatio="xMidYMid slice" clip-path="url(#mirror-piece-4)" />{{ end }}
-            <text class="mirror-label mirror-label--4" x="564" y="560">{{ .Name }}</text>
+            <text class="mirror-label mirror-label--4" x="400" y="610">{{ .Name }}</text>
           </a>
         {{ end }}
         {{ with index $destinations 4 }}
           <a class="mirror-piece-link" href="{{ .URL }}" aria-label="进入 {{ .Name }}">
-            <path class="mirror-piece mirror-piece--5" d="M425 470 L585 690 Q501 744 400 740 L375 481 L398 467 Z" />
+            <path class="mirror-piece mirror-piece--5" d="M400 400 L252 704 A338 338 0 0 1 70.4 475.2 Z" />
             {{ with $avatar }}<image class="mirror-piece-image" href="{{ .RelPermalink }}" x="62" y="62" width="676" height="676" preserveAspectRatio="xMidYMid slice" clip-path="url(#mirror-piece-5)" />{{ end }}
-            <text class="mirror-label mirror-label--5" x="402" y="628">{{ .Name }}</text>
+            <text class="mirror-label mirror-label--5" x="236" y="531">{{ .Name }}</text>
           </a>
         {{ end }}
         {{ with index $destinations 5 }}
           <a class="mirror-piece-link" href="{{ .URL }}" aria-label="进入 {{ .Name }}">
-            <path class="mirror-piece mirror-piece--6" d="M365 461 L370 720 Q260 685 185 600 L335 430 L355 442 Z" />
+            <path class="mirror-piece mirror-piece--6" d="M400 400 L70.4 475.2 A338 338 0 0 1 135.8 189.2 Z" />
             {{ with $avatar }}<image class="mirror-piece-image" href="{{ .RelPermalink }}" x="62" y="62" width="676" height="676" preserveAspectRatio="xMidYMid slice" clip-path="url(#mirror-piece-6)" />{{ end }}
-            <text class="mirror-label mirror-label--6" x="245" y="557">{{ .Name }}</text>
+            <text class="mirror-label mirror-label--6" x="195" y="353">{{ .Name }}</text>
           </a>
         {{ end }}
         {{ with index $destinations 6 }}
           <a class="mirror-piece-link" href="{{ .URL }}" aria-label="进入 {{ .Name }}">
-            <path class="mirror-piece mirror-piece--7" d="M339 405 L100 220 Q158 119 300 80 L366 349 L355 383 Z" />
+            <path class="mirror-piece mirror-piece--7" d="M400 400 L135.8 189.2 A338 338 0 0 1 400 62 Z" />
             {{ with $avatar }}<image class="mirror-piece-image" href="{{ .RelPermalink }}" x="62" y="62" width="676" height="676" preserveAspectRatio="xMidYMid slice" clip-path="url(#mirror-piece-7)" />{{ end }}
-            <text class="mirror-label mirror-label--7" x="205" y="260">{{ .Name }}</text>
+            <text class="mirror-label mirror-label--7" x="308" y="211">{{ .Name }}</text>
           </a>
         {{ end }}
 
