@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.addEventListener("click", (e) => {
 
-    const trigger = e.target.closest(".ephemera-maximize, .ephemera-media");
+    const trigger = e.target.closest(".ephemera-maximize, .ephemera-attachments");
 
     if (!trigger) return;
 
@@ -45,16 +45,16 @@ document.addEventListener("DOMContentLoaded", () => {
     viewer.style.removeProperty("transform");
     viewer.style.removeProperty("opacity");
 
-    const mediaDiv = document.createElement("div");
-    mediaDiv.className = "ephemera-media";
-    mediaDiv.append(
-      createSwiper(item.querySelector(".ephemera-media"))
+    const attachmentsDiv = document.createElement("div");
+    attachmentsDiv.className = "ephemera-attachments";
+    attachmentsDiv.append(
+      createSwiper(item.querySelector(".ephemera-attachments"))
     );
 
-    viewer?.querySelector(".viewer-main").replaceChildren(mediaDiv);
+    viewer?.querySelector(".viewer-main").replaceChildren(attachmentsDiv);
 
     viewer?.querySelector(".viewer-side").replaceChildren(
-      item.querySelector(".ephemera-date").cloneNode(true),
+      item.querySelector(".ephemera-header").cloneNode(true),
       item.querySelector(".ephemera-content").cloneNode(true)
     );
 
@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   });
 
-  function createSwiper(itemMedia) {
+  function createSwiper(itemAttachments) {
 
     const swiper = document.createElement(
       "swiper-container"
@@ -144,7 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
     swiper.setAttribute("navigation", "true")
 
 
-    itemMedia
+    itemAttachments
       .querySelectorAll("img[data-viewer-src]")
       .forEach(img => {
 

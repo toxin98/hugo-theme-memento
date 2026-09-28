@@ -34,29 +34,25 @@
           {{ $date = time.AsTime $rawTimeStr site.Params.ephemera.timeZone }}
         {{ end }}
 
-        <div class="ephemera-item" data-id={{ $date | time.Format "20060102_150405-0700" }} data-infinite-scroll-item>
+        <article class="ephemera-item" data-id={{ $date | time.Format "20060102_150405-0700" }} data-infinite-scroll-item>
           <button class="ephemera-maximize">{{ partial "utils/icon.html" "maximize" }}</button>
-          <article class="ephemera-body">
-            <div class="ephemera-header">
-              <div class="avatar lg">
-                {{ with resources.Get site.Params.profile.avatar }}
-                  {{ $thumb := .Fill "70x70 center" }}
-                  <img src="{{ $thumb.RelPermalink }}" alt="avatar">
-                {{ else }}
-                  <img src="">
-                {{ end }}
-              </div>
-              <div class="ephemera-meta">
-                <div class="ephemera-author">{{ site.Params.profile.name }}</div>
-                <div class="ephemera-dateline">{{ partial "utils/date-format.html" (dict "date" $date "layout" "ephemera") }}</div>
-              </div>
+          <div class="ephemera-header">
+            <div class="avatar lg">
+              {{ with resources.Get site.Params.profile.avatar }}
+                {{ $thumb := .Fill "70x70 center" }}
+                <img src="{{ $thumb.RelPermalink }}" alt="avatar">
+              {{ else }}
+                <img src="">
+              {{ end }}
             </div>
-            <div class="ephemera-content">{{ .Content }}</div>
-            {{ if gt (len .Resources) 0 }}
-              <div class="ephemera-media">{{ partial "ephemera-media.html" $page }}</div>
-            {{ end }}
-          </article>
-        </div>
+            <div class="ephemera-meta">
+              <div class="ephemera-author">{{ site.Params.profile.name }}</div>
+              <div class="ephemera-dateline">{{ partial "utils/date-format.html" (dict "date" $date "layout" "ephemera") }}</div>
+            </div>
+          </div>
+          <div class="ephemera-content">{{ .Content }}</div>
+          <div class="ephemera-attachments">{{ partial "ephemera-media.html" $page }}</div>
+        </article>
       {{ end }}
     </div>
 
