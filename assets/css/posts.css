@@ -94,7 +94,7 @@
 .posts-years-list,
 .posts-tags-list {
   position: sticky;
-  top: calc(var(--topbar-height)*2 + 1rem*2);
+  top: calc(var(--header-height)*2 + 1rem*2);
 }
 
 .posts-years-list,
@@ -134,7 +134,7 @@
 
 .posts .entry-group-header {
   position: sticky;
-  top: var(--topbar-height);
+  top: var(--header-height);
   z-index: 99;
 }
 

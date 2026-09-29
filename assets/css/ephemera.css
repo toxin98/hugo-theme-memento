@@ -4,7 +4,6 @@
 }
 
 .ephemera-avatar {
-  position: sticky;
   width: 48px;
   height: 48px;
   border-radius: 4px;
@@ -18,7 +17,7 @@
 .ephemera-topbar {
   position: sticky;
   top: 0;
-  height: var(--topbar-height);
+  height: var(--header-height);
   align-items: center;
   display: flex;
   gap: 10px;

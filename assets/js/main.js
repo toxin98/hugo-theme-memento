@@ -157,12 +157,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 document.addEventListener("DOMContentLoaded", () => {
   const readingTitle = document.querySelector(".topbar-reading");
-  const sentinel = document.createElement("div")
-  const pageTitle = document.querySelector(".page-title")
+  const sentinel = document.createElement("div");
+  const pageTitle = document.querySelector(".page-title");
   pageTitle.before(sentinel)
 
   const observer = new IntersectionObserver((entries) => {
     const entry = entries[0];
+    header.classList.toggle("is-scrolled", !entry.isIntersecting)
     readingTitle.classList.toggle("show", !entry.isIntersecting)
   }, {
     rootMargin: "16px 0px 0px 0px"

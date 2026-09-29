@@ -4,7 +4,7 @@
 
 .things .entry-group-header {
   position: sticky;
-  top: var(--topbar-height);
+  top: var(--header-height);
   z-index: 99;
 }
 

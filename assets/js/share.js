@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const dialog = document.querySelector("[data-share-dialog]");
-  const openButton = document.querySelector("[data-share-open]");
+  const openButton = document.querySelectorAll("[data-share-open]");
   const closeButton = document.querySelector("[data-share-close]");
   const copyButton = document.querySelector("[data-share-copy]");
 

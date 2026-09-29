@@ -8,7 +8,7 @@
 @import 'share.css';
 
 :root {
-  --topbar-height: 52px;
+  --header-height: 52px;
   --sidebar-width: 280px;
   --column-layout-gap: 20px;
   --edge-gap: 16px;
@@ -69,16 +69,19 @@ button {
 
 header {
   background: var(--main-color);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  border-bottom: 1px solid transparent;
+  transition: border-color .25s ease, box-shadow .25s ease;
 }
 
 .topbar {
-  height: var(--topbar-height);
+  height: var(--header-height);
   padding: 0 var(--edge-gap);
   display: flex;
   align-items: center;
   gap: 1rem;
-  z-index: 999;
-  margin-bottom: 1rem;
 }
 
 .topbar-left {
@@ -105,6 +108,37 @@ header {
   font-size: 26px;
   font-weight: 700;
   line-height: 1;
+  transition: opacity .22s ease, transform .22s ease;
+}
+
+.topbar-reading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  font-size: 18px;
+  font-weight: 650;
+  opacity: 0;
+  transform: translateY(7px);
+  pointer-events: none;
+  transition: opacity .22s ease, transform .22s ease;
+}
+
+header.is-scrolled {
+  border-bottom-color: var(--border-color);
+  box-shadow: 0 4px 16px rgba(40, 19, 19, .06);
+}
+
+header.is-scrolled .site-brand {
+  opacity: 0;
+  transform: translateY(-7px);
+}
+
+header.is-scrolled .topbar-reading {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .topbar button {
@@ -117,7 +151,7 @@ header {
 }
 
 h2, h3, h4, h5 {
-  scroll-margin-top: calc(var(--topbar-height) + 1rem);
+  scroll-margin-top: calc(var(--header-height) + 1rem);
 }
 
 nav.back-nav {
@@ -223,16 +257,6 @@ main {
   display: none;
 }
 
-.topbar-reading {
-  display: none;
-  font-size: 24px;
-  font-weight: 600;
-}
-
-.topbar-reading.show {
-  display: flex;
-}
-
 /* 【核心】使用 ::after 伪元素铺满整个卡片 */
 .stretched-link::after {
   content: "";
@@ -255,7 +279,7 @@ main {
 
 .overlay {
   position: fixed;
-  inset: var(--topbar-height) 0 0;
+  inset: var(--header-height) 0 0;
   background: rgba(0,0,0,.35);
   opacity: 0;
   pointer-events: none;
@@ -277,8 +301,6 @@ main {
   min-width: 0;
   padding: 0 0.5rem;
   color: #444;
-  max-width: 768px;
-  margin: 0 auto;
 }
 
 .content p {
@@ -287,7 +309,7 @@ main {
 
 .content img {
   max-width: 75%;
-  max-height: calc(100dvh - var(--topbar-height) - 15rem);
+  max-height: calc(100dvh - var(--header-height) - 15rem);
   display: block;
   margin: 0 auto;
 }
@@ -356,7 +378,7 @@ main {
   display: flex;
   flex-direction: column;
   position: sticky;
-  top: calc(var(--topbar-height)*2 + 1rem*2);
+  top: calc(var(--header-height)*2 + 1rem*2);
 }
 
 .toc-header {
@@ -406,10 +428,8 @@ main {
 }
 
 .wrapper .topbar {
-  position: sticky;
-  top: 0;
-  padding: 0;
-  background: var(--main-color);
+  padding-inline: var(--edge-gap);
+  background: transparent;
 }
 
 .topbar-left .back-link {
@@ -526,10 +546,14 @@ swiper-slide img {
 
 @media (max-width: 1280px) {
 
+  .topbar {
+    top: var(--header-height);
+  }
+
   .sidebar[data-position="right"] {
     position: fixed;
     right: 0;
-    top: var(--topbar-height);
+    top: var(--header-height);
     bottom: 0;
     background: #fff;
     transform: translateX(100%);

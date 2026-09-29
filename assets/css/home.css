@@ -45,7 +45,7 @@
 
 /* Shattered mirror landing page */
 .mirror-home {
-  min-height: calc(100dvh - var(--topbar-height) - 3rem);
+  min-height: calc(100dvh - var(--header-height) - 3rem);
   display: grid;
   grid-template-columns: minmax(180px, 0.7fr) minmax(440px, 1.3fr);
   align-items: center;
@@ -150,7 +150,7 @@
 
 @media (max-width: 760px) {
   .mirror-home {
-    min-height: calc(100dvh - var(--topbar-height) - 2rem);
+    min-height: calc(100dvh - var(--header-height) - 2rem);
     display: flex;
     flex-direction: column;
     justify-content: center;

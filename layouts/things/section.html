@@ -2,20 +2,6 @@
 
   <div class="wrapper things">
 
-    <div class="topbar">
-      <div class="topbar-left">
-        {{ if and .Parent (ne .Parent.Kind "home") }}
-        <a href="{{ .Parent.RelPermalink }}" class="back-link" aria-label="back">{{ partial "utils/icon.html" "chevron-left" }}</a>
-        {{ end }}
-      </div>
-      <div class="topbar-middle">
-        <h1>{{ .Title }}</h1>
-      </div>
-      <div class="topbar-right">
-
-      </div>
-    </div>
-
     {{ if .Sections }}
 
       {{ $sections := slice }}
