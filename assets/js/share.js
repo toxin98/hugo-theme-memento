@@ -1,13 +1,16 @@
 document.addEventListener("DOMContentLoaded", () => {
   const dialog = document.querySelector("[data-share-dialog]");
-  const openButton = document.querySelectorAll("[data-share-open]");
   const closeButton = document.querySelector("[data-share-close]");
   const copyButton = document.querySelector("[data-share-copy]");
 
-  if (!dialog || !openButton) return;
+  if (!dialog) return;
 
-  openButton.addEventListener("click", () => {
-    dialog.showModal();
+  document.addEventListener("click", (e) => {
+    const openButton = e.target.closest("[data-share-open]");
+
+    if (openButton) {
+      dialog.showModal();
+    }
   });
 
   closeButton?.addEventListener("click", () => {

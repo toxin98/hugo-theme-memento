@@ -156,6 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
+  // const header = document.querySelector("header");
   const readingTitle = document.querySelector(".topbar-reading");
   const sentinel = document.createElement("div");
   const pageTitle = document.querySelector(".page-title");
@@ -163,7 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const observer = new IntersectionObserver((entries) => {
     const entry = entries[0];
-    header.classList.toggle("is-scrolled", !entry.isIntersecting)
+    // header.classList.toggle("is-scrolled", !entry.isIntersecting)
     readingTitle.classList.toggle("show", !entry.isIntersecting)
   }, {
     rootMargin: "16px 0px 0px 0px"

@@ -1,5 +1,7 @@
 {{ define "main" }}
 
+  {{ partial "share-dialog.html" . }}
+
   <div class="wrapper three-column-layout posts">
 
     <aside class="sidebar" data-position="left">
@@ -9,7 +11,7 @@
 
       <div class="topbar">
         <div class="topbar-right">
-          {{ partial "share.html" . }}
+          <button class="share-button" data-share-open>{{ partial "utils/icon.html" "share" }}</button>
           <button class="sidebar-toggle" data-target="right">{{ partial "utils/icon.html" "list-tree" }}</button>
         </div>
       </div>
@@ -26,6 +28,7 @@
     </div>
 
     <aside class="sidebar" data-position="right">
+      <button class="share-button" data-share-open>{{ partial "utils/icon.html" "share" }}</button>
       {{ partial "toc.html" . }}
     </aside>
 

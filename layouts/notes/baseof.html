@@ -7,6 +7,8 @@
 
   <main>
 
+    {{ partial "share-dialog.html" . }}
+
     <div class="wrapper notes">
 
       <button class="sidebar-toggle" data-target="left">{{ partial "utils/icon.html" "layout-sidebar-left-expand" }}</button>
@@ -44,30 +46,32 @@
 
       </aside>
 
-      <div class="primary-area">
-
-        <div class="topbar">
-          <!-- {{ partial "breadcrumbs.html" . }} -->
-          <div class="topbar-left">
-            <span class="topbar-reading">{{ .Title }}</span>
-          </div>
-          <div class="topbar-right">
-            {{ partial "share.html" . }}
-            <button class="sidebar-toggle" data-target="right">{{ partial "utils/icon.html" "list-tree" }}</button>
-          </div>
-        </div>
+      <div class="notes-main">
 
         <div class="notes-reading">
-          <article class="content">
-            <div class="meta-container">
-              <span>Last updated: {{ partial "utils/date-format.html" (dict "date" .Lastmod "layout" "notes") }}</span>
-              <span>Publish date: {{ partial "utils/date-format.html" (dict "date" .PublishDate "layout" "notes") }}</span>
+          <div class="primary-area">
+            <div class="topbar">
+              <!-- {{ partial "breadcrumbs.html" . }} -->
+              <div class="topbar-left">
+                <span class="topbar-reading">{{ .Title }}</span>
+              </div>
+              <div class="topbar-right">
+                <button class="share-button" data-share-open>{{ partial "utils/icon.html" "share" }}</button>
+                <button class="sidebar-toggle" data-target="right">{{ partial "utils/icon.html" "list-tree" }}</button>
+              </div>
             </div>
-            <h1 class="page-title">{{ .Title }}</h1>
-            {{ .Content }}
-            {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
-          </article>
+            <article class="content">
+              <div class="meta-container">
+                <span>Last updated: {{ partial "utils/date-format.html" (dict "date" .Lastmod "layout" "notes") }}</span>
+                <span>Publish date: {{ partial "utils/date-format.html" (dict "date" .PublishDate "layout" "notes") }}</span>
+              </div>
+              <h1 class="page-title">{{ .Title }}</h1>
+              {{ .Content }}
+              {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+            </article>
+          </div>
           <aside class="sidebar" data-position="right">
+            <button class="share-button" data-share-open>{{ partial "utils/icon.html" "share" }}</button>
             {{ partial "toc.html" . }}
           </aside>
         </div>
