@@ -138,16 +138,6 @@
   letter-spacing: .08em;
 }
 
-.mirror__glint { fill: #fff; opacity: .85; }
-
-.mirror__crack {
-  fill: none;
-  stroke: rgba(255, 255, 255, .95);
-  stroke-width: 3;
-  stroke-linecap: round;
-  pointer-events: none;
-}
-
 @media (max-width: 760px) {
   .mirror-home {
     min-height: calc(100dvh - var(--header-height) - 2rem);
