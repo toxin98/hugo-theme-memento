@@ -91,45 +91,15 @@
   margin-right: 0.1rem;
 }
 
-.posts-years-list,
 .posts-tags-list {
   position: sticky;
   top: calc(var(--header-height)*2 + 1rem*2);
 }
 
-.posts-years-list,
 .posts-tags-list {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-}
-
-.posts-filter.year {
-  display: block;
-  text-align: center;
-  padding: .35rem .9rem;
-  border-radius: 999px;
-  text-decoration: none;
-  background: #f2f2f2;
-  color: #333;
-  transition: all 0.2s ease;
-}
-
-.posts-filter.year:hover {
-  background: #bbb;
-}
-
-.posts-filter.year.active {
-  background: #222;
-  color: #fff;
-}
-
-.posts .entry-group.hidden {
-  display: none;
-}
-
-.posts .entry.hidden {
-  display: none;
 }
 
 .posts-filter.tag {

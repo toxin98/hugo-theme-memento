@@ -5,12 +5,6 @@
     {{ $posts := .RegularPagesRecursive }}
 
     <aside class="sidebar" data-position="left">
-      <div class="posts-years-list">
-        <button class="posts-filter year active" data-filter="all"> All #{{ $posts.Len }}</button>
-        {{ range $posts.GroupByDate "2006" }}
-        <button class="posts-filter year" data-filter="{{ .Key }}">{{ .Key }} #{{ .Pages.Len }}</button>
-        {{ end }}
-      </div>
     </aside>
 
     <div class="primary-area">

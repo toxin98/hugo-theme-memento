@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  const yearButtons = document.querySelectorAll(".posts-filter.year");
   const tagButtons = document.querySelectorAll(".posts-filter.tag");
   const tagsCleaner = document.querySelector("#tagsCleaner");
 

@@ -223,7 +223,7 @@ footer {
 
 main {
   flex: 1;
-  padding-bottom: 2rem;
+  padding-bottom: 3rem;
 }
 
 main .bar {
@@ -479,7 +479,7 @@ main .bar {
 }
 
 .entry-group {
-  margin-bottom: 1rem;
+  margin-top: 1rem;
 }
 
 .entry-group-header {
