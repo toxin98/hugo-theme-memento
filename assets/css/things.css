@@ -2,12 +2,6 @@
   max-width: 800px;
 }
 
-.things .entry-group-header {
-  position: sticky;
-  top: var(--sticky-top);
-  z-index: 99;
-}
-
 .things .entry-list {
   display: flex;
   flex-direction: row;

@@ -132,12 +132,6 @@
   display: none;
 }
 
-.posts .entry-group-header {
-  position: sticky;
-  top: var(--sticky-top);
-  z-index: 99;
-}
-
 .posts-filter.tag {
   display: block;
   text-align: center;

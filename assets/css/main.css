@@ -9,7 +9,6 @@
 
 :root {
   --header-height: 52px;
-  --sticky-top: 0px;
   --sidebar-width: 280px;
   --column-layout-gap: 20px;
   --edge-gap: 16px;
@@ -228,6 +227,8 @@ main {
 }
 
 main .bar {
+  position: sticky;
+  top: 0;
   display: none;
 }
 
@@ -410,6 +411,38 @@ main .bar {
   color: #000;
   border-bottom: 0.1rem solid #000;
 }
+/* breadcrumbs */
+.breadcrumbs-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 6px 0;
+  padding: 0;
+  font-size: 14px;
+}
+
+.breadcrumbs-list li {
+  display: flex;
+  color: #555;
+}
+
+.breadcrumbs-list a {
+  text-decoration: none;
+  color: #0073e6;
+  transition: color 0.2s;
+}
+
+.breadcrumbs-list a:hover {
+  text-decoration: underline;
+  color: var(--accent-color);
+}
+
+.breadcrumbs-list li:not(:last-child)::after {
+  content: "›";
+  margin: 0 4px;
+  font-size: 24px;
+  line-height: 14px;
+}
 /* universal */
 .avatar {
   border-radius: 50%;
@@ -450,6 +483,10 @@ main .bar {
 }
 
 .entry-group-header {
+  position: sticky;
+  top: 0;
+  z-index: 99;
+
   height: 3rem;
   display: flex;
   align-items: center;
@@ -545,20 +582,8 @@ swiper-slide img {
 
 @media (max-width: 1280px) {
 
-  :root {
-    --sticky-top: var(--header-height);
-  }
-
-  header {
-    position: sticky;
-    top: 0;
-    z-index: 999;
-  }
-
   main .bar {
     display: flex;
-    position: sticky;
-    top: var(--header-height);
   }
 
   .sidebar[data-position="right"] {

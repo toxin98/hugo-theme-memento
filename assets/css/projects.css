@@ -2,12 +2,6 @@
   max-width: 800px;
 }
 
-.projects .entry-group-header {
-  position: sticky;
-  top: var(--sticky-top);
-  z-index: 99;
-}
-
 .projects .entry-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
