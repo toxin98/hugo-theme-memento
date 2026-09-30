@@ -123,7 +123,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 document.addEventListener("DOMContentLoaded", () => {
   const asideToggleBtn = document.querySelector(".notes-aside-toggle");
-  const asideContainer = document.querySelector(".notes-reading-aside");
 
   if (asideToggleBtn && asideContainer) {
     // 1. 点击按钮呼出/收起卡片[cite: 1]
@@ -157,7 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 document.addEventListener("DOMContentLoaded", () => {
   // const header = document.querySelector("header");
-  const readingTitle = document.querySelector(".topbar-reading");
+  const readingTitle = document.querySelector(".bar-reading");
   const sentinel = document.createElement("div");
   const pageTitle = document.querySelector(".page-title");
   pageTitle.before(sentinel)

@@ -13,7 +13,7 @@
   max-height: none;
 }
 
-.sidebar[data-position="left"] .sidebar-header {
+.wrapper.notes .sidebar[data-position="left"] .sidebar-header {
   position: sticky;
   top: 0;
 
@@ -137,7 +137,7 @@
   z-index: 99;
 }
 
-.notes-main {
+.notes-workspace {
   flex: 1;
   min-width: 0;
   display: flex;
@@ -145,13 +145,17 @@
   min-height: 100dvh;
 }
 
-.notes-reading {
+.notes-body {
   flex: 1;
   display: flex;
 }
 
 .wrapper.notes .primary-area {
   padding: 0 var(--edge-gap);
+}
+
+.wrapper.notes .primary-area header {
+  display: none;
 }
 
 .meta-container {
@@ -211,10 +215,6 @@
 
   .wrapper.notes .sidebar[data-position="right"].open {
     display: flex;
-  }
-
-  .wrapper.notes .topbar {
-    top: 0;
   }
 
 }

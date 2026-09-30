@@ -45,28 +45,20 @@
 
 /* Shattered mirror landing page */
 .mirror-home {
-  min-height: calc(100dvh - var(--header-height) - 3rem);
-  display: grid;
-  grid-template-columns: minmax(180px, 0.7fr) minmax(440px, 1.3fr);
-  align-items: center;
-  gap: clamp(1rem, 5vw, 7rem);
-  max-width: 1260px;
-  margin: 0 auto;
-  padding: clamp(2rem, 6vw, 6rem) clamp(1rem, 5vw, 5rem);
+  display: flex;
 }
 
 .mirror {
-  width: min(70vw, 720px);
-  max-width: 100%;
-  justify-self: center;
+  height: calc(100dvh - var(--header-height));
+  margin: 0 auto;
   filter: drop-shadow(0 24px 28px rgba(55, 64, 78, .16));
 }
 
 .mirror__svg {
   display: block;
   overflow: visible;
-  width: 100%;
-  height: auto;
+  max-width: 100%;
+  height: 100%;
 }
 
 .mirror__base {
@@ -136,31 +128,4 @@
 .mirror-piece-link:focus-visible .mirror-label {
   opacity: 1;
   letter-spacing: .08em;
-}
-
-@media (max-width: 760px) {
-  .mirror-home {
-    min-height: calc(100dvh - var(--header-height) - 2rem);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 1rem;
-    padding-top: 2rem;
-  }
-
-  .mirror-home__intro {
-    text-align: center;
-    padding: 0;
-  }
-
-  .mirror-home__intro h1 { font-size: clamp(1.8rem, 8vw, 3rem); }
-  .mirror { width: min(94vw, 620px); }
-  .mirror-label { font-size: 25px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .mirror-piece,
-  .mirror-label,
-  .mirror__avatar,
-  .mirror-piece-image { transition: none; }
 }

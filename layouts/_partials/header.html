@@ -1,13 +1,13 @@
-<div class="wrapper topbar" data-page-title="{{ if not .IsHome }}{{ .Title }}{{ end }}">
-  <div class="topbar-left">
-  </div>
-  <div class="topbar-middle">
+<div class="wrapper bar" data-page-title="{{ if not .IsHome }}{{ .Title }}{{ end }}">
+  <div class="bar-left">
     <a href="/" class="site-brand" aria-label="{{ site.Title }}">{{ site.Title }}</a>
     {{ if not .IsHome }}
-      <span class="topbar-reading" aria-hidden="true">{{ .Title }}</span>
+      <span class="bar-reading" aria-hidden="true">{{ .Title }}</span>
     {{ end }}
   </div>
-  <div class="topbar-right">
+  <div class="bar-center">
+  </div>
+  <div class="bar-right">
     <button>{{ partial "utils/icon.html" "search"}}</button>
   </div>
 </div>
