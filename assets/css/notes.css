@@ -185,6 +185,10 @@
     display: flex;
   }
 
+  .wrapper.notes .primary-area header {
+    display: block;
+  }
+
 }
 
 @media (max-width: 1024px) {

@@ -1,10 +1,11 @@
 {{ define "main" }}
 
-  <div class="wrapper three-column-layout posts">
+  <div class="wrapper posts three-column-layout">
 
     {{ $posts := .RegularPagesRecursive }}
 
-    <aside class="sidebar" data-position="left">
+    <aside class="sidebar hide-below-1280" data-position="left">
+      <h1>{{ .Title }}</h1>
     </aside>
 
     <div class="primary-area">
@@ -47,7 +48,7 @@
       {{ end }}
     </div>
 
-    <aside class="sidebar" data-position="right">
+    <aside class="sidebar hide-below-1280" data-position="right">
       <div class="posts-tags-list">
         <div><span>Tags: </span><button id="tagsCleaner">{{ partial "utils/icon.html" "x" }}Clear</button></div>
         {{ range $name, $taxonomy := site.Taxonomies.tags }}

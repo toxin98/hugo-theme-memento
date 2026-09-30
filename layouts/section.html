@@ -1,10 +1,45 @@
 {{ define "main" }}
-  <h1>{{ .Title }}</h1>
-  {{ .Content }}
-  {{ range .Pages }}
-    <section>
-      <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
-      {{ .Summary }}
-    </section>
-  {{ end }}
+
+  {{ $partialPath := printf "%s-grid.html" .Section }}
+
+  <div class="wrapper {{ .Section }} entry-group-list">
+
+    <h1>{{ .Title }}</h1>
+
+    {{ if .Sections }}
+
+      {{ $sections := slice }}
+
+      {{ range .Sections }}
+        {{ $weight := .Weight | default 1 }}
+        {{ $sections = $sections | append (dict "section" . "weight" $weight) }}
+      {{ end }}
+
+      {{ range sort $sections "weight" }}
+
+        <div class="entry-group">
+
+          <div class="entry-group-header">
+            <a href="{{ .section.RelPermalink }}">
+              <h2 class="entry-group-title">{{ .section.Title }}{{ partial "utils/icon.html" "chevron-right" }}</h2> 
+            </a>
+          </div>
+
+          {{ $pages := .section.RegularPagesRecursive }}
+          {{ $pages = sort $pages ".Params.dateStart" "desc" }}
+
+          {{ partial $partialPath $pages }}
+
+        </div>
+
+      {{ end }}
+
+    {{ else }}
+
+      {{ partial $partialPath .Pages }}
+
+    {{ end }}
+
+  </div>
+
 {{ end }}

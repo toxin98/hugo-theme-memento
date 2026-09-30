@@ -11,7 +11,7 @@
 
     <button class="sidebar-toggle" data-target="left">{{ partial "utils/icon.html" "layout-sidebar-left-expand" }}</button>
 
-    <aside class="sidebar" data-position="left">
+    <aside class="sidebar hide-below-1024" data-position="left">
 
       <div class="sidebar-header">
         <a href="/" class="back-link" aria-label="back">{{ partial "utils/icon.html" "chevron-left" }}</a>
@@ -50,7 +50,6 @@
         <div class="primary-area">
           <header>
             <div class="wrapper bar">
-              <!-- {{ partial "breadcrumbs.html" . }} -->
               <div class="bar-left">
                 <span class="bar-reading">{{ .Title }}</span>
               </div>
@@ -72,7 +71,7 @@
             </article>
           </main>
         </div>
-        <aside class="sidebar" data-position="right">
+        <aside class="sidebar hide-below-1280" data-position="right">
           <button class="share-button" data-share-open>{{ partial "utils/icon.html" "share" }}</button>
           {{ partial "toc.html" . }}
         </aside>

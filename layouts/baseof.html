@@ -8,11 +8,11 @@
     {{ partial "header.html" . }}
   </header>
   <main>
-    {{- if and (not .IsHome) (not .Params.hide_breadcrumbs) -}}
+    {{ if and (not .IsHome) (not .Params.hide_breadcrumb) }}
       <div class="wrapper">
-        {{ partial "breadcrumbs.html" . }}
+        {{ partial "breadcrumb.html" . }}
       </div>
-    {{- end -}}
+    {{ end }}
     {{ block "main" . }}{{ end }}
   </main>
   <div class="overlay"></div>

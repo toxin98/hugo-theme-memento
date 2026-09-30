@@ -2,9 +2,9 @@
 
   {{ partial "share-dialog.html" . }}
 
-  <div class="wrapper three-column-layout posts">
+  <div class="wrapper posts three-column-layout">
 
-    <aside class="sidebar" data-position="left">
+    <aside class="sidebar hide-below-1280" data-position="left">
     </aside>
 
     <div class="primary-area">
@@ -27,7 +27,7 @@
 
     </div>
 
-    <aside class="sidebar" data-position="right">
+    <aside class="sidebar hide-below-1024" data-position="right">
       <button class="share-button" data-share-open>{{ partial "utils/icon.html" "share" }}</button>
       {{ partial "toc.html" . }}
     </aside>
