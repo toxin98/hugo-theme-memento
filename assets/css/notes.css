@@ -151,15 +151,6 @@
   padding: 0 var(--edge-gap);
 }
 
-.meta-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 0.2rem 1rem;
-  color: var(--text-color-secondary);
-  margin-top: 1rem;
-}
-
 @media (max-width: 1024px) {
 
   .wrapper.notes .sidebar[data-position="left"] {

@@ -10,7 +10,7 @@
       <h1>{{ .Title }}</h1>
     </aside>
 
-    <div class="primary-area">
+    <div class="primary-area entry-group-list">
 
       {{ range $posts.GroupByDate "2006" }}
       <div class="entry-group" data-year="{{ .Key }}">
@@ -25,16 +25,16 @@
 
             <div class="entry-body">
               <div class="entry-meta">
-                {{ partial "utils/date-format.html" (dict "date" .Date "layout" "posts") }}
+                {{ partial "utils/date-format.html" (dict "date" .Date "layout" "posts-section") }}
               </div>
               <h3 class="entry-title">
                 <a href="{{ .RelPermalink}}" class="stretched-link">{{ .Title }}</a>
               </h3>
               <p class="entry-summary">{{ .Summary | plainify }}</p>
               <div class="entry-tags">
-                {{ range .Params.tags }}
-                  <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="tag-badge">#{{ . }}</a>
-                {{ end }}
+                {{- range .Params.tags -}}
+                  <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
+                {{- end -}}
               </div>
             </div>
 

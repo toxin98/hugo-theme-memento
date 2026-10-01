@@ -20,12 +20,14 @@
 
       <article class="content">
         <div class="meta-container">
-          <time datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}" aria-label="{{ .Date.Format "2006-01-02" }}">
-            <span>{{ .Date.Format "January 02, 2006" }}</span>
-          </time>
+          <div class="entry-tags">
+            {{- range .Params.tags -}}
+              <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
+            {{- end -}}
+          </div>
+          <span>{{ partial "utils/date-format.html" (dict "date" .Date "layout" "posts-page") }}</span>
         </div>
         <h1>{{ .Title }}</h1>
-        {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
         {{ .Content }}
       </article>
 

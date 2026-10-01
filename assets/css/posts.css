@@ -8,20 +8,19 @@
   display: flex;
   flex-direction: row;
   height: 200px; /* 核心：强制统一卡片高度 */
-  /* 基础美化（沿用之前的设计） */
   position: relative;
   background-color: #ffffff;
   border-radius: 12px;
   overflow: hidden;
   border: 1px solid #eaecef;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
 }
 
 .posts .entry-body {
   flex: 1;
-  padding: 1rem 2rem;
+  min-width: 0;
   display: flex;
   flex-direction: column;
+  padding: 1rem;
 }
 
 .posts .entry-title,
@@ -29,43 +28,57 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  word-wrap: break-word; /* 保证单词能断行 */
+  word-wrap: break-word;
+  flex-shrink: 0;
 }
 
 .posts .entry-title {
-  -webkit-line-clamp: 2; /* 标题最多 2 行，超出显示 ... */
+  -webkit-line-clamp: 2;
   font-weight: 600;
-  margin-bottom: 0.5rem;
 }
 
 .posts .entry-summary {
-  -webkit-line-clamp: 2; /* 摘要同样限制 2 行 */
-  font-size: var(--text-size-sm);
+  -webkit-line-clamp: 2;
   color: var(--text-color-secondary);
 }
 
-.posts .entry-tags {
-  margin-top: auto; 
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  position: relative;
-  z-index: 1; /* 保证能独立点击 */
+.posts .entry .entry-tags {
+  z-index: 1;
+  pointer-events: none;
+
+  display: block;
+  white-space: nowrap;
+  margin-top: auto;
+  border-top: 1px solid;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.posts .tag-badge {
+.posts .entry .entry-tags a {
+  margin-right: 8px;
+}
+
+.posts .entry-tags a {
+  pointer-events: auto;
+
   text-decoration: none;
   color: inherit;
+
+  display: inline-block;
 }
 
-.posts .tag-badge:hover {
+.posts .entry-tags a::before {
+  content: "#";
+}
+
+.posts .entry-tags a:hover {
   color: var(--accent-color);
 }
 
 .posts .entry-featured {
-  flex-shrink: 0; /* 防止被左侧长文本挤压缩小 */
-  height: 100%;   /* 撑满卡片的 220px 高度 */
-  aspect-ratio: 4 / 3; /* 核心：基于固定的高度，强制图片比例为 4:3 */
+  flex: 0 0 auto;
+  height: 100%;
+  aspect-ratio: 4 / 3;
   /* overflow: hidden; */
 }
 
@@ -74,21 +87,7 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
-}
-
-.posts .entry-tags {
-  border-top: 1px solid var(--border-color);
-  overflow: hidden;
-}
-
-.posts .entry-tag {
-  font-size: var(--text-size-sm);
-  color: var(--text-color-secondary);
-}
-
-.posts .entry-tag::before {
-  content: "#";
-  margin-right: 0.1rem;
+  display:block;
 }
 
 .posts-tags-list {

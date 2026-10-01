@@ -9,7 +9,6 @@
 
 :root {
   --header-height: 52px;
-  --toolbar-height: 52px;
   --sidebar-width: 280px;
   --column-layout-gap: 20px;
   --edge-gap: 16px;
@@ -21,9 +20,9 @@
   --text-size-sm: 14px;
   --text-size-xs: 12px;
   --text-color-primary: #222;
-  --text-color-secondary: #8a8f98;
-  --text-color-tertiary: #777;
-  --text-color-muted: #888;
+  --text-color-secondary: #52525b;
+  --text-color-tertiary: #888;
+  --text-color-muted: #9ca3af;
   --accent-color: #6cb0d8;
   --border-color: #ddd;
   --card-background: #fff;
@@ -264,7 +263,7 @@ main {
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
   transition: background-color 0.2s;
 }
-/* 【核心】使用 ::after 伪元素铺满整个卡片 */
+/* 使用 ::after 伪元素铺满整个卡片 */
 .stretched-link::after {
   content: "";
   position: absolute;
@@ -272,7 +271,7 @@ main {
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 1; /* 层级位于卡片内容底端，但覆盖整个容器 */
+  z-index: 1;
 }
 
 .stretched-link {
@@ -475,7 +474,7 @@ main {
 }
 
 .toolbar {
-  height: var(--toolbar-height);
+  height: var(--header-height);
   pointer-events: none;
 }
 
@@ -502,6 +501,19 @@ main {
 
 .toolbar button:hover {
   background: #fff;
+}
+
+.meta-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-top: 1rem;
+}
+
+.entry-tags {
+  display: flex;
+  flex-wrap: wrap; 
+  gap: 8px;
 }
 
 .entry-group-list {
@@ -626,22 +638,11 @@ swiper-slide img {
   .hide-below-1280[data-position="right"] { right: 0; transform: translateX(100%); }
   .hide-below-1280.open { transform: translateX(0); }
 
-  .sidebar[data-position="right"] {
-    position: fixed;
-    top: calc(var(--header-height) + 12px);
-    right: var(--edge-gap);
-    border-radius: 12px;
-    border: 1px solid #ebebeb;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    overflow-y: auto;
-    animation: fadeIn 0.3s ease-out;
-  }
-
   .sidebar[data-position="right"].open {
     display: flex;
   }
 
-  .sidebar .bar {
+  .hide-below-1280 .bar {
     display: none;
   }
 
@@ -664,6 +665,20 @@ swiper-slide img {
   .hide-below-1024[data-position="left"]  { left: 0; transform: translateX(-100%); }
   .hide-below-1024[data-position="right"] { right: 0; transform: translateX(100%); }
   .hide-below-1024.open { transform: translateX(0); }
+
+  .hide-below-1024 .bar {
+    display: none;
+  }
+
+  .sidebar[data-position="right"] {
+    position: fixed;
+    top: calc(var(--header-height) + 12px);
+    border-radius: 12px;
+    border: 1px solid #ebebeb;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    overflow-y: auto;
+    animation: fadeIn 0.3s ease-out;
+  }
 
 }
 
