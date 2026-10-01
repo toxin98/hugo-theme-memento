@@ -276,7 +276,6 @@ main .bar {
 .sidebar-toggle {
   display: none;
 }
-
 /* 【核心】使用 ::after 伪元素铺满整个卡片 */
 .stretched-link::after {
   content: "";
@@ -603,8 +602,8 @@ swiper-slide img {
     position: fixed;
     top: 0;
     bottom: 0;
-    background: #fff;
     z-index: 1000;
+    background: #fff;
     transition: transform 0.3s ease;
   }
   .hide-below-1280[data-position="left"]  { left: 0; transform: translateX(-100%); }
@@ -635,10 +634,6 @@ swiper-slide img {
     display: flex;
   }
 
-  main .bar {
-    display: flex;
-  }
-
 }
 
 @media (max-width: 768px) {
@@ -647,20 +642,12 @@ swiper-slide img {
     flex-direction: column;
   }
 
-  .viewer .button-close {
-    display: none;
-  }
-
 }
 
 @media print {
 
   header, footer {
     display: none;
-  }
-
-  main {
-    padding-top: 0;
   }
 
 }

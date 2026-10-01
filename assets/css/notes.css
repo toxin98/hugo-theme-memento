@@ -173,12 +173,11 @@
     position: fixed;
     top: calc(var(--header-height) + 12px);
     right: var(--edge-gap);
-    background: #ffffff;
     border-radius: 12px;
     border: 1px solid #ebebeb;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     overflow-y: auto;
-    animation: fadeIn 0.2s ease-out;
+    animation: fadeIn 0.3s ease-out;
   }
 
   .wrapper.notes .sidebar[data-position="right"].open {
@@ -187,6 +186,8 @@
 
   .wrapper.notes .primary-area header {
     display: block;
+    position: sticky;
+    top: 0;
   }
 
 }
