@@ -9,17 +9,21 @@
 
     <div class="primary-area">
 
-      <div class="bar">
-        <div class="bar-right">
-          <button class="share-button" data-share-open>{{ partial "utils/icon.html" "share" }}</button>
-          <button class="sidebar-toggle" data-target="right">{{ partial "utils/icon.html" "list-tree" }}</button>
+      <div class="toolbar sticky-top show-below-1024">
+        <div class="bar">
+          <div class="bar-right">
+            <button class="share-button" data-share-open>{{ partial "utils/icon.html" "share" }}</button>
+            <button class="sidebar-toggle" data-target="right">{{ partial "utils/icon.html" "list-tree" }}</button>
+          </div>
         </div>
       </div>
 
       <article class="content">
-        <time datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}" aria-label="{{ .Date.Format "2006-01-02" }}">
-          <span>{{ .Date.Format "January 02, 2006" }}</span>
-        </time>
+        <div class="meta-container">
+          <time datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}" aria-label="{{ .Date.Format "2006-01-02" }}">
+            <span>{{ .Date.Format "January 02, 2006" }}</span>
+          </time>
+        </div>
         <h1>{{ .Title }}</h1>
         {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
         {{ .Content }}
@@ -28,7 +32,9 @@
     </div>
 
     <aside class="sidebar hide-below-1024" data-position="right">
-      <button class="share-button" data-share-open>{{ partial "utils/icon.html" "share" }}</button>
+      <div class="bar">
+        <button class="share-button" data-share-open>{{ partial "utils/icon.html" "share" }}</button>
+      </div>
       {{ partial "toc.html" . }}
     </aside>
 

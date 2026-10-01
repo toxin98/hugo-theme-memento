@@ -9,12 +9,13 @@
 
 :root {
   --header-height: 52px;
+  --toolbar-height: 52px;
   --sidebar-width: 280px;
   --column-layout-gap: 20px;
   --edge-gap: 16px;
   --body-bg: #eee;
-  --header-bg: #281313;
-  --footer-bg: #e0d6d6;;
+  --header-bg: #aaa;
+  --footer-bg: #ca8eb1;
   --text-size-lg: 18px;
   --text-size-base: 16px;
   --text-size-sm: 14px;
@@ -64,8 +65,6 @@ button {
 }
 
 .wrapper {
-  width: 100%;
-  height: 100%;
   max-width: 1360px;
   margin-inline: auto;
   padding: 0 var(--edge-gap);
@@ -79,15 +78,18 @@ header {
 }
 
 .bar {
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   gap: 1rem;
 }
 
-.bar-start {
+.bar-left {
   flex: 1;
   display: flex;
   justify-content: flex-start;
+  gap: 0.5rem;
 }
 
 .bar-center {
@@ -100,6 +102,11 @@ header {
   flex: 1;
   display: flex;
   justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.bar svg {
+  vertical-align: middle;
 }
 
 .site-brand {
@@ -126,28 +133,19 @@ header {
   transition: opacity .22s ease, transform .22s ease;
 }
 
-header.is-scrolled {
+header.scrolled {
   border-bottom-color: var(--border-color);
   box-shadow: 0 4px 16px rgba(40, 19, 19, .06);
 }
 
-header.is-scrolled .site-brand {
+header.scrolled .site-brand {
   opacity: 0;
   transform: translateY(-7px);
 }
 
-header.is-scrolled .bar-reading {
+header.scrolled .bar-reading {
   opacity: 1;
   transform: translateY(0);
-}
-
-.bar button {
-  padding: 6px;
-  border-radius: 6px;
-}
-
-.bar button:hover {
-  background: #eee;
 }
 
 h2, h3, h4, h5 {
@@ -226,12 +224,6 @@ main {
   padding-bottom: 3rem;
 }
 
-main .bar {
-  position: sticky;
-  top: 0;
-  display: none;
-}
-
 .three-column-layout {
   display: flex;
 }
@@ -272,10 +264,6 @@ main .bar {
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
   transition: background-color 0.2s;
 }
-
-.sidebar-toggle {
-  display: none;
-}
 /* 【核心】使用 ::after 伪元素铺满整个卡片 */
 .stretched-link::after {
   content: "";
@@ -298,7 +286,7 @@ main .bar {
 
 .overlay {
   position: fixed;
-  inset: var(--header-height) 0 0;
+  inset: 0;
   background: rgba(0,0,0,.35);
   opacity: 0;
   pointer-events: none;
@@ -398,7 +386,7 @@ main .bar {
   min-height: 0;
   display: flex;
   flex-direction: column;
-  margin: 0.5rem 0;
+  padding: 0.5rem 0;
 }
 
 .toc-header {
@@ -458,6 +446,14 @@ main .bar {
   margin-inline: 0.5em;
 }
 /* universal */
+.show-below-1280 {
+  display: none;
+}
+
+.show-below-1024 {
+  display: none;
+}
+
 .avatar {
   border-radius: 50%;
   overflow: hidden;
@@ -478,18 +474,34 @@ main .bar {
   object-fit: cover;
 }
 
-.bar-left .back-link {
-  margin-left: auto;
+.toolbar {
+  height: var(--toolbar-height);
+  pointer-events: none;
 }
 
-.bar svg {
-  vertical-align: middle;
+.sticky-top {
+  position: sticky;
+  top: 0;
+  z-index: 99;
 }
 
-.bar .primary-area {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
+.toolbar button {
+  pointer-events: auto;
+
+  padding: 6px;
+  border-radius: 6px;
+
+  background: rgb(255 255 255 / 0.45);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+
+  box-shadow:
+  0 1px 2px rgb(0 0 0 / 0.08),
+  inset 0 0 0 0.5px rgb(255 255 255 / 0.35);
+}
+
+.toolbar button:hover {
+  background: #fff;
 }
 
 .entry-group-list {
@@ -598,6 +610,10 @@ swiper-slide img {
 
 @media (max-width: 1280px) {
 
+  .show-below-1280 {
+    display: flex;
+  }
+
   .hide-below-1280 {
     position: fixed;
     top: 0;
@@ -610,13 +626,32 @@ swiper-slide img {
   .hide-below-1280[data-position="right"] { right: 0; transform: translateX(100%); }
   .hide-below-1280.open { transform: translateX(0); }
 
-  .show-below-1280 {
+  .sidebar[data-position="right"] {
+    position: fixed;
+    top: calc(var(--header-height) + 12px);
+    right: var(--edge-gap);
+    border-radius: 12px;
+    border: 1px solid #ebebeb;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    overflow-y: auto;
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  .sidebar[data-position="right"].open {
     display: flex;
+  }
+
+  .sidebar .bar {
+    display: none;
   }
 
 }
 
 @media (max-width: 1024px) {
+
+  .show-below-1024 {
+    display: flex;
+  }
 
   .hide-below-1024 {
     position: fixed;
@@ -629,10 +664,6 @@ swiper-slide img {
   .hide-below-1024[data-position="left"]  { left: 0; transform: translateX(-100%); }
   .hide-below-1024[data-position="right"] { right: 0; transform: translateX(100%); }
   .hide-below-1024.open { transform: translateX(0); }
-
-  .show-below-1024 {
-    display: flex;
-  }
 
 }
 

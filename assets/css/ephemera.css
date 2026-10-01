@@ -14,27 +14,6 @@
   width: 100%;
 }
 
-.ephemera-topbar {
-  position: sticky;
-  top: 0;
-  height: var(--header-height);
-  align-items: center;
-  display: flex;
-  gap: 10px;
-  background: var(--body-bg);
-  z-index: 1000;
-}
-
-.ephemera-topbar :nth-last-child(1) {
-  margin-left: auto;
-}
-
-.ephemera-count,
-.ephemera-control {
-  display: flex;
-  gap: 0.5rem;
-}
-
 .ephemera-item {
   position: relative;
 }
@@ -201,7 +180,7 @@
   display: none;
 }
 
-.viewer.is-dragging {
+.viewer.dragging {
   transition: none;
 }
 

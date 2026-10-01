@@ -7,20 +7,24 @@
     {{ $pages := .RegularPages.ByDate.Reverse }}
     {{ $paginator := .Paginate $pages }}
 
-    <div class="ephemera-topbar">
-      {{ $textNum := where $pages "Params.media.type" "empty" | len}}
-      {{ $imageNum := where $pages "Params.media.type" "image" | len }}
-      {{ $videoNum := where $pages "Params.media.type" "video" | len }}
-      {{ $audioNum := where $pages "Params.media.type" "audio" | len }}
-      <div class="ephemera-count">
-        <button>{{ partial "utils/icon.html" "message" }}{{ $textNum }}</button>
-        <button>{{ partial "utils/icon.html" "photo" }}{{ $imageNum }}</button>
-        <button>{{ partial "utils/icon.html" "video" }}{{ $videoNum }}</button>
-        <button>{{ partial "utils/icon.html" "headphones" }}{{ $audioNum }}</button>
-      </div>
-      <div class="ephemera-control">
-        <button class="layout-btn" data-layout="list">{{ partial "utils/icon.html" "layout-list" }}</button>
-        <button class="layout-btn" data-layout="grid">{{ partial "utils/icon.html" "layout-grid" }}</button>
+    <div class="toolbar sticky-top">
+      <div class="bar">
+        <div class="bar-left">
+          {{ $textNum := where $pages "Params.media.type" "empty" | len}}
+          {{ $imageNum := where $pages "Params.media.type" "image" | len }}
+          {{ $videoNum := where $pages "Params.media.type" "video" | len }}
+          {{ $audioNum := where $pages "Params.media.type" "audio" | len }}
+          <button>{{ partial "utils/icon.html" "message" }}{{ $textNum }}</button>
+          <button>{{ partial "utils/icon.html" "photo" }}{{ $imageNum }}</button>
+          <button>{{ partial "utils/icon.html" "video" }}{{ $videoNum }}</button>
+          <button>{{ partial "utils/icon.html" "headphones" }}{{ $audioNum }}</button>
+        </div>
+        <div class="bar-center">
+        </div>
+        <div class="bar-right">
+          <button class="layout-btn" data-layout="list">{{ partial "utils/icon.html" "layout-list" }}</button>
+          <button class="layout-btn" data-layout="grid">{{ partial "utils/icon.html" "layout-grid" }}</button>
+        </div>
       </div>
     </div>
 

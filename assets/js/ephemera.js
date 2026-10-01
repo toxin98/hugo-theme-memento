@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
     currentY = 0;
     dragging = true;
 
-    viewer.classList.add("is-dragging");
+    viewer.classList.add("dragging");
 
   });
 
@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     dragging = false;
 
-    viewer.classList.remove("is-dragging");
+    viewer.classList.remove("dragging");
 
     if (currentY > 120) {
 

@@ -44,22 +44,31 @@
 
     </aside>
 
-    <div class="notes-workspace">
+    <div class="notes-body">
 
-      <div class="notes-body">
-        <div class="primary-area">
-          <header>
-            <div class="wrapper bar">
-              <div class="bar-left">
-                <span class="bar-reading">{{ .Title }}</span>
-              </div>
-              <div class="bar-right">
-                <button class="share-button" data-share-open>{{ partial "utils/icon.html" "share" }}</button>
-                <button class="sidebar-toggle show-below-1280" data-target="right">{{ partial "utils/icon.html" "list-tree" }}</button>
-              </div>
+      {{ if and .IsSection (eq .Parent .Site.Home) }}
+        <main>
+          <p>{{ len .RegularPagesRecursive }} notes</p>
+          {{ $totalWords := 0 }}
+          {{ range .RegularPagesRecursive }}
+            {{ $totalWords = add $totalWords .WordCount }}
+          {{ end }}
+          <p>{{ $totalWords }} words</p>
+        </main>
+      {{ else }}
+        <div class="toolbar sticky-top show-below-1280">
+          <div class="wrapper bar">
+            <div class="bar-left">
+              <span class="bar-reading">{{ .Title }}</span>
             </div>
-          </header>
-          <main>
+            <div class="bar-right">
+              <button class="share-button" data-share-open>{{ partial "utils/icon.html" "share" }}</button>
+              <button class="sidebar-toggle show-below-1280" data-target="right">{{ partial "utils/icon.html" "list-tree" }}</button>
+            </div>
+          </div>
+        </div>
+        <main>
+          <div class="primary-area">
             <article class="content">
               <div class="meta-container">
                 <span>Last updated: {{ partial "utils/date-format.html" (dict "date" .Lastmod "layout" "notes") }}</span>
@@ -69,13 +78,16 @@
               {{ .Content }}
               {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
             </article>
-          </main>
-        </div>
-        <aside class="sidebar hide-below-1280" data-position="right">
-          <button class="share-button" data-share-open>{{ partial "utils/icon.html" "share" }}</button>
-          {{ partial "toc.html" . }}
-        </aside>
-      </div>
+          </div>
+          <aside class="sidebar hide-below-1280" data-position="right">
+            <div class="bar">
+              <button class="share-button" data-share-open>{{ partial "utils/icon.html" "share" }}</button>
+            </div>
+            {{ partial "toc.html" . }}
+          </aside>
+        </main>
+
+      {{ end }}
 
       <footer>
         {{ partial "footer.html" . }}

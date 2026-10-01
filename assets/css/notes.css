@@ -1,4 +1,5 @@
 .wrapper.notes {
+  width: 100%;
   display: flex;
   padding: 0;
 }
@@ -137,7 +138,7 @@
   z-index: 99;
 }
 
-.notes-workspace {
+.notes-body {
   flex: 1;
   min-width: 0;
   display: flex;
@@ -145,17 +146,9 @@
   min-height: 100dvh;
 }
 
-.notes-body {
-  flex: 1;
+.wrapper.notes main {
   display: flex;
-}
-
-.wrapper.notes .primary-area {
   padding: 0 var(--edge-gap);
-}
-
-.wrapper.notes .primary-area header {
-  display: none;
 }
 
 .meta-container {
@@ -164,32 +157,7 @@
   justify-content: space-between;
   gap: 0.2rem 1rem;
   color: var(--text-color-secondary);
-}
-
-@media (max-width: 1280px) {
-
-  .wrapper.notes .sidebar[data-position="right"] {
-    display: none;
-    position: fixed;
-    top: calc(var(--header-height) + 12px);
-    right: var(--edge-gap);
-    border-radius: 12px;
-    border: 1px solid #ebebeb;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    overflow-y: auto;
-    animation: fadeIn 0.3s ease-out;
-  }
-
-  .wrapper.notes .sidebar[data-position="right"].open {
-    display: flex;
-  }
-
-  .wrapper.notes .primary-area header {
-    display: block;
-    position: sticky;
-    top: 0;
-  }
-
+  margin-top: 1rem;
 }
 
 @media (max-width: 1024px) {

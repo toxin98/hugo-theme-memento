@@ -163,7 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const observer = new IntersectionObserver((entries) => {
     const entry = entries[0];
-    // header.classList.toggle("is-scrolled", !entry.isIntersecting)
+    // header.classList.toggle("scrolled", !entry.isIntersecting)
     readingTitle.classList.toggle("show", !entry.isIntersecting)
   }, {
     rootMargin: "16px 0px 0px 0px"

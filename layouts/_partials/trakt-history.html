@@ -114,7 +114,7 @@
   transition: opacity 0.3s ease;
 }
 
-.trakt-card-poster.is-loaded {
+.trakt-card-poster.loaded {
   opacity: 1;
 }
 
@@ -313,7 +313,7 @@
 
   function createPosterImage(fallbackPoster, title) {
     const img = document.createElement('img');
-    img.className = 'trakt-card-poster is-loaded';
+    img.className = 'trakt-card-poster loaded';
     img.src = fallbackPoster;
     img.alt = title;
     return img;

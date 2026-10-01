@@ -4,7 +4,7 @@
 
   // Give keyboard users the same subtle focus treatment as pointer users.
   mirror.querySelectorAll('.mirror-piece-link').forEach((link) => {
-    link.addEventListener('focus', () => link.classList.add('is-focused'));
-    link.addEventListener('blur', () => link.classList.remove('is-focused'));
+    link.addEventListener('focus', () => link.classList.add('focused'));
+    link.addEventListener('blur', () => link.classList.remove('focused'));
   });
 })();

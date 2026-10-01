@@ -1,5 +1,7 @@
 {{ define "main" }}
 
+  <button class="sidebar-toggle show-below-1280 bottom-left" data-target="left">{{ partial "utils/icon.html" "layout-sidebar-left-expand" }}</button>
+
   <div class="wrapper posts three-column-layout">
 
     {{ $posts := .RegularPagesRecursive }}
@@ -58,7 +60,5 @@
     </aside>
 
   </div>
-
-  <button class="sidebar-toggle show-below-1280" data-target="left">{{ partial "utils/icon.html" "layout-sidebar-left-expand" }}</button>
 
 {{ end }}
