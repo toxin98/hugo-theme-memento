@@ -8,11 +8,11 @@
       {{ range .Pages }}
         <a class="albums-card" href="{{ .RelPermalink }}" title="{{ .Title }}">
 
-          <div class="albums-card-cover">
-            {{ with .Resources.GetMatch .Params.cover }}
-              {{ $cover := .Filter (slice images.AutoOrient (images.Process "fit 400x400 webp")) }}
+          <div class="albums-card-featured">
+            {{ with .Resources.GetMatch .Params.featured }}
+              {{ $featured := .Filter (slice images.AutoOrient (images.Process "fit 400x400 webp")) }}
               <img
-                src="{{  $cover.RelPermalink }}"
+                src="{{  $featured.RelPermalink }}"
                 alt="{{ .Title }}"
                 loading="lazy"
               >

@@ -14,7 +14,7 @@
   text-decoration: none;
 }
 
-.albums-card-cover {
+.albums-card-featured {
   aspect-ratio: 3 / 2;
   background: #ddd;
   overflow: hidden;
