@@ -13,18 +13,18 @@
       {{/* 2. 初始化统计变量 */}}
       {{ $totalRaces := len $trailPages }}
       {{ $totalDistance := 0.0 }}
-      {{ $totalElevation := 0 }}
+      {{ $totalElevationGain := 0 }}
       {{ $totalFee := 0.0 }}
 
       {{/* 3. 遍历累加 */}}
       {{ range $trailPages }}
-        {{ with .Params.trail }}
+        {{ with .Params.TrailRun }}
           {{/* 使用 float 确保带小数的公里数（如 52.5）不会报错 */}}
-          {{ with .distance }}
+          {{ with .route.distance }}
             {{ $totalDistance = add $totalDistance (float .) }}
           {{ end }}
-          {{ with .elevation }}
-            {{ $totalElevation = add $totalElevation (int .) }}
+          {{ with .route.ElevationGain }}
+            {{ $totalElevationGain = add $totalElevationGain (int .) }}
           {{ end }}
           {{ with .fee.paid }}
             {{ $totalFee = add $totalFee (float .) }}
@@ -44,7 +44,7 @@
           <span class="stat-label">累计越野里程</span>
         </div>
         <div class="stat-item">
-          <span class="stat-num">{{ lang.FormatNumber 0 $totalElevation }} <small>m+</small></span>
+          <span class="stat-num">{{ lang.FormatNumber 0 $totalElevationGain }} <small>m+</small></span>
           <span class="stat-label">累计爬升</span>
         </div>
         <div class="stat-item">
