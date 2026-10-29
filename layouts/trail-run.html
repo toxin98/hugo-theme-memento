@@ -1,0 +1,63 @@
+{{ define "main" }}
+
+  <div class="wrapper three-column-layout">
+
+    <aside class="sidebar hide-below-1280" data-position="left">
+    </aside>
+
+    <div class="primary-area">
+
+      {{/* 1. 筛选出全站所有包含 trail 参数的文章 */}}
+      {{ $trailPages := where site.RegularPages "Params.TrailRun" "!=" nil }}
+
+      {{/* 2. 初始化统计变量 */}}
+      {{ $totalRaces := len $trailPages }}
+      {{ $totalDistance := 0.0 }}
+      {{ $totalElevation := 0 }}
+      {{ $totalFee := 0.0 }}
+
+      {{/* 3. 遍历累加 */}}
+      {{ range $trailPages }}
+        {{ with .Params.trail }}
+          {{/* 使用 float 确保带小数的公里数（如 52.5）不会报错 */}}
+          {{ with .distance }}
+            {{ $totalDistance = add $totalDistance (float .) }}
+          {{ end }}
+          {{ with .elevation }}
+            {{ $totalElevation = add $totalElevation (int .) }}
+          {{ end }}
+          {{ with .fee.paid }}
+            {{ $totalFee = add $totalFee (float .) }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+
+      {{/* 4. 渲染统计看板（复用你在 notes-hero-card 的视觉思路） */}}
+      <div class="trail-stats-dashboard">
+        <div class="stat-item">
+          <span class="stat-num">{{ $totalRaces }}</span>
+          <span class="stat-label">参赛场次</span>
+        </div>
+        <div class="stat-item">
+          <!-- lang.FormatNumber 1 保留一位小数 -->
+          <span class="stat-num">{{ lang.FormatNumber 1 $totalDistance }} <small>km</small></span>
+          <span class="stat-label">累计越野里程</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">{{ lang.FormatNumber 0 $totalElevation }} <small>m+</small></span>
+          <span class="stat-label">累计爬升</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">¥{{ lang.FormatNumber 0 $totalFee }}</span>
+          <span class="stat-label">累计门票花费</span>
+        </div>
+      </div>
+
+    </div>
+
+    <aside class="sidebar hide-below-1280" data-position="right">
+    </aside>
+
+  </div>
+
+{{ end }}
